@@ -1,16 +1,21 @@
 <section class="header">
   <nav class="navbar navbar-expand-lg header__nav">
-    <a routerLink="/home" class="navbar-brand header__logo">Papers</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-items" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collaps navbar-collaps" id="navbar-items">
-      <div class="navbar-nav">
-        <a class="nav-item nav-link">Home</a>
-        <a class="nav-item nav-link">My Books</a>
-        <a class="nav-item nav-link">Authors</a>
-        <a class="nav-item nav-link">Community</a>
-      </div>
+    <div class="container">
+        <a routerLink="/home" class="navbar-brand header__logo">Papers</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-items" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collaps navbar-collaps" id="navbar-items">
+          <div class="navbar-nav">
+            <a class="nav-item nav-link header__item">Home</a>
+            <a class="nav-item nav-link header__item">My Books</a>
+            <a class="nav-item nav-link header__item">Authors</a>
+            <a class="nav-item nav-link header__item">Community<mat-icon>expand_more</mat-icon></a>
+
+          </div>
+        </div>
     </div>
+  
+    
   </nav>
 </section>

@@ -1,0 +1,29 @@
+@import "../../shared/variables";
+
+.header {
+ .container {
+     justify-content: flex-start;
+ }
+    &__logo {
+        color: $color-white;
+        font-weight: bold;
+        font-size: 2.5rem;
+        border-right: .1rem solid $color-white;
+        padding: 0 2rem;
+    }
+    &__nav {
+        background-color: $color-primary;
+        color: $color-white;
+    }
+
+    &__item {
+        font-size: 2rem;
+        margin: 0 1rem;
+        cursor: pointer;
+        &:last-of-type{
+            display: flex;
+            align-items: center;
+        }
+    }
+ 
+}

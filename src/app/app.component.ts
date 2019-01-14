@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'papers';
+  isNav : boolean = true;
+
+  onNav() {
+    this.isNav = !this.isNav;
+    console.log(this.isNav);
+  }
 }

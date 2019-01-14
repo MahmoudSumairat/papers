@@ -9,6 +9,8 @@ import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { HeaderComponent } from './navigation/header/header.component';
+import { ContentComponent } from './content/content.component';
+import { MaterialModule } from './material.module';
 
 @NgModule({
   declarations: [
@@ -17,12 +19,15 @@ import { HeaderComponent } from './navigation/header/header.component';
     SignupComponent,
     HomeComponent,
     WelcomeComponent,
-    HeaderComponent
+    HeaderComponent,
+    ContentComponent,
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    MaterialModule
   
   ],
   providers: [],
