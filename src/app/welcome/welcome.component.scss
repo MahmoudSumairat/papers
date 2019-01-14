@@ -1,0 +1,53 @@
+@import '../shared/variables';
+
+
+.home {
+    background-image: linear-gradient(to right, rgba($color-dark, .85) , rgba($color-dark, .85)), url(./images/welcome.jpg);
+    height: 100vh;
+    background-size: cover;
+    padding: 2rem;
+    padding-top: 18rem;
+
+    &__heading {
+        color: $color-white;
+        font-size: 5.5rem;
+        margin: 1rem;
+    }
+
+    &__par {
+        color: $color-white;
+        font-size: 4rem;
+        margin-left: 1rem;
+    }
+
+    &__log {
+        color: $color-white;
+        font-size: 3rem;
+        margin-left: 1rem;
+    }
+
+    .btn {
+        color: $color-white;
+        background-color: $color-primary;
+        font-size: 2.5rem;
+        margin: 1rem .4rem;
+        border-radius: 1rem;
+
+
+        &:hover {
+            background-color: darken($color-primary, 7%);
+        }
+
+        
+        &--guest {
+            background-color: transparent;
+            color: $color-primary;
+            border:solid .1rem $color-primary;
+
+            &:hover {
+                color: $color-white;
+                background-color: $color-primary ;
+            }
+        }
+    }
+}
