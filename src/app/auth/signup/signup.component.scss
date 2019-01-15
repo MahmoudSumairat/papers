@@ -5,13 +5,6 @@
     background-image: linear-gradient(to right, rgba($color-dark, .7), rgba($color-dark, .7) ), url(../images/signup.jpg);
     background-size: cover;
 
-    &__heading {
-        color: $color-primary;
-        font-size: 4.5rem;
-        padding: 1rem;
-        border-bottom: solid .05rem $color-white;
-        margin: 2rem;
-    }
 
     &__container {
         width: 35%;
@@ -121,6 +114,12 @@
         color: $color-primary;
         font-size: 1.4rem;
     }
+
+    &__account {
+        display: flex;
+
+    }
+
 }
 
 input.ng-invalid.ng-touched {

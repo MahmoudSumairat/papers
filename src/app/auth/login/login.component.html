@@ -1,14 +1,13 @@
 <section class="login">
     <div class="container">
       <div class="login__container">
-        <h2 class="login__heading text-center" >LOGIN</h2>
         <form class="form-froup login__form" #f="ngForm" (ngSubmit)="onSubmit(f)" >
               <input id="email" type="text" name="email" class="login__email " required email placeholder="Your Email" ngModel >  
               <input id="password" type="password" name="password" class="login__password " required placeholder="Password" ngModel minlength="6" >
           <button type="submit" class="btn login__submit">Login</button>
         </form>
         <p class="login__dont text-center">
-            Don't have an account?...You can <button class="btn login__creat" routerLink="/signup">Creat One</button>
+            Don't have an account?...You can <a class="btn login__creat" routerLink="/signup">Creat One</a>
         </p>
       </div>
     </div>

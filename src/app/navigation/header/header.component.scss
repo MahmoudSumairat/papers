@@ -14,16 +14,96 @@
     &__nav {
         background-color: $color-primary;
         color: $color-white;
+        padding: 0;
     }
 
     &__item {
-        font-size: 2rem;
+        font-size: 1.8rem;
         margin: 0 1rem;
+        position: relative;
+        padding: 1rem!important;
+        z-index: 2;
         cursor: pointer;
         &:last-of-type{
             display: flex;
             align-items: center;
         }
+        &::after {
+            content: "";
+            width: 100%;
+            height: .2rem;
+            transform: scaleX(0);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: $color-dark;
+            transition: transform .2s ease ,
+            height .2s ease .2s;
+            transform-origin: center;
+            display: block;
+            z-index: -1;
+
+        }
+
+        &:hover {
+            &::after {
+            transform: scaleX(1);
+            height: 100%;
+            }
+        }
     }
  
+    &__search {
+        width: 30rem;
+        background-color: darken($color-primary, 20%);
+        border: none;
+        border-radius: 1.5rem;
+        padding: .4rem 1rem;
+        font-size: 1.5rem;
+        display: flex;
+        transition: all .4s;
+        color: $color-white;
+
+        &:focus {
+            outline: none;
+            background-color: darken($color-primary, 15%);
+        }
+
+        &::placeholder{
+            color: rgba($color-white, .8);
+            font-size: 1.5rem;
+        }
+    }
+
+    &__search-container {
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+
+    &__search-icon {
+        position: absolute;
+        right: 2%;
+        color: rgba($color-white, .7);
+    }
+
+    &__account {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 0 2rem;
+        font-size: 1.6rem;
+        width : auto;
+    }
+
+    &__signin-btn, &__creat-btn {
+        color: $color-white;
+        background-color: $color-dark;
+        border-radius: .7rem;
+        font-size: 1.5rem;
+        margin: 0 .4rem;
+    }
+
+    
+
 }

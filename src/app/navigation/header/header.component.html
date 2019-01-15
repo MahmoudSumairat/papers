@@ -11,7 +11,19 @@
             <a class="nav-item nav-link header__item">My Books</a>
             <a class="nav-item nav-link header__item">Authors</a>
             <a class="nav-item nav-link header__item">Community<mat-icon>expand_more</mat-icon></a>
-
+            <div class="header__search-container">
+                <input type="text" name="search" placeholder="Search books" class="header__search"><mat-icon class="header__search-icon">search</mat-icon>
+            </div>
+            <div class="header__account">
+              <a routerLink="/login" class="btn header__signin-btn">Signin</a>
+              <span class="header__or">Or</span>
+              <a routerLink="/signup" class="btn header__creat-btn">Creat Account</a>
+            </div>
+            <!-- <div class="header__user">
+             <div class="header__icon header__icon--profile"></div>
+             <div class="header__icon header__icon--message"></div>
+             <div class="header__icon header__icon--notif"></div>
+            </div> -->
           </div>
         </div>
     </div>

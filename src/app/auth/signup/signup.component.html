@@ -1,7 +1,6 @@
 <section class="signup">
     <div class="container">
       <div class="signup__container">
-        <h2 class="signup__heading text-center" >SIGNUP</h2>
         <form class="form-froup signup__form" #f="ngForm" (ngSubmit)="onSubmit(f)" >
               <input id="email" type="text" name="email" class="signup__email " required email placeholder="Your Email" ngModel >  
               <input id="password" type="password" name="password" class="signup__password " required placeholder="Password" ngModel minlength="6" >
