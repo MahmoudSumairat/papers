@@ -101,7 +101,39 @@
         background-color: $color-dark;
         border-radius: .7rem;
         font-size: 1.5rem;
-        margin: 0 .4rem;
+        margin: 0 .7rem;
+
+        &:hover {
+            background-color: lighten($color-dark,5%)
+        }
+    }
+
+    &__signin-btn {
+        background-color: darken($color-secondary,10%);
+        &:hover {
+            background-color: darken($color-secondary,15%);
+        }
+    }
+
+    &__user {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 1rem;
+    }
+
+    &__icon {
+        margin: 0 .5rem;
+        background-color: $color-dark;
+        padding: .2rem .5rem 0;
+        border-radius: .8rem;
+        color: $color-white;
+        background-color: darken($color-primary, 20%);
+        cursor: pointer;
+        transition: all .4s;
+        &:hover {
+            background-color: $color-dark;
+        }
     }
 
     

@@ -11,6 +11,9 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { HeaderComponent } from './navigation/header/header.component';
 import { ContentComponent } from './content/content.component';
 import { MaterialModule } from './material.module';
+import { AuthService } from './auth/auth.service';
+import { StoreModule } from '@ngrx/store';
+import { reducers } from "./app.reducer";
 
 @NgModule({
   declarations: [
@@ -27,10 +30,11 @@ import { MaterialModule } from './material.module';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    MaterialModule
+    MaterialModule,
+    StoreModule.forRoot(reducers)
   
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

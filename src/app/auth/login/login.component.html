@@ -4,7 +4,7 @@
         <form class="form-froup login__form" #f="ngForm" (ngSubmit)="onSubmit(f)" >
               <input id="email" type="text" name="email" class="login__email " required email placeholder="Your Email" ngModel >  
               <input id="password" type="password" name="password" class="login__password " required placeholder="Password" ngModel minlength="6" >
-          <button type="submit" class="btn login__submit">Login</button>
+          <button type="submit" class="btn login__submit" [disabled]="f.invalid" >Login</button>
         </form>
         <p class="login__dont text-center">
             Don't have an account?...You can <a class="btn login__creat" routerLink="/signup">Creat One</a>
