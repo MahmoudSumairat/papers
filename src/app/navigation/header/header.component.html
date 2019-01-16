@@ -10,7 +10,17 @@
             <a class="nav-item nav-link header__item">Home</a>
             <a class="nav-item nav-link header__item">My Books</a>
             <a class="nav-item nav-link header__item">Authors</a>
-            <a class="nav-item nav-link header__item">Community<mat-icon>expand_more</mat-icon></a>
+            <div class="header__community">
+              <a class="nav-item nav-link header__item" [ngClass]="{'header-item-active' : toggleComDropdown}" (click)="onToggleComDropdown()"  >Community<mat-icon>expand_more</mat-icon></a>
+              <div class="header__com-dropdown" [ngClass]="{'list-active' : toggleComDropdown}">
+                <ul class="header__com-list">
+                  <li><a class="header__com-item">Groups</a></li>
+                  <li><a class="header__com-item">Discussions</a></li>
+                  <li><a class="header__com-item">Quotes</a></li>
+                  <li><a class="header__com-item">Ask The Author</a></li>
+                </ul>
+              </div>
+            </div>
             <div class="header__search-container">
                 <input type="text" name="search" placeholder="Search books" class="header__search"><mat-icon class="header__search-icon">search</mat-icon>
             </div>
@@ -20,15 +30,44 @@
               <a routerLink="/signup" class="btn header__creat-btn">Creat Account</a>
             </div>
             <div class="header__user" *ngIf="isAuth$ | async" >
-             <div class="header__icon header__icon--message" title="Messages">
-                <mat-icon>message</mat-icon>
-             </div>
-             <div class="header__icon header__icon--notif" title="Notifications">
-              <mat-icon>notifications</mat-icon>
-             </div>
-             <div class="header__icon header__icon--profile" title="{{user.userName}}" >
-                <mat-icon>account_box</mat-icon>
+              <div class="header__message">
+                  <div class="header__icon header__icon--message" title="Messages" (click)="onToggleMailDropdown()">
+                      <mat-icon>mail</mat-icon>
+                  </div>
+                  <div class="header__mail-box" [ngClass]="{'list-active' : toggleMailDropdown}"  >
+                    <p>No Current Messages</p>
+                  </div> 
               </div>
+             
+             <div class="header__notif">
+                <div class="header__icon header__icon--notif" title="Notifications" (click)="onToggleNotiDropdown()">
+                    <mat-icon>notifications</mat-icon>
+                  </div>
+                    <div class="header__notification-box" [ngClass]="{'list-active' : toggleNotiDropdown}" >
+                      <p>No Current Notifications</p>
+                    </div>
+             </div>
+             
+             <div class="header__profile">
+                <div class="header__icon header__icon--profile" title="Current User"  (click)="onToggleProDropdown()">
+                    <mat-icon>account_box</mat-icon>
+                </div>
+                    <div class="profile-box" [ngClass]="{'list-active' : toggleProDropdown}" >
+                      <h3 class="profile-box__heading">{{ user.userName }}</h3>
+                      <ul class="profile-box__list">
+                        <li><a class="profile-box__list-item">Profile</a></li>
+                        <li><a class="profile-box__list-item">Friends</a></li>
+                        <li><a class="profile-box__list-item">Groups</a></li>
+                        <li><a class="profile-box__list-item">Disscussions</a></li>
+                        <li><a class="profile-box__list-item">Quotes</a></li>
+                        <hr>
+                        <li><a class="profile-box__list-item">Account Settings</a></li>
+                        <li><a class="profile-box__list-item">Help</a></li>
+                        <li><a class="profile-box__list-item" (click)="onLogout()" >Log Out</a></li>
+                      </ul>
+                    </div>
+             </div>
+             
             </div>
           </div>
         </div>

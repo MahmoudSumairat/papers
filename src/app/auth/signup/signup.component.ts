@@ -23,7 +23,6 @@ export class SignupComponent implements OnInit {
       password : f.value.password,
       userName : f.value.username
     });
-  
     
   }
 }

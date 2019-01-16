@@ -1,5 +1,5 @@
 @import "../../shared/variables";
-
+@import "../../shared/utilities";
 .header {
  .container {
      justify-content: flex-start;
@@ -136,6 +136,86 @@
         }
     }
 
-    
+    &__community {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
 
+    &__com-dropdown {
+        position: absolute;
+        top: 4.6rem;
+        background-color: $color-secondary;
+        transform: translateX(2rem);
+        display: none;
+    }
+
+    &__com-list {
+        font-size: 1.8rem;
+        list-style: none;
+        line-height: 2;
+        margin: 0;
+        padding: 0;
+        
+    }
+
+    &__com-item {
+        padding: .5rem 3rem;
+        transition: all .4s;
+        display: block;
+        cursor: pointer;
+        &:hover {
+            background-color: lighten($color-dark, 10%);
+        }
+    }
+   
+    &__mail-box, &__notification-box{
+        position: absolute;
+        top: 4.6rem;
+        transform: translateX(-80%);
+        background-color: $color-secondary;
+        padding: 1rem;
+        font-size: 1.6rem;
+        display: none;
+        
+    }
+    
+    .profile-box {
+        position: absolute;
+        transform: translateX(-80%);
+        display: none;
+        top: 4.6rem;
+        background-color: $color-secondary;
+        font-size: 1.7rem;
+        
+        &__heading {
+            margin-bottom: .5rem;
+            padding: 1rem
+        }
+
+        &__list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+
+            &-item {
+                margin: .5rem 0;
+                transition: all .4s;
+                cursor: pointer;
+                display: block;
+                padding: .4rem;
+                &:hover {
+                    background-color: lighten($color-dark, 10%);
+                }
+            }
+        }
+
+
+    }
+
+}
+
+mat-icon {
+    color: $color-white;
 }

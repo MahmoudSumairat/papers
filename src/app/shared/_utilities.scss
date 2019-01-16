@@ -1,0 +1,9 @@
+.list-active {
+    display: block !important;
+}
+.header-item-active {
+    &::after {
+        transform: scaleX(1) !important;
+        height: 100% !important;
+        }
+    }

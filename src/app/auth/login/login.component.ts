@@ -19,5 +19,6 @@ export class LoginComponent implements OnInit {
       email : f.value.email,
       password : f.value.password,
     })
+    f.reset();
   }
 }
