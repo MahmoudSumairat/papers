@@ -17,6 +17,8 @@ import { StoreModule } from '@ngrx/store';
 import { reducers } from "./app.reducer";
 import { environment } from "../environments/environment";
 import { AuthModule } from './auth/auth.module';
+import { BookService } from './content/home/book.service';
+import { ContentModule } from './content/content.module';
 
 @NgModule({
   declarations: [
@@ -36,10 +38,11 @@ import { AuthModule } from './auth/auth.module';
     MaterialModule,
     StoreModule.forRoot(reducers),
     AngularFireModule.initializeApp(environment.firebase),
-    AuthModule
+    AuthModule,
+    ContentModule
   
   ],
-  providers: [AuthService],
+  providers: [AuthService, BookService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

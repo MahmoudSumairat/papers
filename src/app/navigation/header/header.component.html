@@ -31,7 +31,7 @@
             </div>
             <div class="header__user" *ngIf="isAuth$ | async" >
               <div class="header__message">
-                  <div class="header__icon header__icon--message" title="Messages" (click)="onToggleMailDropdown()">
+                  <div class="header__icon header__icon--message" title="Messages" (click)="onToggleMailDropdown()" [ngClass]="{'account-item-active' : toggleMailDropdown}">
                       <mat-icon>mail</mat-icon>
                   </div>
                   <div class="header__mail-box" [ngClass]="{'list-active' : toggleMailDropdown}"  >
@@ -40,7 +40,7 @@
               </div>
              
              <div class="header__notif">
-                <div class="header__icon header__icon--notif" title="Notifications" (click)="onToggleNotiDropdown()">
+                <div class="header__icon header__icon--notif" title="Notifications" (click)="onToggleNotiDropdown()" [ngClass]="{'account-item-active' : toggleNotiDropdown}">
                     <mat-icon>notifications</mat-icon>
                   </div>
                     <div class="header__notification-box" [ngClass]="{'list-active' : toggleNotiDropdown}" >
@@ -49,7 +49,7 @@
              </div>
              
              <div class="header__profile">
-                <div class="header__icon header__icon--profile" title="Current User"  (click)="onToggleProDropdown()">
+                <div class="header__icon header__icon--profile" title="Current User" [ngClass]="{'account-item-active' : toggleProDropdown}"  (click)="onToggleProDropdown()">
                     <mat-icon>account_box</mat-icon>
                 </div>
                     <div class="profile-box" [ngClass]="{'list-active' : toggleProDropdown}" >

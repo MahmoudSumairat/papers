@@ -149,6 +149,7 @@
         background-color: $color-secondary;
         transform: translateX(2rem);
         display: none;
+        z-index: 9999;
     }
 
     &__com-list {

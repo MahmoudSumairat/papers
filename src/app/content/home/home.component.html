@@ -1,2 +1,18 @@
 <section class="home">
+    <div class="container">
+        <div class="book-list">
+                <div class="book" *ngFor="let book of allBooks$ | async">
+                        <div class="card">
+                                <img [src]="book.img" [alt]="book.bookName" class="card-img-top image-responsive">
+                                <div class="card-body text-center">
+                                <h4 class="card-title"> {{ book.bookName }} </h4>
+                                <p class="card-text">by: {{ book.authorName }} </p>
+                                <p class="card__rating">Rating : 3.75</p>
+                                <button class="btn card__btn">Details</button>
+                                </div>
+                            </div>
+                </div>
+        </div>
+ 
+    </div>
 </section>
