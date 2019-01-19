@@ -9,16 +9,14 @@
 }
 
 .book-list {
-    display: flex;
-    flex-wrap: wrap;
+
 
 }
 
 .book {
-
-    width: 25%;
+    padding-left: 0!important;
+    padding-right: 0!important;
     margin: 1rem 0 ;
-  
     .card {
         width: 90%;
         cursor: pointer;

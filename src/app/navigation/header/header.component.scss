@@ -179,6 +179,7 @@
         padding: 1rem;
         font-size: 1.6rem;
         display: none;
+        z-index: 2000;
         
     }
     
@@ -189,6 +190,7 @@
         top: 4.6rem;
         background-color: $color-secondary;
         font-size: 1.7rem;
+        z-index: 2000;
         
         &__heading {
             margin-bottom: .5rem;
