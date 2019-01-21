@@ -4,6 +4,7 @@ import * as fromRoot from "../../app.reducer";
 import { Store } from "@ngrx/store";
 import { Observable } from 'rxjs';
 import { Book } from './book.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,7 @@ import { Book } from './book.model';
 export class HomeComponent implements OnInit {
   allBooks$ : Observable<Book[]>;
 
-  constructor(private bookService : BookService, private store : Store<fromRoot.State>) { }
+  constructor(private bookService : BookService, private store : Store<fromRoot.State>, private router : Router) { }
 
   ngOnInit() {
     this.fetchAllBooks();
@@ -23,6 +24,10 @@ export class HomeComponent implements OnInit {
 
   fetchAllBooks() {
     this.bookService.fetchAllBooks();
+  }
+
+  loadBookDetails(bookName : string) {
+    this.router.navigate(['/content', bookName]);
   }
 
 }

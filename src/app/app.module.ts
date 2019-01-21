@@ -19,6 +19,7 @@ import { environment } from "../environments/environment";
 import { AuthModule } from './auth/auth.module';
 import { BookService } from './content/home/book.service';
 import { ContentModule } from './content/content.module';
+import { BookDetailsComponent } from './content/book-details/book-details.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { ContentModule } from './content/content.module';
     WelcomeComponent,
     HeaderComponent,
     ContentComponent,
+    BookDetailsComponent,
     
   ],
   imports: [

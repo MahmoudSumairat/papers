@@ -1,0 +1,84 @@
+@import "../../shared/variables";
+
+.book-details {
+    min-height: 100vh;
+    background-color: $color-dark;
+    .container {
+        padding: 2rem;
+    }
+    &__img {
+        height: 39rem!important;
+    }
+    &__book-name {
+        color: $color-white;
+        font-size: 2.9rem;
+
+    }
+
+    &__author-name {
+        color: $color-white;
+        font-size: 2.4rem;
+    }
+
+    &__par {
+        color: $color-white;
+        font-size: 1.8rem;
+        line-height: 1.5;
+        text-overflow: clip;
+        overflow: hidden;
+      
+    }
+
+    &__reading {
+        display: flex;
+
+    }
+
+    &__read, &__current, &__want {
+        mat-icon {
+            margin-left: .5rem;
+            display: block;
+        }
+        display: flex;
+        align-items: center;
+        padding: .5rem .8rem;
+        overflow: hidden;
+        font-size: 1.8rem;
+        border-radius: .5rem;
+        color: $color-white;
+        margin: .5rem;
+        border: none;
+        transition: all .4s;
+        cursor: pointer;
+        &:focus, &:active {
+            outline: none;
+        }
+        
+    }
+
+    &__current {
+        background-color: $color-primary;
+        &:hover {
+            background-color: darken($color-primary, 5%);
+        }
+    }
+
+    &__read {
+        background-color: $color-read;
+        &:hover {
+            background-color: darken($color-read, 5%);
+        }
+    }
+    &__want {
+        background-color: $color-want;
+        &:hover {
+            background-color: darken($color-want, 5%);
+        }
+    }
+
+    &__rate {
+        color: $color-white;
+        font-size: 1.7rem;
+        margin: .4rem 0;
+    }
+}

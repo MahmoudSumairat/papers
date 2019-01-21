@@ -21,6 +21,7 @@
         width: 90%;
         cursor: pointer;
         height: 37rem;
+        background-color: transparent;
         box-shadow: .5rem .5rem 1rem rgba(darken($color-dark,70%), .5);
 
         &-img-top {

@@ -1,0 +1,25 @@
+<section class="book-details">
+  <div class="container">
+    <div class="row">
+      <img [src]="(selectedBook$ | async).img" [alt]="(selectedBook$ | async).bookName" class="col-3 book-details__img" >
+      <article class="col-9">
+        <h2 class="book-details__book-name"> {{ (selectedBook$ | async).bookName }} </h2>
+        <p class="book-details__author-name"> by: <strong>{{ (selectedBook$ | async).authorName }}</strong>  </p>
+        <p class="book-details__par">
+          {{ (selectedBook$ | async).brief }}
+        </p>
+        <div class="book-details__reading">
+          <button class=" book-details__read">Read <mat-icon>done</mat-icon></button>
+          <button class=" book-details__current">Currently Reading <mat-icon>local_cafe</mat-icon></button>
+          <button class=" book-details__want">Want To Read <mat-icon>add</mat-icon></button>
+        </div>
+      </article>
+    </div>
+    <div class="row">
+      <div class="book-details__rate col-3 text-center">
+        Rate This Book
+      </div>
+    
+    </div>
+  </div>
+</section>

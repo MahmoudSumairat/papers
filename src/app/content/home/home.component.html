@@ -8,7 +8,7 @@
                                 <h4 class="card-title"> {{ book.bookName }} </h4>
                                 <p class="card-text">by: {{ book.authorName }} </p>
                                 <p class="card__rating">Rating : 3.75</p>
-                                <button class="btn card__btn">Details</button>
+                                <button class="btn card__btn" (click)="loadBookDetails(book.bookName)" >Details</button>
                                 </div>
                             </div>
                 </div>

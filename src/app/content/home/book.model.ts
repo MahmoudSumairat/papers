@@ -4,5 +4,4 @@ export interface Book {
     rate : number,
     brief : string,
     img : string,
-    
 }

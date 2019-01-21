@@ -23,6 +23,7 @@
         position: relative;
         padding: 1rem!important;
         z-index: 2;
+        color: $color-white!important;
         cursor: pointer;
         &:last-of-type{
             display: flex;
