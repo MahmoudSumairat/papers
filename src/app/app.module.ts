@@ -20,6 +20,8 @@ import { AuthModule } from './auth/auth.module';
 import { BookService } from './content/home/book.service';
 import { ContentModule } from './content/content.module';
 import { BookDetailsComponent } from './content/book-details/book-details.component';
+import { StarsReviewComponent } from './content/book-details/stars-review/stars-review.component';
+import { StarService } from './content/book-details/star.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,7 @@ import { BookDetailsComponent } from './content/book-details/book-details.compon
     HeaderComponent,
     ContentComponent,
     BookDetailsComponent,
-    
+    StarsReviewComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +46,7 @@ import { BookDetailsComponent } from './content/book-details/book-details.compon
     ContentModule
   
   ],
-  providers: [AuthService, BookService],
+  providers: [AuthService, BookService,StarService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

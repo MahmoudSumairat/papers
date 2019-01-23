@@ -1,0 +1,40 @@
+<fieldset class="rating">
+  <input type="radio" id="star5" name="rating" value="5" [checked]="myValue === 5"/>
+  <label class="full" for="star5"  (click)="onClick(5)"  ></label>
+
+
+  <input type="radio" id="star4half" name="rating" value="4 and a half" [checked]="myValue === 4.5" />
+  <label class="half" for="star4half"  (click)="onClick(4.5)" ></label>
+
+
+  <input type="radio" id="star4" name="rating" value="4" [checked]="myValue === 4"  />
+  <label class = "full" for="star4"  (click)="onClick(4)" ></label>
+
+
+  <input type="radio" id="star3half" name="rating" value="3 and a half" [checked]="myValue === 3.5" />
+  <label class="half" for="star3half"  (click)="onClick(3.5)" ></label>
+
+
+  <input type="radio" id="star3" name="rating" value="3" [checked]="myValue === 3" />
+  <label class = "full" for="star3"  (click)="onClick(3)" ></label>
+
+
+  <input type="radio" id="star2half" name="rating" value="2 and a half" [checked]="myValue === 2.5" />
+  <label class="half" for="star2half"  (click)="onClick(2.5)" ></label>
+
+
+  <input type="radio" id="star2" name="rating" value="2" [checked]="myValue === 2" />
+  <label class = "full" for="star2" (click)="onClick(2)" ></label>
+
+
+  <input type="radio" id="star1half" name="rating" value="1 and a half" [checked]="myValue === 1.5" />
+  <label class="half" for="star1half" title="Meh - 1.5 stars" (click)="onClick(1.5)" ></label>
+
+
+  <input type="radio" id="star1" name="rating" value="1" [checked]="myValue === 1" />
+  <label class = "full" for="star1" title="Sucks big time - 1 star" (click)="onClick(1)" ></label>
+
+  
+  <input type="radio" id="starhalf" name="rating" value="half" [checked]="myValue === 0.5" />
+  <label class="half" for="starhalf" title="Sucks big time - 0.5 stars" (click)="onClick(0.5)"></label>
+</fieldset>

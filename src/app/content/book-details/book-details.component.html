@@ -8,6 +8,29 @@
         <p class="book-details__par">
           {{ (selectedBook$ | async).brief }}
         </p>
+
+        <div class="book-details__rating">
+          
+         <div class="book-details__star" *ngFor="let star of output">
+            <mat-icon>star</mat-icon>
+         </div>
+         <div [style.width]="i * 24 + 'px'" class="book-details__star" *ngIf="i < 1">
+            <mat-icon>star</mat-icon>
+         </div>
+         <div class="book-details__rating-value">
+           <p>
+              {{avgRating | async}} 
+           </p>
+         </div>
+         <div class="book-details__rating-num">
+           <p>
+             {{ ratingLength }} ratings  
+           </p>
+         </div>
+
+          
+        </div>
+
         <div class="book-details__reading">
           <button class=" book-details__read">Read <mat-icon>done</mat-icon></button>
           <button class=" book-details__current">Currently Reading <mat-icon>local_cafe</mat-icon></button>
@@ -17,9 +40,10 @@
     </div>
     <div class="row">
       <div class="book-details__rate col-3 text-center">
-        Rate This Book
+        {{ rateTitle }}
+        <app-stars-review></app-stars-review>
       </div>
-    
+      
     </div>
   </div>
 </section>
