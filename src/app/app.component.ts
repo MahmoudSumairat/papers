@@ -10,6 +10,5 @@ export class AppComponent {
 
   onNav() {
     this.isNav = !this.isNav;
-    console.log(this.isNav);
   }
 }

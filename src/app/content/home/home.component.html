@@ -1,18 +1,29 @@
 <section class="home">
-    <div class="container">
-        <div class="book-list row">
-                <div class="book col-12 col-sm-6 col-md-3" *ngFor="let book of allBooks$ | async" >
-                        <div class="card">
-                                <img [src]="book.img" [alt]="book.bookName" class="card-img-top image-responsive">
-                                <div class="card-body text-center">
-                                <h4 class="card-title"> {{ book.bookName }} </h4>
-                                <p class="card-text">by: {{ book.authorName }} </p>
-                                <p class="card__rating">Rating : 3.75</p>
-                                <button class="btn card__btn" (click)="loadBookDetails(book.bookName)" >Details</button>
-                                </div>
-                            </div>
-                </div>
+  <div class="container">
+    <div class="book-list row">
+      <div
+        class="book col-12 col-sm-6 col-md-3"
+        *ngFor="let book of (allBooks$ | async)"
+      >
+        <div class="card">
+          <img
+            [src]="book.img"
+            [alt]="book.bookName"
+            class="card-img-top image-responsive"
+          />
+          <div class="card-body text-center">
+            <h4 class="card-title">{{ book.bookName }}</h4>
+            <p class="card-text">by: {{ book.authorName }}</p>
+            <p class="card__rating">Rating : {{ book.avgRating }}</p>
+            <button
+              class="btn card__btn"
+              (click)="loadBookDetails(book.bookName)"
+            >
+              Details
+            </button>
+          </div>
         </div>
- 
+      </div>
     </div>
+  </div>
 </section>

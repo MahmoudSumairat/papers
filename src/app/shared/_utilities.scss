@@ -1,12 +1,12 @@
 .list-active {
-    display: block !important;
+  display: block !important;
 }
 .header-item-active {
-    &::after {
-        transform: scaleX(1) !important;
-        height: 100% !important;
-        }
-    }
+  &::after {
+    transform: scaleX(1) !important;
+    height: 100% !important;
+  }
+}
 .account-item-active {
-    background-color: $color-dark!important;
+  background-color: $color-dark !important;
 }

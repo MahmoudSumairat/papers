@@ -1,12 +1,8 @@
-import {NgModule} from "@angular/core";
+import { NgModule } from "@angular/core";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 
 @NgModule({
-imports :[
-    AngularFirestoreModule
-],
-declarations: []
+  imports: [AngularFirestoreModule],
+  declarations: []
 })
-export class ContentModule {
-
-}
+export class ContentModule {}

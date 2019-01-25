@@ -1,7 +1,7 @@
 export interface Book {
-    bookName : string,
-    authorName : string,
-    rate : number,
-    brief : string,
-    img : string,
+  bookName: string;
+  authorName: string;
+  brief: string;
+  img: string;
+  avgRating : number;
 }

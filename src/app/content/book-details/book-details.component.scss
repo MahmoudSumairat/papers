@@ -1,109 +1,108 @@
 @import "../../shared/variables";
 
 .book-details {
-    height: 93.8vh;
-    background-color: $color-dark;
-    .container {
-        padding: 2rem;
-    }
-    &__img {
-        height: 39rem!important;
-    }
-    &__book-name {
-        color: $color-white;
-        font-size: 2.9rem;
+  height: 93.8vh;
+  background-color: $color-dark;
+  .container {
+    padding: 2rem;
+  }
+  &__img {
+    height: 39rem !important;
+  }
+  &__book-name {
+    color: $color-white;
+    font-size: 2.9rem;
+  }
 
-    }
+  &__author-name {
+    color: $color-white;
+    font-size: 2.4rem;
+  }
 
-    &__author-name {
-        color: $color-white;
-        font-size: 2.4rem;
-    }
+  &__par {
+    color: $color-white;
+    font-size: 1.8rem;
+    line-height: 1.5;
+    text-overflow: clip;
+    overflow: hidden;
+  }
 
-    &__par {
-        color: $color-white;
-        font-size: 1.8rem;
-        line-height: 1.5;
-        text-overflow: clip;
-        overflow: hidden;
-      
-    }
+  &__rating {
+    color: $color-white;
+    font-size: 1.9rem;
+    display: flex;
+    align-items: center;
 
-    &__rating {
-        color: $color-white;
-        font-size: 1.9rem;
-        display: flex;
-        align-items: center;
-
-        &-value {
-            margin: 0 2rem;
-        }
-
-        &-num {
-            margin-left: 1rem;
-            font-size: 1.2rem;
-        }
+    &-value {
+      margin: .5rem 1rem 0;
     }
 
-
-
-    &__star {
-        font-size: 2.4rem;
-        margin: .2rem;
-        color: gold;
-        overflow: hidden;
+    &-num {
+      margin-left: 1rem;
+      font-size: 1.2rem;
+      margin-top: .5rem;
+      display: inline-block;
     }
+  }
 
-    &__reading {
-        display: flex;
+  &__star {
+    font-size: 2.4rem;
+    margin: 0.2rem;
+    color: $color-gold;
+    overflow: hidden;
+  }
 
-    }
+  &__reading {
+    display: flex;
+  }
 
-    &__read, &__current, &__want {
-        mat-icon {
-            margin-left: .5rem;
-            display: block;
-        }
-        display: flex;
-        align-items: center;
-        padding: .5rem .8rem;
-        overflow: hidden;
-        font-size: 1.8rem;
-        border-radius: .5rem;
-        color: $color-white;
-        margin: .5rem;
-        border: none;
-        transition: all .4s;
-        cursor: pointer;
-        &:focus, &:active {
-            outline: none;
-        }
-        
+  &__read,
+  &__current,
+  &__want {
+    mat-icon {
+      margin-left: 0.5rem;
+      display: block;
     }
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0.8rem;
+    overflow: hidden;
+    font-size: 1.8rem;
+    border-radius: 0.5rem;
+    color: $color-white;
+    margin: 0.5rem;
+    border: none;
+    transition: all 0.4s;
+    cursor: pointer;
+    &:focus,
+    &:active {
+      outline: none;
+    }
+  }
 
-    &__current {
-        background-color: $color-primary;
-        &:hover {
-            background-color: darken($color-primary, 5%);
-        }
+  &__current {
+    background-color: $color-primary;
+    &:hover {
+      background-color: darken($color-primary, 5%);
     }
+  }
 
-    &__read {
-        background-color: $color-read;
-        &:hover {
-            background-color: darken($color-read, 5%);
-        }
+  &__read {
+    background-color: $color-read;
+    &:hover {
+      background-color: darken($color-read, 5%);
     }
-    &__want {
-        background-color: $color-want;
-        &:hover {
-            background-color: darken($color-want, 5%);
-        }
+  }
+  &__want {
+    background-color: $color-want;
+    &:hover {
+      background-color: darken($color-want, 5%);
     }
+  }
 
-    &__rate {
-        color: $color-white;
-        font-size: 1.7rem;
-        margin: .4rem 0;
-    }
+  &__rate {
+    color: $color-white;
+    font-size: 1.7rem;
+    margin: 0.4rem 0;
+  }
 }
