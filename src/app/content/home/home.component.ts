@@ -5,6 +5,7 @@ import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { Book } from "./book.model";
 import { Router } from "@angular/router";
+import { StarService } from '../book-details/star.service';
 
 @Component({
   selector: "app-home",
@@ -13,11 +14,14 @@ import { Router } from "@angular/router";
 })
 export class HomeComponent implements OnInit {
   allBooks$: Observable<Book[]>;
+  avgRating : Observable<number>;
+  i : number;
 
   constructor(
     private bookService: BookService,
     private store: Store<fromRoot.State>,
-    private router: Router
+    private router: Router,
+    private starService : StarService
   ) {}
 
   ngOnInit() {
@@ -30,6 +34,13 @@ export class HomeComponent implements OnInit {
   }
 
   loadBookDetails(bookName: string) {
-    this.router.navigate(["/content", bookName]);
+    this.router.navigate(["/content/books", bookName]);
+  }
+
+  creatStars(number) {
+    return {
+      arr : this.starService.creatStars(number).starArr,
+      i : this.starService.creatStars(number).i
+    }
   }
 }

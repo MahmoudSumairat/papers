@@ -12,7 +12,5 @@ export class WelcomeComponent implements OnInit {
 
   ngOnInit() {}
 
-  onNivaigate() {
-    this.isChanged.emit();
-  }
+ 
 }

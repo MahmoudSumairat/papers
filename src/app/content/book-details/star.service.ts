@@ -15,7 +15,6 @@ export interface Star {
 @Injectable()
 export class StarService {
    private numberOfRatings : number;
-   starArrayChange : Subject<number[]>;
 
   constructor(
     private authService: AuthService,
@@ -32,8 +31,9 @@ export class StarService {
         .collection(bookName.toLowerCase().replace(/ /g, "_"))
         .doc(user.userName.replace(/@([^.@\s]+\.)+([^.@\s]+)/, ""))
         .set({
+          name : user.userName.replace(/@([^.@\s]+\.)+([^.@\s]+)/, ""),
           value
-        })
+        }, {merge : true})
         .then(() => {})
         .catch(() => {
           console.log("error");
@@ -45,7 +45,7 @@ export class StarService {
 
      //We get the the array from the database and calculate the average
      calculateAverage(bookName : string) {
-      return this.afs
+       this.afs
       .collection("stars")
       .doc("book_review")
       .collection(bookName.toLowerCase().replace(/ /g, "_"))
@@ -54,7 +54,7 @@ export class StarService {
         map(data => {
           const ratings = data.map(object => object.value);
           this.numberOfRatings = ratings.length;
-          return ratings.reduce((accum, value) => accum + value) / ratings.length
+          return (ratings.reduce((accum, value) => accum + value) / ratings.length).toFixed(2);
         })
       ).subscribe((data) => {
         this.afs.collection('myBooks').doc(bookName.toLocaleLowerCase().replace(/ /g,'_')).update({
@@ -69,8 +69,31 @@ export class StarService {
     
 
 
-    getnumOfRatings() {
-      const temp = this.numberOfRatings;
-      return temp;
+    getnumOfRatings(bookName) { 
+     return  this.afs
+      .collection("stars")
+      .doc("book_review")
+      .collection(bookName.toLowerCase().replace(/ /g, "_"))
+      .valueChanges()
+      .pipe(
+        map(data => {
+          const ratings = data.map(object => object.value);
+           return  this.numberOfRatings = ratings.length;
+        })
+      )
+    }
+
+    creatStars(number) {
+      let i;
+      const starArr = [];
+      for ( i = number; i >= 1; i--) {
+        starArr.push(1);
+      }
+  
+      return {
+        starArr,
+        i
+      };
+  
     }
 }

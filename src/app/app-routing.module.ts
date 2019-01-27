@@ -6,6 +6,7 @@ import { SignupComponent } from "./auth/signup/signup.component";
 import { WelcomeComponent } from "./welcome/welcome.component";
 import { ContentComponent } from "./content/content.component";
 import { BookDetailsComponent } from "./content/book-details/book-details.component";
+import { MyBooksComponent } from './content/my-books/my-books.component';
 
 const routes: Routes = [
   { path: "", component: WelcomeComponent },
@@ -14,7 +15,8 @@ const routes: Routes = [
     component: ContentComponent,
     children: [
       { path: "", component: HomeComponent },
-      { path: ":bookName", component: BookDetailsComponent }
+      { path: "books/:bookName", component: BookDetailsComponent },
+      { path : "my-books", component : MyBooksComponent }
     ]
   },
   { path: "login", component: LoginComponent },

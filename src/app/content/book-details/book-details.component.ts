@@ -2,36 +2,33 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { ActivatedRoute, Params } from "@angular/router";
 import { Store } from "@ngrx/store";
 import * as fromRoot from "../../app.reducer";
-import { Observable } from "rxjs";
+import { Observable, Subscription } from "rxjs";
 import { map } from "rxjs/operators";
 import { Book } from "../home/book.model";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { AuthService } from "src/app/auth/auth.service";
-import { StarService } from './star.service';
+import { StarService } from "./star.service";
 
 @Component({
   selector: "app-book-details",
   templateUrl: "./book-details.component.html",
   styleUrls: ["./book-details.component.scss"]
 })
-export class BookDetailsComponent implements OnInit {
-  i: number;
-  starRating;
-  ratingLength;
-  output: number[] = [];
+export class BookDetailsComponent implements OnInit, OnDestroy {
+  ratingLength: Observable<number>;
   selectedBook$: Observable<Book>;
-  avgRating: Observable<any>;
   bookName: string = this.activatedRoute.snapshot.params["bookName"];
   userName = this.authService.getUser().userName;
-  myRating: Observable<any>;
-  titleCondition : Observable<any>;
+  titleCondition: Observable<any>;
+  subscriptions : Subscription[] = [];
+  isAuth : boolean;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private store: Store<fromRoot.State>,
     private afs: AngularFirestore,
     private authService: AuthService,
-    private starService : StarService
+    private starService: StarService,
   ) {}
 
   ngOnInit() {
@@ -42,36 +39,43 @@ export class BookDetailsComponent implements OnInit {
       })
     );
 
-    
-    //Update the avgRating field in the appropriate document
-    this.starService.calculateAverage(this.bookName)
+    this.subscriptions.push(this.store.select(fromRoot.getIsAuth).subscribe(data => this.isAuth = data));
 
 
-    //Get the number of ratings from starService
-    this.ratingLength = this.starService.getnumOfRatings();
-    
+    this.checkUser();
 
+     this.subscriptions.push(this.store.select(fromRoot.getIsReviewed).subscribe(result => {
+      if (result) {
+          //Cacluate the average rating
+          this.starService.calculateAverage(this.bookName);
 
-    //Push a dummy data to output array to render the rating stars
-    this.starService.renderStars(this.bookName).subscribe((data : any) => {
-      this.starRating = data.avgRating;
-      this.output = [];
-      for (this.i = this.starRating; this.i >= 1; this.i--) {
-        this.output.push(1);
+          //Update the number of rendered stars
+          this.ratingLength = this.starService.getnumOfRatings(this.bookName);
       }
     })
-  
+    )
 
-    if(this.userName) {
-      this.titleCondition = this.afs
-      .collection("stars")
-      .doc("book_review")
-      .collection(this.bookName.toLowerCase().replace(/ /g, "_"))
-      .doc(this.userName.replace(/@([^.@\s]+\.)+([^.@\s]+)/, ""))
-      .valueChanges(); 
-    }
-  
+  }
+  creatDummyArray(value : number) {
+    //Get A dummy array fomr star service
+    return this.starService.creatStars(value)
   }
 
+  checkUser() {
+    //Check if the user has rated the book or not
   
+    if (this.isAuth) {
+      this.titleCondition = this.afs
+        .collection("stars")
+        .doc("book_review")
+        .collection(this.bookName.toLowerCase().replace(/ /g, "_"))
+        .doc(this.userName.replace(/@([^.@\s]+\.)+([^.@\s]+)/, ""))
+        .valueChanges();
+    }
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
+  }
+
 }

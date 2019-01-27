@@ -1,0 +1,159 @@
+@import "../../../shared/variables";
+.reviewes {
+    display: flex;
+    padding: 1rem 0;
+    flex-direction: column;
+  
+    &__img {
+        background-color: $color-gray;
+        width: 5rem;
+        height: 5rem;
+        border-radius: 50%;
+        margin: 1rem 1rem 0 ;
+    }
+
+    &__container {
+        border-bottom: .1rem solid lighten($color-dark, 10%);
+        padding-bottom: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+
+    &__btns {
+        transition: all .4s;
+        z-index: 1;
+        margin-right: 0!important;
+        margin-left: 0!important;
+    }
+
+    &__content {
+        background-color: darken($color-dark, 6%);
+        border: solid .1rem lighten($color-dark, 10%);
+        border-radius: 1rem;
+        color: $color-white;
+        font-size: 1.5rem;
+        padding: 1rem;
+        height: 7.5rem;
+        transition: all .4s;
+        transform: scaleY(1);
+        overflow: hidden;
+        &::placeholder {
+            color: rgba($color-white, .7);
+            font-size: 1.8rem;
+        }
+
+        &:focus {
+            height : 15rem!important;
+            outline: none;
+           
+        }
+
+        
+        
+
+        
+    }
+
+    &__submit, &__cancel {
+        background-color: $color-secondary;
+        color: $color-white;
+        font-size: 1.5rem;
+        padding: .5rem 1rem;
+        border-radius: .5rem;
+        margin: .5rem;
+        cursor: pointer;
+        border: none;
+        transition: all .4s;
+        z-index: 4;
+         &:focus {
+             outline: none;
+         }
+
+         &:hover {
+            background-color: darken($color-secondary, 8%);
+         }
+
+        
+    }
+
+    &__cancel {
+        background-color: darken($color-dark, 5%);
+        
+        &:hover {
+            background-color: darken($color-dark, 10%);
+         }
+    }
+
+    .people-reviewes {
+        &__heading {
+            align-items: center;
+            margin-bottom: -2rem;
+
+        }
+
+        &__img {
+            width: 5rem;
+            height: 5rem;
+            margin: 1rem .5rem 0;
+
+        }
+
+        &__username, &__rated, &__andsaid, &__content {
+            color: $color-white;
+        }
+
+        &__username {
+            font-size: 1.8rem;
+            margin: 0 .5rem;
+        }
+
+        &__rated {
+            font-size: 1.2rem;
+            margin-bottom: -.5rem;
+        }
+
+        &__stars {
+            color: $color-gold;
+            margin: -.5rem .5rem 0;
+            display: flex;
+            align-items: center;
+            mat-icon {
+                width: 2rem;
+                height: 2rem;
+                margin: 0 .2rem;
+            }
+        }
+
+        &__star-container {
+            overflow: hidden;
+            height: 2rem;
+        }
+
+        &__andsaid {
+            margin-left: 5rem;
+            font-size: 1.5rem;
+            
+        }
+
+        &__content {
+            font-size: 1.6rem;
+            line-height: 1.5;
+            margin-left: 5rem;
+            background-color: darken($color-dark, 5%);
+            border-radius: .5rem;
+            padding: .8rem;
+            margin-top: .5rem;
+           
+            &::first-letter{
+                text-transform: uppercase;
+            }
+        }
+    }
+}
+
+

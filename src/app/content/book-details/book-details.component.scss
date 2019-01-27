@@ -1,8 +1,11 @@
 @import "../../shared/variables";
 
 .book-details {
-  height: 93.8vh;
+  min-height: 110vh;
   background-color: $color-dark;
+  display: flex;
+  justify-content: center;
+  padding-top: 4rem;
   .container {
     padding: 2rem;
   }

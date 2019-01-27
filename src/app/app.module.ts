@@ -22,6 +22,9 @@ import { ContentModule } from "./content/content.module";
 import { BookDetailsComponent } from "./content/book-details/book-details.component";
 import { StarsReviewComponent } from "./content/book-details/stars-review/stars-review.component";
 import { StarService } from "./content/book-details/star.service";
+import { MyBooksComponent } from './content/my-books/my-books.component';
+import { ReviewsComponent } from './content/book-details/reviews/reviews.component';
+import { AuthorComponent } from './content/book-details/author/author.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,10 @@ import { StarService } from "./content/book-details/star.service";
     HeaderComponent,
     ContentComponent,
     BookDetailsComponent,
-    StarsReviewComponent
+    StarsReviewComponent,
+    MyBooksComponent,
+    ReviewsComponent,
+    AuthorComponent
   ],
   imports: [
     BrowserModule,

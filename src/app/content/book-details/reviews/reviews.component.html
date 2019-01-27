@@ -1,0 +1,50 @@
+<section class="reviewes">
+  <div class="reviewes__container row">
+      <img
+      src="https://eabiawak.com/wp-content/uploads/2017/07/photo.png"
+      alt="User"
+      class="reviewes__img"
+    />
+    <form class="reviewes__form" #f="ngForm" (ngSubmit)="onSubmit(f)">
+      <textarea
+        (blur)="onBlur()"
+        #reviewContent
+        class="reviewes__content"
+        name="review"
+        id="review"
+        cols="100"
+        rows="3"
+        placeholder="What Do You Think About This Book?"
+        ngModel
+      ></textarea>
+      <div class="reviewes__btns row">
+        <button type="submit" class=" reviewes__submit">Post</button>
+        <button type="button" class=" reviewes__cancel" (click)="onCancel(f)">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+  
+  <div class="people-reviewes" *ngFor="let user of reviews | async" >
+    <div class="people-reviewes__heading row">
+      <img
+        src="https://eabiawak.com/wp-content/uploads/2017/07/photo.png"
+        [alt]="user.name"
+        class="people-reviewes__img"
+      />
+      <h4 class="people-reviewes__username"> {{user.name}} </h4>
+      <span class="people-reviewes__rated"> Rated it </span>
+      <div class="people-reviewes__stars">
+        <mat-icon *ngFor="let star of creatStars(user.value).starArr" >star</mat-icon>
+        <div class="people-reviewes__star-container" *ngIf="creatStars(user.value).i < 1 && creatStars(user.value).i > 0 " [style.width]="creatStars(user.value).i * 24 + 'px'" >
+          <mat-icon >star</mat-icon>
+        </div>
+      </div>
+    </div>
+    <span class="people-reviewes__andsaid">And said: </span>
+    <p class="people-reviewes__content">
+     {{ user.review }}
+    </p>
+  </div>
+</section>

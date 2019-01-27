@@ -16,13 +16,13 @@
         <p class="book-details__par">{{ (selectedBook$ | async).brief }}</p>
 
         <div class="book-details__rating">
-          <div class="book-details__star" *ngFor="let star of output">
+          <div class="book-details__star" *ngFor="let star of creatDummyArray((selectedBook$ | async).avgRating).starArr">
             <mat-icon>star</mat-icon>
           </div>
           <div
-            [style.width]="i * 24 + 'px'"
+            [style.width]="creatDummyArray((selectedBook$ | async).avgRating).i * 24 + 'px'"
             class="book-details__star"
-            *ngIf="i < 1"
+            *ngIf="creatDummyArray((selectedBook$ | async).avgRating).i < 1"
           >
             <mat-icon>star</mat-icon>
           </div>
@@ -30,7 +30,7 @@
             <p> {{ (selectedBook$ | async).avgRating }} </p>
           </div>
           <div class="book-details__rating-num">
-            <p>{{ ratingLength }} ratings</p>
+            <p>{{ ratingLength | async }} ratings</p>
           </div>
         </div>
 
@@ -52,6 +52,14 @@
         <span *ngIf="titleCondition | async" > You rated this Book </span>
         <span *ngIf="!(titleCondition | async)" > Rate this Book </span>
         <app-stars-review></app-stars-review>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-8">
+        <app-reviews></app-reviews>
+      </div>
+      <div class="col-4">
+        <app-author></app-author>
       </div>
     </div>
   </div>
