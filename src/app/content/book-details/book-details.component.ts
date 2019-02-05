@@ -44,13 +44,14 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
 
     this.checkUser();
 
+    this.ratingLength = this.starService.getnumOfRatings(this.bookName);
+
+
      this.subscriptions.push(this.store.select(fromRoot.getIsReviewed).subscribe(result => {
       if (result) {
           //Cacluate the average rating
           this.starService.calculateAverage(this.bookName);
 
-          //Update the number of rendered stars
-          this.ratingLength = this.starService.getnumOfRatings(this.bookName);
       }
     })
     )

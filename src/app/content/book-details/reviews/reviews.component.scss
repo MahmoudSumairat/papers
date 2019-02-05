@@ -42,6 +42,7 @@
         transition: all .4s;
         transform: scaleY(1);
         overflow: hidden;
+        resize: none;
         &::placeholder {
             color: rgba($color-white, .7);
             font-size: 1.8rem;
@@ -148,12 +149,114 @@
             border-radius: .5rem;
             padding: .8rem;
             margin-top: .5rem;
+            margin-bottom: .5rem;
            
             &::first-letter{
                 text-transform: uppercase;
             }
         }
+
+        &__like, &__comment  {
+            background-color: $color-want;
+            border: none;
+            border-radius: .4rem;
+            padding: .2rem .5rem;
+            font-size: 1.3rem;
+            margin-left: 6rem;
+            color: $color-white;
+            display: inline-block;
+            transition: all .4s;
+            cursor: pointer;
+            z-index: 5;
+            position: relative;
+
+            &:focus {
+                outline: none;
+            }
+
+            &:hover {
+                background-color: lighten($color-want, 8%);
+            }
+
+            &--number {
+                padding: 0 .2rem;
+                z-index: -1;
+            }
+        }
+
+        &__like {
+            width: 5.5rem;
+        }
+   
+        &__comment {
+            background-color: $color-read;
+            margin-left: .5rem;
+            &:hover {
+                background-color: lighten($color-read, 8%);
+            }
+
+            &--content {
+                background-color: darken($color-dark, 6%);
+                border: solid .1rem lighten($color-dark, 10%);
+                border-radius: 1rem;
+                color: $color-white;
+                font-size: 1.4rem;
+                padding: .5rem;
+                height: 3rem;
+                transition: all .4s;
+                overflow: hidden;
+                margin-left: 5rem;
+                resize: none;
+                &:focus {
+                    outline: none;
+                    background-color: darken($color-dark, 10%);
+                }
+                
+            }
+
+            &-form {
+                display: flex;
+                align-items: center;
+            }
+        }
+
+      
+
+        &__comment-box {
+            display: none;
+
+            &--view {
+                color: $color-white;
+            font-size: 1.4rem;
+            margin-left: 6rem;
+            display: block;
+            margin-top: .5rem;
+            cursor: pointer;
+            &:hover {
+                text-decoration: underline;
+            }
+            }
+        }
+
+        &__comment-btn {
+            background-color: $color-primary;
+            border: none;
+            border-radius: .4rem;
+            padding:  .2rem .5rem;
+            font-size: 1.3rem;
+            margin-left: .4rem;
+            color: $color-white;
+            display: inline-block;
+            cursor: pointer;
+
+        }
     }
 }
 
 
+.show-btn {
+    display: inline;
+}
+.hide-btn {
+    display: none;
+}

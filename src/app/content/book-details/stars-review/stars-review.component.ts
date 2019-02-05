@@ -30,7 +30,7 @@ export class StarsReviewComponent implements OnInit, OnDestroy {
   user: UserData = this.authService.getUser();
   bookName: string = this.route.snapshot.params["bookName"];
   sub: Subscription;
-  myValue;
+  myValue = 0;
   isAuth : boolean;
   subscription : Subscription;
 
@@ -52,7 +52,16 @@ export class StarsReviewComponent implements OnInit, OnDestroy {
         .collection(this.bookName.toLowerCase().replace(/ /g, "_"))
         .doc(this.user.userName.replace(/@([^.@\s]+\.)+([^.@\s]+)/, ""))
         .valueChanges()
-        .subscribe((data: { value: number }) => (this.myValue = data.value));
+        .subscribe((data: { value: number }) => {
+          if(data.value) {
+            this.myValue = data.value
+            this.store.dispatch(new bookDetails.SetStarReviewed());
+          }
+        });
+    }
+
+    if(this.myValue) {
+      this.store.dispatch(new bookDetails.SetStarReviewed());
     }
   }
 
