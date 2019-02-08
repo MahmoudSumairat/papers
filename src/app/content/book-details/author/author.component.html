@@ -1,7 +1,28 @@
 <section class="author">
+    <h3 class="author__heading text-center"> About {{ (author$ | async).name }} </h3>
     <div class="row">
-        <img src="https://eabiawak.com/wp-content/uploads/2017/07/photo.png" alt="authorname" class="author__img">
-        
+        <img [src]="(author$ | async).img" [alt]="(author$ | async).name" class="author__img">
+        <div class="author__bio">
+            <h3 class="author__name"> {{ (author$ | async).name }} </h3>
+            <div class="author__rating">
+                <span *ngFor="let star of creatStars((author$ | async).avgRating).starArr" class="author__star">
+                  <mat-icon  >star</mat-icon>
+                </span>
+                <span *ngIf="creatStars((author$ | async).avgRating).i < 1" [style.width]="creatStars((author$ | async).avgRating).i * 24 + 'px'" class="author__star-container" >
+                    <mat-icon  >star</mat-icon>
+                </span>
+                
+              </div>
+            <button class="author__details"> More Details </button>
+        </div>
+    </div>
+    <div class="row">
+        <article class="author__brief-box">
+            <p class="author__brief">
+                {{ ((author$ | async).about) | slice:0:aboutCharLimit }}
+                <span (click)="clickSeeMore()" class="author__seemore" > {{seeMoreTitle}} </span>
+            </p>
+        </article>
     </div>
 
 </section>

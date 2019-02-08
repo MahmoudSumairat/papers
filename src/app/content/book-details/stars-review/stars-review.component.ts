@@ -32,7 +32,8 @@ export class StarsReviewComponent implements OnInit, OnDestroy {
   sub: Subscription;
   myValue = 0;
   isAuth : boolean;
-  subscription : Subscription;
+  subscription : Subscription[] = [];
+  isReviewed : boolean;
 
   onClick(value) {
     this.starService.setStar(value, this.bookName, this.user);
@@ -41,31 +42,41 @@ export class StarsReviewComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.subscription = this.store.select(fromRoot.getIsAuth).subscribe(data => {
+    this.subscription.push(this.store.select(fromRoot.getIsAuth).subscribe(data => {
       this.isAuth = data;
-    })
+    }))
 
+    this.subscription.push(this.store.select(fromRoot.getIsReviewed).subscribe(result => {
+      this.isReviewed = result;
+    }))
+
+    this.getStarsValue();
+    
+  }
+
+  getStarsValue() {
     if (this.isAuth) {
-      this.sub = this.afs
+        this.sub = this.afs
         .collection("stars")
         .doc("book_review")
         .collection(this.bookName.toLowerCase().replace(/ /g, "_"))
         .doc(this.user.userName.replace(/@([^.@\s]+\.)+([^.@\s]+)/, ""))
         .valueChanges()
         .subscribe((data: { value: number }) => {
-          if(data.value) {
-            this.myValue = data.value
-            this.store.dispatch(new bookDetails.SetStarReviewed());
+          if(data) {
+            if(data.value) {
+              this.myValue = data.value
+              this.store.dispatch(new bookDetails.SetStarReviewed());
+            } else {
+            }
           }
         });
-    }
-
-    if(this.myValue) {
-      this.store.dispatch(new bookDetails.SetStarReviewed());
     }
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.subscription.forEach(sub => {
+      sub.unsubscribe();
+    })
   }
 }

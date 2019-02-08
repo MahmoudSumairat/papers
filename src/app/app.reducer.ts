@@ -16,8 +16,9 @@ export interface State {
 
 export const reducers: ActionReducerMap<State> = {
   auth: fromAuth.authReducer,
-  book: fromBook.authReducer,
-  bookDetails : fromBookDetails.bookDetailsReducer
+  bookDetails : fromBookDetails.bookDetailsReducer,
+  book: fromBook.bookReducer,
+
 };
 
 
@@ -45,6 +46,10 @@ export const getCurrentBooks = createSelector(
 export const getWantBooks = createSelector(
   getBookState,
   fromBook.getWantBooks
+);
+export const getAuthors = createSelector(
+  getBookState,
+  fromBook.getAuthors
 );
 
 

@@ -4,7 +4,8 @@ import {
   SET_ALL_BOOKS,
   SET_READ_BOOKS,
   SET_CURRENT_BOOKS,
-  SET_WANT_BOOKS
+  SET_WANT_BOOKS,
+  SET_AUTHORS
 } from "./book.actions";
 
 export interface State {
@@ -12,16 +13,18 @@ export interface State {
   readBooks: Book[];
   currentBooks: Book[];
   wantBooks: Book[];
+  authors : any[]
 }
 
 export const initialState: State = {
   allBooks: [],
   readBooks: [],
   currentBooks: [],
-  wantBooks: []
+  wantBooks: [],
+  authors : []
 };
 
-export function authReducer(state = initialState, action: BookActions) {
+export function bookReducer(state = initialState, action: BookActions) {
   switch (action.type) {
     case SET_ALL_BOOKS:
       return {
@@ -45,6 +48,12 @@ export function authReducer(state = initialState, action: BookActions) {
         wantBooks: action.payload
       };
     }
+    case SET_AUTHORS: {
+      return {
+        ...state,
+        authors: action.payload
+      };
+    }
     default:
       return state;
   }
@@ -54,3 +63,4 @@ export const getAllBooks = (state: State) => state.allBooks;
 export const getReadBooks = (state: State) => state.readBooks;
 export const getCurrentBooks = (state: State) => state.currentBooks;
 export const getWantBooks = (state: State) => state.wantBooks;
+export const getAuthors = (state: State) => state.authors;

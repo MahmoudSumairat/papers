@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { ActivatedRoute, Params } from "@angular/router";
 import { Store } from "@ngrx/store";
 import * as fromRoot from "../../app.reducer";
+import * as bookDetails from "./book-details.actions";
 import { Observable, Subscription } from "rxjs";
 import { map } from "rxjs/operators";
 import { Book } from "../home/book.model";
@@ -22,6 +23,7 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
   titleCondition: Observable<any>;
   subscriptions : Subscription[] = [];
   isAuth : boolean;
+  author
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -41,8 +43,10 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
 
     this.subscriptions.push(this.store.select(fromRoot.getIsAuth).subscribe(data => this.isAuth = data));
 
+    
 
     this.checkUser();
+    this.starService.calculateAverage(this.bookName);
 
     this.ratingLength = this.starService.getnumOfRatings(this.bookName);
 
@@ -75,8 +79,11 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
     }
   }
 
+  
+
   ngOnDestroy() {
     this.subscriptions.forEach(sub => sub.unsubscribe());
+    this.store.dispatch(new bookDetails.SetStarNotReviewed());
   }
 
 }

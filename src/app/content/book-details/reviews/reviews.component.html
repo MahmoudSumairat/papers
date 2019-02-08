@@ -72,22 +72,29 @@
         class="people-reviewes__comment"
         (click)="toggleCommentBox(commentBox)"
       >
-        <span class="people-reviewes__comment--number">55</span> Comments
+      Comment <span class="people-reviewes__comment--number">{{user.comments?.length || 0 }}</span> 
       </button>
     </div>
-    <div class="people-reviewes__comment-box" #commentBox>
-      <a class="people-reviewes__comment-box--view">View all comments</a>
-      <p
-        class="people-reviewes__comment-box--comments"
-        *ngFor="let comment of (comments | async)"
-        style="color: aliceblue"
-      >
-        {{ comment.content }}
-      </p>
+    <div class="people-reviewes__comment-box" #commentBox style="display: none">
+      <a class="people-reviewes__comment-box--view" (click)="onToggleComments(commentsContent)">View all comments</a>
+      <div class="people-reviewes__written-comments-box" #commentsContent style='display: none' >
+        <div
+        class="people-reviewes__comments-content"
+        *ngFor="let comment of user.comments"
+      > 
+        <h4 class="people-reviewes__comments-heading">
+        {{ comment.name }} :
+        </h4>
+        <p>
+          {{ comment.comment }}
+        </p>
+      </div>
+      </div>
+    
       <form
         class="people-reviewes__comment-form"
         #c="ngForm"
-        (ngSubmit)="onSubmitComment(c, user.name, user.comments)"
+        (ngSubmit)="onSubmitComment(c, user.name, user.comments, commentBox)"
       >
         <textarea
           name="comment"

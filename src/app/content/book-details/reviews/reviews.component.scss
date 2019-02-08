@@ -223,7 +223,6 @@
       
 
         &__comment-box {
-            display: none;
 
             &--view {
                 color: $color-white;
@@ -236,6 +235,20 @@
                 text-decoration: underline;
             }
             }
+
+          
+        }
+
+     
+
+        &__comments-content {
+                color: $color-white;
+                font-size: 1.6rem;
+                margin-left: 5rem;
+                background-color: darken($color-dark, 5%);
+                border-radius: 1rem;
+                padding: 1rem;
+                line-height: 1.4;
         }
 
         &__comment-btn {
@@ -249,6 +262,16 @@
             display: inline-block;
             cursor: pointer;
 
+        }
+
+        &__comments-content {
+            margin: 1rem 0;
+            margin-left: 5rem;
+        }
+
+        &__comments-heading {
+            font-size: 1.5rem;
+            color: $color-white;
         }
     }
 }

@@ -26,11 +26,16 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.fetchAllBooks();
+    this.fetchAuthors();
     this.allBooks$ = this.store.select(fromRoot.getAllBooks);
   }
 
   fetchAllBooks() {
     this.bookService.fetchAllBooks();
+  }
+
+  fetchAuthors() {
+    this.bookService.fetchAuthors();
   }
 
   loadBookDetails(bookName: string) {

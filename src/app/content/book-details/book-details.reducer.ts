@@ -1,4 +1,4 @@
-import { BookDetailsActions, SET_STAR_REVIEWED } from "./book-details.actions";
+import { BookDetailsActions, SET_STAR_REVIEWED, SET_STAR_NOT_REVIEWED } from "./book-details.actions";
 
 export interface State {
   starReviewed : boolean
@@ -14,6 +14,11 @@ export function bookDetailsReducer(state = initialState, action : BookDetailsAct
       return {
         ...state,
         starReviewed : true
+      };
+      case SET_STAR_NOT_REVIEWED:
+      return {
+        ...state,
+        starReviewed : false
       };
     default:
       return state;
