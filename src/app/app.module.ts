@@ -25,6 +25,7 @@ import { StarService } from "./content/book-details/star.service";
 import { MyBooksComponent } from './content/my-books/my-books.component';
 import { ReviewsComponent } from './content/book-details/reviews/reviews.component';
 import { AuthorComponent } from './content/book-details/author/author.component';
+import { BookDetailsSerice } from './content/book-details/book-details.service';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,7 @@ import { AuthorComponent } from './content/book-details/author/author.component'
     AuthModule,
     ContentModule
   ],
-  providers: [AuthService, BookService, StarService],
+  providers: [AuthService, BookService, StarService, BookDetailsSerice],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

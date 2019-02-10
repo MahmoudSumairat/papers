@@ -1,59 +1,65 @@
 <section class="book-details">
-  <div class="container">
+  <div class="container"  *ngIf="(selectedBook$ | async) as book">
     <div class="row">
-      <img
-        [src]="(selectedBook$ | async).img"
-        [alt]="(selectedBook$ | async).bookName"
-        class="col-3 book-details__img"
-      />
+      <div class="col-3">
+          <img
+          [src]="book.img"
+          [alt]="book.bookName"
+          class=" book-details__img"
+          
+        />
+        <div class="book-details__rate  text-center">
+            <span   *ngIf="titleCondition | async" > You rated this Book </span>
+            <span *ngIf="!(titleCondition | async)" > Rate this Book </span>
+            <app-stars-review></app-stars-review>
+          </div>
+      </div>
+      
       <article class="col-9">
         <h2 class="book-details__book-name">
-          {{ (selectedBook$ | async).bookName }}
+          {{ book.bookName }}
         </h2>
         <p class="book-details__author-name">
-          by: <strong>{{ (selectedBook$ | async).authorName }}</strong>
+          by: <strong>{{ book.authorName }}</strong>
         </p>
-        <p class="book-details__par">{{ (selectedBook$ | async).brief }}</p>
+        <p class="book-details__par">{{ book.brief }}</p>
 
         <div class="book-details__rating">
-          <div class="book-details__star" *ngFor="let star of creatDummyArray((selectedBook$ | async).avgRating).starArr">
+          <div class="book-details__star" *ngFor="let star of creatDummyArray(book.avgRating).starArr">
             <mat-icon>star</mat-icon>
           </div>
           <div
-            [style.width]="creatDummyArray((selectedBook$ | async).avgRating).i * 24 + 'px'"
+            [style.width]="creatDummyArray(book.avgRating).i * 24 + 'px'"
             class="book-details__star"
-            *ngIf="creatDummyArray((selectedBook$ | async).avgRating).i < 1"
+            *ngIf="creatDummyArray(book.avgRating).i < 1"
           >
             <mat-icon>star</mat-icon>
           </div>
           <div class="book-details__rating-value">
-            <p> {{ (selectedBook$ | async).avgRating }} </p>
+            <p> {{ book.avgRating }} </p>
           </div>
           <div class="book-details__rating-num">
             <p>{{ ratingLength | async }} ratings</p>
           </div>
         </div>
 
-        <div class="book-details__reading">
-          <button class=" book-details__read">
+      <div class="book-details__reading" *ngIf="!readingTitle">
+          <button class=" book-details__read" (click)="readBook(book)">
             Read <mat-icon>done</mat-icon>
           </button>
-          <button class=" book-details__current">
+          <button class=" book-details__current" (click)="currentlyReadingBook(book)" >
             Currently Reading <mat-icon>local_cafe</mat-icon>
           </button>
-          <button class=" book-details__want">
+          <button class=" book-details__want" (click)="wantToReadBook(book)" >
             Want To Read <mat-icon>add</mat-icon>
           </button>
         </div>
+        <p class="book-details__reading-title" *ngIf="readingTitle" >
+          {{ readingTitle }} <span  (click)=(undo()) >(Undo)</span>
+        </p>
       </article>
     </div>
-    <div class="row">
-      <div class="book-details__rate col-3 text-center">
-        <span *ngIf="titleCondition | async" > You rated this Book </span>
-        <span *ngIf="!(titleCondition | async)" > Rate this Book </span>
-        <app-stars-review></app-stars-review>
-      </div>
-    </div>
+    
     <div class="row">
       <div class="col-8">
         <app-reviews></app-reviews>

@@ -35,18 +35,7 @@ export const getAllBooks = createSelector(
   getBookState,
   fromBook.getAllBooks
 );
-export const getReadBooks = createSelector(
-  getBookState,
-  fromBook.getReadBooks
-);
-export const getCurrentBooks = createSelector(
-  getBookState,
-  fromBook.getCurrentBooks
-);
-export const getWantBooks = createSelector(
-  getBookState,
-  fromBook.getWantBooks
-);
+
 export const getAuthors = createSelector(
   getBookState,
   fromBook.getAuthors
@@ -56,3 +45,15 @@ export const getAuthors = createSelector(
 //For bookDetails reducer
 export const getBookDetailsState = createFeatureSelector<fromBookDetails.State>("bookDetails");
 export const getIsReviewed = createSelector(getBookDetailsState, fromBookDetails.getIsReviewed);
+export const getReadBooks = createSelector(
+  getBookDetailsState,
+  fromBookDetails.getReadBooks
+);
+export const getCurrentBooks = createSelector(
+  getBookDetailsState,
+  fromBookDetails.getCurrentBooks
+);
+export const getWantBooks = createSelector(
+  getBookDetailsState,
+  fromBookDetails.getWantBooks
+);

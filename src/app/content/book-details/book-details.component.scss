@@ -103,6 +103,18 @@
     }
   }
 
+  &__reading-title {
+    color: $color-white;
+    font-size: 1.9rem;
+    span {
+      color: darken($color-white, 5%);
+      cursor: pointer;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
   &__rate {
     color: $color-white;
     font-size: 1.7rem;
