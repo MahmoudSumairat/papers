@@ -5,7 +5,7 @@ import { AngularFirestore } from "@angular/fire/firestore";
 import { Book } from "../home/book.model";
 import * as bookDetails from "../book-details/book-details.actions";
 @Injectable()
-export class BookDetailsSerice {
+export class BookDetailsService {
   constructor(
     private store: Store<fromRoot.State>,
     private afs: AngularFirestore
@@ -13,16 +13,18 @@ export class BookDetailsSerice {
 
   readThisBook(book: Book, username: string, bookName: string) {
     this.afs
-      .collection("favourites")
-      .doc(username.replace(/@([^.@\s]+\.)+([^.@\s]+)/, ""))
       .collection("read-books")
+      .doc('my-books')
+      .collection(username.replace(/@([^.@\s]+\.)+([^.@\s]+)/, ""))
       .doc(bookName.toLowerCase().replace(/ /g, "_"))
-      .set(book)
-      .then(resolve => {
+      .set({...book,
+          dateAdded : new Date()
+      })
+      .then(() => {
         this.afs
-          .collection("favourites")
-          .doc(username.replace(/@([^.@\s]+\.)+([^.@\s]+)/, ""))
           .collection("read-books")
+          .doc('my-books')
+          .collection(username.replace(/@([^.@\s]+\.)+([^.@\s]+)/, ""))
           .valueChanges()
           .subscribe((data: Book[]) => {
             this.store.dispatch(new bookDetails.SetReadBooks(data));
@@ -32,38 +34,42 @@ export class BookDetailsSerice {
 
   currentlyReadingThisBook(book: Book, username: string, bookName: string) {
     this.afs
-      .collection("favourites")
-      .doc(username.replace(/@([^.@\s]+\.)+([^.@\s]+)/, ""))
       .collection("currently-reading")
+      .doc('my-books')
+      .collection(username.replace(/@([^.@\s]+\.)+([^.@\s]+)/, ""))
       .doc(bookName.toLowerCase().replace(/ /g, "_"))
-      .set(book)
+      .set({...book,
+        dateAdded : new Date()
+      })
       .then(resolve => {
         this.afs
-          .collection("favourites")
-          .doc(username.replace(/@([^.@\s]+\.)+([^.@\s]+)/, ""))
           .collection("currently-reading")
+          .doc('my-books')
+          .collection(username.replace(/@([^.@\s]+\.)+([^.@\s]+)/, ""))
           .valueChanges()
           .subscribe((data: Book[]) => {
-            this.store.dispatch(new bookDetails.SetReadBooks(data));
+            this.store.dispatch(new bookDetails.SetCurrentBooks(data));
           });
       });
   }
 
   wantToReadThisBook(book: Book, username: string, bookName: string) {
     this.afs
-      .collection("favourites")
-      .doc(username.replace(/@([^.@\s]+\.)+([^.@\s]+)/, ""))
       .collection("want-to-read")
+      .doc('my-books')
+      .collection(username.replace(/@([^.@\s]+\.)+([^.@\s]+)/, ""))
       .doc(bookName.toLowerCase().replace(/ /g, "_"))
-      .set(book)
+      .set({...book,
+        dateAdded : new Date()
+      })
       .then(resolve => {
         this.afs
-          .collection("favourites")
-          .doc(username.replace(/@([^.@\s]+\.)+([^.@\s]+)/, ""))
-          .collection("want-to-read")
+          .collection("currently-reading")
+          .doc('my-books')
+          .collection(username.replace(/@([^.@\s]+\.)+([^.@\s]+)/, ""))
           .valueChanges()
           .subscribe((data: Book[]) => {
-            this.store.dispatch(new bookDetails.SetReadBooks(data));
+            this.store.dispatch(new bookDetails.SetWantBooks(data));
           });
       });
   }
@@ -75,35 +81,57 @@ export class BookDetailsSerice {
     dist: string
   ) {
       const newArray = booksArray.filter(book => book.bookName !== bookName);
-    this.afs
-      .collection("favourites")
-      .doc(username.replace(/@([^.@\s]+\.)+([^.@\s]+)/, ""))
-      .collection(dist)
-      .doc(bookName.toLowerCase().replace(/ /g, "_"))
-      .delete().then(() => {
-          switch(dist) {
-              case 'read-books':
-              this.store.dispatch(new bookDetails.SetReadBooks(newArray))
-              this.store.dispatch(new bookDetails.SetCurrentBooks(null))
-              this.store.dispatch(new bookDetails.SetWantBooks(null))
-              console.log('read state')
-              return
-              case 'currently-reading':
-              this.store.dispatch(new bookDetails.SetReadBooks(null))
-              this.store.dispatch(new bookDetails.SetCurrentBooks(newArray))
-              this.store.dispatch(new bookDetails.SetWantBooks(null))
-              console.log('current state')
-              return
-              case 'want-to-read':
-              this.store.dispatch(new bookDetails.SetReadBooks(null))
-              this.store.dispatch(new bookDetails.SetCurrentBooks(null))
-              this.store.dispatch(new bookDetails.SetWantBooks(newArray))
-              console.log('want state')
-              return
-              default:
-              return
-          }
-          
-      })
+      this.afs.collection(dist).doc('my-books').collection(username.replace(/@([^.@\s]+\.)+([^.@\s]+)/, ""))
+      .doc(bookName.toLowerCase().replace(/ /g, '_')).delete().then(() => {
+        switch(dist) {
+          case 'read-books':
+         
+          this.store.dispatch(new bookDetails.SetReadBooks(newArray))
+
+          return
+          case 'currently-reading':
+          this.store.dispatch(new bookDetails.SetCurrentBooks(newArray))
+          return
+          case 'want-to-read':
+
+          this.store.dispatch(new bookDetails.SetWantBooks(newArray))
+          return
+          default:
+          return
+      
+      
   }
+      })
+
+        
+  }
+
+  fetchReadBooks(username : string) {
+    this.afs.collection('read-books').doc('my-books').collection(username.replace(/@([^.@\s]+\.)+([^.@\s]+)/, "")).valueChanges()
+    .subscribe((booksArr : Book[]) => {
+      if(booksArr) {
+        this.store.dispatch(new bookDetails.SetReadBooks(booksArr))
+      }
+    })
+  }
+
+  fetchCurrentBooks(username : string) {
+    this.afs.collection('currently-reading').doc('my-books').collection(username.replace(/@([^.@\s]+\.)+([^.@\s]+)/, "")).valueChanges()
+    .subscribe((booksArr : Book[]) => {
+      if(booksArr) {
+        this.store.dispatch(new bookDetails.SetCurrentBooks(booksArr))
+      }
+    })
+  }
+
+  fetchWantBooks(username : string) {
+    this.afs.collection('want-to-read').doc('my-books').collection(username.replace(/@([^.@\s]+\.)+([^.@\s]+)/, "")).valueChanges()
+    .subscribe((booksArr : Book[]) => {
+      if(booksArr) {
+        this.store.dispatch(new bookDetails.SetWantBooks(booksArr))
+      }
+    })
+  }
+
+  
 }

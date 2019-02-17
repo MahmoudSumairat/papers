@@ -1,0 +1,49 @@
+<section class="book ">
+  <img
+    [src]="book.img"
+    alt="book.bookName"
+    class="book__img"
+    [title]="book.bookName"
+    (click)="navigateToBook(book.bookName)"
+  />
+  <div class="book__info">
+    <h3 class="book__book-name">{{ book.bookName }}</h3>
+    <h4 class="book__author-name">{{ book.authorName }}</h4>
+    <p class="book__date-added">
+      Date Added : {{ book.dateAdded.toDate() | date }}
+    </p>
+    <p class="book__date-read" *ngIf="book.dateRead && dist === 'read-books'">
+      Date Read : {{ book.dateRead.toDate() | date }}
+    </p>
+
+    <mat-form-field *ngIf="!book.dateRead && dist === 'read-books'">
+      <input
+        matInput
+        [matDatepicker]="picker"
+        placeholder="When did you read this book?"
+        #dateInput
+        (dateInput)="inputChanged(dateInput)"
+        [max]="maxDate"
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <div class="book__avgRating" *ngIf="resArr.starArr[0]">
+      <span class="book__your-rate">Your Rate: </span>
+      <span *ngFor="let star of resArr.starArr" class="book__star">
+        <mat-icon>star</mat-icon>
+      </span>
+      <span
+        *ngIf="resArr.i < 1"
+        [style.width]="resArr.i * 24 + 'px'"
+        class="book__star-container"
+      >
+        <mat-icon>star</mat-icon>
+      </span>
+    </div>
+    <p class="book__not-rated" *ngIf="!resArr.starArr[0]">Not Rated</p>
+  </div>
+  <span class="book__remove" (click)="removeBook(book.bookName)">
+    <mat-icon>clear</mat-icon>
+  </span>
+</section>

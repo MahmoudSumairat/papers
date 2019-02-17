@@ -1,0 +1,97 @@
+@import "../../../shared/variables";
+
+.book {
+    display: flex;
+    background-color: darken($color-dark, 5%);
+    padding: 0;
+    position: relative;
+    margin: 1.5rem;
+
+    &__img {
+        width: 18rem;
+        height: 25rem;
+        flex: 1;
+        cursor: pointer;
+    }
+
+
+    
+    &__info {
+        padding: .5rem 1rem;
+        width: 100%;
+    }
+
+    &__book-name {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+
+    }
+
+    &__author-name {
+        font-size: 1.6rem;
+        margin-bottom: 1rem;
+
+    }
+
+    &__date-added, &__date-read {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+
+    }
+
+    
+    &__avgRating {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+
+      
+      }
+  
+    
+      &__star {
+        color: $color-gold;
+        display: inline-block;
+  
+      }
+  
+      &__star-container {
+        overflow: hidden;
+        display: inline-block;
+        color: $color-gold;
+      }
+
+      &__your-rate, &__not-rated {
+          color: $color-white;
+          font-size: 1.6rem;
+      }
+
+      &__not-rated {
+          font-size: 1.8rem
+      }
+
+    &__remove {
+        position: absolute; 
+        top: .5rem;
+        right: .5rem;
+        color: darken($color-dark, 10%);
+        transition: all .4s;
+        cursor: pointer;
+        &:hover {
+            color: $color-primary;
+        }
+    }
+}
+
+
+button.cdk-focused.cdk-program-focused {
+    &:focus {
+        outline: none;
+    }
+}
+
+mat-datepicker-toggle {
+    &:focus {
+        display: none!important;
+    }
+}

@@ -108,21 +108,23 @@ export class ReviewsComponent implements OnInit, OnDestroy {
   onSubmit(f: NgForm) {
     if (this.isAuth) {
       // Check if the user is signed in or not
-      if (this.isReviewed) {
-        // Check if the user is reviewed or not
+      if (this.isReviewed ) {
+        if(f.value.review) {
+          // Check if the user is reviewed or not
         this.afs
-          .collection("stars") // Collection Stars in the database
-          .doc("book_review") // Document Book Review in the collection Stars
-          .collection(this.bookName.toLowerCase().replace(/ /g, "_")) // Select the collection that depends on the bookName that i got from the URL
-          .doc(this.user.userName.replace(/@([^.@\s]+\.)+([^.@\s]+)/, "")) // Select the document that depends on the username that i got from the AuthService
-          .set(
-            // Set the content of the review in that document
-            {
-              review: f.value.review
-            },
-            { merge: true } // Allow to merge the doceumtn fields with this field
-          );
-        this.onCancel(f); // To reset the form and resize it to the initial size
+        .collection("stars") // Collection Stars in the database
+        .doc("book_review") // Document Book Review in the collection Stars
+        .collection(this.bookName.toLowerCase().replace(/ /g, "_")) // Select the collection that depends on the bookName that i got from the URL
+        .doc(this.user.userName.replace(/@([^.@\s]+\.)+([^.@\s]+)/, "")) // Select the document that depends on the username that i got from the AuthService
+        .set(
+          // Set the content of the review in that document
+          {
+            review: f.value.review
+          },
+          { merge: true } // Allow to merge the doceumtn fields with this field
+        );
+      this.onCancel(f); // To reset the form and resize it to the initial size
+        }
       } else {
         alert("You have to rate the book first"); // The user has not rated the book so he can't write a reviewe
       }
@@ -292,45 +294,47 @@ export class ReviewsComponent implements OnInit, OnDestroy {
     if (this.isAuth) {
       // Check if the user is signed in
 
-      if (comments) {
-        const newCommentsArr = [
-          ...comments,
-          {
-            name: this.user.userName.replace(/@([^.@\s]+\.)+([^.@\s]+)/, ""),
-            comment: form.value.comment
-          }
-        ];
-        this.afs
-          .collection("stars") // Select collection Stars
-          .doc("book_review") // Selects document Reviewes Comment
-          .collection(this.bookName.toLowerCase().replace(/ /g, "_")) // Select the collection that depends on the bookName from the URL
-          .doc(username) // Select the document that depends on the username from the arguments list
-          .set(
+      if(form.value.comment) {
+        if (comments) {
+          const newCommentsArr = [
+            ...comments,
             {
-              comments: newCommentsArr
-            },
-            { merge: true } // Allow to merge the current fields with these fields
-          );
-      } else {
-        this.afs
-          .collection("stars") // Select collection Stars
-          .doc("book_review") // Selects document Reviewes Comment
-          .collection(this.bookName.toLowerCase().replace(/ /g, "_")) // Select the collection that depends on the bookName from the URL
-          .doc(username) // Select the document that depends on the username from the arguments list
-          .set(
-            {
-              comments: [
-                {
-                  name: this.user.userName.replace(
-                    /@([^.@\s]+\.)+([^.@\s]+)/,
-                    ""
-                  ),
-                  comment: form.value.comment
-                }
-              ]
-            },
-            { merge: true } // Allow to merge the current fields with these fields
-          );
+              name: this.user.userName.replace(/@([^.@\s]+\.)+([^.@\s]+)/, ""),
+              comment: form.value.comment
+            }
+          ];
+          this.afs
+            .collection("stars") // Select collection Stars
+            .doc("book_review") // Selects document Reviewes Comment
+            .collection(this.bookName.toLowerCase().replace(/ /g, "_")) // Select the collection that depends on the bookName from the URL
+            .doc(username) // Select the document that depends on the username from the arguments list
+            .set(
+              {
+                comments: newCommentsArr
+              },
+              { merge: true } // Allow to merge the current fields with these fields
+            );
+        } else {
+          this.afs
+            .collection("stars") // Select collection Stars
+            .doc("book_review") // Selects document Reviewes Comment
+            .collection(this.bookName.toLowerCase().replace(/ /g, "_")) // Select the collection that depends on the bookName from the URL
+            .doc(username) // Select the document that depends on the username from the arguments list
+            .set(
+              {
+                comments: [
+                  {
+                    name: this.user.userName.replace(
+                      /@([^.@\s]+\.)+([^.@\s]+)/,
+                      ""
+                    ),
+                    comment: form.value.comment
+                  }
+                ]
+              },
+              { merge: true } // Allow to merge the current fields with these fields
+            );
+        }
       }
     } else {
       this.router.navigate(["/login"]); // The user is not signed in so he should go to tha sign in page and sign in

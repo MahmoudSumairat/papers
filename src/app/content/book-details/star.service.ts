@@ -83,6 +83,7 @@ export class StarService {
       )
     }
 
+ 
     creatStars(number) {
       let i;
       const starArr = [];

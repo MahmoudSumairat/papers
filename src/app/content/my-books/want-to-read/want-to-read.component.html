@@ -1,0 +1,9 @@
+<section class="want-to-read">
+    <div class="container">
+    <div class="row" >
+        <app-book [dist]="'want-to-read'" *ngFor="let book of (wantBooks$ | async)" [book]="book" class="col-6" style="padding:0" ></app-book>
+    </div>
+    </div>
+  
+    
+  </section>

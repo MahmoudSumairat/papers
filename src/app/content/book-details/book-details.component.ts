@@ -9,7 +9,7 @@ import { Book } from "../home/book.model";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { AuthService } from "src/app/auth/auth.service";
 import { StarService } from "./star.service";
-import { BookDetailsSerice } from './book-details.service';
+import { BookDetailsService } from './book-details.service';
 
 @Component({
   selector: "app-book-details",
@@ -35,7 +35,7 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
     private afs: AngularFirestore,
     private authService: AuthService,
     private starService: StarService,
-    private bookDetailsService : BookDetailsSerice,
+    private bookDetailsService : BookDetailsService,
     private router : Router
   ) {}
 
@@ -142,32 +142,27 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
   }
 
   checkReading() {
-    console.log('fuck')
-    console.log(this.isAuth)
     if(this.isAuth) {
-      this.afs.collection('favourites').doc(this.userName.replace(/@([^.@\s]+\.)+([^.@\s]+)/, "")).collection('read-books').valueChanges().subscribe((data : Book[]) => {
+      this.store.select(fromRoot.getReadBooks).subscribe((data : Book[]) => {
         if(data.find(book => book.bookName === this.bookName)) {
           this.readingTitle = 'You read this book';
           this.readBooks = data;
-          console.log('fuck')
 
         }
       })
   
-      this.afs.collection('favourites').doc(this.userName.replace(/@([^.@\s]+\.)+([^.@\s]+)/, "")).collection('currently-reading').valueChanges().subscribe((data : Book[]) => {
+      this.store.select(fromRoot.getCurrentBooks).subscribe((data : Book[]) => {
          if(data.find(book => book.bookName === this.bookName)) {
           this.readingTitle = 'You are currently reading this book';
           this.currentBooks = data;
-          console.log('fuck')
 
         }
       })
   
-      this.afs.collection('favourites').doc(this.userName.replace(/@([^.@\s]+\.)+([^.@\s]+)/, "")).collection('want-to-read').valueChanges().subscribe((data : Book[]) => {
+      this.store.select(fromRoot.getWantBooks).subscribe((data : Book[]) => {
          if(data.find(book => book.bookName === this.bookName)) {
           this.readingTitle = 'You want to read this book';
           this.wantToReadBooks = data;
-          console.log('fuck')
 
         }
       })

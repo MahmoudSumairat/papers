@@ -6,6 +6,8 @@ import { Observable } from "rxjs";
 import { Book } from "./book.model";
 import { Router } from "@angular/router";
 import { StarService } from '../book-details/star.service';
+import { AuthService } from 'src/app/auth/auth.service';
+import { BookDetailsService } from '../book-details/book-details.service';
 
 @Component({
   selector: "app-home",
@@ -16,18 +18,24 @@ export class HomeComponent implements OnInit {
   allBooks$: Observable<Book[]>;
   avgRating : Observable<number>;
   i : number;
+  user = this.authService.getUser();
+  isAuth : boolean;
 
   constructor(
     private bookService: BookService,
     private store: Store<fromRoot.State>,
     private router: Router,
-    private starService : StarService
+    private starService : StarService,
+    private authService : AuthService,
+    private bookDetailsService : BookDetailsService
   ) {}
 
   ngOnInit() {
     this.fetchAllBooks();
     this.fetchAuthors();
     this.allBooks$ = this.store.select(fromRoot.getAllBooks);
+    this.store.select(fromRoot.getIsAuth).subscribe(res => this.isAuth = res);
+    this.fetchFavouriteBooks();
   }
 
   fetchAllBooks() {
@@ -36,6 +44,15 @@ export class HomeComponent implements OnInit {
 
   fetchAuthors() {
     this.bookService.fetchAuthors();
+  }
+
+  fetchFavouriteBooks() {
+    const username = this.user.userName;
+    if(this.isAuth) {
+      this.bookDetailsService.fetchReadBooks(username);
+      this.bookDetailsService.fetchCurrentBooks(username);
+      this.bookDetailsService.fetchWantBooks(username);
+    }
   }
 
   loadBookDetails(bookName: string) {
