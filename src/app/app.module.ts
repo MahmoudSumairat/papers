@@ -32,6 +32,8 @@ import { CurrentlyReadingComponent } from './content/my-books/currently-reading/
 import { WantToReadComponent } from './content/my-books/want-to-read/want-to-read.component';
 import { BookComponent } from './content/my-books/book/book.component';
 import { AuthGurad } from "./auth/auth.guard";
+import { AuthorsComponent } from './content/authors/authors.component';
+import { AuthorsService } from './content/authors/authors.service';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,8 @@ import { AuthGurad } from "./auth/auth.guard";
     ReadBooksComponent,
     CurrentlyReadingComponent,
     WantToReadComponent,
-    BookComponent
+    BookComponent,
+    AuthorsComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +67,7 @@ import { AuthGurad } from "./auth/auth.guard";
     BrowserAnimationsModule,
     
   ],
-  providers: [AuthService, BookService, StarService, BookDetailsService, AuthGurad],
+  providers: [AuthService, BookService, StarService, BookDetailsService, AuthGurad, AuthorsService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

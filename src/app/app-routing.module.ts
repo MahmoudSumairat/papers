@@ -8,6 +8,7 @@ import { ContentComponent } from "./content/content.component";
 import { BookDetailsComponent } from "./content/book-details/book-details.component";
 import { MyBooksComponent } from './content/my-books/my-books.component';
 import { AuthGurad } from './auth/auth.guard';
+import { AuthorsComponent } from './content/authors/authors.component';
 
 const routes: Routes = [
   { path: "", component: WelcomeComponent },
@@ -17,7 +18,8 @@ const routes: Routes = [
     children: [
       { path: "", component: HomeComponent },
       { path: "books/:bookName", component: BookDetailsComponent },
-      { path : "my-books", component : MyBooksComponent, canActivate : [AuthGurad] }
+      { path : "my-books", component : MyBooksComponent, canActivate : [AuthGurad] },
+      { path : 'authors', component : AuthorsComponent }
     ]
   },
   { path: "login", component: LoginComponent },

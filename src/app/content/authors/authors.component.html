@@ -1,0 +1,38 @@
+<section class="authors "  >
+  <div class="container">
+      <div class="row justify-content-center  ">
+          <div class="author col-5 " *ngFor="let author of (allAuthors$ | async)">
+              <img
+              [src]="author.img"
+              class="author__img"
+              [title]="author.name"
+            />
+            <div class="author__info">
+              <h3 class="author__name">{{ author.name }}</h3>
+              <h4 class="author__born">Born :  {{ author.born }}</h4>
+              <span class="author__genre" *ngFor="let genre of author.genre" > {{genre}} </span>
+          
+            <div *ngIf="author.avgRating"  class="author__rating">
+              <span *ngFor="let star of createStars(author.avgRating).starArr" class="author__star">
+                <mat-icon  >star</mat-icon>
+              </span>
+              <span *ngIf="createStars(author.avgRating).i < 1" [style.width]="createStars(author.avgRating).i * 24 + 'px'" class="author__star-container" >
+                  <mat-icon  >star</mat-icon>
+              </span>
+              
+            </div>
+            <p class="author__not-rated" *ngIf="!author.avgRating" >Not Reviewed</p>
+            
+            <p class="author__popular"> Most Popular Book : <span class="author__popular-book" (click)="onLoadBook(author.bestBook)" >{{author.bestBook}}</span> </p>
+
+            </div>
+            
+          </div>
+      </div>
+  </div>
+
+
+   
+   
+  </section>
+  

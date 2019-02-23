@@ -11,6 +11,7 @@ import { Store } from "@ngrx/store";
 import * as fromRoot from "../../../app.reducer";
 import { map } from "rxjs/operators";
 import { StarService } from '../star.service';
+import { Author } from '../../authors/author.model';
 
 @Component({
   selector: "app-author",
@@ -20,7 +21,7 @@ import { StarService } from '../star.service';
 export class AuthorComponent implements OnInit {
   bookName = this.route.snapshot.params["bookName"];
   authorName;
-  author$: Observable<any>;
+  author$: Observable<Author>;
   aboutCharLimit = 420;
   seeMoreTitle = "...See More";
 

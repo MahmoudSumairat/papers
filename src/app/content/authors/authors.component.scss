@@ -1,0 +1,117 @@
+@import "../../shared/variables";
+
+.authors {
+    padding: 5rem 0;
+    background-color: $color-dark;
+    min-height: 120vh;
+
+    
+}
+
+.author {
+    margin-bottom: 1rem;
+    display: flex;
+    background-color: darken($color-dark, 5%);
+    padding: 0 ;
+    position: relative;
+    margin: 1.5rem;
+    
+
+    &__img {
+        width: 20rem !important;
+        height: 25rem !important;
+        cursor: pointer;
+        
+    }
+
+
+    
+    &__info {
+        padding: .5rem 2rem;
+        width: 100%;
+        color: $color-white;
+        flex: 1;
+
+    }
+
+    &__name {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        font-weight: bold;
+
+    }
+
+    &__born {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+
+    }
+
+    &__genre {
+        font-size: 1.5rem;
+
+        &:not(:last-of-type) {
+            &::after {
+                content: ","
+            }
+        }
+    }
+
+    
+    &__rating {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+
+      
+      }
+  
+    
+      &__star {
+        color: $color-gold;
+        display: inline-block;
+  
+      }
+  
+      &__star-container {
+        overflow: hidden;
+        display: inline-block;
+        color: $color-gold;
+      }
+
+      &__popular {
+          font-size: 1.4rem;
+          &-book {
+            font-size: 1.6rem;
+            font-weight: bold;
+            cursor: pointer;
+
+            &:hover {
+                text-decoration: underline;
+            }
+          }
+          
+        }
+
+      &__your-rate, &__not-rated {
+          color: $color-white;
+          font-size: 1.6rem;
+      }
+
+      &__not-rated {
+          font-size: 1.8rem;
+          margin-top: 1rem;
+      }
+
+    &__remove {
+        position: absolute; 
+        top: .5rem;
+        right: .5rem;
+        color: darken($color-dark, 10%);
+        transition: all .4s;
+        cursor: pointer;
+        &:hover {
+            color: $color-primary;
+        }
+    }
+}
