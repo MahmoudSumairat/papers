@@ -8,4 +8,5 @@ export interface Book {
   avgRating : number;
   dateAdded : any;
   dateRead? : any;
+  genres : string[];
 }

@@ -70,6 +70,16 @@
           font-size: 1.8rem
       }
 
+      &__finished-reading {
+          background-color: $color-primary;
+          color: $color-white;
+          font-size: 1.7rem;
+          border-radius: .3rem;
+          padding: .4rem .7rem;
+          cursor: pointer;
+          border: none;
+      }
+
     &__remove {
         position: absolute; 
         top: .5rem;

@@ -57,7 +57,7 @@ export class StarService {
           return (ratings.reduce((accum, value) => accum + value) / ratings.length).toFixed(2);
         })
       ).subscribe((data) => {
-        this.afs.collection('myBooks').doc(bookName.toLocaleLowerCase().replace(/ /g,'_')).update({
+        this.afs.collection('myBooks').doc(bookName.toLowerCase().replace(/ /g,'_')).update({
           avgRating : data
         }).then(() => {console.log('Updated')}).catch((error) => console.log('what the fuck'));
       })

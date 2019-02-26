@@ -42,8 +42,8 @@
             <p>{{ ratingLength | async }} ratings</p>
           </div>
         </div>
-
-      <div class="book-details__reading" *ngIf="!readingTitle">
+        
+        <div class="book-details__reading" *ngIf="!readingTitle">
           <button class=" book-details__read" (click)="readBook(book)">
             Read <mat-icon>done</mat-icon>
           </button>
@@ -57,6 +57,7 @@
         <p class="book-details__reading-title" *ngIf="readingTitle" >
           {{ readingTitle }} <span  (click)=(undo()) >(Undo)</span>
         </p>
+        <div class="book-details__genres"> <span class="book-details__genres-caption"> Genres : </span> <span class="book-details__genre" *ngFor="let genre of book.genres">    {{genre}} </span> </div>
       </article>
     </div>
     

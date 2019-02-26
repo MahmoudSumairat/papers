@@ -8,6 +8,7 @@ import * as fromRoot from "../../../app.reducer";
 import { Store } from '@ngrx/store';
 import * as BookDetails from "../../book-details/book-details.actions";
 import { Router } from '@angular/router';
+import { BookDetailsService } from '../../book-details/book-details.service';
 
 @Component({
   selector: 'app-book',
@@ -34,7 +35,8 @@ export class BookComponent implements OnInit {
     private authService : AuthService,
     private starService : StarService,
     private store : Store<fromRoot.State>,
-    private router : Router
+    private router : Router,
+    private bookDetialsService : BookDetailsService
   ) {
  
    }
@@ -50,7 +52,6 @@ export class BookComponent implements OnInit {
         
       });
     }, 10);
-
     this.maxDate = new Date()
   }
 
@@ -59,8 +60,8 @@ export class BookComponent implements OnInit {
       return  this.starService.creatStars(rating);
   }
 
-  removeBook(bookName : string) {
-    this.afs.collection(this.dist).doc('my-books').collection(this.user.userName.replace(/@([^.@\s]+\.)+([^.@\s]+)/, "")).doc(bookName.toLowerCase().replace(/ /g, "_")).delete();
+  removeBook() {
+    this.afs.collection(this.dist).doc('my-books').collection(this.user.userName.replace(/@([^.@\s]+\.)+([^.@\s]+)/, "")).doc(this.book.bookName.toLowerCase().replace(/ /g, "_")).delete();
     this.afs.collection(this.dist).doc('my-books').collection(this.user.userName.replace(/@([^.@\s]+\.)+([^.@\s]+)/, "")).valueChanges()
     .subscribe((data : any) => {
       switch(this.dist) {
@@ -87,5 +88,10 @@ export class BookComponent implements OnInit {
   inputChanged(value) {
     this.afs.collection(this.dist).doc('my-books').collection(this.user.userName.replace(/@([^.@\s]+\.)+([^.@\s]+)/, "")).doc(this.book.bookName.toLowerCase().replace(/ /g, "_"))
     .set({dateRead : new Date(value.value)}, {merge : true});
+  }
+
+  finishedReading() {
+    this.removeBook();
+    this.bookDetialsService.readThisBook(this.book, this.user.userName, this.book.bookName, true);
   }
 }

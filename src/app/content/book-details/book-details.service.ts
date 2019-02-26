@@ -8,17 +8,18 @@ import * as bookDetails from "../book-details/book-details.actions";
 export class BookDetailsService {
   constructor(
     private store: Store<fromRoot.State>,
-    private afs: AngularFirestore
+    private afs: AngularFirestore,
   ) {}
 
-  readThisBook(book: Book, username: string, bookName: string) {
+  readThisBook(book: Book, username: string, bookName: string, finishedReading = false) {
     this.afs
       .collection("read-books")
       .doc('my-books')
       .collection(username.replace(/@([^.@\s]+\.)+([^.@\s]+)/, ""))
       .doc(bookName.toLowerCase().replace(/ /g, "_"))
       .set({...book,
-          dateAdded : new Date()
+          dateAdded : new Date(),
+          dateRead : finishedReading ? new Date() : null
       })
       .then(() => {
         this.afs

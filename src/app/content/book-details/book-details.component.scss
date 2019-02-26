@@ -49,6 +49,37 @@
     }
   }
 
+  &__genres {
+    margin: 1rem 0;
+    border-top: .1rem solid darken($color-dark, 2%);
+    padding: 1rem 0;
+    list-style: none;
+
+    &-caption {
+      font-size: 1.7rem;
+      font-weight: bold;
+      color: $color-white;
+    }
+  }
+
+
+
+  &__genre {
+    color: $color-white;
+    font-size: 1.8rem;
+    margin-right: .2rem;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+    &:not(:last-of-type) {
+      &::after {
+        content: ',  ';
+      }
+    }
+  }
+
   &__star {
     font-size: 2.4rem;
     margin: 0.2rem;
@@ -122,5 +153,4 @@
     margin: 0.4rem 0;
   }
 }
-
 

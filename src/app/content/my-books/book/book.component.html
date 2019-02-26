@@ -1,11 +1,13 @@
 <section class="book ">
-  <img
-    [src]="book.img"
-    alt="book.bookName"
-    class="book__img"
-    [title]="book.bookName"
-    (click)="navigateToBook(book.bookName)"
-  />
+  <div class="book__img-box">
+    <img
+      [src]="book.img"
+      alt="book.bookName"
+      class="book__img"
+      [title]="book.bookName"
+      (click)="navigateToBook(book.bookName)"
+    />
+  </div>
   <div class="book__info">
     <h3 class="book__book-name">{{ book.bookName }}</h3>
     <h4 class="book__author-name">{{ book.authorName }}</h4>
@@ -42,8 +44,9 @@
       </span>
     </div>
     <p class="book__not-rated" *ngIf="!resArr.starArr[0]">Not Rated</p>
+    <button class="book__finished-reading" *ngIf="dist === 'currently-reading'" (click)="finishedReading()" >Finished Reading</button>
   </div>
-  <span class="book__remove" (click)="removeBook(book.bookName)">
+  <span class="book__remove" (click)="removeBook()">
     <mat-icon>clear</mat-icon>
   </span>
 </section>
