@@ -21,6 +21,13 @@
   &__author-name {
     color: $color-white;
     font-size: 2.4rem;
+    &--content {
+      cursor: pointer;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  
   }
 
   &__par {
@@ -67,7 +74,7 @@
   &__genre {
     color: $color-white;
     font-size: 1.8rem;
-    margin-right: .2rem;
+    margin-right: .9rem;
     cursor: pointer;
 
     &:hover {
@@ -76,6 +83,7 @@
     &:not(:last-of-type) {
       &::after {
         content: ',  ';
+        position: absolute;
       }
     }
   }

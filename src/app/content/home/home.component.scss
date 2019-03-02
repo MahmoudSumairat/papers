@@ -50,6 +50,13 @@
     &-text {
       color: $color-white;
       font-size: 1.8rem;
+      &--content {
+
+        cursor: pointer;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
     }
 
     &__rating {

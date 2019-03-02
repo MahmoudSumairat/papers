@@ -43,6 +43,26 @@ export class StarService {
     }
   }
 
+  setStarForAuthor(value, authorName,user ) {
+    if (user.userName) {
+      this.afs
+        .collection("stars")
+        .doc("author_review")
+        .collection(authorName.toLowerCase().replace(/ /g, "_"))
+        .doc(user.userName.replace(/@([^.@\s]+\.)+([^.@\s]+)/, ""))
+        .set({
+          name : user.userName.replace(/@([^.@\s]+\.)+([^.@\s]+)/, ""),
+          value
+        }, {merge : true})
+        .then(() => {})
+        .catch(() => {
+          console.log("error");
+        });
+    } else {
+      this.router.navigate(["/login"]);
+    }
+  }
+
      //We get the the array from the database and calculate the average
      calculateAverage(bookName : string) {
        this.afs
@@ -60,6 +80,26 @@ export class StarService {
         this.afs.collection('myBooks').doc(bookName.toLowerCase().replace(/ /g,'_')).update({
           avgRating : data
         }).then(() => {console.log('Updated')}).catch((error) => console.log('what the fuck'));
+      })
+    }
+
+    calculateAverageForAuthor(authorName) {
+      this.afs
+      .collection("stars")
+      .doc("author_review")
+      .collection(authorName.toLowerCase().replace(/ /g, "_"))
+      .valueChanges()
+      .pipe(
+        map(data => {
+          let ratings = [] 
+          ratings = data.map(object => object.value);
+          this.numberOfRatings = ratings.length;
+          return (ratings.reduce((accum, value) => accum + value) / ratings.length).toFixed(2);
+        })
+      ).subscribe((data) => {
+        this.afs.collection('authors').doc(authorName.toLowerCase().replace(/ /g,'_')).set({
+          avgRating : data
+        }, {merge : true}).then(() => {console.log('Updated')}).catch((error) => console.log('what the fuck'));
       })
     }
 
@@ -82,6 +122,20 @@ export class StarService {
         })
       )
     }
+
+    getnumOfAuthorRatings(authorName) { 
+      return  this.afs
+       .collection("stars")
+       .doc("author_review")
+       .collection(authorName.toLowerCase().replace(/ /g, "_"))
+       .valueChanges()
+       .pipe(
+         map(data => {
+           const ratings = data.map(object => object.value);
+            return  this.numberOfRatings = ratings.length;
+         })
+       )
+     }
 
  
     creatStars(number) {

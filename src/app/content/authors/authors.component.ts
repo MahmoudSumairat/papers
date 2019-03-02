@@ -42,4 +42,9 @@ export class AuthorsComponent implements OnInit {
     this.router.navigate(['content/books', bookName])
   }
 
+
+  goToAuthor(authorName : string) {
+    this.router.navigate(['content/authors',authorName ])
+  }
+
 }

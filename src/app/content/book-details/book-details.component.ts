@@ -168,4 +168,8 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
       })
     }
   }
+
+  goToAuthor(authorName) {
+    this.router.navigate(['content/authors', authorName])
+  }
 }

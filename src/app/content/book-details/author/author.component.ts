@@ -4,7 +4,7 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy
 } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { Observable } from "rxjs";
 import { Store } from "@ngrx/store";
@@ -29,7 +29,8 @@ export class AuthorComponent implements OnInit {
     private route: ActivatedRoute,
     private afs: AngularFirestore,
     private store: Store<fromRoot.State>,
-    private starService : StarService
+    private starService : StarService,
+    private router : Router
   ) {}
 
   ngOnInit() {
@@ -62,5 +63,8 @@ export class AuthorComponent implements OnInit {
 
   creatStars(authorRating : number) {
    return this.starService.creatStars(authorRating);
+  }
+  goToAuthor(authorName) {
+    this.router.navigate(['content/authors', authorName])
   }
 }

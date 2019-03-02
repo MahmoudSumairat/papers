@@ -19,8 +19,8 @@
         <h2 class="book-details__book-name">
           {{ book.bookName }}
         </h2>
-        <p class="book-details__author-name">
-          by: <strong>{{ book.authorName }}</strong>
+        <p class="book-details__author-name"   >
+          by: <strong (click)="goToAuthor(book.authorName)" class="book-details__author-name--content">{{ book.authorName }}</strong>
         </p>
         <p class="book-details__par">{{ book.brief }}</p>
 

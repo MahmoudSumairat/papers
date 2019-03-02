@@ -65,4 +65,8 @@ export class HomeComponent implements OnInit {
       i : this.starService.creatStars(number).i
     }
   }
+
+  goToAuthor(authorName) {
+    this.router.navigate(['content/authors', authorName])
+  }
 }

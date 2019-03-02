@@ -1,0 +1,195 @@
+@import "../../shared/variables";
+
+.author-details {
+    padding: 4rem 0;
+    background-color: $color-dark;
+    min-height: 120vh;
+    color: $color-white;
+    
+    .container {
+        padding: 2rem;
+    }
+
+    &__img {
+        width: 26rem;
+        height: 39rem;
+    }
+
+    &__rate {
+        font-size: 1.7rem;
+
+        &--title {
+            color: $color-white;
+
+        }
+    }
+
+    &__name {
+        font-size: 2.7rem;
+        font-weight: bold;
+        margin-bottom: 3rem;
+
+    }
+
+    &__born,&__birth,&__death {
+        font-size: 2rem;
+        margin-bottom: .5rem;
+         
+        &--title {
+            font-weight: bold;
+        }
+    }
+
+    &__genres {
+        display: flex;
+        justify-content: flex-start;
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+
+        &--title {
+            font-weight: bold;
+        }
+    }
+
+    &__genre {
+        display: inline-block;
+        margin-left: 1rem;
+        cursor: pointer;
+        position: relative;
+
+        &:hover {
+            text-decoration: underline;
+        }
+
+        &:not(:last-of-type) {
+            &:after {
+                content: ", ";
+                position: absolute;
+                bottom: 0;
+                right: -.5rem;
+            }
+        }
+    }
+
+    &__about {
+        line-height: 1.5;
+        font-size: 1.7rem;
+    }
+
+    &__rating {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin-bottom: .5rem;
+      
+      }
+
+      &__avgRating {
+          font-size: 1.9rem;
+          margin-left: 1rem;
+
+      }
+
+      &__ratings-length {
+          font-size: 1.5rem;
+          margin-left: 2rem;
+      }
+  
+    
+      &__star {
+        color: $color-gold;
+        display: inline-block;
+  
+      }
+  
+      &__star-container {
+        overflow: hidden;
+        display: inline-block;
+        color: $color-gold;
+      }
+
+      &__notreviewed {
+          font-size: 1.8rem;
+      }
+
+    &__seemore {
+        color: darken($color-white, 7%);
+        cursor: pointer;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    &__books-title {
+        color: $color-white;
+        font-size: 1.8rem;
+        padding-bottom: 1rem;
+        border-bottom: .1rem solid darken($color-dark, 5%);
+        padding-left: 1rem;
+        margin: 1rem 0;
+    }
+
+    &__books-container {
+        padding: 0 1rem;
+    }
+
+}
+
+.author-book {
+    display: flex;
+    margin-top: 3rem;
+    background-color: darken($color-dark, 5%);
+    padding: 0;
+    margin: .5rem;
+    
+    &__bio {
+        margin-left: .5rem;
+        flex: 1;
+        padding: .5rem .5rem;
+    }
+
+    &__img {
+        width: 12rem;
+        height: 19rem;
+    }
+    &__name {
+        font-size: 1.7rem;
+        padding-bottom: .5rem;
+    }
+    &__author {
+        color: $color-white;
+        font-size: 1.5rem;
+    }
+    &__rating {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      
+      }
+  
+    
+      &__star {
+        color: $color-gold;
+        display: inline-block;
+  
+      }
+  
+      &__star-container {
+        overflow: hidden;
+        display: inline-block;
+        color: $color-gold;
+      }
+      &__notreviewed {
+        font-size: 1.8rem;
+    }
+
+    &__details {
+        color: $color-white;
+        background-color: $color-primary;
+        border: none;
+        font-size: 1.7rem;
+        border-radius: .5rem;
+        margin-top: 1rem;
+        cursor: pointer;
+    }
+}

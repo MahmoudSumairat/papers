@@ -9,6 +9,7 @@ import { Store } from '@ngrx/store';
 import * as BookDetails from "../../book-details/book-details.actions";
 import { Router } from '@angular/router';
 import { BookDetailsService } from '../../book-details/book-details.service';
+import { MyBooksService } from '../my-books.service';
 
 @Component({
   selector: 'app-book',
@@ -36,7 +37,8 @@ export class BookComponent implements OnInit {
     private starService : StarService,
     private store : Store<fromRoot.State>,
     private router : Router,
-    private bookDetialsService : BookDetailsService
+    private bookDetialsService : BookDetailsService,
+    private myBooksService : MyBooksService
   ) {
  
    }
@@ -61,21 +63,7 @@ export class BookComponent implements OnInit {
   }
 
   removeBook() {
-    this.afs.collection(this.dist).doc('my-books').collection(this.user.userName.replace(/@([^.@\s]+\.)+([^.@\s]+)/, "")).doc(this.book.bookName.toLowerCase().replace(/ /g, "_")).delete();
-    this.afs.collection(this.dist).doc('my-books').collection(this.user.userName.replace(/@([^.@\s]+\.)+([^.@\s]+)/, "")).valueChanges()
-    .subscribe((data : any) => {
-      switch(this.dist) {
-        case 'read-books':
-        this.store.dispatch(new BookDetails.SetReadBooks(data));
-        break;
-        case 'currently-reading':
-        this.store.dispatch(new BookDetails.SetCurrentBooks(data));
-        break;
-        case 'want-to-read':
-        this.store.dispatch(new BookDetails.SetWantBooks(data));
-        break;
-      }
-    })
+    this.myBooksService.removeTheBook(this.book.bookName, this.dist, this.user.userName);
   }
 
 
@@ -86,12 +74,15 @@ export class BookComponent implements OnInit {
 
 
   inputChanged(value) {
-    this.afs.collection(this.dist).doc('my-books').collection(this.user.userName.replace(/@([^.@\s]+\.)+([^.@\s]+)/, "")).doc(this.book.bookName.toLowerCase().replace(/ /g, "_"))
-    .set({dateRead : new Date(value.value)}, {merge : true});
+    this.myBooksService.setDateRead(value, this.dist, this.user.userName, this.book.bookName);
   }
 
   finishedReading() {
     this.removeBook();
     this.bookDetialsService.readThisBook(this.book, this.user.userName, this.book.bookName, true);
+  }
+
+  editDateRead() {
+    this.myBooksService.editDateRead(this.dist, this.user.userName, this.book.bookName);
   }
 }

@@ -38,6 +38,10 @@
         font-size: 2rem;
         margin-bottom: 1rem;
         font-weight: bold;
+        cursor: pointer;
+         &:hover {
+             text-decoration: underline;
+         }
 
     }
 

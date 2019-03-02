@@ -18,7 +18,6 @@ import { reducers } from "./app.reducer";
 import { environment } from "../environments/environment";
 import { AuthModule } from "./auth/auth.module";
 import { BookService } from "./content/home/book.service";
-import { ContentModule } from "./content/content.module";
 import { BookDetailsComponent } from "./content/book-details/book-details.component";
 import { StarsReviewComponent } from "./content/book-details/stars-review/stars-review.component";
 import { StarService } from "./content/book-details/star.service";
@@ -34,6 +33,10 @@ import { BookComponent } from './content/my-books/book/book.component';
 import { AuthGurad } from "./auth/auth.guard";
 import { AuthorsComponent } from './content/authors/authors.component';
 import { AuthorsService } from './content/authors/authors.service';
+import { MyBooksService } from './content/my-books/my-books.service';
+import { CommonModule } from '@angular/common';
+import { AuthorDetailsComponent } from './content/author-details/author-details.component';
+import { ContentModule } from './content/content.module';
 
 @NgModule({
   declarations: [
@@ -53,7 +56,8 @@ import { AuthorsService } from './content/authors/authors.service';
     CurrentlyReadingComponent,
     WantToReadComponent,
     BookComponent,
-    AuthorsComponent
+    AuthorsComponent,
+    AuthorDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -63,11 +67,11 @@ import { AuthorsService } from './content/authors/authors.service';
     StoreModule.forRoot(reducers),
     AngularFireModule.initializeApp(environment.firebase),
     AuthModule,
-    ContentModule,
     BrowserAnimationsModule,
+    ContentModule
     
   ],
-  providers: [AuthService, BookService, StarService, BookDetailsService, AuthGurad, AuthorsService],
+  providers: [AuthService, BookService, StarService, BookDetailsService, AuthGurad, AuthorsService, MyBooksService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

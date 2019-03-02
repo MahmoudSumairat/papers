@@ -13,7 +13,7 @@
           />
           <div class="card-body text-center">
             <h4 class="card-title">{{ book.bookName }}</h4>
-            <p class="card-text">by: {{ book.authorName }}</p>
+            <p class="card-text"  >by: <span (click)="goToAuthor(book.authorName)" class="card-text--content" > {{ book.authorName }} </span></p>
             <div class="card__rating">
               <span *ngFor="let star of creatStars(book.avgRating).arr" class="card__star">
                 <mat-icon  >star</mat-icon>

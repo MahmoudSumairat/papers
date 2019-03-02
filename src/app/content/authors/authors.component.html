@@ -6,9 +6,10 @@
               [src]="author.img"
               class="author__img"
               [title]="author.name"
+              (click)="goToAuthor(author.name)"
             />
             <div class="author__info">
-              <h3 class="author__name">{{ author.name }}</h3>
+              <h3 class="author__name" (click)="goToAuthor(author.name)" >{{ author.name }}</h3>
               <h4 class="author__born">Born :  {{ author.born }}</h4>
               <span class="author__genre" *ngFor="let genre of author.genre" > {{genre}} </span>
           
@@ -23,7 +24,7 @@
             </div>
             <p class="author__not-rated" *ngIf="!author.avgRating" >Not Reviewed</p>
             
-            <p class="author__popular"> Best Seller : <span class="author__popular-book" (click)="onLoadBook(author.bestBook)" >{{author.bestBook}}</span> </p>
+            <p class="author__popular"> Most Popular Book : <span class="author__popular-book" (click)="onLoadBook(author.bestBook)" >{{author.bestBook}}</span> </p>
 
             </div>
             

@@ -29,6 +29,8 @@ export class StarsReviewComponent implements OnInit, OnDestroy {
 
   user: UserData = this.authService.getUser();
   bookName: string = this.route.snapshot.params["bookName"];
+  authorName: string = this.route.snapshot.params["authorName"];
+
   sub: Subscription;
   myValue = 0;
   isAuth : boolean;
@@ -36,9 +38,16 @@ export class StarsReviewComponent implements OnInit, OnDestroy {
   isReviewed : boolean;
 
   onClick(value) {
-    this.starService.setStar(value, this.bookName, this.user);
-    this.starService.calculateAverage(this.bookName);
-    this.store.dispatch(new bookDetails.SetStarReviewed());
+    if (this.bookName) {
+      this.starService.setStar(value, this.bookName, this.user);
+      this.starService.calculateAverage(this.bookName);
+      this.store.dispatch(new bookDetails.SetStarReviewed());
+      console.log('book state')
+    } else if (this.authorName) {
+      this.starService.setStarForAuthor(value, this.authorName, this.user);
+      this.starService.calculateAverageForAuthor(this.authorName);
+      console.log('author state')
+    }
   }
 
   ngOnInit() {
@@ -56,6 +65,7 @@ export class StarsReviewComponent implements OnInit, OnDestroy {
 
   getStarsValue() {
     if (this.isAuth) {
+      if(this.bookName) {
         this.sub = this.afs
         .collection("stars")
         .doc("book_review")
@@ -71,6 +81,24 @@ export class StarsReviewComponent implements OnInit, OnDestroy {
             }
           }
         });
+      } else if (this.authorName) {
+        this.sub = this.afs
+        .collection("stars")
+        .doc("author_review")
+        .collection(this.authorName.toLowerCase().replace(/ /g, "_"))
+        .doc(this.user.userName.replace(/@([^.@\s]+\.)+([^.@\s]+)/, ""))
+        .valueChanges()
+        .subscribe((data: { value: number }) => {
+          if(data) {
+            if(data.value) {
+              this.myValue = data.value
+              this.store.dispatch(new bookDetails.SetStarReviewed());
+            } else {
+            }
+          }
+        });
+      }
+        
     }
   }
 
