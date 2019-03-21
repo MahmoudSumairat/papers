@@ -45,7 +45,7 @@ export class BookComponent implements OnInit {
 
   ngOnInit() {
     setTimeout(() => {
-      this.afs.collection('stars').doc('book_review').collection(this.book.bookName.toLowerCase().replace(/ /g, "_")).doc(this.user.userName.replace(/@([^.@\s]+\.)+([^.@\s]+)/, ""))
+      this.afs.collection('stars').doc('book_review').collection(this.book.bookName.toLowerCase().replace(/ /g, "_")).doc(this.user.userID)
       .valueChanges().subscribe((data : any) => {
         if(data) {
           this.ratingValue = data.value;
@@ -63,7 +63,7 @@ export class BookComponent implements OnInit {
   }
 
   removeBook() {
-    this.myBooksService.removeTheBook(this.book.bookName, this.dist, this.user.userName);
+    this.myBooksService.removeTheBook(this.book.bookName, this.dist, this.user.userID);
   }
 
 
@@ -74,15 +74,15 @@ export class BookComponent implements OnInit {
 
 
   inputChanged(value) {
-    this.myBooksService.setDateRead(value, this.dist, this.user.userName, this.book.bookName);
+    this.myBooksService.setDateRead(value, this.dist, this.user.userID, this.book.bookName);
   }
 
   finishedReading() {
     this.removeBook();
-    this.bookDetialsService.readThisBook(this.book, this.user.userName, this.book.bookName, true);
+    this.bookDetialsService.readThisBook(this.book, this.user.userID, this.book.bookName, true);
   }
 
   editDateRead() {
-    this.myBooksService.editDateRead(this.dist, this.user.userName, this.book.bookName);
+    this.myBooksService.editDateRead(this.dist, this.user.userID, this.book.bookName);
   }
 }

@@ -107,7 +107,7 @@
                 class="profile-box"
                 [ngClass]="{ 'list-active': toggleProDropdown }"
               >
-                <h3 class="profile-box__heading">{{ user.userName }}</h3>
+                <h3 class="profile-box__heading">{{ user.firstName + ' ' + user.lastName }}</h3>
                 <ul class="profile-box__list">
                   <li><a class="profile-box__list-item">Profile</a></li>
                   <li><a class="profile-box__list-item">Friends</a></li>

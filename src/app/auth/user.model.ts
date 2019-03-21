@@ -1,4 +1,8 @@
 export interface UserData {
-    userName : string,
-    userId? : string
+    firstName : string;
+    lastName : string;
+    gender : string;
+    email : string;
+    password : string;
+    userID : string;
 }

@@ -13,9 +13,9 @@ export class MyBooksService {
 
     }
 
-    removeTheBook(bookName : string, dist : string, username : string) {
-        this.afs.collection(dist).doc('my-books').collection(username.replace(/@([^.@\s]+\.)+([^.@\s]+)/, "")).doc(bookName.toLowerCase().replace(/ /g, "_")).delete();
-     this.afs.collection(dist).doc('my-books').collection(username.replace(/@([^.@\s]+\.)+([^.@\s]+)/, "")).valueChanges()
+    removeTheBook(bookName : string, dist : string, userID : string) {
+        this.afs.collection(dist).doc('my-books').collection(userID).doc(bookName.toLowerCase().replace(/ /g, "_")).delete();
+     this.afs.collection(dist).doc('my-books').collection(userID).valueChanges()
     .subscribe((data : any) => {
       switch(dist) {
         case 'read-books':
@@ -32,13 +32,13 @@ export class MyBooksService {
     }
 
 
-    setDateRead(value, dist : string, userName : string, bookName : string) {
-        this.afs.collection(dist).doc('my-books').collection(userName.replace(/@([^.@\s]+\.)+([^.@\s]+)/, "")).doc(bookName.toLowerCase().replace(/ /g, "_"))
+    setDateRead(value, dist : string, userID : string, bookName : string) {
+        this.afs.collection(dist).doc('my-books').collection(userID).doc(bookName.toLowerCase().replace(/ /g, "_"))
     .set({dateRead : new Date(value.value)}, {merge : true});
     }
 
-    editDateRead(dist : string, userName : string, bookName : string) {
-        this.afs.collection(dist).doc('my-books').collection(userName.replace(/@([^.@\s]+\.)+([^.@\s]+)/, "")).doc(bookName.toLowerCase().replace(/ /g, "_"))
+    editDateRead(dist : string, userID : string, bookName : string) {
+        this.afs.collection(dist).doc('my-books').collection(userID).doc(bookName.toLowerCase().replace(/ /g, "_"))
         .set({dateRead : null}, {merge : true});
     }
 }

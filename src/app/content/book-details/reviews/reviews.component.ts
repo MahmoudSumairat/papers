@@ -115,11 +115,12 @@ export class ReviewsComponent implements OnInit, OnDestroy {
         .collection("stars") // Collection Stars in the database
         .doc("book_review") // Document Book Review in the collection Stars
         .collection(this.bookName.toLowerCase().replace(/ /g, "_")) // Select the collection that depends on the bookName that i got from the URL
-        .doc(this.user.userName.replace(/@([^.@\s]+\.)+([^.@\s]+)/, "")) // Select the document that depends on the username that i got from the AuthService
+        .doc(this.user.userID) // Select the document that depends on the username that i got from the AuthService
         .set(
           // Set the content of the review in that document
           {
-            review: f.value.review
+            review: f.value.review,
+            name : this.user.firstName + ' ' +  this.user.lastName
           },
           { merge: true } // Allow to merge the doceumtn fields with this field
         );
@@ -155,7 +156,7 @@ export class ReviewsComponent implements OnInit, OnDestroy {
 
   onLike(
     // Send a like to the database
-    username: string, // The name on the review that the user liked
+    userID: string, // The name on the review that the user liked
     userLikes: string[] // The likes array of this review
   ) {
     if (this.likeFlag) {
@@ -163,7 +164,7 @@ export class ReviewsComponent implements OnInit, OnDestroy {
       // Check if the selected button span innerText is Like which means that the user didn't click the like
       if (
         !this.spanTextsIds.includes(
-          (<HTMLSpanElement>document.getElementById("btn-" + username)).id
+          (<HTMLSpanElement>document.getElementById("btn-" + userID)).id
         )
       ) {
         // Check if the spanTextIds array does not include the current span id so that means that the user has not clicked the like button
@@ -174,13 +175,13 @@ export class ReviewsComponent implements OnInit, OnDestroy {
             // Check if the likes Array in the user document is defined or NOT
             const newArr = [
               ...userLikes,
-              this.user.userName.replace(/@([^.@\s]+\.)+([^.@\s]+)/, "")
+              this.user.userID
             ]; // Creat a brand new array contains the new user that liked this reviewe and the rest of the liked users
             this.afs
               .collection("stars") // Collection Stars in the database
               .doc("book_review") // Document Book Review in the collection Stars
               .collection(this.bookName.toLowerCase().replace(/ /g, "_")) // Select the collection that depends on the bookName that i got from the URL
-              .doc(username) // Select the document that depends in the username that i passed in this function which is the review name
+              .doc(userID) // Select the document that depends in the username that i passed in this function which is the review name
               .set(
                 {
                   likes: newArr // Assigne the likes array to the new array that i created
@@ -193,11 +194,11 @@ export class ReviewsComponent implements OnInit, OnDestroy {
               .collection("stars") // Collection Stars in the database
               .doc("book_review") // Document Book Review in the collection Stars
               .collection(this.bookName.toLowerCase().replace(/ /g, "_")) // Select the collection that depends on the bookName that i got from the URL
-              .doc(username) // Select the document that depends on the username that i passed into this function
+              .doc(userID) // Select the document that depends on the username that i passed into this function
               .set(
                 {
                   likes: [
-                    this.user.userName.replace(/@([^.@\s]+\.)+([^.@\s]+)/, "") // Initiate the likes array from scratch and assign the current user to it because he is the first one who liked this review
+                    this.user.userID // Initiate the likes array from scratch and assign the current user to it because he is the first one who liked this review
                   ]
                 },
                 { merge: true }
@@ -211,14 +212,14 @@ export class ReviewsComponent implements OnInit, OnDestroy {
         const splicedArr = userLikes.filter(username => {
           return (
             username !==
-            this.user.userName.replace(/@([^.@\s]+\.)+([^.@\s]+)/, "")
+            this.user.userID
           ); // Remove the user that clicked on Unlike from the likes Array
         });
         this.afs
           .collection("stars")
           .doc("book_review")
           .collection(this.bookName.toLowerCase().replace(/ /g, "_"))
-          .doc(username)
+          .doc(userID)
           .set(
             {
               likes: splicedArr // Assigne the array that doesn't contain the current user to the likes array
@@ -232,35 +233,36 @@ export class ReviewsComponent implements OnInit, OnDestroy {
 
         // Initialze the newSpanTexts Array to get the newest markup references
         const newSpanTexts = [];
-
+        console.log(this.spanTextsIds);
+        console.log(newSpanTexts);
         // Again check if the user clicked like or not
         if (
           !this.spanTextsIds.includes(
-            (<HTMLSpanElement>document.getElementById("btn-" + username)).id
+            (<HTMLSpanElement>document.getElementById("btn-" + userID)).id
           )
         ) {
           this.spanTextsIds.push(
-            (<HTMLSpanElement>document.getElementById("btn-" + username)).id
+            (<HTMLSpanElement>document.getElementById("btn-" + userID)).id
           ); // Push the span id of the clicked button in the spanTextIds
           console.log("like state");
         } else {
           // Here the user has clikced the like button so he will click the unlike button
-          this.spanTextsIds.splice(
-            this.spanTextsIds.indexOf(
-              (<HTMLSpanElement>document.getElementById("btn-" + username)).id
-            ),
-            1
-          );
+         this.spanTextsIds =  this.spanTextsIds.filter(id => {
+            return id !==  (<HTMLSpanElement>document.getElementById("btn-" + userID)).id
+          })
           console.log("unlike state");
+          console.log(this.spanTextsIds);
         }
+
+        console.log(this.spanTextsIds);
+
 
         // Loop over the spanTextIds and push the selected element by this ID into the newSpanTexts array
         this.spanTextsIds.forEach(spanId => {
           newSpanTexts.push(<HTMLSpanElement>document.getElementById(spanId));
         });
 
-        console.log(this.spanTextsIds);
-        console.log(newSpanTexts);
+     
         // Loop over the newes elements and change the innerText of them into 'Unlike'
         newSpanTexts.forEach(span => {
           span.innerText = "Unlike";
@@ -286,9 +288,10 @@ export class ReviewsComponent implements OnInit, OnDestroy {
 
   onSubmitComment(
     form: NgForm,
-    username: string,
+    userID: string,
     comments: string[],
-    commentBox
+    commentBox,
+    username
   ) {
     // Send the comment into the database
     if (this.isAuth) {
@@ -299,15 +302,16 @@ export class ReviewsComponent implements OnInit, OnDestroy {
           const newCommentsArr = [
             ...comments,
             {
-              name: this.user.userName.replace(/@([^.@\s]+\.)+([^.@\s]+)/, ""),
-              comment: form.value.comment
+              ID: this.user.userID,
+              comment: form.value.comment,
+              name : username
             }
           ];
           this.afs
             .collection("stars") // Select collection Stars
             .doc("book_review") // Selects document Reviewes Comment
             .collection(this.bookName.toLowerCase().replace(/ /g, "_")) // Select the collection that depends on the bookName from the URL
-            .doc(username) // Select the document that depends on the username from the arguments list
+            .doc(userID) // Select the document that depends on the username from the arguments list
             .set(
               {
                 comments: newCommentsArr
@@ -319,16 +323,14 @@ export class ReviewsComponent implements OnInit, OnDestroy {
             .collection("stars") // Select collection Stars
             .doc("book_review") // Selects document Reviewes Comment
             .collection(this.bookName.toLowerCase().replace(/ /g, "_")) // Select the collection that depends on the bookName from the URL
-            .doc(username) // Select the document that depends on the username from the arguments list
+            .doc(userID) // Select the document that depends on the username from the arguments list
             .set(
               {
                 comments: [
                   {
-                    name: this.user.userName.replace(
-                      /@([^.@\s]+\.)+([^.@\s]+)/,
-                      ""
-                    ),
-                    comment: form.value.comment
+                    ID: this.user.userID,
+                    comment: form.value.comment,
+                    name : username
                   }
                 ]
               },
@@ -354,13 +356,12 @@ export class ReviewsComponent implements OnInit, OnDestroy {
         // Check if the userLikes array is defined or not
         if (
           userLikes.includes(
-            this.user.userName.replace(/@([^.@\s]+\.)+([^.@\s]+)/, "")
+            this.user.userID
           )
         ) {
           // If the username is included in the likes array that means he clicked the like button\
           if (!this.spanTextsIds.includes(btn.id)) {
             // Check if the spansTextIds array does not include the liked buttons
-            this.spanTextsIds.push(btn.id); //Push the liked buttons into the spanTextIds array to make it logically liked button
           }
           return "Unlike"; // Return the string Unlike to appear in the UI when the button is liked
         } else {
@@ -380,7 +381,7 @@ export class ReviewsComponent implements OnInit, OnDestroy {
           .collection("stars")
           .doc("book_review")
           .collection(this.bookName.toLowerCase().replace(/ /g, "_"))
-          .doc(this.user.userName.replace(/@([^.@\s]+\.)+([^.@\s]+)/, ""))
+          .doc(this.user.userID)
           .valueChanges()
           .subscribe((data: { value: number }) => {
             if (data) {

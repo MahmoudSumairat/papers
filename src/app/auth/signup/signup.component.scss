@@ -73,7 +73,7 @@
         }
     }
 
-    &__email, &__password, &__username {
+    &__email, &__password, &__firstName, &__lastName {
         
             width: 75%;
             background-color: lighten($color-dark, 10%);
@@ -100,6 +100,38 @@
         
     }
 
+    &__gender {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__gender-title {
+        color: $color-white;
+        font-size: 1.8rem;
+        display: block;
+        text-align: center;
+    }
+
+    &__male, &__female {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 1rem;
+    }
+
+    &__male-radio, &__female-radio {
+        width: 2rem;
+        height: 2rem;
+        background-color: $color-primary;
+        border-radius: 50%;
+        display: inline-block;
+        margin: 0 .5rem;
+        border: .2rem solid transparent;
+        transition: all .4s;
+        cursor: pointer;
+    }
+
     &__submit {
         background-color: $color-primary;
         border-radius: 1rem;
@@ -124,4 +156,8 @@
 
 input.ng-invalid.ng-touched {
     border-color: $color-primary;
+}
+
+.radio-active {
+    border: .2rem solid $color-white; 
 }

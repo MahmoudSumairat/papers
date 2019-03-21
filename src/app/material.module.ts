@@ -3,7 +3,8 @@ import { MatIconModule,
          MatFormFieldModule,
          MatDatepickerModule,
          MatNativeDateModule,
-         MatInputModule
+         MatInputModule,
+         MatSnackBarModule
          
 } from "@angular/material";
 
@@ -12,13 +13,15 @@ import { MatIconModule,
             MatFormFieldModule,
             MatDatepickerModule,
             MatNativeDateModule,
-            MatInputModule
+            MatInputModule,
+            MatSnackBarModule
             ],
   exports: [MatIconModule,
             MatFormFieldModule,
             MatDatepickerModule,
             MatNativeDateModule,
-            MatInputModule
+            MatInputModule,
+            MatSnackBarModule
   ]
 })
 export class MaterialModule {}

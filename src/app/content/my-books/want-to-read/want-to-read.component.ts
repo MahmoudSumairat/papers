@@ -20,6 +20,8 @@ export class WantToReadComponent implements OnInit {
 
   ngOnInit() {
     this.wantBooks$ = this.store.select(fromRoot.getWantBooks)
+
+    this.store.select(fromRoot.getWantBooks).subscribe(data => console.log(data));
   }
 
 }

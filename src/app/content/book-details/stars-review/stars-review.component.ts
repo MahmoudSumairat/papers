@@ -70,7 +70,7 @@ export class StarsReviewComponent implements OnInit, OnDestroy {
         .collection("stars")
         .doc("book_review")
         .collection(this.bookName.toLowerCase().replace(/ /g, "_"))
-        .doc(this.user.userName.replace(/@([^.@\s]+\.)+([^.@\s]+)/, ""))
+        .doc(this.user.userID)
         .valueChanges()
         .subscribe((data: { value: number }) => {
           if(data) {
@@ -86,7 +86,7 @@ export class StarsReviewComponent implements OnInit, OnDestroy {
         .collection("stars")
         .doc("author_review")
         .collection(this.authorName.toLowerCase().replace(/ /g, "_"))
-        .doc(this.user.userName.replace(/@([^.@\s]+\.)+([^.@\s]+)/, ""))
+        .doc(this.user.userID)
         .valueChanges()
         .subscribe((data: { value: number }) => {
           if(data) {

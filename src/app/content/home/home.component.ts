@@ -47,11 +47,11 @@ export class HomeComponent implements OnInit {
   }
 
   fetchFavouriteBooks() {
-    const username = this.user.userName;
+    const userID = this.user.userID
     if(this.isAuth) {
-      this.bookDetailsService.fetchReadBooks(username);
-      this.bookDetailsService.fetchCurrentBooks(username);
-      this.bookDetailsService.fetchWantBooks(username);
+      this.bookDetailsService.fetchReadBooks(userID);
+      this.bookDetailsService.fetchCurrentBooks(userID);
+      this.bookDetailsService.fetchWantBooks(userID);
     }
   }
 

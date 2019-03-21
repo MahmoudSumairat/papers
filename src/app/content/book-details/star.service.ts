@@ -4,6 +4,7 @@ import { AngularFirestore } from "@angular/fire/firestore";
 import { Router, ActivatedRoute } from "@angular/router";
 import { map } from "rxjs/operators";
 import { Subject } from 'rxjs';
+import { UserData } from 'src/app/auth/user.model';
 
 export interface Star {
   userEmail: string;
@@ -23,15 +24,15 @@ export class StarService {
     private route : ActivatedRoute
   ) {}
 
-  setStar(value, bookName, user) {
-    if (user.userName) {
+  setStar(value, bookName, user : UserData) {
+    if (user) {
       this.afs
         .collection("stars")
         .doc("book_review")
         .collection(bookName.toLowerCase().replace(/ /g, "_"))
-        .doc(user.userName.replace(/@([^.@\s]+\.)+([^.@\s]+)/, ""))
+        .doc(user.userID)
         .set({
-          name : user.userName.replace(/@([^.@\s]+\.)+([^.@\s]+)/, ""),
+          ID : user.userID,
           value
         }, {merge : true})
         .then(() => {})
@@ -43,15 +44,15 @@ export class StarService {
     }
   }
 
-  setStarForAuthor(value, authorName,user ) {
-    if (user.userName) {
+  setStarForAuthor(value, authorName,user : UserData ) {
+    if (user) {
       this.afs
         .collection("stars")
         .doc("author_review")
         .collection(authorName.toLowerCase().replace(/ /g, "_"))
-        .doc(user.userName.replace(/@([^.@\s]+\.)+([^.@\s]+)/, ""))
+        .doc(user.userID)
         .set({
-          name : user.userName.replace(/@([^.@\s]+\.)+([^.@\s]+)/, ""),
+          ID : user.userID,
           value
         }, {merge : true})
         .then(() => {})
@@ -91,7 +92,7 @@ export class StarService {
       .valueChanges()
       .pipe(
         map(data => {
-          let ratings = [] 
+          let ratings = [1, 2] 
           ratings = data.map(object => object.value);
           this.numberOfRatings = ratings.length;
           return (ratings.reduce((accum, value) => accum + value) / ratings.length).toFixed(2);
@@ -124,6 +125,7 @@ export class StarService {
     }
 
     getnumOfAuthorRatings(authorName) { 
+      
       return  this.afs
        .collection("stars")
        .doc("author_review")
@@ -136,6 +138,8 @@ export class StarService {
          })
        )
      }
+
+    
 
  
     creatStars(number) {

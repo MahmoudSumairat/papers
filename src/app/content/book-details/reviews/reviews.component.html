@@ -56,12 +56,12 @@
     <div class="people-reviewes__btns">
       <button
         class="people-reviewes__like"
-        (click)="onLike(user.name, user.likes)"
+        (click)="onLike(user.ID, user.likes)"
       >
         <span
           #likeBtn
           class="show-btn"
-          id="btn-{{ user.name }}"
+          id="btn-{{ user.ID }}"
           attr.isClicked="false"
           > {{ getLikeOrUnlikeTitle(user.likes, likeBtn) || 'Like' }} </span
         ><span class="people-reviewes__like--number">
@@ -94,7 +94,7 @@
       <form
         class="people-reviewes__comment-form"
         #c="ngForm"
-        (ngSubmit)="onSubmitComment(c, user.name, user.comments, commentBox)"
+        (ngSubmit)="onSubmitComment(c, user.ID, user.comments, commentBox, user.name)"
       >
         <textarea
           name="comment"

@@ -1,12 +1,28 @@
 <section class="signup">
     <div class="container">
       <div class="signup__container">
-        <form class="form-froup signup__form" #f="ngForm" (ngSubmit)="onSubmit(f)" >
+        <form class="form-froup signup__form" #f="ngForm" (ngSubmit)="onSubmit(f, maleRadio, femaleRadio)" >
               <input id="email" type="text" name="email" class="signup__email " required email placeholder="Your Email" ngModel >  
+              <input id="firstName" type="text" name="firstName" class="signup__firstName" required  placeholder="First Name" ngModel >  
+              <input id="lastName" type="text" name="lastName" class="signup__lastName " required placeholder="Last Name" ngModel >  
               <input id="password" type="password" name="password" class="signup__password " required placeholder="Password" ngModel minlength="6" >
-              <input id="username" type="text" name="username" class="signup__username " required placeholder="Username" ngModel >
+              <span class="signup__gender-title">Gender</span>
+              <div class="signup__gender">
+                <div class="signup__male">
+                  <span class="signup__male-radio" (click)="onSelectMale(male, maleRadio, femaleRadio)" #maleRadio > </span>
+                  <input type="radio" #male id="male" name="gender" [value]="'male'" ngModel  style="display: none;" >
+                  <label for="male">Male</label>
+                </div>
+
+                <div class="signup__female">
+                  <span class="signup__female-radio" (click)="onSelectFemale(female, maleRadio, femaleRadio)"  #femaleRadio > </span>
+                  <input #female type="radio" id="female" name="gender" [value]="'female'" ngModel  style="display: none;" >
+                  <label for="female">Female</label>
+                </div>
+
+              </div>
+
           <div class="signup__agree-cont">
-              
               <input id="agree"  type="checkbox" name="agree" class="signup__agree " required ngModel >
               <label for="agree"></label>
               <span>Agree to terms and conditions</span>

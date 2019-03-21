@@ -20,7 +20,7 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
   ratingLength: Observable<number>;
   selectedBook$: Observable<Book>;
   bookName: string = this.activatedRoute.snapshot.params["bookName"];
-  userName = this.authService.getUser().userName;
+  user = this.authService.getUser()
   titleCondition: Observable<any>;
   subscriptions : Subscription[] = [];
   isAuth : boolean;
@@ -46,19 +46,11 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
         return bookArr.find(book => book.bookName === this.bookName);
       })
     );
-
-    
     this.subscriptions.push(this.store.select(fromRoot.getIsAuth).subscribe(data => this.isAuth = data));
     this.checkReading();
-
-    
-
     this.checkUser();
     this.starService.calculateAverage(this.bookName);
-
     this.ratingLength = this.starService.getnumOfRatings(this.bookName);
-
-
      this.subscriptions.push(this.store.select(fromRoot.getIsReviewed).subscribe(result => {
       if (result) {
           //Cacluate the average rating
@@ -82,7 +74,7 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
         .collection("stars")
         .doc("book_review")
         .collection(this.bookName.toLowerCase().replace(/ /g, "_"))
-        .doc(this.userName.replace(/@([^.@\s]+\.)+([^.@\s]+)/, ""))
+        .doc(this.user.userID)
         .valueChanges();
 
        
@@ -91,7 +83,7 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
 
   readBook(book) {
     if(this.isAuth){
-      this.bookDetailsService.readThisBook(book, this.userName, this.bookName);
+      this.bookDetailsService.readThisBook(book, this.user.userID, this.bookName);
       this.readingTitle = 'You read this book'
     } else {
       this.router.navigate(['/login']);
@@ -100,7 +92,7 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
 
   currentlyReadingBook(book) {
     if(this.isAuth){
-      this.bookDetailsService.currentlyReadingThisBook(book, this.userName, this.bookName);
+      this.bookDetailsService.currentlyReadingThisBook(book, this.user.userID, this.bookName);
       this.readingTitle = 'You are currently reading  this book'
     } else {
       this.router.navigate(['/login']);
@@ -110,7 +102,7 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
 
   wantToReadBook(book) {
     if(this.isAuth){
-      this.bookDetailsService.wantToReadThisBook(book, this.userName, this.bookName);
+      this.bookDetailsService.wantToReadThisBook(book, this.user.userID, this.bookName);
       this.readingTitle = 'You want to read this book'
     } else {
       this.router.navigate(['/login']);
@@ -126,15 +118,15 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
   undo() {
     if(this.readBooks) {
       
-      this.bookDetailsService.undoChanges(this.readBooks, this.bookName, this.userName, 'read-books');
+      this.bookDetailsService.undoChanges(this.readBooks, this.bookName, this.user.userID, 'read-books');
       this.readBooks = null;
     } else if(this.currentBooks) {
       
-      this.bookDetailsService.undoChanges(this.currentBooks, this.bookName, this.userName, 'currently-reading');
+      this.bookDetailsService.undoChanges(this.currentBooks, this.bookName, this.user.userID, 'currently-reading');
       this.currentBooks = null;
     } else if(this.wantToReadBooks) {
       
-      this.bookDetailsService.undoChanges(this.wantToReadBooks, this.bookName, this.userName, 'want-to-read');
+      this.bookDetailsService.undoChanges(this.wantToReadBooks, this.bookName, this.user.userID, 'want-to-read');
       this.wantToReadBooks= null;
       
     }
