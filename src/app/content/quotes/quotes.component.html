@@ -1,0 +1,28 @@
+<section class="quotes">
+  <div class="container">
+    <h1 class="quotes__heading">Authors Quotes</h1>
+    <div class="quotes__box" *ngFor="let quote of (quotes | async)">
+      <p class="quotes__content">{{ quote.quote }}</p>
+      <strong
+        class="quotes__name"
+        routerLink="/content/authors/{{ quote.name }}"
+        >{{ quote.name }}</strong
+      >
+      <div class="quotes__like-fave">
+        <div class="quotes__fav" #fav (click)="favQuote(quote, fav)" id="quote-{{quote.id}}"  [style.color]="checkFavQuotesOnInit(quote)" >
+          <mat-icon title="Add to My Quotes">star</mat-icon>
+        </div>
+        <div
+          class="quotes__like"
+          #like
+          id="div-{{ quote.id }}"
+          [style.color]="checkQuote(quote)"
+          (click)="likeQuote(quote, like)"
+        >
+          <mat-icon title="I like it">thumb_up_alt</mat-icon
+          ><span class="quotes__like-num">{{ quote.likes?.length || 0 }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

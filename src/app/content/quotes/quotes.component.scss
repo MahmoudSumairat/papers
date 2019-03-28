@@ -1,0 +1,66 @@
+@import "../../shared/variables";
+
+.quotes {
+    background-color: $color-dark;
+    min-height: 120vh;
+    padding-top : 5.5rem;
+
+    &__heading {
+        color: $color-white;
+        font-size: 4rem;
+        margin-bottom: 2rem;
+    }
+    
+    &__box {
+        color: $color-white;
+        background-color: darken($color-dark, 5%);
+        padding: 1rem 2rem;
+        margin-top: 1rem;
+        position: relative;
+    }
+    &__content {
+        font-size: 2rem;
+        line-height: 1.5;
+    }
+
+    &__name {
+        cursor: pointer;
+        font-size: 1.7rem;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    &__like-fave {
+        position: absolute;
+        right: 2rem;
+        bottom: 1rem;
+        color: darken($color-dark, 10%);
+
+    }
+
+    &__like, &__fav {
+        cursor: pointer;
+        transition: all .2s;
+    }
+
+    &__fav {
+        color: darken($color-dark, 10%);
+    }
+
+    &__like {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__like-num {
+        font-size: 1.7rem;
+        display: inline-block;
+        padding-left: .5rem;
+        color: $color-white;
+        width: 2rem;
+    }
+
+}

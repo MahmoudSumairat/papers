@@ -5,4 +5,6 @@ export interface UserData {
     email : string;
     password : string;
     userID : string;
+    favQuotes? : {name : string, quote : string}[];
+    
 }

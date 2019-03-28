@@ -8,12 +8,14 @@ import * as fromBook from "./content/home/book.reducer";
 import * as fromAuth from "./auth/auth.reducer";
 import * as fromBookDetails from "./content/book-details/book-details.reducer";
 import * as fromAuthors from "./content/authors/authors.reducer";
+import * as fromQuotes from "./content/quotes/quotes.reducer";
 
 export interface State {
   auth : fromAuth.State,
   book: fromBook.State;
   bookDetails : fromBookDetails.State;
-  authors : fromAuthors.State
+  authors : fromAuthors.State;
+  quotes : fromQuotes.State
 }
 
 export const reducers: ActionReducerMap<State> = {
@@ -21,6 +23,7 @@ export const reducers: ActionReducerMap<State> = {
   bookDetails : fromBookDetails.bookDetailsReducer,
   book: fromBook.bookReducer,
   authors : fromAuthors.authorsReducer,
+  quotes : fromQuotes.quotesReducer
 
 };
 
@@ -66,3 +69,8 @@ export const getWantBooks = createSelector(
 //For Authors reducer
 export const getAuthorsState = createFeatureSelector<fromAuthors.State>('authors');
 export const getAllAuthors = createSelector(getAuthorsState, fromAuthors.getAuthors);
+
+
+//For quotes reducer
+export const getQuotesState = createFeatureSelector<fromQuotes.State>('quotes')
+export const getQuotes = createSelector(getQuotesState, fromQuotes.getQuotes);

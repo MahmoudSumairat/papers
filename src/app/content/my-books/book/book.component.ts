@@ -10,6 +10,7 @@ import * as BookDetails from "../../book-details/book-details.actions";
 import { Router } from '@angular/router';
 import { BookDetailsService } from '../../book-details/book-details.service';
 import { MyBooksService } from '../my-books.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-book',
@@ -38,7 +39,8 @@ export class BookComponent implements OnInit {
     private store : Store<fromRoot.State>,
     private router : Router,
     private bookDetialsService : BookDetailsService,
-    private myBooksService : MyBooksService
+    private myBooksService : MyBooksService,
+    private snackBar : MatSnackBar
   ) {
  
    }
@@ -80,6 +82,7 @@ export class BookComponent implements OnInit {
   finishedReading() {
     this.removeBook();
     this.bookDetialsService.readThisBook(this.book, this.user.userID, this.book.bookName, true);
+    this.snackBar.open('Added to read books', 'OK', {duration : 1000});
   }
 
   editDateRead() {

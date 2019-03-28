@@ -2,6 +2,8 @@
   <div class="container">
   <div class="row" >
       <app-book [dist]="'read-books'" *ngFor="let book of (readBooks$ | async)" [book]="book" class="col-6" style="padding:0" ></app-book>
+      <h1 style="color: rgba(255, 255, 255, .7)"  *ngIf="!(readBooks$ | async)[0]" >No Current Books</h1>
+
   </div>
   </div>
 

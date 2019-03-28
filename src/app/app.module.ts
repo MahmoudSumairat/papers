@@ -34,9 +34,10 @@ import { AuthGurad } from "./auth/auth.guard";
 import { AuthorsComponent } from './content/authors/authors.component';
 import { AuthorsService } from './content/authors/authors.service';
 import { MyBooksService } from './content/my-books/my-books.service';
-import { CommonModule } from '@angular/common';
 import { AuthorDetailsComponent } from './content/author-details/author-details.component';
 import { ContentModule } from './content/content.module';
+import { QuotesComponent } from './content/quotes/quotes.component';
+import { QuotesService } from './content/quotes/quotes.service';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { ContentModule } from './content/content.module';
     WantToReadComponent,
     BookComponent,
     AuthorsComponent,
-    AuthorDetailsComponent
+    AuthorDetailsComponent,
+    QuotesComponent
   ],
   imports: [
     BrowserModule,
@@ -71,7 +73,7 @@ import { ContentModule } from './content/content.module';
     ContentModule
     
   ],
-  providers: [AuthService, BookService, StarService, BookDetailsService, AuthGurad, AuthorsService, MyBooksService],
+  providers: [AuthService, BookService, StarService, BookDetailsService, AuthGurad, AuthorsService, MyBooksService, QuotesService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -63,8 +63,17 @@
                 <button class="author-book__details" (click)="goToBook(book.bookName)" >More Details</button>
               </div>
           </div>
+
+  
   
       </div>
-    
+      <h3 class="author-details__quotes-title  ">{{theAuthor.name}}'s Quotes: </h3>
+      <div class="author-details__quotes-container row text-center justify-content-center">
+        <div class="author-details__quote col-12"*ngFor="let quote of theAuthor.quotes" >
+          <p class="author-details__quote-content" ><q>{{quote | titlecase }} </q></p>
+        </div>
+        <h4 style="color: rgba(255, 255, 255, .7); font-size: 2rem;" *ngIf="!theAuthor.quotes"  class="text-center" >No Quotes</h4>
+
+      </div>
   </div>
 </section>

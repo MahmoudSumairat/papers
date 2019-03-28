@@ -24,7 +24,8 @@ export class StarsReviewComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private route: ActivatedRoute,
     private starService: StarService,
-    private store: Store<fromRoot.State>
+    private store: Store<fromRoot.State>,
+    private router : Router
   ) {}
 
   user: UserData = this.authService.getUser();
@@ -38,16 +39,21 @@ export class StarsReviewComponent implements OnInit, OnDestroy {
   isReviewed : boolean;
 
   onClick(value) {
-    if (this.bookName) {
-      this.starService.setStar(value, this.bookName, this.user);
-      this.starService.calculateAverage(this.bookName);
-      this.store.dispatch(new bookDetails.SetStarReviewed());
-      console.log('book state')
-    } else if (this.authorName) {
-      this.starService.setStarForAuthor(value, this.authorName, this.user);
-      this.starService.calculateAverageForAuthor(this.authorName);
-      console.log('author state')
+    if(this.user.userID){
+      if (this.bookName) {
+        this.starService.setStar(value, this.bookName, this.user);
+        this.starService.calculateAverage(this.bookName);
+        this.store.dispatch(new bookDetails.SetStarReviewed());
+        console.log('book state')
+      } else if (this.authorName) {
+        this.starService.setStarForAuthor(value, this.authorName, this.user);
+        this.starService.calculateAverageForAuthor(this.authorName);
+        console.log('author state')
+      }
+    } else {
+      this.router.navigate(['/login']);
     }
+ 
   }
 
   ngOnInit() {

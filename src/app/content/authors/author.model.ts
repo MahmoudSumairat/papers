@@ -9,4 +9,5 @@ export interface Author {
     books : string[];
     avgRating : number;
     bestBook : string;
+    quotes : string[];
 }

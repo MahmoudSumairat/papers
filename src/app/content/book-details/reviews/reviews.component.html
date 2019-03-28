@@ -1,10 +1,6 @@
 <section class="reviewes">
   <div class="reviewes__container row">
-    <img
-      src="https://eabiawak.com/wp-content/uploads/2017/07/photo.png"
-      alt="User"
-      class="reviewes__img"
-    />
+
     <form class="reviewes__form" #f="ngForm" (ngSubmit)="onSubmit(f)">
       <textarea
         (blur)="onBlur()"
@@ -30,11 +26,7 @@
 
   <div class="people-reviewes" *ngFor="let user of (reviews | async)">
     <div class="people-reviewes__heading row">
-      <img
-        src="https://eabiawak.com/wp-content/uploads/2017/07/photo.png"
-        [alt]="user.name"
-        class="people-reviewes__img"
-      />
+    
       <h4 class="people-reviewes__username">{{ user.name }}</h4>
       <span class="people-reviewes__rated"> Rated it </span>
       <div class="people-reviewes__stars">

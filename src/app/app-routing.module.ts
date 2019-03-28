@@ -10,6 +10,7 @@ import { MyBooksComponent } from './content/my-books/my-books.component';
 import { AuthGurad } from './auth/auth.guard';
 import { AuthorsComponent } from './content/authors/authors.component';
 import { AuthorDetailsComponent } from './content/author-details/author-details.component';
+import { QuotesComponent } from './content/quotes/quotes.component';
 
 const routes: Routes = [
   { path: "", component: WelcomeComponent },
@@ -21,7 +22,8 @@ const routes: Routes = [
       { path: "books/:bookName", component: BookDetailsComponent },
       { path : "my-books", component : MyBooksComponent, canActivate : [AuthGurad] },
       { path : 'authors', component : AuthorsComponent },
-      { path : 'authors/:authorName', component : AuthorDetailsComponent }
+      { path : 'authors/:authorName', component : AuthorDetailsComponent },
+      { path : 'quotes', component : QuotesComponent }
     ]
   },
   { path: "login", component: LoginComponent },

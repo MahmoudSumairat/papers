@@ -343,7 +343,6 @@ export class ReviewsComponent implements OnInit, OnDestroy {
     }
 
     setTimeout(() => {
-      console.log("sjsdsdj");
       this.toggleCommentBox(commentBox);
     }, 100);
   }

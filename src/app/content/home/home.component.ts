@@ -8,6 +8,7 @@ import { Router } from "@angular/router";
 import { StarService } from '../book-details/star.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { BookDetailsService } from '../book-details/book-details.service';
+import { QuotesService } from '../quotes/quotes.service';
 
 @Component({
   selector: "app-home",
@@ -27,7 +28,8 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private starService : StarService,
     private authService : AuthService,
-    private bookDetailsService : BookDetailsService
+    private bookDetailsService : BookDetailsService,
+    private quotesSerivice : QuotesService
   ) {}
 
   ngOnInit() {
@@ -36,6 +38,12 @@ export class HomeComponent implements OnInit {
     this.allBooks$ = this.store.select(fromRoot.getAllBooks);
     this.store.select(fromRoot.getIsAuth).subscribe(res => this.isAuth = res);
     this.fetchFavouriteBooks();
+    this.fetchQuotes();
+    
+  }
+
+  fetchQuotes() {
+    this.quotesSerivice.fetchQuotes();
   }
 
   fetchAllBooks() {
