@@ -35,10 +35,12 @@
         
           <div class="header__search-container">
             <input
+              #searchInput
               type="text"
               name="search"
               placeholder="Search books, Authors or Quotes"
               class="header__search"
+              (keyup)="searchBooks(searchInput)"
             /><mat-icon class="header__search-icon">search</mat-icon>
           </div>
           <div class="header__account" *ngIf="!(isAuth$ | async)">
@@ -53,25 +55,20 @@
               <div
                 class="header__icon header__icon--profile"
                 title="Current User"
-                [ngClass]="{ 'account-item-active': toggleProDropdown }"
-                (click)="onToggleProDropdown()"
+                (click)="onToggleProDropdown(profileBox, profileIcon)"
+                #profileIcon
               >
                 <mat-icon>account_box</mat-icon>
               </div>
               <div
                 class="profile-box"
-                [ngClass]="{ 'list-active': toggleProDropdown }"
+                #profileBox
               >
                 <h3 class="profile-box__heading">{{ user.firstName + ' ' + user.lastName }}</h3>
                 <ul class="profile-box__list">
-                  <li><a class="profile-box__list-item">Profile</a></li>
-                  <li><a class="profile-box__list-item">Disscussions</a></li>
-                  <li><a class="profile-box__list-item">Quotes</a></li>
+                  <li><a class="profile-box__list-item" (click)="goToProfile(profileBox, profileIcon)" >Profile</a></li>
+                  <li><a class="profile-box__list-item"(click)="goToMyQuotes(profileBox, profileIcon)" >My Quotes</a></li>
                   <hr />
-                  <li>
-                    <a class="profile-box__list-item">Account Settings</a>
-                  </li>
-                  <li><a class="profile-box__list-item">Help</a></li>
                   <li>
                     <a class="profile-box__list-item" (click)="onLogout()"
                       >Log Out</a

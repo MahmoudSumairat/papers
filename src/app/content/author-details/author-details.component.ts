@@ -7,6 +7,7 @@ import {map} from "rxjs/operators";
 import { Book } from '../home/book.model';
 import { StarService } from '../book-details/star.service';
 import { BookService } from '../home/book.service';
+import { AuthorsService } from '../authors/authors.service';
 
 @Component({
   selector: 'app-author-details',
@@ -27,7 +28,8 @@ export class AuthorDetailsComponent implements OnInit {
     private route : ActivatedRoute,
     private starSerivice : StarService,
     private router : Router,
-    private bookService : BookService
+    private bookService : BookService,
+    private authorsService : AuthorsService
   ) { }
 
   ngOnInit() {
@@ -41,7 +43,7 @@ export class AuthorDetailsComponent implements OnInit {
     } ))
 
     this.bookService.fetchAllBooks();
-    this.bookService.fetchAuthors();
+    this.authorsService.fetchAuthors();
 
     this.ratingsLength = this.starSerivice.getnumOfAuthorRatings(this.authorName);
     }

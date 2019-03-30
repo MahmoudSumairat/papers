@@ -15,10 +15,9 @@ export class AuthorsService {
     ) {}
 
  
-    fecthAuthors() {
+    fetchAuthors() {
         this.afs.collection('authors').valueChanges()
         .subscribe((authors : Author[]) => {
-            console.log(authors);
             this.store.dispatch(new Authors.SetAuthors(authors))
         })
     }

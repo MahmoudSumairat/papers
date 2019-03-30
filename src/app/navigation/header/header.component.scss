@@ -204,11 +204,11 @@
     width: 20rem;
 
     &__heading {
-      margin-bottom: 0.5rem;
       padding: 1rem 2rem;
       font-size: 2rem;
       text-align: center;
       background-color: lighten($color-dark, 10%);
+      margin: 0;
 
     }
 
@@ -217,8 +217,14 @@
       margin: 0;
       padding: 0;
 
+      hr {
+        margin: 0;
+      }
+
       &-item {
-        margin: 0.5rem 0;
+        margin: 0.1rem 0;
+        color: $color-white;
+        text-decoration: none;
         transition: all 0.4s;
         cursor: pointer;
         display: block;

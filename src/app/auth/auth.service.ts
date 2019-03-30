@@ -73,7 +73,7 @@ export class AuthService implements OnDestroy {
                     );
                   }, 500);
                   this.inLoginPage = false;
-                } else {
+                } else if (data.password !== password && this.inLoginPage) {
                   this.snackBar.open("Incorrect Password, Please try again", "Ok", {
                     duration: 2000
                   });
@@ -105,6 +105,10 @@ export class AuthService implements OnDestroy {
   updateUser(favQuotes) {
     this.user.favQuotes = favQuotes;
     console.log(this.user);
+  }
+
+  updateQuote(quote) {
+    this.user.myQuote = quote;
   }
 
 

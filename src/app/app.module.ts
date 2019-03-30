@@ -38,6 +38,9 @@ import { AuthorDetailsComponent } from './content/author-details/author-details.
 import { ContentModule } from './content/content.module';
 import { QuotesComponent } from './content/quotes/quotes.component';
 import { QuotesService } from './content/quotes/quotes.service';
+import { MyQuotesComponent } from './content/my-quotes/my-quotes.component';
+import { ProfileComponent } from './content/profile/profile.component';
+import { FilterPipe } from './content/home/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -59,7 +62,10 @@ import { QuotesService } from './content/quotes/quotes.service';
     BookComponent,
     AuthorsComponent,
     AuthorDetailsComponent,
-    QuotesComponent
+    QuotesComponent,
+    ProfileComponent,
+    MyQuotesComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

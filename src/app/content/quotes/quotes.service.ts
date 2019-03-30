@@ -95,4 +95,16 @@ export class QuotesService {
         
         
     }
+
+    removeQuote(quote) {
+        const theUser = this.authService.getUser();
+        const quotesArr = theUser.favQuotes.filter(theQuote => {
+            return theQuote !== quote
+        })
+
+        this.afs.collection('users').doc(theUser.userID).set({
+            favQuotes : quotesArr
+        }, {merge : true});
+        this.authService.updateUser(quotesArr);
+    }
 }

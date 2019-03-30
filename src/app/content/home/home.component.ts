@@ -9,6 +9,7 @@ import { StarService } from '../book-details/star.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { BookDetailsService } from '../book-details/book-details.service';
 import { QuotesService } from '../quotes/quotes.service';
+import { AuthorsService } from '../authors/authors.service';
 
 @Component({
   selector: "app-home",
@@ -21,6 +22,7 @@ export class HomeComponent implements OnInit {
   i : number;
   user = this.authService.getUser();
   isAuth : boolean;
+  searchValue : string;
 
   constructor(
     private bookService: BookService,
@@ -29,7 +31,8 @@ export class HomeComponent implements OnInit {
     private starService : StarService,
     private authService : AuthService,
     private bookDetailsService : BookDetailsService,
-    private quotesSerivice : QuotesService
+    private quotesSerivice : QuotesService,
+    private authorsService : AuthorsService
   ) {}
 
   ngOnInit() {
@@ -39,6 +42,8 @@ export class HomeComponent implements OnInit {
     this.store.select(fromRoot.getIsAuth).subscribe(res => this.isAuth = res);
     this.fetchFavouriteBooks();
     this.fetchQuotes();
+    this.bookService.inputChanged.subscribe(data => this.searchValue = data);
+    console.log(this.router.url);
     
   }
 
@@ -51,7 +56,7 @@ export class HomeComponent implements OnInit {
   }
 
   fetchAuthors() {
-    this.bookService.fetchAuthors();
+    this.authorsService.fetchAuthors();
   }
 
   fetchFavouriteBooks() {

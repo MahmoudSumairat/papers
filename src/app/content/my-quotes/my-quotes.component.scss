@@ -1,0 +1,54 @@
+@import "../../shared/variables";
+
+.my-quotes {
+    background-color: $color-dark;
+    color: $color-white;
+    min-height: 120vh;
+    padding-top: 5rem;
+
+    .container {
+        padding-top: 2rem;
+    }
+
+    &__heading {
+        margin-bottom: 2rem;
+
+    }
+
+    &__quote-box {
+        background-color: darken($color-dark, 5%);
+        padding: 1rem 2rem;
+        margin-top: .5rem;
+        position: relative;
+    
+    }
+
+    &__quote-content {
+        font-size: 1.8rem;
+        line-height: 1.5;
+    }
+
+    &__quote-name {
+        font-size: 1.7rem;
+    }
+
+    &__remove {
+        background: none;
+        border: none;
+        color: darken($color-dark, 10%);
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+        cursor: pointer;
+        transition: all .4s;
+
+        &:hover {
+            color: $color-primary;
+
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+}

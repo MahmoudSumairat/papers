@@ -1,0 +1,10 @@
+<section class="my-quotes">
+  <div class="container">
+    <h1 class="my-quotes__heading text-center">My Quotes</h1>
+    <div class="my-quotes__quote-box" *ngFor="let quote of quotes">
+      <p class="my-quotes__quote-content" > {{quote.quote}} </p>
+      <strong class="my-quotes__quote-name" > {{quote.name}} </strong>
+      <button class="my-quotes__remove" title="Remove Quote" (click)="removeQuote(quote)"><mat-icon>clear</mat-icon></button>
+    </div>
+  </div>
+</section>

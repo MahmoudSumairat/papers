@@ -27,7 +27,7 @@ export class AuthorsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.authorsService.fecthAuthors();
+    this.authorsService.fetchAuthors();
     this.allAuthors$ = this.store.select(fromRoot.getAllAuthors);
     this.allAuthors$.subscribe(data => console.log(data));  
     this.bookService.fetchAllBooks();

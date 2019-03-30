@@ -11,6 +11,8 @@ import { AuthGurad } from './auth/auth.guard';
 import { AuthorsComponent } from './content/authors/authors.component';
 import { AuthorDetailsComponent } from './content/author-details/author-details.component';
 import { QuotesComponent } from './content/quotes/quotes.component';
+import { ProfileComponent } from './content/profile/profile.component';
+import { MyQuotesComponent } from './content/my-quotes/my-quotes.component';
 
 const routes: Routes = [
   { path: "", component: WelcomeComponent },
@@ -23,11 +25,13 @@ const routes: Routes = [
       { path : "my-books", component : MyBooksComponent, canActivate : [AuthGurad] },
       { path : 'authors', component : AuthorsComponent },
       { path : 'authors/:authorName', component : AuthorDetailsComponent },
-      { path : 'quotes', component : QuotesComponent }
+      { path : 'quotes', component : QuotesComponent },
+      { path : 'profile', component : ProfileComponent, canActivate : [AuthGurad]},
+      { path : 'my-quotes', component : MyQuotesComponent, canActivate : [AuthGurad] }
     ]
   },
   { path: "login", component: LoginComponent },
-  { path: "signup", component: SignupComponent }
+  { path: "signup", component: SignupComponent },
 ];
 
 @NgModule({

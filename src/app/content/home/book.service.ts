@@ -5,9 +5,11 @@ import { Store } from "@ngrx/store";
 import * as fromRoot from "../../app.reducer";
 import * as BookActions from "./book.actions";
 import { map } from "rxjs/operators";
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class BookService {
+  inputChanged = new Subject<string>();
   constructor(
     private db: AngularFirestore,
     private store: Store<fromRoot.State>
@@ -28,14 +30,8 @@ export class BookService {
       });
   }
 
-  fetchAuthors() {
-    this.db
-      .collection("authors")
-      .valueChanges()
-      .subscribe((authors: any[]) => {
-        this.store.dispatch(new BookActions.SetAuthors(authors));
-      });
-  }
 
+
+  
   
 }

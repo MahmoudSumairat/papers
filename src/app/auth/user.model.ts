@@ -6,5 +6,5 @@ export interface UserData {
     password : string;
     userID : string;
     favQuotes? : {name : string, quote : string}[];
-    
+    myQuote? : String
 }

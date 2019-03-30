@@ -1,9 +1,11 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { Store } from "@ngrx/store";
 import * as fromRoot from "../../app.reducer";
-import { Observable } from "rxjs";
+import { Observable, Subject } from "rxjs";
 import { AuthService } from "src/app/auth/auth.service";
 import { UserData } from "src/app/auth/user.model";
+import { Router } from '@angular/router';
+import { BookService } from 'src/app/content/home/book.service';
 
 @Component({
   selector: "app-header",
@@ -19,7 +21,9 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private store: Store<fromRoot.State>,
-    private authService: AuthService
+    private authService: AuthService,
+    private router : Router,
+    private booksService : BookService
   ) {}
 
   ngOnInit() {
@@ -31,12 +35,35 @@ export class HeaderComponent implements OnInit {
 
 
 
-  onToggleProDropdown() {
-    this.toggleProDropdown = !this.toggleProDropdown;
+  onToggleProDropdown(profileBox, profileIcon) {
+    if(profileBox.classList.contains('list-active')) {
+      profileBox.classList.remove('list-active');
+      profileIcon.classList.remove('account-item-active');
+    } else {
+      profileBox.classList.add('list-active');
+      profileIcon.classList.add('account-item-active');
+    }
+
 
   }
 
   onLogout() {
     this.authService.logout();
+  }
+
+  goToProfile(profileBox, profileIcon) {
+    profileIcon.classList.remove('account-item-active');
+    profileBox.classList.remove('list-active');
+    this.router.navigate(['/content/profile']);
+  }
+
+  goToMyQuotes(profileBox, profileIcon) {
+    profileIcon.classList.remove('account-item-active');
+    profileBox.classList.remove('list-active');
+    this.router.navigate(['/content/my-quotes']);
+  }
+
+  searchBooks(input : HTMLInputElement) {
+    this.booksService.inputChanged.next(input.value);
   }
 }
