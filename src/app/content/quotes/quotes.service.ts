@@ -7,9 +7,12 @@ import { map } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { UserData } from 'src/app/auth/user.model';
 import * as Auth from "../../auth/auth.actions";
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class QuotesService {
+
+    inputChanged = new Subject<string>();
     constructor(private afs : AngularFirestore, private store : Store<fromRoot.State>, private authService : AuthService) {
 
     }

@@ -4,10 +4,11 @@ import { Store } from '@ngrx/store';
 import * as fromRoot from "../../app.reducer";
 import * as Authors from "./authors.actions";
 import { Author } from './author.model';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class AuthorsService {
-
+    inputChanged = new Subject<string>();
     constructor(
         private afs : AngularFirestore,
         private store : Store<fromRoot.State>

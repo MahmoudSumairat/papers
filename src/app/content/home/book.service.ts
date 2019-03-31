@@ -10,6 +10,7 @@ import { Subject } from 'rxjs';
 @Injectable()
 export class BookService {
   inputChanged = new Subject<string>();
+  inputValueChanged = new Subject<string>();
   constructor(
     private db: AngularFirestore,
     private store: Store<fromRoot.State>

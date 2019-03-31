@@ -16,6 +16,7 @@ import { BookService } from '../home/book.service';
 export class AuthorsComponent implements OnInit {
 
     allAuthors$ : Observable<Author[]>;
+    searchValue : string;
   
 
   constructor(
@@ -31,6 +32,7 @@ export class AuthorsComponent implements OnInit {
     this.allAuthors$ = this.store.select(fromRoot.getAllAuthors);
     this.allAuthors$.subscribe(data => console.log(data));  
     this.bookService.fetchAllBooks();
+    this.authorsService.inputChanged.subscribe(data => this.searchValue = data);
   
   }
 

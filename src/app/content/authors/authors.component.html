@@ -1,7 +1,7 @@
 <section class="authors "  >
   <div class="container">
       <div class="row justify-content-center  ">
-          <div class="author col-5 " *ngFor="let author of (allAuthors$ | async)">
+          <div class="author col-5 " *ngFor="let author of (allAuthors$ | async) | filter:searchValue">
               <img
               [src]="author.img"
               class="author__img"

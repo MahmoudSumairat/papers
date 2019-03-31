@@ -1,7 +1,7 @@
 <section class="quotes">
   <div class="container">
     <h1 class="quotes__heading">Authors Quotes</h1>
-    <div class="quotes__box" *ngFor="let quote of (quotes | async)">
+    <div class="quotes__box" *ngFor="let quote of (quotes | async) | filter:searchValue">
       <p class="quotes__content">{{ quote.quote }}</p>
       <strong
         class="quotes__name"

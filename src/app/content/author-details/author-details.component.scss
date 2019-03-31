@@ -54,12 +54,8 @@
     &__genre {
         display: inline-block;
         margin-left: 1rem;
-        cursor: pointer;
         position: relative;
 
-        &:hover {
-            text-decoration: underline;
-        }
 
         &:not(:last-of-type) {
             &:after {

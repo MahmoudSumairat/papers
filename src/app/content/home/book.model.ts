@@ -1,4 +1,3 @@
-import { Timestamp } from 'rxjs';
 
 export interface Book {
   bookName: string;

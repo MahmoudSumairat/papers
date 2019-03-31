@@ -40,7 +40,7 @@ import { QuotesComponent } from './content/quotes/quotes.component';
 import { QuotesService } from './content/quotes/quotes.service';
 import { MyQuotesComponent } from './content/my-quotes/my-quotes.component';
 import { ProfileComponent } from './content/profile/profile.component';
-import { FilterPipe } from './content/home/filter.pipe';
+import { FilterPipe } from './content/filter.pipe';
 
 @NgModule({
   declarations: [

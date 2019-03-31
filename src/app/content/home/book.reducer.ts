@@ -4,7 +4,6 @@ import {
   SET_ALL_BOOKS,
   SET_AUTHORS
 } from "./book.actions";
-import { Author } from '../authors/author.model';
 
 export interface State {
   allBooks: Book[];

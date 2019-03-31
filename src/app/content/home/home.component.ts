@@ -36,14 +36,16 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    
     this.fetchAllBooks();
     this.fetchAuthors();
-    this.allBooks$ = this.store.select(fromRoot.getAllBooks);
     this.store.select(fromRoot.getIsAuth).subscribe(res => this.isAuth = res);
     this.fetchFavouriteBooks();
     this.fetchQuotes();
+    setTimeout(() => {
+      this.allBooks$ = this.store.select(fromRoot.getAllBooks);
+    }, 1)
     this.bookService.inputChanged.subscribe(data => this.searchValue = data);
-    console.log(this.router.url);
     
   }
 

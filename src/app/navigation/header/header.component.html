@@ -20,16 +20,16 @@
       </button>
       <div class="collaps navbar-collaps" id="navbar-items">
         <div class="navbar-nav">
-          <a class="nav-item nav-link header__item" routerLink="/content"
+          <a class="nav-item nav-link header__item" (click)="navigate(null)"
             >Home</a
           >
-          <a class="nav-item nav-link header__item" routerLink="my-books" >My Books</a>
-          <a class="nav-item nav-link header__item" routerLink="authors" >Authors</a>
+          <a class="nav-item nav-link header__item" (click)="navigate('my-books')" >My Books</a>
+          <a class="nav-item nav-link header__item" (click)="navigate('authors')" >Authors</a>
             <a
               #dropdownItem
               id="community"
               class="nav-item nav-link header__item"
-              routerLink="quotes"
+              (click)="navigate('quotes')"
               >Quotes</a
             >
         

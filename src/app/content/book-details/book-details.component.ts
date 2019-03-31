@@ -10,6 +10,7 @@ import { AngularFirestore } from "@angular/fire/firestore";
 import { AuthService } from "src/app/auth/auth.service";
 import { StarService } from "./star.service";
 import { BookDetailsService } from './book-details.service';
+import { BookService } from '../home/book.service';
 
 @Component({
   selector: "app-book-details",
@@ -36,7 +37,8 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private starService: StarService,
     private bookDetailsService : BookDetailsService,
-    private router : Router
+    private router : Router,
+    private bookService : BookService
   ) {}
 
   ngOnInit() {
@@ -163,5 +165,14 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
 
   goToAuthor(authorName) {
     this.router.navigate(['content/authors', authorName])
+  }
+
+
+  findTheSameGenre(genre : string) {
+    this.router.navigate(['/content']);
+    setTimeout(() => {
+      this.bookService.inputValueChanged.next(genre);
+      this.bookService.inputChanged.next(genre);
+    }, .5)
   }
 }

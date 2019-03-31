@@ -24,6 +24,7 @@ export class QuotesComponent implements OnInit {
   user : UserData;
   divsArr = [];
   quotesArr = [];
+  searchValue : string;
   
   constructor(
     private afs : AngularFirestore,
@@ -39,7 +40,7 @@ export class QuotesComponent implements OnInit {
     this.quotes = this.store.select(fromRoot.getQuotes);
     this.quoteSerivce.fetchQuotes();
     this.user = this.authService.getUser();
-    
+    this.quoteSerivce.inputChanged.subscribe(data => this.searchValue = data);
    
 
 
