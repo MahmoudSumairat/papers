@@ -1,10 +1,21 @@
 <section class="my-quotes">
   <div class="container">
     <h1 class="my-quotes__heading text-center">My Quotes</h1>
-    <div class="my-quotes__quote-box" *ngFor="let quote of quotes">
-      <p class="my-quotes__quote-content" > {{quote.quote}} </p>
+    <div class="my-quotes__quote-box" *ngFor="let quote of quotes|slice:startingIndex:endingIndex">
+      <p class="my-quotes__quote-content" > <q>{{quote.quote.replace('"', "")}}</q></p>
       <strong class="my-quotes__quote-name" > {{quote.name}} </strong>
       <button class="my-quotes__remove" title="Remove Quote" (click)="removeQuote(quote)"><mat-icon>clear</mat-icon></button>
+    </div>
+    <h2 class="my-quotes__no-quotes" *ngIf="!quotes || !quotes[0]"  >No Current Quotes</h2>
+
+    <div *ngIf="(quotes ) as quotes" class="my-quotes__navigate row justify-content-center " > 
+      <div class="my-quotes__navigate-box row justify-space-evenly" *ngIf="quotes[0]" >
+        <button (click)="firstPage(quotes)"  class="my-quotes__fast-rewind" title="First Page"> <mat-icon>navigate_before</mat-icon><mat-icon>navigate_before</mat-icon></button>
+        <button (click)="previuosQuotes(quotes)"  class="my-quotes__previuos" title="Previuos"> <mat-icon>navigate_before</mat-icon> </button>
+        <span class="my-quotes__page" *ngFor="let page of getNumOfPages() | slice:theFirstPage:theLastPage" (click)="goToPage(page)"  [ngClass]="{'page-active':currentPage === page}"  > {{page}} </span>
+        <button (click)="nextQuotes(quotes)" class="my-quotes__next" title="Next" > <mat-icon>navigate_next</mat-icon> </button>
+        <button (click)="lastPage(quotes)" class="my-quotes__fast-forward" title="Last Page" > <mat-icon>navigate_next</mat-icon><mat-icon>navigate_next</mat-icon> </button>
+      </div>
     </div>
   </div>
 </section>

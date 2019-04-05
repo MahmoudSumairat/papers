@@ -3,11 +3,82 @@
 .read-books {
    padding: 2rem 0;
    color: $color-white;
+   position: relative;
+   min-height: 100vh;
    .row {
        margin: 0;
        justify-content: space-evenly;
    }
 
+   
+   &__navigate {
+    padding: 2rem 0;
+    margin: 1rem auto;
+   
+  }
+
+  &__navigate-box {
+    position: absolute;
+    top: 100%;
+    
+  }
+
+  &__next, &__previuos, &__fast-rewind, &__fast-forward {
+    .mat-icon{
+      font-size: 2.9rem;
+    }
+    background: none;
+    border: none;
+    color: darken($color-dark, 10%);
+    cursor: pointer;
+    transition: all .4s;
+    padding: 0;
+    margin: 0 1rem;
+
+    &:hover {
+      color: $color-primary;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__fast-rewind, &__fast-forward {
+    .mat-icon {
+      width: 1rem;
+    }
+  }
+
+  &__fast-forward {
+    margin-left: -.3rem;
+  }
+
+
+
+
+  &__page {
+    color: $color-white;
+    font-size: 1.5rem;
+    display: block;
+    margin: 1rem;
+    margin-left: 1.4rem;
+    transition: all .2s;
+    cursor: pointer;
+    text-shadow: .05rem .05rem .5rem transparent , -.05rem -.05rem .5rem transparent;
+
+
+    &:hover {
+      text-shadow: .05rem .05rem .5rem $color-white, -.05rem -.05rem .5rem $color-white;
+      transform: scale(1.2);
+    }
+    
+  }
 
     
 }
+
+.page-active {
+    text-shadow: .05rem .05rem .5rem $color-white, -.05rem -.05rem .5rem $color-white;
+    transform: scale(1.2);
+  }

@@ -1,9 +1,9 @@
 <section class="home">
   <div class="container">
-    <div class="book-list row">
+    <div class="book-list row" *ngIf=" showBooks" > 
       <div
         class="book col-6 col-sm-4 col-md-3"
-        *ngFor="let book of (allBooks$ | async | filter:searchValue)"
+        *ngFor="let book of (allBooks$ | async | filter:searchValue | slice:startingIndex:endingIndex)"
       >
         <div class="card">
           <img
@@ -33,5 +33,18 @@
         </div>
       </div>
     </div>
+
+    <div *ngIf="(allBooks$ | async | filter:searchValue ) as books" class="home__navigate row justify-content-center " > 
+      <div class="home__navigate-box row justify-space-evenly" *ngIf="books[0] && showPagination" >
+        <button (click)="firstPage(books)"  class="home__fast-rewind" title="First Page"> <mat-icon>navigate_before</mat-icon><mat-icon>navigate_before</mat-icon></button>
+        <button (click)="previuosBooks(books)"  class="home__previuos" title="Previuos"> <mat-icon>navigate_before</mat-icon> </button>
+        <span class="home__page" *ngFor="let page of getNumOfPages() | slice:theFirstPage:theLastPage" (click)="goToPage(page)"  [ngClass]="{'page-active':currentPage === page}"  > {{page}} </span>
+        <button (click)="nextBooks(books)" class="home__next" title="Next" > <mat-icon>navigate_next</mat-icon> </button>
+        <button (click)="lastPage(books)" class="home__fast-forward" title="Last Page" > <mat-icon>navigate_next</mat-icon><mat-icon>navigate_next</mat-icon> </button>
+      </div>
+    </div>
   </div>
+
+  <h2 *ngIf="searchValue && !((allBooks$ | async) | filter:searchValue).length"  class="home__no-results" >No Results</h2>
+
 </section>

@@ -11,9 +11,9 @@ export class FilterPipe implements PipeTransform {
 
   transform(value: any[], searchValue: string): any {
     if(!searchValue) {
-        return value;
-      } 
-
+      return value;
+    } 
+    
     if(this.router.url === '/content') {
           return  value.filter((book : Book) => {
             const genres = book.genres.map(genre => genre.toLowerCase());

@@ -73,9 +73,10 @@ export class StarService {
       .valueChanges()
       .pipe(
         map(data => {
-          const ratings = data.map(object => object.value);
+          let ratings = [];
+          ratings = data.map(object => object.value);
           this.numberOfRatings = ratings.length;
-          return (ratings.reduce((accum, value) => accum + value) / ratings.length).toFixed(2);
+          return (ratings.reduce((accum, value,) => accum + value) / ratings.length).toFixed(2);
         })
       ).subscribe((data) => {
         this.afs.collection('myBooks').doc(bookName.toLowerCase().replace(/ /g,'_')).update({

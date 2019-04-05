@@ -4,8 +4,8 @@
       <h1 class="profile__name"> {{user.firstName + ' ' + user.lastName}} </h1>      
     </div>
     <div class="profile__quote-container" >
-      <h2 class="profile__second-heading text-center" > Best Quote </h2>
-      <p class="profile__my-quote text-center" *ngIf="user.myQuote" ><q> {{user.myQuote}} </q>  <span class="profile__quote-edit" (click)="toggleQuote()" > [Edit] </span> </p>
+      <h2 class="profile__second-heading text-center" *ngIf="!user.myQuote && toggleQuoteInput" > Best Quote </h2>
+      <p class="profile__my-quote text-center" *ngIf="user.myQuote" ><q>{{user.myQuote.replace('"', "")}}</q>  <span class="profile__quote-edit" (click)="toggleQuote()" > [Edit] </span> </p>
       <button class="profile__add-quote" *ngIf="!user.myQuote && toggleQuoteInput" (click)="toggleQuote()" >Add One</button>
 
       <div *ngIf="!toggleQuoteInput"  >
@@ -46,7 +46,7 @@
     </h2>
     <div class="quotes  " >
       <div class="quotes__quote" *ngFor="let quote of user.favQuotes | slice:0:5, let i = index"  >
-        <p>{{quote.quote}}</p>
+        <p><q>{{quote.quote.replace('"', "")}}</q></p>
         <h4>{{ quote.name }}</h4>
       </div>
       <a class="quotes__link text-center" routerLink="/content/my-quotes" > Go to My Quotes </a>

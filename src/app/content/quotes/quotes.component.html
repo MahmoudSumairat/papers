@@ -1,8 +1,8 @@
 <section class="quotes">
   <div class="container">
     <h1 class="quotes__heading">Authors Quotes</h1>
-    <div class="quotes__box" *ngFor="let quote of (quotes | async) | filter:searchValue">
-      <p class="quotes__content">{{ quote.quote }}</p>
+    <div class="quotes__box" *ngFor="let quote of (quotes$ | async) | filter:searchValue | slice:startingIndex:endingIndex">
+      <p class="quotes__content"> <q>{{ quote.quote.replace('“', "").replace("”", "").replace('"', "") }}</q> </p>
       <strong
         class="quotes__name"
         routerLink="/content/authors/{{ quote.name }}"
@@ -24,5 +24,18 @@
         </div>
       </div>
     </div>
+
+    <div *ngIf="(quotes$ | async ) as quotes" class="quotes__navigate row justify-content-center " > 
+      <div class="quotes__navigate-box row justify-space-evenly" *ngIf="quotes[0] && showPagination" >
+        <button (click)="firstPage(quotes)"  class="quotes__fast-rewind" title="First Page"> <mat-icon>navigate_before</mat-icon><mat-icon>navigate_before</mat-icon></button>
+        <button (click)="previuosQuotes(quotes)"  class="quotes__previuos" title="Previuos"> <mat-icon>navigate_before</mat-icon> </button>
+        <span class="quotes__page" *ngFor="let page of getNumOfPages() | slice:theFirstPage:theLastPage" (click)="goToPage(page)"  [ngClass]="{'page-active':currentPage === page}"  > {{page}} </span>
+        <button (click)="nextQuotes(quotes)" class="quotes__next" title="Next" > <mat-icon>navigate_next</mat-icon> </button>
+        <button (click)="lastPage(quotes)" class="quotes__fast-forward" title="Last Page" > <mat-icon>navigate_next</mat-icon><mat-icon>navigate_next</mat-icon> </button>
+      </div>
+    </div>
+
   </div>
+
+  <h2 *ngIf="searchValue && !((quotes$ | async) | filter:searchValue).length"  class="quotes__no-results" >No Results</h2>
 </section>

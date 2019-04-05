@@ -20,11 +20,21 @@ import { Router } from '@angular/router';
 export class QuotesComponent implements OnInit {
 
 
-  quotes : Observable<{name : string, quote : string, id? : string, likes? : []}[]>;
+  quotes$ : Observable<{name : string, quote : string, id? : string, likes? : []}[]>;
   user : UserData;
   divsArr = [];
   quotesArr = [];
   searchValue : string;
+  quotesPerPage : number = 10;
+  startingIndex = 0;
+  endingIndex = this.quotesPerPage;
+  pagesArr = [];
+  numOfPages : number;
+  currentPage : number = 1;
+  theFirstPage : number = 0;
+  navigatablePages : number = 4;
+  theLastPage : number = this.navigatablePages;
+  showPagination = true;
   
   constructor(
     private afs : AngularFirestore,
@@ -37,10 +47,30 @@ export class QuotesComponent implements OnInit {
 
 
   ngOnInit() {
-    this.quotes = this.store.select(fromRoot.getQuotes);
+    this.quotes$ = this.store.select(fromRoot.getQuotes).pipe(map(quotes => {
+      this.numOfPages = Math.ceil(quotes.length/this.quotesPerPage);
+      console.log(quotes.length);
+      return quotes
+    }))
     this.quoteSerivce.fetchQuotes();
     this.user = this.authService.getUser();
-    this.quoteSerivce.inputChanged.subscribe(data => this.searchValue = data);
+    this.quoteSerivce.inputChanged.subscribe(data => {
+      
+      this.searchValue = data
+      
+      if(this.searchValue) {
+        this.startingIndex = 0;
+        this.endingIndex = undefined;
+        this.showPagination = false;
+       
+      } else {
+        this.startingIndex = this.currentPage * this.quotesPerPage - this.quotesPerPage;
+        this.endingIndex = this.currentPage * this.quotesPerPage;
+        this.showPagination = true;
+    
+      }
+
+    });
    
 
 
@@ -129,6 +159,102 @@ export class QuotesComponent implements OnInit {
       return '#0a0d0f';
     }
  
+  }
+
+  
+  nextQuotes(quotes) {
+    console.log(this.numOfPages);
+    if(this.endingIndex <= quotes.length && quotes.length >= this.quotesPerPage) {
+      this.startingIndex += this.quotesPerPage;
+      this.endingIndex += this.quotesPerPage;
+      this.currentPage = Math.ceil(this.endingIndex/this.quotesPerPage);
+
+      if(this.currentPage >= this.navigatablePages && this.theLastPage < this.numOfPages) {
+        this.theFirstPage++;
+        this.theLastPage++;
+      }
+    } else {
+      console.log('no you dont');
+    }
+    
+  }
+  
+  previuosQuotes(quotes) {
+    if(this.startingIndex > 0 && quotes.length >= this.quotesPerPage) {
+      this.startingIndex -= this.quotesPerPage;
+      this.endingIndex -= this.quotesPerPage;
+      
+      this.currentPage = Math.ceil(this.endingIndex/this.quotesPerPage);
+
+      if(this.theFirstPage > 0) {
+        this.theFirstPage--;
+        this.theLastPage--;
+      }
+    } else {
+      console.log('no you dont');
+    } 
+  }
+
+
+  firstPage(books) {
+    if(this.startingIndex > 0 && books.length >= this.quotesPerPage) {
+      this.startingIndex = 0;
+      this.endingIndex = this.quotesPerPage;
+      this.currentPage = Math.ceil(this.endingIndex/this.quotesPerPage);
+      this.theFirstPage = 0;
+      this.theLastPage = this.navigatablePages;
+
+
+    } else {
+      console.log('no you dont');
+    }
+  }
+
+  lastPage(books) {
+    if(this.endingIndex <= books.length && books.length >= this.quotesPerPage) {
+      this.startingIndex = this.quotesPerPage * Math.ceil(books.length / this.quotesPerPage  ) - this.quotesPerPage;
+      this.endingIndex = this.quotesPerPage * Math.ceil(books.length / this.quotesPerPage );
+      this.currentPage = Math.ceil(this.endingIndex/this.quotesPerPage);
+      this.theLastPage = this.currentPage;
+      this.theFirstPage = this.currentPage - this.navigatablePages;
+
+    } else {
+      console.log('no you dont');
+    }
+  }
+
+  getNumOfPages() {
+    this.pagesArr = [];
+     for(let i = 1; i <= this.numOfPages; i++ ) {
+        this.pagesArr.push(i);
+    }
+
+    return this.pagesArr;
+  }
+
+
+  goToPage(pageNo : number) {
+    if(pageNo < this.currentPage && this.currentPage >= this.navigatablePages ) {
+      if(this.theFirstPage > 0) {
+        this.theFirstPage--;
+        this.theLastPage--;
+        console.log('something')
+      } else {
+        console.log('no you dont');
+      }
+    } else if(pageNo > this.currentPage && pageNo >= this.navigatablePages)  {
+      console.log('something')
+      if(this.theLastPage < this.numOfPages) {
+        this.theFirstPage++;
+        this.theLastPage++;
+      }
+    } 
+    console.log(this.currentPage);
+    console.log(this.theFirstPage, this.theLastPage);
+    this.startingIndex = pageNo * this.quotesPerPage - this.quotesPerPage;
+    this.endingIndex = pageNo * this.quotesPerPage;
+    this.currentPage = pageNo;
+    
   }
   
 
