@@ -11,11 +11,41 @@ import { BookDetailsService } from '../book-details/book-details.service';
 import { QuotesService } from '../quotes/quotes.service';
 import { AuthorsService } from '../authors/authors.service';
 import { map } from 'rxjs/operators';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: "app-home",
   templateUrl: "./home.component.html",
-  styleUrls: ["./home.component.scss"]
+  styleUrls: ["./home.component.scss"],
+  animations: [
+    trigger('booksState', [
+      state('exist', style({
+        opacity : 1,
+        transform : 'translateZ(0)'
+      })),
+      transition('void => *' , [
+        style({
+          opacity: 0,
+          transform : 'translateZ(-25px)'
+        }),
+        animate('.25s ease-out')
+      ]),
+   
+    ] ),
+    trigger('pageState', [
+      state('navigatable', style({
+        transform : 'scale(1)'
+      })),
+      transition("void => *", [
+        style({
+         transform : 'scale(0)' 
+        }),
+        animate(200)
+      ] ),
+  
+    ])
+  ]
+  
 })
 export class HomeComponent implements OnInit {
   allBooks$: Observable<Book[]>;
@@ -35,6 +65,11 @@ export class HomeComponent implements OnInit {
   navigatablePages : number = 4;
   theLastPage : number = this.navigatablePages;
   showPagination = true;
+  isLoading$ : Observable<boolean>;
+  tryAgain$ : Observable<boolean>;
+
+  
+  
   
 
   constructor(
@@ -45,11 +80,13 @@ export class HomeComponent implements OnInit {
     private authService : AuthService,
     private bookDetailsService : BookDetailsService,
     private quotesSerivice : QuotesService,
-    private authorsService : AuthorsService
+    private authorsService : AuthorsService,
+    
   ) {}
 
   ngOnInit() {
-    
+    this.isLoading$ = this.store.select(fromRoot.getIsLoading);
+    this.tryAgain$ = this.store.select(fromRoot.getTry);
     this.fetchAllBooks();
     this.fetchAuthors();
     this.store.select(fromRoot.getIsAuth).subscribe(res => this.isAuth = res);
@@ -85,6 +122,8 @@ export class HomeComponent implements OnInit {
       }
     });
 
+
+    
   }
 
   fetchQuotes() {

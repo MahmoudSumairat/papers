@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 import { BookDetailsService } from '../../book-details/book-details.service';
 import { MyBooksService } from '../my-books.service';
 import { MatSnackBar } from '@angular/material';
+import * as ui from "../../../shared/ui.actions";
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-book',
@@ -31,6 +33,7 @@ export class BookComponent implements OnInit {
     i : 0
   };
   maxDate : Date;
+  isLoadind$ : Observable<boolean>;
 
   constructor(
     private afs : AngularFirestore,
@@ -46,17 +49,20 @@ export class BookComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.store.dispatch(new ui.StartLoading());
     setTimeout(() => {
       this.afs.collection('stars').doc('book_review').collection(this.book.bookName.toLowerCase().replace(/ /g, "_")).doc(this.user.userID)
       .valueChanges().subscribe((data : any) => {
         if(data) {
           this.ratingValue = data.value;
           this.resArr = this.creatStars(this.ratingValue);
+          this.store.dispatch(new ui.StopLoading());
         }
         
       });
     }, 10);
     this.maxDate = new Date()
+    this.isLoadind$ = this.store.select(fromRoot.getIsLoading);
   }
 
 

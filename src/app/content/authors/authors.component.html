@@ -1,50 +1,115 @@
-<section class="authors "  >
+<section class="authors ">
   <div class="container">
-      <div class="row justify-content-center  ">
-          <div class="author col-5 " *ngFor="let author of (allAuthors$ | async) | filter:searchValue | slice:startingIndex:endingIndex">
-              <img
-              [src]="author.img"
-              class="author__img"
-              [title]="author.name"
-              (click)="goToAuthor(author.name)"
-            />
-            <div class="author__info">
-              <h3 class="author__name" (click)="goToAuthor(author.name)" >{{ author.name }}</h3>
-              <h4 class="author__born">Born :  {{ author.born }}</h4>
-              <span class="author__genre" *ngFor="let genre of author.genre" > {{genre}} </span>
-          
-            <div *ngIf="author.avgRating"  class="author__rating">
-              <span *ngFor="let star of createStars(author.avgRating).starArr" class="author__star">
-                <mat-icon  >star</mat-icon>
-              </span>
-              <span *ngIf="createStars(author.avgRating).i < 1" [style.width]="createStars(author.avgRating).i * 24 + 'px'" class="author__star-container" >
-                  <mat-icon  >star</mat-icon>
-              </span>
-              
-            </div>
-            <p class="author__not-rated" *ngIf="!author.avgRating" >Not Reviewed</p>
-            
-            <p class="author__popular"> Most Popular Book : <span class="author__popular-book" (click)="onLoadBook(author.bestBook)" >{{author.bestBook}}</span> </p>
+    <div class="row justify-content-center  " *ngIf="showAuthors">
+      <div
+        class="author col-5 "
+        *ngFor="
+          let author of (allAuthors$
+            | async
+            | filter: searchValue
+            | slice: startingIndex:endingIndex)
+        "
+        [@authorState]
+      >
+        <img
+          [src]="author.img"
+          class="author__img"
+          [title]="author.name"
+          (click)="goToAuthor(author.name)"
+        />
+        <div class="author__info">
+          <h3 class="author__name" (click)="goToAuthor(author.name)">
+            {{ author.name }}
+          </h3>
+          <h4 class="author__born">Born : {{ author.born }}</h4>
+          <span class="author__genre" *ngFor="let genre of author.genre">
+            {{ genre }}
+          </span>
 
-            </div>
-            
+          <div *ngIf="author.avgRating" class="author__rating">
+            <span
+              *ngFor="let star of createStars(author.avgRating).starArr"
+              class="author__star"
+            >
+              <mat-icon>star</mat-icon>
+            </span>
+            <span
+              *ngIf="createStars(author.avgRating).i < 1"
+              [style.width]="createStars(author.avgRating).i * 24 + 'px'"
+              class="author__star-container"
+            >
+              <mat-icon>star</mat-icon>
+            </span>
           </div>
-      </div>
+          <p class="author__not-rated" *ngIf="!author.avgRating">
+            Not Reviewed
+          </p>
 
-      <div *ngIf="(allAuthors$ | async | filter:searchValue ) as books" class="authors__navigate row justify-content-center " > 
-        <div class="authors__navigate-box row justify-space-evenly" *ngIf="books[0] && showPagination" >
-          <button (click)="firstPage(books)"  class="authors__fast-rewind" title="First Page"> <mat-icon>navigate_before</mat-icon><mat-icon>navigate_before</mat-icon></button>
-          <button (click)="previuosAuthors(books)"  class="authors__previuos" title="Previuos"> <mat-icon>navigate_before</mat-icon> </button>
-          <span class="authors__page" *ngFor="let page of getNumOfPages() | slice:theFirstPage:theLastPage" (click)="goToPage(page)"  [ngClass]="{'page-active':currentPage === page}"  > {{page}} </span>
-          <button (click)="nextAuthors(books)" class="authors__next" title="Next" > <mat-icon>navigate_next</mat-icon> </button>
-          <button (click)="lastPage(books)" class="authors__fast-forward" title="Last Page" > <mat-icon>navigate_next</mat-icon><mat-icon>navigate_next</mat-icon> </button>
+          <p class="author__popular">
+            Most Popular Book :
+            <span
+              class="author__popular-book"
+              (click)="onLoadBook(author.bestBook)"
+              >{{ author.bestBook }}</span
+            >
+          </p>
         </div>
       </div>
+    </div>
+
+    <div
+      *ngIf="(allAuthors$ | async | filter: searchValue) as books"
+      class="authors__navigate row justify-content-center "
+    >
+      <div
+        class="authors__navigate-box row justify-space-evenly"
+        *ngIf="books[0] && showPagination"
+      >
+        <button
+          (click)="firstPage(books)"
+          class="authors__fast-rewind"
+          title="First Page"
+        >
+          <mat-icon>navigate_before</mat-icon
+          ><mat-icon>navigate_before</mat-icon>
+        </button>
+        <button
+          (click)="previuosAuthors(books)"
+          class="authors__previuos"
+          title="Previuos"
+        >
+          <mat-icon>navigate_before</mat-icon>
+        </button>
+        <span
+          [@pageState]
+          class="authors__page"
+          *ngFor="
+            let page of (getNumOfPages() | slice: theFirstPage:theLastPage)
+          "
+          (click)="goToPage(page)"
+          [ngClass]="{ 'page-active': currentPage === page }"
+        >
+          {{ page }}
+        </span>
+        <button (click)="nextAuthors(books)" class="authors__next" title="Next">
+          <mat-icon>navigate_next</mat-icon>
+        </button>
+        <button
+          (click)="lastPage(books)"
+          class="authors__fast-forward"
+          title="Last Page"
+        >
+          <mat-icon>navigate_next</mat-icon><mat-icon>navigate_next</mat-icon>
+        </button>
+      </div>
+    </div>
   </div>
 
-  <h2 *ngIf="searchValue && !((allAuthors$ | async) | filter:searchValue).length"  class="authors__no-results" >No Results</h2>
-
-   
-   
-  </section>
-  
+  <h2
+    *ngIf="searchValue && !(allAuthors$ | async | filter: searchValue).length"
+    class="authors__no-results"
+  >
+    No Results
+  </h2>
+  <h2 *ngIf="(isLoading$ | async)" class="authors__loading">Loading...</h2>
+</section>

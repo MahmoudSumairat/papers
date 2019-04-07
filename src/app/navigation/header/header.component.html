@@ -55,7 +55,7 @@
               <div
                 class="header__icon header__icon--profile"
                 title="Current User"
-                (click)="onToggleProDropdown(profileBox, profileIcon)"
+                (click)="onToggleProDropdown(profileIcon)"
                 #profileIcon
               >
                 <mat-icon>account_box</mat-icon>
@@ -63,11 +63,13 @@
               <div
                 class="profile-box"
                 #profileBox
+                *ngIf="showProfileBox"
+                [@profileBoxState]
               >
                 <h3 class="profile-box__heading">{{ user.firstName + ' ' + user.lastName }}</h3>
                 <ul class="profile-box__list">
-                  <li><a class="profile-box__list-item" (click)="goToProfile(profileBox, profileIcon)" >Profile</a></li>
-                  <li><a class="profile-box__list-item"(click)="goToMyQuotes(profileBox, profileIcon)" >My Quotes</a></li>
+                  <li><a class="profile-box__list-item" (click)="goToProfile( profileIcon)" >Profile</a></li>
+                  <li><a class="profile-box__list-item"(click)="goToMyQuotes( profileIcon)" >My Quotes</a></li>
                   <hr />
                   <li>
                     <a class="profile-box__list-item" (click)="onLogout()"

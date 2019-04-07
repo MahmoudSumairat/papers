@@ -8,11 +8,39 @@ import { StarService } from '../book-details/star.service';
 import { Router } from '@angular/router';
 import { BookService } from '../home/book.service';
 import { map } from 'rxjs/operators';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-authors',
   templateUrl: './authors.component.html',
-  styleUrls: ['./authors.component.scss']
+  styleUrls: ['./authors.component.scss'],
+  animations : [
+    trigger('authorState', [
+      state('exist', style({
+        opacity : 1,
+        transform : 'translateZ(0)'
+      })),
+      transition('void => *', [
+        style({
+          opacity : 0,
+          transform : 'translateZ(-20px)'
+        }),
+        animate('.25s ease-out')
+      ])
+    ]),
+    trigger('pageState', [
+      state('navigatable', style({
+        transform : 'scale(1)'
+      })),
+      transition("void => *", [
+        style({
+         transform : 'scale(0)' 
+        }),
+        animate(200)
+      ] ),
+  
+    ])
+  ]
 })
 export class AuthorsComponent implements OnInit {
 
@@ -28,6 +56,8 @@ export class AuthorsComponent implements OnInit {
     navigatablePages : number = 4;
     theLastPage : number = this.navigatablePages;
     showPagination = true;
+    isLoading$ : Observable<boolean>;
+    showAuthors : boolean = true;
     
     
 
@@ -40,26 +70,33 @@ export class AuthorsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.authorsService.fetchAuthors();
+    this.isLoading$ = this.store.select(fromRoot.getIsLoading);
     this.allAuthors$ = this.store.select(fromRoot.getAllAuthors).pipe(map((authors => {
       this.numOfPages = Math.ceil(authors.length/this.authorsPerPage);
+      if(!authors.length) {
+        this.authorsService.fetchAuthors();
 
+      }
 
       return authors;
+
     })))
     this.bookService.fetchAllBooks();
     this.authorsService.inputChanged.subscribe(data => {
       this.searchValue = data
-      
+      this.showAuthors = false;
+
       if(this.searchValue) {
         this.startingIndex = 0;
         this.endingIndex = undefined;
         this.showPagination = false;
+        this.showAuthors = true;
     
       } else {
         this.startingIndex = this.currentPage * this.authorsPerPage - this.authorsPerPage;
         this.endingIndex = this.currentPage * this.authorsPerPage;
         this.showPagination = true;
+        this.showAuthors = true;
    
       }
     });

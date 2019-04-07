@@ -10,11 +10,40 @@ import { QuotesService } from './quotes.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { UserData } from 'src/app/auth/user.model';
 import { Router } from '@angular/router';
+import { trigger, style, state, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-quotes',
   templateUrl: './quotes.component.html',
-  styleUrls: ['./quotes.component.scss']
+  styleUrls: ['./quotes.component.scss'],
+  animations: [
+    trigger('quoteState', [
+      state('exist', style({
+        transform : 'translateY(0)',
+        opacity : 1
+      })),
+      transition('void => *', [
+        style({
+          transform : 'translateY(30px)',
+          opacity : 0
+        }),
+        animate(200)
+      ]),
+      
+    ]),
+    trigger('pageState', [
+      state('navigatable', style({
+        transform : 'scale(1)'
+      })),
+      transition("void => *", [
+        style({
+         transform : 'scale(0)' 
+        }),
+        animate(200)
+      ] ),
+  
+    ])
+  ]
 })
 
 export class QuotesComponent implements OnInit {
@@ -35,6 +64,7 @@ export class QuotesComponent implements OnInit {
   navigatablePages : number = 4;
   theLastPage : number = this.navigatablePages;
   showPagination = true;
+  isLoading$ : Observable<boolean>;
   
   constructor(
     private afs : AngularFirestore,
@@ -47,6 +77,7 @@ export class QuotesComponent implements OnInit {
 
 
   ngOnInit() {
+    this.isLoading$ = this.store.select(fromRoot.getIsLoading);
     this.quotes$ = this.store.select(fromRoot.getQuotes).pipe(map(quotes => {
       this.numOfPages = Math.ceil(quotes.length/this.quotesPerPage);
       console.log(quotes.length);

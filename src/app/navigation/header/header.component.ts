@@ -8,11 +8,34 @@ import { Router } from '@angular/router';
 import { BookService } from 'src/app/content/home/book.service';
 import { AuthorsService } from 'src/app/content/authors/authors.service';
 import { QuotesService } from 'src/app/content/quotes/quotes.service';
+import * as ui from "../../shared/ui.actions";
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: "app-header",
   templateUrl: "./header.component.html",
-  styleUrls: ["./header.component.scss"]
+  styleUrls: ["./header.component.scss"],
+  animations : [
+    trigger('profileBoxState', [
+      state('exist',style({
+        opacity : 1,
+        transform : 'translateY(0)'
+      })),
+      transition('void => *' , [
+        style({
+          opacity: 0,
+          transform : 'translateX(-15px)'
+        }),
+        animate('.25s ease-out')
+      ]),
+      transition('* => void', [
+        animate('.25s ease-out', style({
+          opacity: 0,
+          transform : 'translateX(-15px)'
+        }))
+      ])
+    ])
+  ]
 })
 export class HeaderComponent implements OnInit {
   user: UserData;
@@ -21,6 +44,7 @@ export class HeaderComponent implements OnInit {
   @ViewChild('dropdownDiv') dropdownDiv;
   @ViewChild('dropdownItem') dropdownItem;
   @ViewChild('searchInput') searchInput : ElementRef;
+  showProfileBox : boolean;
 
   constructor(
     private store: Store<fromRoot.State>,
@@ -32,6 +56,9 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.store.select(fromRoot.getShow).subscribe(data => {
+      this.showProfileBox = data;
+    });
     this.isAuth$ = this.store.select(fromRoot.getIsAuth);
     this.isAuth$.subscribe(data => console.log(data));
     this.user = this.authService.getUser();
@@ -47,31 +74,39 @@ export class HeaderComponent implements OnInit {
 
 
 
-  onToggleProDropdown(profileBox, profileIcon) {
-    if(profileBox.classList.contains('list-active')) {
-      profileBox.classList.remove('list-active');
-      profileIcon.classList.remove('account-item-active');
-    } else {
-      profileBox.classList.add('list-active');
-      profileIcon.classList.add('account-item-active');
-    }
+  onToggleProDropdown( profileIcon) {
+    // if(profileBox.classList.contains('list-active')) {
+    //   profileBox.classList.remove('list-active');
+    //   profileIcon.classList.remove('account-item-active');
+    // } else {
+      // profileBox.classList.add('list-active');
+      // }
+      if(this.showProfileBox) {
+        profileIcon.classList.remove('account-item-active');
+        this.store.dispatch(new ui.HideProfileBox());
+      } else {
+        profileIcon.classList.add('account-item-active');
+        this.store.dispatch(new ui.ShowProfileBox());
 
-
+      }
+      
   }
 
   onLogout() {
     this.authService.logout();
+    this.store.dispatch(new ui.HideProfileBox());
+
   }
 
-  goToProfile(profileBox, profileIcon) {
+  goToProfile( profileIcon) {
     profileIcon.classList.remove('account-item-active');
-    profileBox.classList.remove('list-active');
+    this.store.dispatch(new ui.HideProfileBox());
     this.router.navigate(['/content/profile']);
   }
 
-  goToMyQuotes(profileBox, profileIcon) {
+  goToMyQuotes( profileIcon) {
     profileIcon.classList.remove('account-item-active');
-    profileBox.classList.remove('list-active');
+    this.store.dispatch(new ui.HideProfileBox());
     this.router.navigate(['/content/my-quotes']);
   }
 

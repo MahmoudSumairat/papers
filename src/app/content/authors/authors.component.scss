@@ -1,10 +1,12 @@
 @import "../../shared/variables";
+@import "../../shared/animations";
 
 .authors {
     padding: 5rem 0;
     background-color: $color-dark;
     min-height: 120vh;
     position: relative;
+    perspective: 100rem;
 
     
   &__navigate {
@@ -78,6 +80,18 @@
     transform: translate(-50%, -50%);
     color: rgba($color-white, .7);
     font-size: 3rem;
+  }
+
+  &__loading {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    color: rgba($color-white, .7);
+    font-size: 4rem;
+    animation: loading .5s ease-in-out infinite alternate;
+
+
   }
     
 }

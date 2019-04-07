@@ -9,13 +9,15 @@ import * as fromAuth from "./auth/auth.reducer";
 import * as fromBookDetails from "./content/book-details/book-details.reducer";
 import * as fromAuthors from "./content/authors/authors.reducer";
 import * as fromQuotes from "./content/quotes/quotes.reducer";
+import * as fromUI from "./shared/ui.reducer";
 
 export interface State {
   auth : fromAuth.State,
   book: fromBook.State;
   bookDetails : fromBookDetails.State;
   authors : fromAuthors.State;
-  quotes : fromQuotes.State
+  quotes : fromQuotes.State;
+  ui : fromUI.State
 }
 
 export const reducers: ActionReducerMap<State> = {
@@ -23,8 +25,8 @@ export const reducers: ActionReducerMap<State> = {
   bookDetails : fromBookDetails.bookDetailsReducer,
   book: fromBook.bookReducer,
   authors : fromAuthors.authorsReducer,
-  quotes : fromQuotes.quotesReducer
-
+  quotes : fromQuotes.quotesReducer,
+  ui : fromUI.uiReducer
 };
 
 
@@ -74,3 +76,11 @@ export const getAllAuthors = createSelector(getAuthorsState, fromAuthors.getAuth
 //For quotes reducer
 export const getQuotesState = createFeatureSelector<fromQuotes.State>('quotes')
 export const getQuotes = createSelector(getQuotesState, fromQuotes.getQuotes);
+
+
+
+//For UI
+export const getUiState = createFeatureSelector<fromUI.State>('ui');
+export const getIsLoading = createSelector(getUiState, fromUI.getIsLoading);
+export const getShow = createSelector(getUiState, fromUI.getShow);
+export const getTry = createSelector(getUiState, fromUI.getTry);

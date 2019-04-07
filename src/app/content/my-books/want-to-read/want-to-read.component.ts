@@ -4,11 +4,26 @@ import { Book } from '../../home/book.model';
 import * as fromRoot from '../../../app.reducer';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-want-to-read',
   templateUrl: './want-to-read.component.html',
-  styleUrls: ['./want-to-read.component.scss']
+  styleUrls: ['./want-to-read.component.scss'],
+  animations : [
+    trigger('pageState', [
+      state('navigatable', style({
+        transform : 'scale(1)'
+      })),
+      transition("void => *", [
+        style({
+         transform : 'scale(0)' 
+        }),
+        animate(200)
+      ] ),
+  
+    ])
+  ]
 })
 export class WantToReadComponent implements OnInit {
 

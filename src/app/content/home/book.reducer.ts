@@ -34,5 +34,5 @@ export function bookReducer(state = initialState, action: BookActions) {
   }
 }
 
-export const getAllBooks = (state: State) => state.allBooks;;
+export const getAllBooks = (state: State) => state.allBooks;
 export const getAuthors = (state: State) => state.authors;

@@ -44,6 +44,7 @@
         <mat-icon>star</mat-icon>
       </span>
     </div>
+
     <p class="book__not-rated" *ngIf="!resArr.starArr[0]">Not Rated</p>
     <button class="book__finished-reading" *ngIf="dist === 'currently-reading'" (click)="finishedReading()" >Finished Reading</button>
   </div>

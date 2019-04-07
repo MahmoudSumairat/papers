@@ -6,6 +6,7 @@ import * as fromRoot from "../../app.reducer";
 import * as BookActions from "./book.actions";
 import { map } from "rxjs/operators";
 import { Subject } from 'rxjs';
+import * as ui from "../../shared/ui.actions";
 
 @Injectable()
 export class BookService {
@@ -17,6 +18,7 @@ export class BookService {
   ) {}
 
   fetchAllBooks() {
+    this.store.dispatch(new ui.StartLoading());
     this.db
       .collection("myBooks")
       .valueChanges()
@@ -28,7 +30,10 @@ export class BookService {
       )
       .subscribe((books: Book[]) => {
         this.store.dispatch(new BookActions.SetAllBooks(books));
-      });
+        this.store.dispatch(new ui.StopLoading());
+      }, (error => {
+        this.store.dispatch(new ui.ShowTryAgain());
+      }));
   }
 
 

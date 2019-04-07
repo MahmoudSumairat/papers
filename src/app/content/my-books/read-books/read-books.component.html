@@ -11,7 +11,7 @@
     <div class="read-books__navigate-box row justify-space-evenly" *ngIf="books[0]" >
       <button (click)="firstPage(books)"  class="read-books__fast-rewind" title="First Page"> <mat-icon>navigate_before</mat-icon><mat-icon>navigate_before</mat-icon></button>
       <button (click)="previuosBooks(books)"  class="read-books__previuos" title="Previuos"> <mat-icon>navigate_before</mat-icon> </button>
-      <span class="read-books__page" *ngFor="let page of getNumOfPages() | slice:theFirstPage:theLastPage" (click)="goToPage(page)"  [ngClass]="{'page-active':currentPage === page}"  > {{page}} </span>
+      <span [@pageState] class="read-books__page" *ngFor="let page of getNumOfPages() | slice:theFirstPage:theLastPage" (click)="goToPage(page)"  [ngClass]="{'page-active':currentPage === page}"  > {{page}} </span>
       <button (click)="nextBooks(books)" class="read-books__next" title="Next" > <mat-icon>navigate_next</mat-icon> </button>
       <button (click)="lastPage(books)" class="read-books__fast-forward" title="Last Page" > <mat-icon>navigate_next</mat-icon><mat-icon>navigate_next</mat-icon> </button>
     </div>

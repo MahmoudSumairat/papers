@@ -1,17 +1,36 @@
 import { Component, OnInit, ViewChild, Renderer2 } from '@angular/core';
 import * as fromRoot from "../../app.reducer";
 import { Store } from '@ngrx/store';
+import { trigger, state, style, transition, animate } from '@angular/animations';
+import { Observable } from 'rxjs';
 
 
 
 @Component({
   selector: 'app-my-books',
   templateUrl: './my-books.component.html',
-  styleUrls: ['./my-books.component.scss']
+  styleUrls: ['./my-books.component.scss'],
+  animations :[
+    trigger('myBooksState', [
+      state('exist', style({
+        opacity : 0,
+        transform : 'translateY(0)'
+      })),
+      transition('void => *', [
+        style({
+          opacity: 0,
+          transform : 'translateY(10px)'
+        }),
+        animate(200)
+      ])
+    ]),
+    
+  ]
 })
 export class MyBooksComponent implements OnInit {
   noBooks = false;
   booksDestination = 'read-books';
+  isLoading$ : Observable<boolean>;
   @ViewChild('btnCursor') btnCursor;
   constructor(
       private store : Store<fromRoot.State>,
@@ -20,6 +39,7 @@ export class MyBooksComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.isLoading$ = this.store.select(fromRoot.getIsLoading);
   }
 
 

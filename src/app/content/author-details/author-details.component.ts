@@ -8,11 +8,28 @@ import { Book } from '../home/book.model';
 import { StarService } from '../book-details/star.service';
 import { BookService } from '../home/book.service';
 import { AuthorsService } from '../authors/authors.service';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-author-details',
   templateUrl: './author-details.component.html',
-  styleUrls: ['./author-details.component.scss']
+  styleUrls: ['./author-details.component.scss'],
+  animations : [
+    trigger('authorDetailsState', [
+      state('exist', style({
+        opacity : 1,
+        transform : 'translateZ(0)'
+      })),
+      transition('void => *' , [
+        style({
+          opacity: 0,
+          transform : 'translateZ(-25px)'
+        }),
+        animate('.25s ease-out')
+      ]),
+   
+    ] ),
+  ]
 })
 export class AuthorDetailsComponent implements OnInit {
 

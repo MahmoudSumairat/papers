@@ -7,11 +7,28 @@ import { map } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Book } from 'src/app/content/home/book.model';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  styleUrls: ['./profile.component.scss'],
+  animations : [
+    trigger('profileState', [
+      state('exist', style({
+        opacity : 1,
+        transform : 'translateZ(0)'
+      })),
+      transition('void => *' , [
+        style({
+          opacity: 0,
+          transform : 'translateZ(-25px)'
+        }),
+        animate(250)
+      ]),
+   
+    ] ),
+  ]
 })
 export class ProfileComponent implements OnInit {
   user : UserData  ;

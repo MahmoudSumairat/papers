@@ -1,5 +1,5 @@
 <section class="author-details">
-  <div class="container" *ngIf="(author | async) as theAuthor"  >
+  <div class="container" *ngIf="(author | async) as theAuthor" [@authorDetailsState]  >
     <div class="row">
       <div class="col-3">
         <img [src]="theAuthor.img" [alt]="theAuthor.name" class="author-details__img">

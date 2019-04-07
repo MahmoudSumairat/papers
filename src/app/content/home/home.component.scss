@@ -1,10 +1,12 @@
 @import "../../shared/variables";
+@import "../../shared/animations";
 
 .home {
   min-height: 100vh;
   background-color: $color-dark;
   padding-top: 3rem;
   position: relative;
+  perspective: 100rem;
   .container {
     padding: 3rem;
   }
@@ -82,6 +84,25 @@
     color: rgba($color-white, .7);
     font-size: 3rem;
   }
+
+
+  
+  &__loading, &__error-loading {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    color: rgba($color-white, .7);
+    font-size: 4rem;
+    animation: loading .5s ease-in-out infinite alternate;
+
+  }
+
+  &__error-loading {
+    animation: none;
+  }
+
+
 }
 
 .book {
@@ -174,6 +195,8 @@
       transform: translateY(0);
     }
   }
+
+
 
 
 }

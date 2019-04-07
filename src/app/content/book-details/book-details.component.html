@@ -1,5 +1,5 @@
 <section class="book-details">
-  <div class="container"  *ngIf="(selectedBook$ | async) as book">
+  <div class="container"  *ngIf="(selectedBook$ | async) as book" [@bookDetailsState] >
     <div class="row">
       <div class="col-3">
           <img

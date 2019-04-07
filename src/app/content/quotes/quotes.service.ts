@@ -8,6 +8,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { UserData } from 'src/app/auth/user.model';
 import * as Auth from "../../auth/auth.actions";
 import { Subject } from 'rxjs';
+import * as ui from "../../shared/ui.actions";
 
 @Injectable()
 export class QuotesService {
@@ -18,6 +19,7 @@ export class QuotesService {
     }
 
     fetchQuotes() {
+        this.store.dispatch(new ui.StartLoading());
         this.afs.collection('quotes').snapshotChanges().pipe(map((data) => {
             return data.map(quotes => {
                 return {
@@ -26,7 +28,7 @@ export class QuotesService {
                 }
             })
         })).subscribe((data :any) => {
-            
+            this.store.dispatch(new ui.StopLoading());
             this.store.dispatch(new quotes.SetQuotes(data))
         })
     }

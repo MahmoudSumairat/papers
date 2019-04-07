@@ -5,6 +5,7 @@ import * as fromRoot from "../../app.reducer";
 import * as Authors from "./authors.actions";
 import { Author } from './author.model';
 import { Subject } from 'rxjs';
+import * as ui from "../../shared/ui.actions";
 
 @Injectable()
 export class AuthorsService {
@@ -17,9 +18,11 @@ export class AuthorsService {
 
  
     fetchAuthors() {
+        this.store.dispatch(new ui.StartLoading());
         this.afs.collection('authors').valueChanges()
         .subscribe((authors : Author[]) => {
             this.store.dispatch(new Authors.SetAuthors(authors))
+            this.store.dispatch(new ui.StopLoading());
         })
     }
 }

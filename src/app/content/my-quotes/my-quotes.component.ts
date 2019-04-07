@@ -2,11 +2,39 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { QuotesService } from '../quotes/quotes.service';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-my-quotes',
   templateUrl: './my-quotes.component.html',
-  styleUrls: ['./my-quotes.component.scss']
+  styleUrls: ['./my-quotes.component.scss'],
+  animations: [
+    trigger('quoteState', [
+      state('exist', style({
+        transform : 'translateY(0)',
+        opacity : 1
+      })),
+      transition('void => *', [
+        style({
+          transform : 'translateY(30px)',
+          opacity : 0
+        }),
+        animate(200)
+      ])
+    ]),
+    trigger('pageState', [
+      state('navigatable', style({
+        transform : 'scale(1)'
+      })),
+      transition("void => *", [
+        style({
+         transform : 'scale(0)' 
+        }),
+        animate(200)
+      ] ),
+  
+    ])
+  ]
 })
 export class MyQuotesComponent implements OnInit {
   quotes : {name : string, quote : string}[];

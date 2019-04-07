@@ -1,18 +1,32 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit,  } from '@angular/core';
 import { Store } from "@ngrx/store";
 import * as fromRoot from '../../../app.reducer';
 import { Observable } from 'rxjs';
 import { Book } from '../../home/book.model';
-import { StarService } from '../../book-details/star.service';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { UserData } from 'src/app/auth/user.model';
 import { AuthService } from 'src/app/auth/auth.service';
 import { map } from 'rxjs/operators';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-read-books',
   templateUrl: './read-books.component.html',
   styleUrls: ['./read-books.component.scss'],
+  animations :[
+    trigger('pageState', [
+      state('navigatable', style({
+        transform : 'scale(1)'
+      })),
+      transition("void => *", [
+        style({
+         transform : 'scale(0)' 
+        }),
+        animate(200)
+      ] ),
+  
+    ])
+  ]
+
 })
 export class ReadBooksComponent implements OnInit {
 

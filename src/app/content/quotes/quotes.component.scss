@@ -1,4 +1,5 @@
 @import "../../shared/variables";
+@import "../../shared/animations";
 
 .quotes {
     background-color: $color-dark;
@@ -138,6 +139,18 @@
     transform: translate(-50%, -50%);
     color: rgba($color-white, .7);
     font-size: 3rem;
+  }
+
+  &__loading {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    color: rgba($color-white, .7);
+    font-size: 4rem;
+    animation: loading .5s ease-in-out infinite alternate;
+
+
   }
 
 }

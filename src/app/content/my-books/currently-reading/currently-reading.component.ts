@@ -4,11 +4,26 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Book } from '../../home/book.model';
 import { map } from 'rxjs/operators';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-currently-reading',
   templateUrl: './currently-reading.component.html',
-  styleUrls: ['./currently-reading.component.scss']
+  styleUrls: ['./currently-reading.component.scss'],
+  animations : [
+    trigger('pageState', [
+      state('navigatable', style({
+        transform : 'scale(1)'
+      })),
+      transition("void => *", [
+        style({
+         transform : 'scale(0)' 
+        }),
+        animate(200)
+      ] ),
+  
+    ])
+  ]
 })
 export class CurrentlyReadingComponent implements OnInit {
 

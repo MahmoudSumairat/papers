@@ -11,11 +11,28 @@ import { AuthService } from "src/app/auth/auth.service";
 import { StarService } from "./star.service";
 import { BookDetailsService } from './book-details.service';
 import { BookService } from '../home/book.service';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: "app-book-details",
   templateUrl: "./book-details.component.html",
-  styleUrls: ["./book-details.component.scss"]
+  styleUrls: ["./book-details.component.scss"],
+  animations : [
+    trigger('bookDetailsState', [
+      state('exist', style({
+        opacity : 1,
+        transform : 'translateZ(0)'
+      })),
+      transition('void => *' , [
+        style({
+          opacity: 0,
+          transform : 'translateZ(-25px)'
+        }),
+        animate('.25s ease-out')
+      ]),
+   
+    ] ),
+  ]
 })
 export class BookDetailsComponent implements OnInit, OnDestroy {
   ratingLength: Observable<number>;
