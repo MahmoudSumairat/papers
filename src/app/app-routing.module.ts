@@ -13,6 +13,13 @@ import { AuthorDetailsComponent } from './content/author-details/author-details.
 import { QuotesComponent } from './content/quotes/quotes.component';
 import { ProfileComponent } from './content/profile/profile.component';
 import { MyQuotesComponent } from './content/my-quotes/my-quotes.component';
+import { AdminComponent } from './content/admin/admin.component';
+import { AddBookComponent } from './content/admin/add-book/add-book.component';
+import { AddAuthorComponent } from './content/admin/add-author/add-author.component';
+import { AddQuoteComponent } from './content/admin/add-quote/add-quote.component';
+import { UsersComponent } from './content/admin/users/users.component';
+import { NavigateComponent } from './content/admin/navigate/navigate.component';
+import { AdminGuard } from './content/admin/admin.guard';
 
 const routes: Routes = [
   { path: "", component: WelcomeComponent },
@@ -27,7 +34,14 @@ const routes: Routes = [
       { path : 'authors/:authorName', component : AuthorDetailsComponent },
       { path : 'quotes', component : QuotesComponent },
       { path : 'profile', component : ProfileComponent, canActivate : [AuthGurad]},
-      { path : 'my-quotes', component : MyQuotesComponent, canActivate : [AuthGurad] }
+      { path : 'my-quotes', component : MyQuotesComponent, canActivate : [AuthGurad] },
+      { path : 'admin', component : AdminComponent, canActivate : [AdminGuard] , children : [
+      { path : '', component : NavigateComponent },
+      { path : 'add-book', component : AddBookComponent },
+      { path : 'add-author', component : AddAuthorComponent },
+      { path : 'add-quote', component : AddQuoteComponent },
+      { path : 'users', component : UsersComponent }
+      ] }
     ]
   },
   { path: "login", component: LoginComponent },

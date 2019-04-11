@@ -1,0 +1,95 @@
+@import "../../../shared/variables";
+@import "../../../shared/animations";
+
+.users {
+    min-height: 100vh;
+    background-color: $color-dark;
+    color: $color-white;
+    perspective: 100rem;
+
+
+    .container {
+        padding-top: 7rem;
+        height: 100%;
+    }
+
+    &__box {
+        display: flex;
+        justify-content: space-around;
+        background-color: darken($color-dark, 10%);
+        margin: .5rem 0;
+        align-items: center;
+        padding: 1rem;
+        position: relative;
+
+    }
+
+    &__label {
+        font-size: 1.7rem;
+    }
+
+    &__chunk {
+        width: 25%;
+    }
+
+    &__remove {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        color: lighten($color-dark, 10%);
+        background: none;
+        border: none;
+        transition: all .4s;
+        cursor: pointer;
+
+        &:hover {
+            color: $color-primary;
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+
+    &__sure {
+        position: absolute; 
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 2.7rem;
+        background-color: $color-primary;
+        padding: 2rem;
+        width: 50rem;
+        height: 12rem;
+        border-radius: 2rem;
+    }
+
+    &__yes, &__no {
+        background: none;
+        border: none;
+        color: $color-white;
+        background-color: $color-dark;
+        font-size: 1.8rem;
+        margin: 0 .5rem;
+        width: 4rem;
+        margin-top: 1rem;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    
+  &__loading, &__error-loading {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    color: rgba($color-white, .7);
+    font-size: 4rem;
+    animation: loading .5s ease-in-out infinite alternate;
+
+  }
+
+}

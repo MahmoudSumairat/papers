@@ -110,6 +110,12 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/content/my-quotes']);
   }
 
+  goToAdminPage( profileIcon) {
+    profileIcon.classList.remove('account-item-active');
+    this.store.dispatch(new ui.HideProfileBox());
+    this.router.navigate(['/content/admin']);
+  }
+
   searchBooks(input : HTMLInputElement) {
     if(this.router.url === '/content') {
       this.booksService.inputChanged.next(input.value);

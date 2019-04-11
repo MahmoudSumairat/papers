@@ -41,6 +41,13 @@ import { QuotesService } from './content/quotes/quotes.service';
 import { MyQuotesComponent } from './content/my-quotes/my-quotes.component';
 import { ProfileComponent } from './content/profile/profile.component';
 import { FilterPipe } from './content/filter.pipe';
+import { AdminComponent } from './content/admin/admin.component';
+import { AddBookComponent } from './content/admin/add-book/add-book.component';
+import { AddAuthorComponent } from './content/admin/add-author/add-author.component';
+import { AddQuoteComponent } from './content/admin/add-quote/add-quote.component';
+import { UsersComponent } from './content/admin/users/users.component';
+import { NavigateComponent } from './content/admin/navigate/navigate.component';
+import { AdminGuard } from './content/admin/admin.guard';
 
 @NgModule({
   declarations: [
@@ -65,7 +72,13 @@ import { FilterPipe } from './content/filter.pipe';
     QuotesComponent,
     ProfileComponent,
     MyQuotesComponent,
-    FilterPipe
+    FilterPipe,
+    AdminComponent,
+    AddBookComponent,
+    AddAuthorComponent,
+    AddQuoteComponent,
+    UsersComponent,
+    NavigateComponent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +92,7 @@ import { FilterPipe } from './content/filter.pipe';
     ContentModule
     
   ],
-  providers: [AuthService, BookService, StarService, BookDetailsService, AuthGurad, AuthorsService, MyBooksService, QuotesService],
+  providers: [AuthService, BookService, StarService, BookDetailsService, AuthGurad, AuthorsService, MyBooksService, QuotesService, AdminGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

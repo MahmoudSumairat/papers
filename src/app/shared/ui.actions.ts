@@ -6,6 +6,8 @@ export const SHOW_PROFILE_BOX = 'SHOW_PROFILE_BOX';
 export const HIDE_PROFILE_BOX = 'HIDE_PROFILE_BOX';
 export const SHOW_TRY_AGAIN = 'SHOW_TRY_AGAIN';
 export const HIDE_TRY_AGAIN = 'HIDE_TRY_AGAIN';
+export const SHOW_SURE_BOX = 'SHOW_SURE_BOX';
+export const HIDE_SURE_BOX = 'HIDE_SURE_BOX';
 
 
 export class StartLoading implements Action {
@@ -33,4 +35,12 @@ export class HideTryAgain implements Action {
     readonly type = HIDE_TRY_AGAIN
 }
 
-export type uiActions = StartLoading | StopLoading | ShowProfileBox | HideProfileBox | ShowTryAgain | HideTryAgain;
+export class ShowSureBox implements Action {
+    readonly type = SHOW_SURE_BOX
+}
+
+export class HideSureBox implements Action {
+    readonly type = HIDE_SURE_BOX
+}
+
+export type uiActions = StartLoading | StopLoading | ShowProfileBox | HideProfileBox | ShowTryAgain | HideTryAgain | ShowSureBox  | HideSureBox

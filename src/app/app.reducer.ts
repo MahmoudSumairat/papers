@@ -84,3 +84,4 @@ export const getUiState = createFeatureSelector<fromUI.State>('ui');
 export const getIsLoading = createSelector(getUiState, fromUI.getIsLoading);
 export const getShow = createSelector(getUiState, fromUI.getShow);
 export const getTry = createSelector(getUiState, fromUI.getTry);
+export const getSure = createSelector(getUiState, fromUI.getSure);

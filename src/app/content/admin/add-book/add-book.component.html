@@ -1,0 +1,25 @@
+<section class="add-book">
+  <div class="container" [@navigateState] >
+    <h1 class="add-book__heading text-center" >Add a book to the Database</h1>
+    <form #form="ngForm" class="form-group add-book__form" (ngSubmit)="submitBook(form)" >
+      <label for="bookName" class="add-book__label" >Book Name</label>
+      <input type="text" name="bookName" ngModel required id="bookName" class="add-book__book-name" autocomplete="off" >
+
+      <label for="authorName" class="add-book__label" >Author Name</label>
+      <input type="text" name="authorName" ngModel required id="authorName" class="add-book__author-name"  autocomplete="off" >
+
+      <label for="brief" class="add-book__label" >Brief</label>
+      <textarea type="text" name="brief" ngModel required id="brief" class="add-book__brief"  autocomplete="off" ></textarea>
+
+      <label for="img" class="add-book__label" >Image</label>
+      <input type="text" name="img" ngModel required id="img" class="add-book__img"  autocomplete="off" >
+
+      <label for="genre" class="add-book__label" >Genre</label>
+      <input type="text" name="genre" ngModel required id="genre"    class="add-book__genre"  autocomplete="off" >
+
+
+      <button type="submit" class="add-book__upload" [disabled]="form.invalid" > Upload </button>
+    </form>
+
+  </div>
+</section>
