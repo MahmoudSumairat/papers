@@ -48,6 +48,7 @@ import { AddQuoteComponent } from './content/admin/add-quote/add-quote.component
 import { UsersComponent } from './content/admin/users/users.component';
 import { NavigateComponent } from './content/admin/navigate/navigate.component';
 import { AdminGuard } from './content/admin/admin.guard';
+import { FooterComponent } from './navigation/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { AdminGuard } from './content/admin/admin.guard';
     AddAuthorComponent,
     AddQuoteComponent,
     UsersComponent,
-    NavigateComponent
+    NavigateComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

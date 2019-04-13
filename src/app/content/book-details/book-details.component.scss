@@ -1,4 +1,5 @@
 @import "../../shared/variables";
+@import "../../shared/animations";
 
 .book-details {
   min-height: 110vh;
@@ -160,6 +161,38 @@
     color: $color-white;
     font-size: 1.7rem;
     margin: 0.4rem 0;
+  }
+
+
+  &__rating-def {
+    padding: .2rem;
+    z-index: -1;
+    color: darken($color-dark, 10%);
+  }
+  
+  &__rating-def-box {
+    display: flex;
+    justify-content: space-between;
+
+  }
+
+
+  &__rating-box {
+    position: absolute;
+    display: flex;
+    
+  }
+
+    
+  &__loading {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    color: rgba($color-white, .7);
+    font-size: 4rem;
+    animation: loading .5s ease-in-out infinite alternate;
+
   }
 }
 

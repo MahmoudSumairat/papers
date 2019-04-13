@@ -1,9 +1,10 @@
 @import "../../shared/variables";
+@import "../../shared/animations";
 
 .author-details {
     padding: 4rem 0;
     background-color: $color-dark;
-    min-height: 120vh;
+    min-height: 100vh;
     color: $color-white;
     perspective: 100rem;
     
@@ -143,6 +144,42 @@
         }
     }
 
+    
+    &__loading {
+        position: absolute;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        left: 50%;
+        color: rgba($color-white, .7);
+        font-size: 4rem;
+        animation: loading .5s ease-in-out infinite alternate;
+      }
+
+      &__rating-def {
+        z-index: -1;
+        color: darken($color-dark, 10%);
+    }
+    
+    &__rating-def-box {
+        display: flex;
+        justify-content: space-between;
+    
+      }
+    
+    
+      &__rating-box {
+        position: absolute;
+        display: flex;
+        
+      }
+
+      &__rating-value, &__rating-num {
+        font-size: 1.8rem;
+        padding: 1rem;
+        padding-bottom: 0;
+      }
+
+      
 
 }
 
@@ -203,6 +240,7 @@
         margin-top: 1rem;
         cursor: pointer;
     }
+
 
 
 }

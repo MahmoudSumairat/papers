@@ -1,0 +1,48 @@
+@import "../../shared/variables";
+
+.footer {
+    background-color: $color-secondary;
+    color: $color-white;
+
+    .row {
+        margin: 0;
+    }
+
+
+    &__social {
+        display: flex;
+        align-items: center;
+        padding: 1rem 0;
+        list-style: none;
+        margin: 0;
+
+        svg {
+           fill : $color-white;
+           cursor: pointer;
+           margin: 0 .5rem;
+           transition: all .4s;
+           &:hover {
+               fill: $color-dark;
+           }
+        }
+
+    }
+
+    &__copy {
+        font-size: 1.9rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__dev {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        font-size: 1.7rem;
+
+        strong {
+            margin: 0 .4rem;
+        }
+    }
+}

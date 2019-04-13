@@ -19,18 +19,27 @@
         <div class="author-details__genres">
             <span class="author-details__genres--title" > Genre:  </span> <span class="author-details__genre" *ngFor="let genre of theAuthor.genre" > {{genre}} </span>
         </div>
-        <div class="author-details__rating" *ngIf="theAuthor.avgRating"  >
-           
-          <span *ngFor="let star of creatStars(theAuthor.avgRating).starArr" class="author-details__star">
-              <mat-icon  >star</mat-icon>
-            </span>
-            <span *ngIf="creatStars(theAuthor.avgRating).i < 1" [style.width]="creatStars(theAuthor.avgRating).i * 24 + 'px'" class="author-details__star-container" >
-                <mat-icon  >star</mat-icon>
-            </span>
-            <span class="author-details__avgRating"> {{theAuthor.avgRating}} </span>
-            <span class="author-details__ratings-length"> {{ratingsLength | async}} Ratings </span>
-            
+        <div class="author-details__rating">
+          <div class="author-details__rating-def-box">
+            <div class="author-details__rating-def" *ngFor="let star of [1,2,3,4,5]" >
+              <mat-icon>star</mat-icon>
+            </div>
           </div>
+            <div class="author-details__rating-box" *ngIf="theAuthor.avgRating"  >
+           
+                <span *ngFor="let star of creatStars(theAuthor.avgRating).starArr" class="author-details__star">
+                    <mat-icon  >star</mat-icon>
+                  </span>
+                  <span *ngIf="creatStars(theAuthor.avgRating).i < 1" [style.width]="creatStars(theAuthor.avgRating).i * 24 + 'px'" class="author-details__star-container" >
+                      <mat-icon  >star</mat-icon>
+                  </span>
+              
+                  
+                </div>
+                <span class="author-details__avgRating"> {{theAuthor.avgRating}} </span>
+                <span class="author-details__ratings-length"> {{ratingsLength | async}} Ratings </span>
+        </div>
+       
           <p class="author-details__notreviewed" *ngIf="!theAuthor.avgRating" >Not Reviewed</p>
         <p class="author-details__about">
           {{theAuthor.about | slice:0:aboutCharLimit }}

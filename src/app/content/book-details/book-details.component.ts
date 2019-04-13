@@ -12,6 +12,7 @@ import { StarService } from "./star.service";
 import { BookDetailsService } from './book-details.service';
 import { BookService } from '../home/book.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { AuthorsService } from '../authors/authors.service';
 
 @Component({
   selector: "app-book-details",
@@ -46,6 +47,7 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
   wantToReadBooks : Book[];
   readBooks : Book[];
   currentBooks : Book[];
+  isLoading$ : Observable<boolean>
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -55,10 +57,15 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
     private starService: StarService,
     private bookDetailsService : BookDetailsService,
     private router : Router,
-    private bookService : BookService
+    private bookService : BookService,
+    private authorsService : AuthorsService
   ) {}
 
   ngOnInit() {
+    this.isLoading$ = this.store.select(fromRoot.getIsLoading);
+    this.bookService.fetchAllBooks();
+    this.authorsService.fetchAuthors();
+    
     //Get the book from the array
     this.selectedBook$ = this.store.select(fromRoot.getAllBooks).pipe(
       map(bookArr => {

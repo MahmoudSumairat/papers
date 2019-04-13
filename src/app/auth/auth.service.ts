@@ -16,6 +16,8 @@ export class AuthService implements OnDestroy {
   subsArr : Subscription[] = [];
   allowToSignIn : boolean = true;
   inLoginPage : boolean = true;
+  loggedInStatus = JSON.parse(localStorage.getItem('loggedIn') || 'false');
+
 
   constructor(
     private store: Store<fromRoot.State>,
@@ -73,6 +75,8 @@ export class AuthService implements OnDestroy {
                     );
                   }, 500);
                   this.inLoginPage = false;
+                  localStorage.setItem('loggedIn', 'true');
+                  localStorage.setItem('user', JSON.stringify(this.user));
                 } else if (data.password !== password && this.inLoginPage) {
                   this.snackBar.open("Incorrect Password, Please try again", "Ok", {
                     duration: 2000
@@ -96,6 +100,8 @@ export class AuthService implements OnDestroy {
     this.store.select(fromRoot.getIsAuth).subscribe(data => console.log(data));
     this.allowToSignIn = false;
     this.inLoginPage = true;
+    localStorage.removeItem('loggedIn');
+    localStorage.removeItem('user');
   }
 
   getUser() {
@@ -116,4 +122,18 @@ export class AuthService implements OnDestroy {
   ngOnDestroy() {
       this.subsArr.forEach(sub => sub.unsubscribe());
   }
+
+
+  getIsLoggedIn() {
+    return JSON.parse(localStorage.getItem('loggedIn') || this.loggedInStatus.toString());
+  }
+
+  getCurrenUser() {
+    return JSON.parse(localStorage.getItem('user') || null )
+  }
+
+  setUser(user : UserData) {
+    this.user = user;
+  }
+
 }

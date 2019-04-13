@@ -3,6 +3,7 @@ import * as fromRoot from "../../app.reducer";
 import { Store } from '@ngrx/store';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Observable } from 'rxjs';
+import { MyBooksService } from './my-books.service';
 
 
 
@@ -34,12 +35,14 @@ export class MyBooksComponent implements OnInit {
   @ViewChild('btnCursor') btnCursor;
   constructor(
       private store : Store<fromRoot.State>,
-      private renderer : Renderer2
+      private renderer : Renderer2,
+      private myBooksService : MyBooksService
 
   ) { }
 
   ngOnInit() {
     this.isLoading$ = this.store.select(fromRoot.getIsLoading);
+    
   }
 
 

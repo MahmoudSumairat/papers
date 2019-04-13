@@ -90,7 +90,11 @@ export class HomeComponent implements OnInit {
     this.fetchAllBooks();
     this.fetchAuthors();
     this.store.select(fromRoot.getIsAuth).subscribe(res => this.isAuth = res);
-    this.fetchFavouriteBooks();
+    setTimeout(() => {
+
+      this.user = this.authService.getUser();
+      this.fetchFavouriteBooks();
+    }, 500)
     this.fetchQuotes();
     setTimeout(() => {
       this.showBooks = true;

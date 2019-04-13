@@ -9,6 +9,8 @@ import { StarService } from '../book-details/star.service';
 import { BookService } from '../home/book.service';
 import { AuthorsService } from '../authors/authors.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import * as fromRoot from "../../app.reducer";
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-author-details',
@@ -38,7 +40,8 @@ export class AuthorDetailsComponent implements OnInit {
     aboutCharLimit = 600;
     limitTitlte = '...See More'
     authorBooks : Observable<any>;
-    ratingsLength : Observable<any>
+    ratingsLength : Observable<any>;
+    isLoading$ : Observable<boolean>;
 
   constructor(
     private afs : AngularFirestore,
@@ -46,10 +49,12 @@ export class AuthorDetailsComponent implements OnInit {
     private starSerivice : StarService,
     private router : Router,
     private bookService : BookService,
-    private authorsService : AuthorsService
+    private authorsService : AuthorsService,
+    private store : Store<fromRoot.State>
   ) { }
 
   ngOnInit() {
+    this.isLoading$ = this.store.select(fromRoot.getIsLoading);
     this.author = this.afs.collection('authors').doc(this.authorName.toLowerCase().replace(/ /g, '_')).valueChanges()
     this.authorBooks = this.afs.collection('myBooks').valueChanges().pipe(map(data => {
       const arr = data.filter((book : Book) => {
@@ -66,6 +71,7 @@ export class AuthorDetailsComponent implements OnInit {
     }
 
     creatStars(avgRating : number) {
+      console.log(this.starSerivice.creatStars(avgRating).starArr)
       return this.starSerivice.creatStars(avgRating);
     }
 

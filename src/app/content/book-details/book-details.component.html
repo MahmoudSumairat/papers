@@ -25,22 +25,33 @@
         <p class="book-details__par">{{ book.brief }}</p>
 
         <div class="book-details__rating">
-          <div class="book-details__star" *ngFor="let star of creatDummyArray(book.avgRating).starArr">
-            <mat-icon>star</mat-icon>
-          </div>
-          <div
-            [style.width]="creatDummyArray(book.avgRating).i * 24 + 'px'"
-            class="book-details__star"
-            *ngIf="creatDummyArray(book.avgRating).i < 1"
-          >
-            <mat-icon>star</mat-icon>
-          </div>
+            <div  class="book-details__rating-def-box" >
+                <div class="book-details__rating-def" *ngFor="let star of [1,2,3,4,5]" >
+                  <mat-icon>star</mat-icon>
+                </div>
+    
+              </div>
+              <div class="book-details__rating-box" >
+                  <div class="book-details__star" *ngFor="let star of creatDummyArray(book.avgRating).starArr">
+                      <mat-icon>star</mat-icon>
+                    </div>
+                    <div
+                      [style.width]="creatDummyArray(book.avgRating).i * 24 + 'px'"
+                      class="book-details__star"
+                      *ngIf="creatDummyArray(book.avgRating).i < 1"
+                    >
+                      <mat-icon>star</mat-icon>
+                    </div>
+              </div>
+       
           <div class="book-details__rating-value">
             <p> {{ book.avgRating }} </p>
           </div>
           <div class="book-details__rating-num">
             <p>{{ ratingLength | async }} ratings</p>
           </div>
+
+       
         </div>
         
         <div class="book-details__reading" *ngIf="!readingTitle">
@@ -69,5 +80,7 @@
         <app-author></app-author>
       </div>
     </div>
+    
   </div>
+  <h2 *ngIf="isLoading$ | async" class="book-details__loading"   > Loading... </h2>
 </section>

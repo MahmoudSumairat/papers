@@ -49,5 +49,4 @@
   <h2 *ngIf="searchValue && !((allBooks$ | async) | filter:searchValue).length"  class="home__no-results" >No Results</h2>
   <h2 *ngIf="isLoading$  | async" class="home__loading"   > Loading... </h2>
   <h2 class="home__error-loading" *ngIf="tryAgain$ | async" > Error Loading! </h2>
-  <button class="home__try-again" *ngIf="tryAgain$ | async" > Try Again </button>
 </section>

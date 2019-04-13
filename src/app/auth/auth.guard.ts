@@ -24,9 +24,6 @@ canActivate(route : ActivatedRouteSnapshot, state : RouterStateSnapshot ) : any 
             isAuthed =  true;
         } else {
             this.router.navigate(['/login'])
-            setTimeout(() => {
-                this.snackBar.open('You have to Logged In', 'Ok', {duration : 2000});
-            },   500)
             return
         }
     })
