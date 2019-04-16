@@ -87,7 +87,7 @@
 
 
   
-  &__loading, &__error-loading {
+  &__loading {
     position: absolute;
     transform: translate(-50%, -50%);
     top: 50%;
@@ -98,9 +98,7 @@
 
   }
 
-  &__error-loading {
-    animation: none;
-  }
+
 
 
 }

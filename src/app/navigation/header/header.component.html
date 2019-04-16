@@ -2,12 +2,14 @@
   <nav class="navbar navbar-expand-lg header__nav">
     <div class="container">
       <a
-        routerLink="/home"
+        routerLink="/"
         class="navbar-brand header__logo"
         routerLink="/content"
-        >Papers</a
-      >
-      <button
+        >
+          PAPERS
+        </a
+        >
+        <button
         class="navbar-toggler"
         type="button"
         data-toggle="collapse"
@@ -15,13 +17,13 @@
         aria-controls="navbarNavAltMarkup"
         aria-expanded="false"
         aria-label="Toggle navigation"
-      >
+        >
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collaps navbar-collaps" id="navbar-items">
         <div class="navbar-nav">
           <a class="nav-item nav-link header__item" (click)="navigate(null)"
-            >Home</a
+          >Home</a
           >
           <a class="nav-item nav-link header__item" (click)="navigate('my-books')" >My Books</a>
           <a class="nav-item nav-link header__item" (click)="navigate('authors')" >Authors</a>
@@ -85,4 +87,5 @@
       </div>
     </div>
   </nav>
+
 </section>

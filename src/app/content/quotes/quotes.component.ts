@@ -11,6 +11,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { UserData } from 'src/app/auth/user.model';
 import { Router } from '@angular/router';
 import { trigger, style, state, transition, animate } from '@angular/animations';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-quotes',
@@ -71,12 +72,14 @@ export class QuotesComponent implements OnInit {
     private store : Store<fromRoot.State>,
     private quoteSerivce : QuotesService,
     private authService : AuthService,
-    private router : Router
+    private router : Router,
+    private title : Title
 
   ) { }
 
 
   ngOnInit() {
+    this.title.setTitle('Quotes');
     this.isLoading$ = this.store.select(fromRoot.getIsLoading);
     this.quotes$ = this.store.select(fromRoot.getQuotes).pipe(map(quotes => {
       this.numOfPages = Math.ceil(quotes.length/this.quotesPerPage);

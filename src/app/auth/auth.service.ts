@@ -46,6 +46,8 @@ export class AuthService implements OnDestroy {
           ...user,
           userID: userID
         };
+        localStorage.setItem('loggedIn', 'true');
+        localStorage.setItem('user', JSON.stringify(this.user));
       });
   }
 
@@ -97,7 +99,6 @@ export class AuthService implements OnDestroy {
     this.router.navigate(["/login"]);
     this.store.dispatch(new Auth.SetUnauthenticated());
     this.user = null;
-    this.store.select(fromRoot.getIsAuth).subscribe(data => console.log(data));
     this.allowToSignIn = false;
     this.inLoginPage = true;
     localStorage.removeItem('loggedIn');
@@ -125,7 +126,7 @@ export class AuthService implements OnDestroy {
 
 
   getIsLoggedIn() {
-    return JSON.parse(localStorage.getItem('loggedIn') || this.loggedInStatus.toString());
+    return JSON.parse(localStorage.getItem('loggedIn') || 'false');
   }
 
   getCurrenUser() {

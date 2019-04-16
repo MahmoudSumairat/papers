@@ -13,20 +13,24 @@ export class AuthGurad implements CanActivate {
         private store : Store<fromRoot.State>,
         private router : Router,
         private snackBar : MatSnackBar
-    ) {
-
-    }
-
-canActivate(route : ActivatedRouteSnapshot, state : RouterStateSnapshot ) : any {
+        ) {
+            
+        }
+        
+        canActivate(route : ActivatedRouteSnapshot, state : RouterStateSnapshot ) : any {
+    let loginStatus = this.authService.getIsLoggedIn();
     let isAuthed : boolean;
     this.store.select(fromRoot.getIsAuth).subscribe(isAuth => {
-        if(isAuth) {
-            isAuthed =  true;
-        } else {
-            this.router.navigate(['/login'])
-            return
-        }
+        isAuthed = isAuthed
     })
-    return isAuthed
+    if(isAuthed || loginStatus) {
+        return true;
+    } else {
+        setTimeout(() => {
+            this.snackBar.open('You have to be logged in', 'OK', {duration : 2000});
+        }, 500);
+        this.router.navigate(['/login'])
+        return
+    }
 }
 }

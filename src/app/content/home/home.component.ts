@@ -12,6 +12,8 @@ import { QuotesService } from '../quotes/quotes.service';
 import { AuthorsService } from '../authors/authors.service';
 import { map } from 'rxjs/operators';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { MyBooksService } from '../my-books/my-books.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: "app-home",
@@ -81,10 +83,13 @@ export class HomeComponent implements OnInit {
     private bookDetailsService : BookDetailsService,
     private quotesSerivice : QuotesService,
     private authorsService : AuthorsService,
+    private myBooksService : MyBooksService,
+    private title : Title
     
   ) {}
 
   ngOnInit() {
+    this.title.setTitle('Home')
     this.isLoading$ = this.store.select(fromRoot.getIsLoading);
     this.tryAgain$ = this.store.select(fromRoot.getTry);
     this.fetchAllBooks();
@@ -107,7 +112,7 @@ export class HomeComponent implements OnInit {
       this.searchValue = data
       this.showBooks = false;
       
-      if(this.searchValue) {
+      if(this.searchValue && this.searchValue.replace(/ /g, '').length ) {
         this.startingIndex = 0;
         this.endingIndex = undefined;
         this.showPagination = false;
@@ -145,9 +150,9 @@ export class HomeComponent implements OnInit {
   fetchFavouriteBooks() {
     const userID = this.user.userID
     if(this.isAuth) {
-      this.bookDetailsService.fetchReadBooks(userID);
-      this.bookDetailsService.fetchCurrentBooks(userID);
-      this.bookDetailsService.fetchWantBooks(userID);
+      this.myBooksService.fetchReadBooks(userID);
+      this.myBooksService.fetchCurrentBooks(userID);
+      this.myBooksService.fetchWantBooks(userID);
     }
   }
 

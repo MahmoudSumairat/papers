@@ -49,14 +49,12 @@ export class BookComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.store.dispatch(new ui.StartLoading());
     setTimeout(() => {
       this.afs.collection('stars').doc('book_review').collection(this.book.bookName.toLowerCase().replace(/ /g, "_")).doc(this.user.userID)
       .valueChanges().subscribe((data : any) => {
         if(data) {
           this.ratingValue = data.value;
           this.resArr = this.creatStars(this.ratingValue);
-          this.store.dispatch(new ui.StopLoading());
         }
         
       });

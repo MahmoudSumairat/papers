@@ -4,11 +4,13 @@ import * as fromRoot from "../../app.reducer";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { Book } from "../home/book.model";
 import * as bookDetails from "../book-details/book-details.actions";
+import { Router } from '@angular/router';
 @Injectable()
 export class BookDetailsService {
   constructor(
     private store: Store<fromRoot.State>,
     private afs: AngularFirestore,
+    private router : Router
   ) {}
 
   readThisBook(book: Book, userID: string, bookName: string, finishedReading = false) {
@@ -132,6 +134,13 @@ export class BookDetailsService {
         this.store.dispatch(new bookDetails.SetWantBooks(booksArr))
       }
     })
+  }
+
+
+  removeThisBook(book : Book) {
+    this.afs.collection('myBooks').doc(book.bookName.toLowerCase().replace(/ /g, '_')).delete().then(() => {
+        this.router.navigate(['/content']);
+    })  
   }
 
   

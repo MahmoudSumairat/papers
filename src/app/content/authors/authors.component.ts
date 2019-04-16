@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { BookService } from '../home/book.service';
 import { map } from 'rxjs/operators';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-authors',
@@ -66,10 +67,12 @@ export class AuthorsComponent implements OnInit {
     private store : Store<fromRoot.State>,
     private starsService : StarService,
     private router : Router,
-    private bookService : BookService
+    private bookService : BookService,
+    private title : Title
   ) { }
 
   ngOnInit() {
+    this.title.setTitle('Authors');
     this.isLoading$ = this.store.select(fromRoot.getIsLoading);
     this.allAuthors$ = this.store.select(fromRoot.getAllAuthors).pipe(map((authors => {
       this.numOfPages = Math.ceil(authors.length/this.authorsPerPage);

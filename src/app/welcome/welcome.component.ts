@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import * as fromRoot from "../app.reducer";
 import * as auth from "../auth/auth.actions";
 import { UserData } from '../auth/user.model';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: "app-welcome",
@@ -13,9 +14,11 @@ import { UserData } from '../auth/user.model';
 export class WelcomeComponent implements OnInit {
   @Output() isChanged = new EventEmitter();
 
-  constructor(private afs : AngularFirestore,private store : Store<fromRoot.State>) {}
+  constructor(private afs : AngularFirestore,private store : Store<fromRoot.State>, private title : Title) {}
 
   ngOnInit() {
+    this.title.setTitle('Welcome to papers');
+
     this.afs.collection('users').snapshotChanges().subscribe((data) => {
       const arr = data.map(item => {
         const itemObj: UserData = (<UserData>item.payload.doc.data());

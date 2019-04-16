@@ -10,6 +10,7 @@
     
     .container {
         padding: 2rem;
+        position: relative;
     }
 
     &__img {
@@ -179,6 +180,33 @@
         padding-bottom: 0;
       }
 
+
+      
+  &__remove {
+    position: absolute;
+    top: 2rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: darken($color-dark, 10%);
+    transition: all .4s;
+    &:hover {
+      color: $color-primary;
+    }
+    cursor: pointer;
+    
+  }
+
+  &__loading {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    color: rgba($color-white, .7);
+    font-size: 4rem;
+    animation: loading .5s ease-in-out infinite alternate;
+
+  }
       
 
 }

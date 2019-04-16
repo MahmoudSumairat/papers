@@ -2,22 +2,40 @@
 
 .signup {
     height: 100vh;
-    background-image: linear-gradient(to right, rgba($color-dark, .7), rgba($color-dark, .7) ), url(../images/signup.jpg);
+    background-image: linear-gradient(90deg, $color-primary 0%, $color-primary 50%, $color-dark 50%, $color-dark 100% );
     background-size: cover;
+    padding-left: 50%;
+    padding-top: 15rem;
+    perspective: 100rem;
+
+    &__papers {
+        position: absolute;
+        top: 10rem;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 6.5rem;
+        font-family: 'Kalam', cursive;
+        color: $color-white;
+
+    }
 
 
     &__container {
-        width: 35%;
-        transform: translate(-50%, -50%);
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        background-color: rgba($color-dark, .8);
         padding: 7rem;
         border-radius: 1rem;
     }
 
+    &__heading {
+        color: $color-white;
+        font-size: 3.8rem;
+        margin-bottom: 4rem;
+    }
+
     &__form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
    
         label {
             color: $color-white;
@@ -61,8 +79,8 @@
                 background-color: $color-primary;
                 display: block;
                 position: absolute;
-                top: 9.5%;
-                left: 9.5%;
+                top: 11%;
+                left: 12.5%;
                 background-color: rgba($color-dark, .8);
                 transition: all .2s;
             }
@@ -75,26 +93,25 @@
 
     &__email, &__password, &__firstName, &__lastName {
         
-            width: 75%;
-            background-color: lighten($color-dark, 10%);
-            margin: 1rem;
+            width: 35rem;
+            background-color: $color-white;
+            margin: 1rem 0;
             border-radius: 1.5rem;
             border: none;
             padding: .5rem;
             padding-left: 2rem;
-            position: relative;
-            left: 12.5%;
+            transition: all .4s;
             font-size: 1.5rem;
-            color: $color-white;
+            color: $color-dark;
             transition: all .4s;
             border :solid .1rem transparent;
 
             &::placeholder {
-                color: rgba($color-white, .6);
+                    color : $color-dark;
             }
             &:focus {
-               background-color: $color-dark;
-               outline: none;
+                border :solid .1rem $color-secondary;
+                outline: none;
             }
             
         
@@ -135,11 +152,12 @@
     &__submit {
         background-color: $color-primary;
         border-radius: 1rem;
-        padding: .5rem 1rem;
+        padding: .7rem 1.2rem;
         color: $color-white;
         font-size: 1.7rem;
         display: block;
         margin: 2rem auto;
+        transition: all .4s;
     }
 
     &__error {
@@ -152,10 +170,59 @@
 
     }
 
+    &__guest {
+        position: absolute;
+        bottom: 10.01rem;
+        left: 50%;
+        transform: translateX(-50%);
+
+        &-btn {
+            background: none;
+            border: .2rem solid $color-white;
+            font-size: 2.2rem;
+            padding: 1rem 2rem;
+            color: $color-white;
+            border-radius: 1rem;
+            cursor: pointer;
+            transition: all .4s;
+
+            &:hover {
+                background-color: $color-white;
+                color: $color-dark;
+            }
+
+            &:focus {
+                outline: none;
+            }
+
+        }
+    }
+
+    
+    &__pass-box {
+        position: relative;
+    }
+
+    &__vis {
+        position: absolute;
+        top: 50%;
+        right: 1rem;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: $color-dark;
+        cursor: pointer;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+
 }
 
 input.ng-invalid.ng-touched {
-    border-color: $color-primary;
+    background-color: lighten(red, 35%);
 }
 
 .radio-active {

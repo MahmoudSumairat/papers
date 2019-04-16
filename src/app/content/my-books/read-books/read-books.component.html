@@ -1,8 +1,8 @@
 <section class="read-books">
   <div class="container">
-  <div class="row" >
+  <div class="row" *ngIf="!(isLoading$ | async )" >
       <app-book [dist]="'read-books'" *ngFor="let book of (readBooks$ | async | slice:startingIndex:endingIndex)" [book]="book" class="col-6" style="padding:0" ></app-book>
-      <h1 style="color: rgba(255, 255, 255, .7)"  *ngIf="!(readBooks$ | async)[0]" >No Current Books</h1>
+      <h1 style="color: rgba(255, 255, 255, .7)"  *ngIf="!(readBooks$ | async)[0] && !(isLoading$ | async)" >No Current Books</h1>
 
   </div>
   </div>
@@ -16,5 +16,6 @@
       <button (click)="lastPage(books)" class="read-books__fast-forward" title="Last Page" > <mat-icon>navigate_next</mat-icon><mat-icon>navigate_next</mat-icon> </button>
     </div>
   </div>
-  
+  <h2 *ngIf="isLoading$  | async" class="read-books__loading"   > Loading... </h2>
+
 </section>

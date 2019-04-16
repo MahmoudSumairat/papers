@@ -11,6 +11,8 @@ import { AuthorsService } from '../authors/authors.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import * as fromRoot from "../../app.reducer";
 import { Store } from '@ngrx/store';
+import { AuthService } from 'src/app/auth/auth.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-author-details',
@@ -42,6 +44,8 @@ export class AuthorDetailsComponent implements OnInit {
     authorBooks : Observable<any>;
     ratingsLength : Observable<any>;
     isLoading$ : Observable<boolean>;
+    user = this.authService.getUser();
+    
 
   constructor(
     private afs : AngularFirestore,
@@ -50,10 +54,14 @@ export class AuthorDetailsComponent implements OnInit {
     private router : Router,
     private bookService : BookService,
     private authorsService : AuthorsService,
-    private store : Store<fromRoot.State>
+    private store : Store<fromRoot.State>,
+    private authService : AuthService,
+    private title : Title
   ) { }
 
   ngOnInit() {
+    this.title.setTitle('Authors - ' + this.authorName)
+    this.user = this.authService.getUser();
     this.isLoading$ = this.store.select(fromRoot.getIsLoading);
     this.author = this.afs.collection('authors').doc(this.authorName.toLowerCase().replace(/ /g, '_')).valueChanges()
     this.authorBooks = this.afs.collection('myBooks').valueChanges().pipe(map(data => {
@@ -88,6 +96,13 @@ export class AuthorDetailsComponent implements OnInit {
 
     goToBook(bookName : string) {
       this.router.navigate(['content/books', bookName])
+    }
+
+    
+    removeThisAuthor(book : Book) {
+      this.afs.collection('authors').doc(book.bookName.toLowerCase().replace(/ /g, '_')).delete().then(() => {
+          this.router.navigate(['/content']);
+      })  
     }
 
 }

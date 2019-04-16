@@ -1,55 +1,67 @@
 @import "../shared/variables";
 
-.home {
+.welcome {
   background-image: linear-gradient(
-      to right,
-      rgba($color-dark, 0.85),
-      rgba($color-dark, 0.85)
-    ),
-    url(./images/welcome.jpg);
+      15deg,
+      $color-primary 0%,
+      $color-primary 30%,
+      $color-dark 30%,
+      $color-dark 80%,
+      $color-primary 80%,
+      $color-primary 100%
+    );
   height: 100vh;
   background-size: cover;
   padding: 2rem;
-  padding-top: 18rem;
+  padding-top: 23rem;
 
   &__heading {
     color: $color-white;
-    font-size: 5.5rem;
+    font-size: 9rem;
     margin: 1rem;
+    font-family: 'Kalam', cursive;
+    font-weight: bold;
+    
   }
 
   &__par {
     color: $color-white;
-    font-size: 4rem;
+    font-size: 4.5rem;
     margin-left: 1rem;
   }
 
-  &__log {
-    color: $color-white;
-    font-size: 3rem;
-    margin-left: 1rem;
+  &__start {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4rem;
   }
 
-  .btn {
-    color: $color-white;
+  &__start-btn {
     background-color: $color-primary;
-    font-size: 2.5rem;
-    margin: 1rem 0.4rem;
+    padding: 1rem 2rem;
+    font-size: 2.1rem;
+    border: none;
+    cursor: pointer;
+    color: $color-white;
     border-radius: 1rem;
+    transition: all .4s;
 
     &:hover {
-      background-color: darken($color-primary, 7%);
-    }
-
-    &--guest {
-      background-color: transparent;
-      color: $color-primary;
-      border: solid 0.1rem $color-primary;
-
-      &:hover {
-        color: $color-white;
-        background-color: $color-primary;
+      background-color: darken($color-primary, 5%);
+      span {
+        margin-left: 1rem;
       }
     }
+
+    &:focus {
+      outline: none;
+    }
   }
+
+  &__arrow {
+    transition: all .4s;
+    margin-left: .2rem;
+  }
+
 }

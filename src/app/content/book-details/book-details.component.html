@@ -81,6 +81,9 @@
       </div>
     </div>
     
+    <button class="book-details__remove" *ngIf="user.isAdmin" title="Remove Book" (click)="removeBook(book)" >
+      <mat-icon>clear</mat-icon>
+    </button>
   </div>
   <h2 *ngIf="isLoading$ | async" class="book-details__loading"   > Loading... </h2>
 </section>

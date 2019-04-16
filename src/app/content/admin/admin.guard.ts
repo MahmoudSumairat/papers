@@ -1,5 +1,5 @@
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from "../../auth/auth.service";
 import * as fromRoot from "../../app.reducer";
 import { Store } from '@ngrx/store';
@@ -8,7 +8,7 @@ import { MatSnackBar } from '@angular/material';
 
 
 @Injectable()
-export class AdminGuard implements CanActivate {
+export class AdminGuard implements CanActivate{
     
     
     
@@ -21,22 +21,27 @@ export class AdminGuard implements CanActivate {
 
     }
 
-    
+   
 
 canActivate(route : ActivatedRouteSnapshot, state : RouterStateSnapshot ) : any {
-    const user = this.authService.getUser()
+ 
+    const user = this.authService.getUser();
     let isAuthed : boolean;
     this.store.select(fromRoot.getIsAuth).subscribe(isAuth => {
-        if(isAuth && user.isAdmin) {
-            isAuthed =  true;
-        } else {
-            this.router.navigate(['/content'])
-            setTimeout(() => {
-                this.snackBar.open('You have to be an admin', 'Ok', {duration : 2000});
-            },   500)
-            return false
-        }
+     isAuthed = isAuth
     })
-    return isAuthed
+
+    if(isAuthed && user.isAdmin) {
+        return true;
+    } else {
+        this.router.navigate(['/content'])
+        setTimeout(() => {
+            this.snackBar.open('You have to be an admin', 'Ok', {duration : 2000});
+        },   500)
+        return
+    }
+
 }
+
+
 }

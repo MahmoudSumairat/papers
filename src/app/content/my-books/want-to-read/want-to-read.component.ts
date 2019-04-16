@@ -5,6 +5,9 @@ import * as fromRoot from '../../../app.reducer';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { Title } from '@angular/platform-browser';
+import { MyBooksService } from '../my-books.service';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-want-to-read',
@@ -36,13 +39,24 @@ export class WantToReadComponent implements OnInit {
   theLastPage = this.navigatablePages;
   currentPage = 1;
   numOfPages : number;
+  user = this.authService.getUser();
+  isLoading$  : Observable<boolean>;
 
 
   constructor(
-    private store : Store<fromRoot.State>
+    private store : Store<fromRoot.State>,
+    private title : Title,
+    private myBooksService : MyBooksService,
+    private authService : AuthService
   ) { }
 
   ngOnInit() {
+    this.isLoading$ = this.store.select(fromRoot.getIsLoading);
+    if(this.user) {
+      this.myBooksService.fetchWantBooks(this.user.userID);
+
+    }
+    this.title.setTitle('My Books - Want To Read');
     this.wantBooks$ = this.store.select(fromRoot.getWantBooks).pipe(map((books) => {
       
       this.numOfPages = Math.ceil(books.length/this.booksPerPage);

@@ -1,8 +1,8 @@
 <section class="currently-reading">
     <div class="container">
-    <div class="row" >
+    <div class="row"  >
         <app-book [dist]="'currently-reading'" *ngFor="let book of (currentBooks$ | async | slice:startingIndex:endingIndex)" [book]="book" class="col-6" style="padding:0" ></app-book>
-        <h1 style="color: rgba(255, 255, 255, .7)"  *ngIf="!(currentBooks$ | async)[0]" >No Current Books</h1>
+        <h1 style="color: rgba(255, 255, 255, .7)"  *ngIf="!(currentBooks$ | async)[0] && !(isLoading$ | async)" >No Current Books</h1>
 
         
     </div>
@@ -16,4 +16,6 @@
         </div>
       </div>
     </div>
+    <h2 *ngIf="isLoading$  | async" class="currently-reading__loading"   > Loading... </h2>
+
   </section>

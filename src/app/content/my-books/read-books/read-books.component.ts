@@ -7,6 +7,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AuthService } from 'src/app/auth/auth.service';
 import { map } from 'rxjs/operators';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { Title } from '@angular/platform-browser';
+import { MyBooksService } from '../my-books.service';
 
 @Component({
   selector: 'app-read-books',
@@ -39,16 +41,26 @@ export class ReadBooksComponent implements OnInit {
   theLastPage = this.navigatablePages;
   currentPage = 1;
   numOfPages : number;
-
+  user = this.authService.getUser();
+  isLoading$ : Observable<boolean>;
 
   constructor(
     private store : Store<fromRoot.State>,
     private afs : AngularFirestore,
-    private authService : AuthService
+    private authService : AuthService,
+    private title : Title,
+    private myBooksService : MyBooksService
 
   ) { }
 
   ngOnInit() {
+    this.isLoading$ = this.store.select(fromRoot.getIsLoading);
+
+    if(this.user) {
+
+      this.myBooksService.fetchReadBooks(this.user.userID);
+    }
+    this.title.setTitle('My Books - Read Books');
     this.readBooks$ = this.store.select(fromRoot.getReadBooks).pipe(map((books) => {
       this.numOfPages = Math.ceil(books.length/this.booksPerPage);
       return books

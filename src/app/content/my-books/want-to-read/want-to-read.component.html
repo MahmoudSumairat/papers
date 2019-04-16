@@ -2,7 +2,7 @@
     <div class="container">
     <div class="row" >
         <app-book [dist]="'want-to-read'" *ngFor="let book of (wantBooks$ | async | slice:startingIndex:endingIndex)" [book]="book" class="col-6" style="padding:0" ></app-book>
-        <h1 style="color: rgba(255, 255, 255, .7)"  *ngIf="!(wantBooks$ | async)[0]" >No Current Books</h1>
+        <h1 style="color: rgba(255, 255, 255, .7)"  *ngIf="!(wantBooks$ | async)[0] && !(isLoading$ | async)" >No Current Books</h1>
 
     </div>
 
@@ -16,6 +16,7 @@
         </div>
       </div>
     </div>
-  
+    <h2 *ngIf="isLoading$  | async" class="want-to-read__loading"   > Loading... </h2>
+
     
   </section>

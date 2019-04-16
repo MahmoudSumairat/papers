@@ -3,6 +3,9 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import * as fromRoot from "../../app.reducer";
 import { Store } from '@ngrx/store';
 import * as BookDetails from "../book-details/book-details.actions";
+import { Book } from '../home/book.model';
+import * as bookDetails from "../book-details/book-details.actions";
+import * as UI from "../../shared/ui.actions";
 
 @Injectable()
 export class MyBooksService {
@@ -41,4 +44,44 @@ export class MyBooksService {
         this.afs.collection(dist).doc('my-books').collection(userID).doc(bookName.toLowerCase().replace(/ /g, "_"))
         .set({dateRead : null}, {merge : true});
     }
+
+    
+  fetchReadBooks(userID : string) {
+    this.store.dispatch(new UI.StartLoading());
+    this.afs.collection('read-books').doc('my-books').collection(userID).valueChanges()
+    .subscribe((booksArr : Book[]) => {
+      if(booksArr) {
+        this.store.dispatch(new bookDetails.SetReadBooks(booksArr))
+        this.store.dispatch(new UI.StopLoading());
+
+      }
+    })
+  }
+
+  fetchCurrentBooks(userID : string) {
+    this.store.dispatch(new UI.StartLoading());
+
+    this.afs.collection('currently-reading').doc('my-books').collection(userID).valueChanges()
+    .subscribe((booksArr : Book[]) => {
+      if(booksArr) {
+        this.store.dispatch(new bookDetails.SetCurrentBooks(booksArr));
+        this.store.dispatch(new UI.StopLoading());
+
+      }
+    })
+  }
+
+  fetchWantBooks(userID : string) {
+    this.store.dispatch(new UI.StartLoading());
+
+    this.afs.collection('want-to-read').doc('my-books').collection(userID).valueChanges()
+    .subscribe((booksArr : Book[]) => {
+      if(booksArr) {
+        this.store.dispatch(new bookDetails.SetWantBooks(booksArr));
+        this.store.dispatch(new UI.StopLoading());
+
+      }
+    })
+  }
+
 }

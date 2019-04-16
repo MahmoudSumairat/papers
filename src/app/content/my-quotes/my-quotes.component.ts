@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { QuotesService } from '../quotes/quotes.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-my-quotes',
@@ -52,12 +53,14 @@ export class MyQuotesComponent implements OnInit {
 
   constructor(
     private authService : AuthService,
-    private quotesService : QuotesService
+    private quotesService : QuotesService,
+    private title : Title
 
 
   ) { }
 
   ngOnInit() {
+    this.title.setTitle('My Quotes');
     this.quotes = this.authService.getUser().favQuotes;
     this.numOfPages = Math.ceil(this.quotes.length/this.quotesPerPage);
 

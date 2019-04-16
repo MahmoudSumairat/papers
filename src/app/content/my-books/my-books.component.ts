@@ -4,6 +4,9 @@ import { Store } from '@ngrx/store';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Observable } from 'rxjs';
 import { MyBooksService } from './my-books.service';
+import { Title } from '@angular/platform-browser';
+import { AuthService } from 'src/app/auth/auth.service';
+import { BookService } from '../home/book.service';
 
 
 
@@ -32,16 +35,22 @@ export class MyBooksComponent implements OnInit {
   noBooks = false;
   booksDestination = 'read-books';
   isLoading$ : Observable<boolean>;
+  user = this.authService.getUser();
   @ViewChild('btnCursor') btnCursor;
   constructor(
       private store : Store<fromRoot.State>,
       private renderer : Renderer2,
-      private myBooksService : MyBooksService
+      private myBooksService : MyBooksService,
+      private authService : AuthService,
 
   ) { }
 
   ngOnInit() {
+    console.log('hala')
     this.isLoading$ = this.store.select(fromRoot.getIsLoading);
+    this.myBooksService.fetchCurrentBooks(this.user.userID);
+    this.myBooksService.fetchReadBooks(this.user.userID);
+    this.myBooksService.fetchWantBooks(this.user.userID);
     
   }
 

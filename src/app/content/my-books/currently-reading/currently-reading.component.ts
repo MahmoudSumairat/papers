@@ -5,6 +5,9 @@ import { Observable } from 'rxjs';
 import { Book } from '../../home/book.model';
 import { map } from 'rxjs/operators';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { Title } from '@angular/platform-browser';
+import { MyBooksService } from '../my-books.service';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-currently-reading',
@@ -36,14 +39,25 @@ export class CurrentlyReadingComponent implements OnInit {
   theLastPage = this.navigatablePages;
   currentPage = 1;
   numOfPages : number;
-  
+  user = this.authService.getUser();
+  isLoading$ : Observable<boolean>;
+
   constructor(
     private store : Store<fromRoot.State>,
+    private title : Title,
+    private myBooksService : MyBooksService,
+    private authService : AuthService
 
   ) { }
 
   ngOnInit() {
+    this.isLoading$ = this.store.select(fromRoot.getIsLoading);
 
+    if(this.user) {
+
+      this.myBooksService.fetchCurrentBooks(this.user.userID);
+    }
+    this.title.setTitle('My Books - Currently Reading');
     this.currentBooks$ =  this.store.select(fromRoot.getCurrentBooks).pipe(map((books) => { 
       this.numOfPages = Math.ceil(books.length/this.booksPerPage);
      

@@ -13,6 +13,8 @@ import { BookDetailsService } from './book-details.service';
 import { BookService } from '../home/book.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { AuthorsService } from '../authors/authors.service';
+import { Title } from '@angular/platform-browser';
+import { MyBooksService } from '../my-books/my-books.service';
 
 @Component({
   selector: "app-book-details",
@@ -58,10 +60,18 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
     private bookDetailsService : BookDetailsService,
     private router : Router,
     private bookService : BookService,
-    private authorsService : AuthorsService
+    private authorsService : AuthorsService,
+    private title : Title,
+    private myBooksService : MyBooksService
   ) {}
 
   ngOnInit() {
+
+    this.title.setTitle('Books - ' + this.bookName);
+    this.user = this.authService.getUser();
+    this.myBooksService.fetchCurrentBooks(this.user.userID);
+    this.myBooksService.fetchReadBooks(this.user.userID);
+    this.myBooksService.fetchWantBooks(this.user.userID);
     this.isLoading$ = this.store.select(fromRoot.getIsLoading);
     this.bookService.fetchAllBooks();
     this.authorsService.fetchAuthors();
@@ -198,5 +208,10 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
       this.bookService.inputValueChanged.next(genre);
       this.bookService.inputChanged.next(genre);
     }, .5)
+  }
+
+
+  removeBook(book) {
+    this.bookDetailsService.removeThisBook(book);
   }
 }
