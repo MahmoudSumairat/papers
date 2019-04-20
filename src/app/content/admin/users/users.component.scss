@@ -22,6 +22,12 @@
         padding: 1rem;
         position: relative;
 
+        @media only screen and (max-width : 500px) {
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
     }
 
     &__label {
@@ -30,6 +36,8 @@
 
     &__chunk {
         width: 25%;
+
+    
     }
 
     &__remove {

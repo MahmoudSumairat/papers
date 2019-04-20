@@ -9,6 +9,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Book } from 'src/app/content/home/book.model';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Title } from '@angular/platform-browser';
+import { MyBooksService } from '../my-books/my-books.service';
 
 @Component({
   selector: 'app-profile',
@@ -43,15 +44,20 @@ export class ProfileComponent implements OnInit {
     private store : Store<fromRoot.State>,
     private authService : AuthService,
     private afs : AngularFirestore,
-    private title : Title
+    private title : Title,
+    private myBooksService : MyBooksService
   ) { }
 
   ngOnInit() {
     this.user = this.authService.getUser();
     this.title.setTitle(this.user.firstName + ' ' + this.user.lastName);
+    this.myBooksService.fetchReadBooks(this.user.userID);
+    this.myBooksService.fetchCurrentBooks(this.user.userID);
+    this.myBooksService.fetchWantBooks(this.user.userID);
     this.readBooks$ = this.store.select(fromRoot.getReadBooks);
     this.currentBooks$ = this.store.select(fromRoot.getCurrentBooks);
     this.wantBooks$ = this.store.select(fromRoot.getWantBooks);
+
 
   }
 

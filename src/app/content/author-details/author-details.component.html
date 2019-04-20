@@ -1,7 +1,7 @@
 <section class="author-details">
   <div class="container" *ngIf="(author | async) as theAuthor" [@authorDetailsState]  >
     <div class="row">
-      <div class="col-3">
+      <div class="col-3 author-details__img-box">
         <img [src]="theAuthor.img" [alt]="theAuthor.name" class="author-details__img">
         <div class="author-details__rate text-center">
           <span class="author-details__rate--title">Rate the author</span>
@@ -9,7 +9,7 @@
         </div>
 
       </div>
-      <article class="col-9" >
+      <article class="col-9 col-sm-8 offset-1 author-details__article" >
         <h2 class="author-details__name">
           {{theAuthor.name}}
         </h2>
@@ -53,7 +53,7 @@
     </div>
     <h3 class="author-details__books-title"> {{theAuthor.name}}'s Books:  </h3>
     <div class="row justify-content-center  author-details__books-container ">
-          <div class="col-3 author-book " *ngFor="let book of authorBooks | async">
+          <div class=" col-12 col-sm-4 col-md-3 author-book " *ngFor="let book of authorBooks | async">
               <img class="author-book__img" [src]="book.img" [alt]="book.bookName">
               <div class="author-book__bio text-center">
   

@@ -6,6 +6,17 @@
     padding-top: 20rem;
     perspective: 100rem;
 
+    .mat-icon {
+        font-size: 2.4rem;
+        width: 2.4rem;
+        height: 2.4rem;
+    }
+
+    @media only screen and (max-width : 517px) {
+        background-image: none;
+        background-color: $color-primary;
+    }
+
     &__papers {
         position: absolute;
         top: 10rem;
@@ -21,12 +32,19 @@
         padding: 7rem;
         border-radius: 1rem;
         width: 50%;
+        @media only screen and (max-width : 517px) {
+            padding: 1rem .5rem;
+            position: relative;
+            left: 25%;
+        }
     }
 
     &__heading {
         color: $color-white;
         font-size: 3.8rem;
         margin-bottom: 4rem;
+
+      
     }
 
     &__form {
@@ -79,6 +97,7 @@
     &__dont {
         color: $color-white;
         font-size: 1.8rem;
+
     }
 
     &__creat {

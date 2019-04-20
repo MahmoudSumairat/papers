@@ -6,11 +6,26 @@
     min-height: 120vh;
     padding-top : 5.5rem;
     position: relative;
+    perspective: 100rem;
+
+    .mat-icon {
+      font-size: 2.4rem;
+      width: 2.4rem;
+      height: 2.4rem;
+    }
 
     &__heading {
         color: $color-white;
         font-size: 4rem;
         margin-bottom: 2rem;
+        
+        @media only screen and (max-width : 768px) {
+          margin-top: 2rem;
+        }
+
+        @media only screen and (max-width : 500px) {
+          font-size: 3rem;
+        }
     }
     
     &__box {
@@ -23,6 +38,11 @@
     &__content {
         font-size: 2rem;
         line-height: 1.5;
+
+        @media only screen and (max-width : 500px) {
+          font-size: 1.6rem;
+          padding-right: 4rem;
+        }
     }
 
     &__name {
@@ -39,6 +59,10 @@
         right: 2rem;
         bottom: 1rem;
         color: darken($color-dark, 10%);
+
+        @media only screen and (max-width : 500px) {
+          right: 1rem;
+        }
 
     }
 

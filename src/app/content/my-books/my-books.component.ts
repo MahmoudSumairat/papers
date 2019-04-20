@@ -46,7 +46,7 @@ export class MyBooksComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log('hala')
+    this.user = this.authService.getUser();
     this.isLoading$ = this.store.select(fromRoot.getIsLoading);
     this.myBooksService.fetchCurrentBooks(this.user.userID);
     this.myBooksService.fetchReadBooks(this.user.userID);
@@ -56,13 +56,13 @@ export class MyBooksComponent implements OnInit {
 
 
   navigateMyBooks(dest, btn) {
-    // this.booksDestination = dest;
-    const x = btn.getBoundingClientRect().x;
-    const y = btn.getBoundingClientRect().y + btn.getBoundingClientRect().height - 2;
-    const width = btn.getBoundingClientRect().width;
-    this.renderer.setStyle(this.btnCursor.nativeElement, 'left', x + 'px' );
-    this.renderer.setStyle(this.btnCursor.nativeElement, 'top', y + 'px' );
-    this.renderer.setStyle(this.btnCursor.nativeElement, 'width', width + 'px' );
+    // // this.booksDestination = dest;
+    // const x = btn.getBoundingClientRect().x;
+    // const y = btn.getBoundingClientRect().y + btn.getBoundingClientRect().height - 2;
+    // const width = btn.getBoundingClientRect().width;
+    // this.renderer.setStyle(this.btnCursor.nativeElement, 'left', x + 'px' );
+    // this.renderer.setStyle(this.btnCursor.nativeElement, 'top', y + 'px' );
+    // this.renderer.setStyle(this.btnCursor.nativeElement, 'width', width + 'px' );
 
     this.booksDestination = dest;
     

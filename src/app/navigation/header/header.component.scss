@@ -4,11 +4,42 @@
   .container {
     justify-content: flex-start;
     position: relative;
+    flex-wrap: nowrap;
+    perspective: 100rem;
 
+    @media only screen and (max-width : 768px) {
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0;
+      justify-content: center;
+
+    }
    
   }
 
-  
+
+  .mat-icon {
+    font-size: 2.4rem;
+    height: 2.4rem;
+    width: 2.4rem;
+  }
+
+
+  .navbar-nav {
+    flex-direction: row;
+    @media only screen and (max-width : 768px) {
+      flex-direction: column !important;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      padding-top: 1rem;
+      width: 100%;
+
+    }
+  }
   
   &__logo {
     color: $color-white;
@@ -18,6 +49,17 @@
     padding: 0 2rem;
     font-family: 'Kalam', cursive;
     padding-top: .4rem;
+
+    @media only screen and (max-width : 768px) {
+      position: absolute;
+      top: 2rem;
+      left : 50%;
+      transform: translateX(-50%);
+      font-size: 5.5rem;
+      border-right: none;
+    
+
+    }
 
   }
 
@@ -30,7 +72,19 @@
     padding: 0;
     position: fixed;
     width: 100%;
-    z-index: 999999;
+    z-index: 999;
+    transition: all .4s;
+
+    @media only screen and (max-width : 768px) {
+      height: 100vh;
+      width: 100%;
+      top: 0;
+      left: 0;
+      transform: scale(.5);
+      opacity: 0;
+      z-index: -1;
+
+    }
   }
 
   &__item {
@@ -41,10 +95,9 @@
     z-index: 2;
     color: $color-white !important;
     cursor: pointer;
-    &:last-of-type {
-      display: flex;
-      align-items: center;
-    }
+ 
+   
+
     &::after {
       content: "";
       width: 100%;
@@ -58,6 +111,10 @@
       transform-origin: center;
       display: block;
       z-index: -1;
+
+      @media only screen and (max-width : 768px) {
+        display: none;
+      }
     }
 
     &:hover {
@@ -65,8 +122,58 @@
         transform: scaleX(1);
         height: 100%;
       }
+
+    
+    }
+
+   
+    
+  
+
+    @media only screen and (max-width : 768px) {
+      font-size: 3.5rem;
     }
   }
+
+ 
+
+  &__item--res {
+    display: none;
+    @media only screen and (max-width : 768px) {
+      display: inline;
+    }
+
+
+
+    &::after {
+      content: "";
+      width: 100%;
+      height: 0.2rem;
+      transform: scaleX(0);
+      position: absolute;
+      left: 0;
+      top: 0;
+      background-color: $color-dark;
+      transition: transform 0.2s ease, height 0.2s ease 0.2s;
+      transform-origin: center;
+      display: block;
+      z-index: -1;
+      @media only screen and (max-width : 768px) {
+        display: none;
+      }
+    }
+
+    
+    &:hover {
+      &::after {
+        transform: scaleX(1);
+        height: 100%;
+      }
+
+    
+    }
+  }
+
 
   &__search {
     width: 35rem;
@@ -94,6 +201,10 @@
     display: flex;
     align-items: center;
     position: relative;
+
+    @media only screen and (max-width : 768px) {
+      display: none;
+    }
   }
 
   &__search-icon {
@@ -109,6 +220,11 @@
     margin: 0 2rem;
     font-size: 1.6rem;
     width: auto;
+
+    @media only screen and (max-width : 768px) {
+      display: none;
+    }
+    
   }
 
   &__signin-btn,
@@ -136,11 +252,16 @@
     justify-content: flex-end;
     align-items: center;
     margin: 0 1rem;
+
+    @media only screen and (max-width : 768px) {
+      display: none;
+    }
   
   }
 
   &__icon {
     margin: 0 0.5rem;
+    margin-left: 10rem;
     background-color: $color-dark;
     padding: 0.2rem 0.5rem 0;
     border-radius: 0.8rem;
@@ -154,42 +275,6 @@
   }
 
 
-
-  &__community {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
-  &__com-dropdown {
-    position: absolute;
-    top: 4.6rem;
-    background-color: $color-secondary;
-    transform: translateX(.8rem);
-    display: none;
-    z-index: 9999;
-  }
-
-  &__com-list {
-    font-size: 1.8rem;
-    list-style: none;
-    line-height: 2;
-    margin: 0;
-    padding: 0;
-  }
-
-  &__com-item {
-    padding: 0.5rem 3rem;
-    transition: all 0.4s;
-    display: block;
-    color: $color-white;
-    text-decoration: none;
-    cursor: pointer;
-    &:hover {
-      background-color: lighten($color-dark, 10%);
-    }
-  }
 
   &__mail-box,
   &__notification-box {
@@ -210,6 +295,7 @@
     font-size: 1.7rem;
     z-index: 2000;
     width: 20rem;
+    transform: translateX(-5.5rem);
 
     &__heading {
       padding: 1rem 2rem;
@@ -243,8 +329,120 @@
       }
     }
   }
+
+
+  &__toggle, &__search-res {
+    cursor: pointer;
+    display: none;
+    background: none;
+    background-color: $color-white;
+    border: none;
+    color: $color-dark;
+    padding: .5rem .7rem;
+    position: fixed;
+    top: 2rem;
+    right: 4rem;
+    z-index: 999999;
+    border-radius: 2rem;
+
+    @media only screen and (max-width : 768px) {
+      display: block;
+    }
+
+    &:focus {
+      outline: none;
+    }
+    mat-icon {
+      color: $color-dark;
+      
+    }
+  }
+
+  
+
+  &__res-logo {
+    position: absolute;
+    top : 0;
+    padding: .5rem 0;
+    width: 100%;
+    color: $color-white;
+    z-index: 99;
+    font-family: 'Kalam', cursive;
+    border-bottom: .1rem solid $color-primary;
+    display: none;
+
+    h1 {
+      font-size: 3.5rem;
+      margin: 0;
+      padding: 0;
+      padding-top: .8rem;
+    }
+
+
+    @media only screen and (max-width : 768px) {
+      display: block;
+    } 
+  }
+
+  
+  &__search-res {
+    top: 9rem;
+  }
+
+  &__search-input-res {
+    position: fixed;
+    z-index: 999;
+    top: -10rem;
+    left: 50%;
+    transform: translate(-50%);
+    transition: all .4s;
+ 
+  }
+
+  &__search-input {
+    width: 35rem;
+    padding: .5rem 1rem;
+    background-color: $color-white;
+    color: $color-dark;
+    border: .1rem solid darken($color-dark, 10%);
+    border-radius: 2rem;
+    font-size: 1.8rem;
+    transition: all .4s;
+
+    @media only screen and (max-width : 400px) {
+      width: 30rem;
+
+    }
+
+    &::placeholder {
+      color: $color-dark;
+    }
+
+    &:focus {
+      outline: none;
+      width: 40rem;
+
+      @media only screen and (max-width : 400px) {
+        width: 34rem;
+      }
+    }
+  }
+
+
+
 }
 
 mat-icon {
   color: $color-white;
 }
+
+.active-res-nav {
+  transform: scale(1);
+  opacity: 1;
+  z-index: 999;
+}
+
+.active-res-search {
+  top: 7.5rem;
+}
+

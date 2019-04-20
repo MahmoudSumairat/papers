@@ -14,11 +14,17 @@ h1 {
   margin: 10px;
 }
 
+.mat-icon {
+  font-size: 2.4rem;
+  height: 2.4rem;
+  width: 2.4rem;
+}
+
 .rating {
   border: none;
   display: block;
   position: relative;
-  left: -25%;
+  
 }
 
 .rating > input {

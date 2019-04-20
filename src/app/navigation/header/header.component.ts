@@ -34,7 +34,21 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
           transform : 'translateX(-15px)'
         }))
       ])
-    ])
+    ]),
+    trigger('iconState', [
+      state('exist', style({
+        transform : 'translateZ(0)',
+        opacity : 1
+      })),
+      transition('void => *', [
+        style({
+          transform : 'translateZ(30px)',
+          opacity : 0
+        }),
+        animate(200)
+      ]),
+      
+    ]),
   ]
 })
 export class HeaderComponent implements OnInit {
@@ -45,6 +59,8 @@ export class HeaderComponent implements OnInit {
   @ViewChild('dropdownItem') dropdownItem;
   @ViewChild('searchInput') searchInput : ElementRef;
   showProfileBox : boolean;
+  navIcon = 'menu';
+  searchIcon = 'search';
 
   constructor(
     private store: Store<fromRoot.State>,
@@ -98,20 +114,32 @@ export class HeaderComponent implements OnInit {
 
   }
 
-  goToProfile( profileIcon) {
-    profileIcon.classList.remove('account-item-active');
+  goToProfile( profileIcon, navbar : HTMLElement) {
+    this.navIcon = 'menu';
+    if (profileIcon) {
+      profileIcon.classList.remove('account-item-active');
+    }
+    navbar.classList.remove('active-res-nav');
     this.store.dispatch(new ui.HideProfileBox());
     this.router.navigate(['/content/profile']);
   }
 
-  goToMyQuotes( profileIcon) {
-    profileIcon.classList.remove('account-item-active');
+  goToMyQuotes( profileIcon, navbar : HTMLElement) {
+    this.navIcon = 'menu';
+    if(profileIcon) {
+      profileIcon.classList.remove('account-item-active');
+    }
+    navbar.classList.remove('active-res-nav');
     this.store.dispatch(new ui.HideProfileBox());
     this.router.navigate(['/content/my-quotes']);
   }
 
-  goToAdminPage( profileIcon) {
-    profileIcon.classList.remove('account-item-active');
+  goToAdminPage( profileIcon, navbar : HTMLElement) {
+    this.navIcon = 'menu';
+    if(profileIcon) {
+      profileIcon.classList.remove('account-item-active');
+    }
+    navbar.classList.remove('active-res-nav');
     this.store.dispatch(new ui.HideProfileBox());
     this.router.navigate(['/content/admin']);
   }
@@ -126,22 +154,55 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  navigate(dist) {
+  navigate(dist, navbar : HTMLElement) {
     if(dist) {
       this.router.navigate(['/content', dist]);
       this.searchInput.nativeElement.value = '';
       this.booksService.inputChanged.next('');
       this.authorsService.inputChanged.next('');
       this.quotesService.inputChanged.next('');
-      
+      navbar.classList.remove('active-res-nav');
+      this.navIcon = 'menu';
+
+
     } else {
       this.router.navigate(['/content']);
       this.searchInput.nativeElement.value = '';
       this.booksService.inputChanged.next('');
       this.authorsService.inputChanged.next('');
       this.quotesService.inputChanged.next('');
+      navbar.classList.remove('active-res-nav');
+      this.navIcon = 'menu';
+
+
     }
   }
 
+  toggleResNav(navbar : HTMLElement, search : HTMLInputElement) {
+    this.navIcon === 'menu' ? this.navIcon = 'clear' : this.navIcon = 'menu';
+    search.classList.remove('active-res-search');
+    this.searchIcon = 'search'
+    if(navbar.classList.contains('active-res-nav')) {
+      navbar.classList.remove('active-res-nav')
+    } else {
+      navbar.classList.add('active-res-nav')
+
+    }
+  }
+
+  toggleSearchRes(search : HTMLInputElement, navbar : HTMLElement) {
+    this.searchIcon === 'search' ? this.searchIcon = 'clear' : this.searchIcon = 'search';
+    this.navIcon = 'menu';
+    navbar.classList.remove('active-res-nav')
+    if(search.classList.contains('active-res-search')) {
+      search.classList.remove('active-res-search')
+      console.log(search);
+    } else {
+      search.classList.add('active-res-search')
+
+    }
+    search.focus();
+
+  }
   
 }

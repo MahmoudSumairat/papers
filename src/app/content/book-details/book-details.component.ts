@@ -69,9 +69,12 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
 
     this.title.setTitle('Books - ' + this.bookName);
     this.user = this.authService.getUser();
-    this.myBooksService.fetchCurrentBooks(this.user.userID);
-    this.myBooksService.fetchReadBooks(this.user.userID);
-    this.myBooksService.fetchWantBooks(this.user.userID);
+    if(this.user.userID) {
+
+      this.myBooksService.fetchCurrentBooks(this.user.userID);
+      this.myBooksService.fetchReadBooks(this.user.userID);
+      this.myBooksService.fetchWantBooks(this.user.userID);
+    }
     this.isLoading$ = this.store.select(fromRoot.getIsLoading);
     this.bookService.fetchAllBooks();
     this.authorsService.fetchAuthors();

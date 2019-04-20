@@ -2,11 +2,18 @@
 @import "../../shared/animations";
 
 .authors {
-    padding: 5rem 0;
+    padding: 7rem 0;
     background-color: $color-dark;
     min-height: 120vh;
     position: relative;
     perspective: 100rem;
+
+
+    @media only screen and (max-width : 530px) {
+      padding: 7rem 2rem;
+    }
+    
+
 
     
   &__navigate {
@@ -104,6 +111,25 @@
     position: relative;
     margin: 1.5rem;
     
+    @media only screen and (max-width : 530px) {
+
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+
+    .mat-icon {
+      font-size: 2.4rem;
+      height: 2.4rem;
+      width: 2.4rem;
+      
+      @media only screen and (max-width : 768px) {
+        font-size: 2rem;
+        height: 2rem;
+        width: 2rem;
+        
+      }
+      
+    }
 
     &__img {
         width: 20rem !important;
@@ -130,6 +156,9 @@
          &:hover {
              text-decoration: underline;
          }
+         @media only screen and (max-width : 768px) {
+          font-size: 1.6rem
+         }
 
     }
 
@@ -137,16 +166,30 @@
         font-size: 1.5rem;
         margin-bottom: 1rem;
 
+        @media only screen and (max-width : 768px) {
+          font-size: 1.3rem;
+        }
+
     }
 
     &__genre {
         font-size: 1.5rem;
+        display: inline-block;
+        
+        &:last-of-type {
 
+          margin-bottom: .5rem;
+        }
         &:not(:last-of-type) {
             &::after {
                 content: ","
             }
         }
+
+        @media only screen and (max-width : 768px) {
+          font-size: 1.2rem;
+        }
+        
     }
 
     
@@ -178,10 +221,20 @@
             font-weight: bold;
             cursor: pointer;
 
+            @media only screen and (max-width : 768px) {
+              font-size: 1.4rem;
+            }
+
             &:hover {
                 text-decoration: underline;
             }
           }
+
+          @media only screen and (max-width : 768px) {
+            font-size: 1.4rem;
+          }
+          
+
           
         }
 

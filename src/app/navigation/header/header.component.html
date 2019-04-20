@@ -1,5 +1,5 @@
 <section class="header">
-  <nav class="navbar navbar-expand-lg header__nav">
+  <nav class="navbar navbar-expand-lg header__nav" #navbar>
     <div class="container">
       <a
         routerLink="/"
@@ -9,31 +9,25 @@
           PAPERS
         </a
         >
-        <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbar-items"
-        aria-controls="navbarNavAltMarkup"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-        >
-        <span class="navbar-toggler-icon"></span>
-      </button>
+ 
       <div class="collaps navbar-collaps" id="navbar-items">
         <div class="navbar-nav">
-          <a class="nav-item nav-link header__item" (click)="navigate(null)"
+          <a class="nav-item nav-link header__item" (click)="navigate(null, navbar)"
           >Home</a
           >
-          <a class="nav-item nav-link header__item" (click)="navigate('my-books')" >My Books</a>
-          <a class="nav-item nav-link header__item" (click)="navigate('authors')" >Authors</a>
+          <a class="nav-item nav-link header__item" (click)="navigate('my-books', navbar)" >My Books</a>
+          <a class="nav-item nav-link header__item" (click)="navigate('authors', navbar)" >Authors</a>
             <a
-              #dropdownItem
-              id="community"
               class="nav-item nav-link header__item"
-              (click)="navigate('quotes')"
+              (click)="navigate('quotes', navbar)"
               >Quotes</a
             >
+            <a class="nav-item nav-link header__item header__item--res"  *ngIf="isAuth$ | async" (click)="goToProfile(null,navbar)" >Profile</a>
+            <a class="nav-item nav-link header__item header__item--res " *ngIf="isAuth$ | async" (click)="goToMyQuotes(null,navbar)" >My Quotes</a>
+            <a class="nav-item nav-link header__item header__item--res " *ngIf="(isAuth$ | async) && user.isAdmin" (click)="goToAdminPage(null,navbar)" >Manage</a>
+            <a class="nav-item nav-link header__item header__item--res " *ngIf="isAuth$ | async" (click)="onLogout(null,navbar)" >Logout</a>
+            <a class="nav-item nav-link header__item header__item--res " *ngIf="!(isAuth$ | async)" routerLink="/login" >Signin</a>
+            <a class="nav-item nav-link header__item header__item--res " *ngIf="!(isAuth$ | async)" routerLink="/signup" >Creat Account</a>
         
           <div class="header__search-container">
             <input
@@ -70,9 +64,9 @@
               >
                 <h3 class="profile-box__heading">{{ user.firstName + ' ' + user.lastName }}</h3>
                 <ul class="profile-box__list">
-                  <li><a class="profile-box__list-item" (click)="goToProfile( profileIcon)" >Profile</a></li>
-                  <li><a class="profile-box__list-item"(click)="goToMyQuotes( profileIcon)" >My Quotes</a></li>
-                  <li><a class="profile-box__list-item"(click)="goToAdminPage( profileIcon)" *ngIf="user.isAdmin" >Manage</a></li>
+                  <li><a class="profile-box__list-item" (click)="goToProfile( profileIcon, navbar)" >Profile</a></li>
+                  <li><a class="profile-box__list-item"(click)="goToMyQuotes( profileIcon, navbar)" >My Quotes</a></li>
+                  <li><a class="profile-box__list-item"(click)="goToAdminPage( profileIcon, navbar)" *ngIf="user.isAdmin" >Manage</a></li>
                   <hr />
                   <li>
                     <a class="profile-box__list-item" (click)="onLogout()"
@@ -87,5 +81,29 @@
       </div>
     </div>
   </nav>
+  <div class="header__res-logo text-center">
+    <h1>PAPERS</h1>
+  </div>
+  <button
+  class="header__toggle"
+  type="button"
+  (click)="toggleResNav(navbar, search)"
+  >
+  <mat-icon [@iconState] *ngIf="navIcon === 'menu'" >menu</mat-icon>
+  <mat-icon  [@iconState] *ngIf="navIcon === 'clear'" >clear</mat-icon>
+</button>
+
+<button
+class="header__search-res"
+type="button"
+(click)="toggleSearchRes(search, navbar)"
+>
+<mat-icon [@iconState] *ngIf="searchIcon === 'search'" >search</mat-icon>
+<mat-icon  [@iconState] *ngIf="searchIcon === 'clear'" >clear</mat-icon>
+</button>
+
+<div class="header__search-input-res" #search >
+  <input type="text" class="header__search-input" #searchValue placeholder="Search books, Authors or Quotes" (keyup)="searchBooks(searchValue)" >
+</div>
 
 </section>

@@ -71,7 +71,6 @@ export class ReadBooksComponent implements OnInit {
   }
 
   nextBooks(books) {
-    console.log(this.numOfPages);
     if(this.endingIndex <= books.length && books.length >= this.booksPerPage) {
       this.startingIndex += this.booksPerPage;
       this.endingIndex += this.booksPerPage;
@@ -81,8 +80,6 @@ export class ReadBooksComponent implements OnInit {
         this.theFirstPage++;
         this.theLastPage++;
       }
-    } else {
-      console.log('no you dont');
     }
     
   }
@@ -98,9 +95,7 @@ export class ReadBooksComponent implements OnInit {
         this.theFirstPage--;
         this.theLastPage--;
       }
-    } else {
-      console.log('no you dont');
-    } 
+    }
   }
 
 
@@ -113,8 +108,6 @@ export class ReadBooksComponent implements OnInit {
       this.theLastPage = this.navigatablePages;
 
 
-    } else {
-      console.log('no you dont');
     }
   }
 
@@ -126,13 +119,10 @@ export class ReadBooksComponent implements OnInit {
       this.theLastPage = this.currentPage;
       this.theFirstPage = this.currentPage - this.navigatablePages;
 
-    } else {
-      console.log('no you dont');
-    }
+    } 
   }
 
   getNumOfPages() {
-    console.log(this.numOfPages)
     const pagesArr = [];
      for(let i = 1; i <= this.numOfPages; i++ ) {
         pagesArr.push(i);
@@ -147,19 +137,14 @@ export class ReadBooksComponent implements OnInit {
       if(this.theFirstPage > 0) {
         this.theFirstPage--;
         this.theLastPage--;
-        console.log('something')
-      } else {
-        console.log('no you dont');
-      }
+      } 
     } else if(pageNo > this.currentPage && pageNo >= this.navigatablePages)  {
-      console.log('something')
       if(this.theLastPage < this.numOfPages) {
         this.theFirstPage++;
         this.theLastPage++;
       }
     } 
-    console.log(this.currentPage);
-    console.log(this.theFirstPage, this.theLastPage);
+  
     this.startingIndex = pageNo * this.booksPerPage - this.booksPerPage;
     this.endingIndex = pageNo * this.booksPerPage;
     this.currentPage = pageNo;

@@ -109,33 +109,6 @@ export class BookDetailsService {
         
   }
 
-  fetchReadBooks(userID : string) {
-    this.afs.collection('read-books').doc('my-books').collection(userID).valueChanges()
-    .subscribe((booksArr : Book[]) => {
-      if(booksArr) {
-        this.store.dispatch(new bookDetails.SetReadBooks(booksArr))
-      }
-    })
-  }
-
-  fetchCurrentBooks(userID : string) {
-    this.afs.collection('currently-reading').doc('my-books').collection(userID).valueChanges()
-    .subscribe((booksArr : Book[]) => {
-      if(booksArr) {
-        this.store.dispatch(new bookDetails.SetCurrentBooks(booksArr))
-      }
-    })
-  }
-
-  fetchWantBooks(userID : string) {
-    this.afs.collection('want-to-read').doc('my-books').collection(userID).valueChanges()
-    .subscribe((booksArr : Book[]) => {
-      if(booksArr) {
-        this.store.dispatch(new bookDetails.SetWantBooks(booksArr))
-      }
-    })
-  }
-
 
   removeThisBook(book : Book) {
     this.afs.collection('myBooks').doc(book.bookName.toLowerCase().replace(/ /g, '_')).delete().then(() => {

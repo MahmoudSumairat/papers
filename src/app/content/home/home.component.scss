@@ -11,6 +11,12 @@
     padding: 3rem;
   }
 
+  &__book-list {
+    @media only screen and (max-width : 768px) {
+      padding-left: 2rem;
+    }
+  }
+
   &__navigate {
     padding: 2rem 0;
     margin: 1rem auto;
@@ -107,6 +113,19 @@
   padding-left: 0 !important;
   padding-right: 0 !important;
   margin: 1rem 0;
+
+  @media only screen and (max-width : 400px) {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  
+.mat-icon {
+  font-size: 2.4rem;
+  width: 2.4rem;
+  height: 2.4rem;
+}
+
   .card {
     width: 90%;
     cursor: pointer;
@@ -132,6 +151,7 @@
       opacity: 0;
       transition: all 0.4s;
       transform: translateY(1rem);
+      z-index: -1;
     }
 
     &-title {
@@ -191,7 +211,10 @@
     &:hover .card-body {
       opacity: 1;
       transform: translateY(0);
+      z-index: 5;
     }
+
+
   }
 
 
@@ -204,3 +227,4 @@
   text-shadow: .05rem .05rem .5rem $color-white, -.05rem -.05rem .5rem $color-white;
   transform: scale(1.2);
 }
+

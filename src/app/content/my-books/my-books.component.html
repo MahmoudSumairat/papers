@@ -2,10 +2,9 @@
   <div class="container">
     <h2 class="my-books__empty" *ngIf="noBooks">No Books To View</h2>
     <div class="my-books__navigation"  >
-        <button class="my-books__btn my-books__btn--read" #readBtn (click)="navigateMyBooks('read-books', readBtn)" >Read</button>
-        <button class="my-books__btn my-books__btn--currently" #currentBtn (click)="navigateMyBooks('currently-reading', currentBtn)" >Currently Reading</button>
-        <button class="my-books__btn my-books__btn--want" #wantBtn (click)="navigateMyBooks('want-to-read', wantBtn)" >Want To Read</button>
-        <span class="my-books__btns-cursor" #btnCursor ></span>
+        <button class="my-books__btn my-books__btn--read" #readBtn (click)="navigateMyBooks('read-books')" [ngClass]="{'section-active' : booksDestination === 'read-books'}" >Read</button>
+        <button class="my-books__btn my-books__btn--currently" #currentBtn (click)="navigateMyBooks('currently-reading')" [ngClass]="{'section-active' : booksDestination === 'currently-reading'}"  >Currently Reading</button>
+        <button class="my-books__btn my-books__btn--want" #wantBtn (click)="navigateMyBooks('want-to-read')" [ngClass]="{'section-active' : booksDestination === 'want-to-read'}"  >Want To Read</button>
     </div>
     <div class="my-books__books-container" [ngSwitch]="booksDestination">
       <div class="my-books__read-books" *ngSwitchCase="'read-books'" [@myBooksState]>

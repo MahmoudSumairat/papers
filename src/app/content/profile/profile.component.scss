@@ -53,6 +53,10 @@
         font-size: 1.5rem;
         color: $color-white;
         resize: none;
+
+        @media only screen and (max-width : 500px) {
+            width: 40rem;
+        }
         
 
         &:focus {
@@ -122,6 +126,11 @@
         color: $color-white;
         padding: 1rem;
         width: 30%;
+
+        @media only screen and (max-width : 450px) {
+            height: 14.2rem;
+        }
+        
     }
 
     &__read-heading, &__current-heading, &__want-heading {
@@ -129,6 +138,17 @@
         font-size: 1.8rem;
         padding-bottom: 1rem;
         border-bottom: .1rem solid lighten($color-dark, 10%);
+
+        @media only screen and (max-width : 450px) {
+            font-size: 1.6rem;
+        }
+    }
+
+    &__read-heading {
+        @media only screen and (max-width : 420px)  {
+            padding-bottom: 2rem;
+            padding-top: 1rem;
+        }
     }
 
     &__read-number, &__current-number, &__want-number {
