@@ -1,93 +1,158 @@
 <section class="author-details">
-  <div class="container" *ngIf="(author | async) as theAuthor" [@authorDetailsState]  >
+  <div
+    class="container"
+    *ngIf="(author | async) as theAuthor"
+    [@authorDetailsState]
+  >
     <div class="row">
       <div class="col-3 author-details__img-box">
-        <img [src]="theAuthor.img" [alt]="theAuthor.name" class="author-details__img">
+        <img
+          [src]="theAuthor.img"
+          [alt]="theAuthor.name"
+          class="author-details__img"
+        />
         <div class="author-details__rate text-center">
           <span class="author-details__rate--title">Rate the author</span>
           <app-stars-review></app-stars-review>
         </div>
-
       </div>
-      <article class="col-9 col-sm-8 offset-1 author-details__article" >
+      <article class="col-9 col-sm-8 offset-1 author-details__article">
         <h2 class="author-details__name">
-          {{theAuthor.name}}
+          {{ theAuthor.name }}
         </h2>
-        <p class="author-details__born"> <span class="author-details__born--title" > Place of Birth: </span> {{ theAuthor.born }} </p>
-        <p class="author-details__birth"> <span class="author-details__birth--title" > Date of Birth: </span>  {{theAuthor.birth}} </p>
-        <p class="author-details__death" *ngIf="theAuthor.death" > <span class="author-details__death--title" > Died: </span> {{theAuthor.death}} </p>
+        <p class="author-details__born">
+          <span class="author-details__born--title"> Place of Birth: </span>
+          {{ theAuthor.born }}
+        </p>
+        <p class="author-details__birth">
+          <span class="author-details__birth--title"> Date of Birth: </span>
+          {{ theAuthor.birth }}
+        </p>
+        <p class="author-details__death" *ngIf="theAuthor.death">
+          <span class="author-details__death--title"> Died: </span>
+          {{ theAuthor.death }}
+        </p>
         <div class="author-details__genres">
-            <span class="author-details__genres--title" > Genre:  </span> <span class="author-details__genre" *ngFor="let genre of theAuthor.genre" > {{genre}} </span>
+          <span class="author-details__genres--title"> Genre: </span>
+          <span
+            class="author-details__genre"
+            *ngFor="let genre of theAuthor.genre"
+          >
+            {{ genre }}
+          </span>
         </div>
         <div class="author-details__rating">
           <div class="author-details__rating-def-box">
-            <div class="author-details__rating-def" *ngFor="let star of [1,2,3,4,5]" >
+            <div
+              class="author-details__rating-def"
+              *ngFor="let star of [1, 2, 3, 4, 5]"
+            >
               <mat-icon>star</mat-icon>
             </div>
           </div>
-            <div class="author-details__rating-box" *ngIf="theAuthor.avgRating"  >
-           
-                <span *ngFor="let star of creatStars(theAuthor.avgRating).starArr" class="author-details__star">
-                    <mat-icon  >star</mat-icon>
-                  </span>
-                  <span *ngIf="creatStars(theAuthor.avgRating).i < 1" [style.width]="creatStars(theAuthor.avgRating).i * 24 + 'px'" class="author-details__star-container" >
-                      <mat-icon  >star</mat-icon>
-                  </span>
-              
-                  
-                </div>
-                <span class="author-details__avgRating"> {{theAuthor.avgRating}} </span>
-                <span class="author-details__ratings-length"> {{ratingsLength | async}} Ratings </span>
-        </div>
-       
-          <p class="author-details__notreviewed" *ngIf="!theAuthor.avgRating" >Not Reviewed</p>
-        <p class="author-details__about">
-          {{theAuthor.about | slice:0:aboutCharLimit }}
-          <span class="author-details__seemore" (click)="onSeeMore()" > {{limitTitlte}} </span>
-        </p>
-       
-
-
-      </article>
-    
-    </div>
-    <h3 class="author-details__books-title"> {{theAuthor.name}}'s Books:  </h3>
-    <div class="row justify-content-center  author-details__books-container ">
-          <div class=" col-12 col-sm-4 col-md-3 author-book " *ngFor="let book of authorBooks | async">
-              <img class="author-book__img" [src]="book.img" [alt]="book.bookName">
-              <div class="author-book__bio text-center">
-  
-                <h4 class="author-book__name"> {{book.bookName}} </h4>
-                <p class="author-book__author" > by: {{book.authorName}} </p>
-                <div class="author-book__rating" *ngIf="book.avgRating"  >
-                  <span *ngFor="let star of creatStars(book.avgRating).starArr" class="author-book__star">
-                    <mat-icon  >star</mat-icon>
-                  </span>
-                  <span *ngIf="creatStars(book.avgRating).i < 1" [style.width]="creatStars(book.avgRating).i * 24 + 'px'" class="author-book__star-container" >
-                    <mat-icon  >star</mat-icon>
-                  </span>
-                  
-                </div>
-                <p class="author-book__notreviewed" *ngIf="!book.avgRating" >Not Reviewed</p>
-                <button class="author-book__details" (click)="goToBook(book.bookName)" >More Details</button>
-              </div>
+          <div class="author-details__rating-box" *ngIf="theAuthor.avgRating">
+            <span
+              *ngFor="let star of creatStars(theAuthor.avgRating).starArr"
+              class="author-details__star"
+            >
+              <mat-icon>star</mat-icon>
+            </span>
+            <span
+              *ngIf="creatStars(theAuthor.avgRating).i < 1"
+              [style.width]="creatStars(theAuthor.avgRating).i * 24 + 'px'"
+              class="author-details__star-container"
+            >
+              <mat-icon>star</mat-icon>
+            </span>
           </div>
-
-  
-  
-      </div>
-      <h3 class="author-details__quotes-title  ">{{theAuthor.name}}'s Quotes: </h3>
-      <div class="author-details__quotes-container row text-center justify-content-center">
-        <div class="author-details__quote col-12"*ngFor="let quote of theAuthor.quotes" >
-          <p class="author-details__quote-content" ><q>{{quote | titlecase }} </q></p>
+          <span class="author-details__avgRating">
+            {{ theAuthor.avgRating }}
+          </span>
+          <span class="author-details__ratings-length">
+            {{ ratingsLength | async }} Ratings
+          </span>
         </div>
-        <h4 style="color: rgba(255, 255, 255, .7); font-size: 2rem;" *ngIf="!theAuthor.quotes"  class="text-center" >No Quotes</h4>
 
+        <p class="author-details__notreviewed" *ngIf="!theAuthor.avgRating">
+          Not Reviewed
+        </p>
+        <p class="author-details__about">
+          {{ theAuthor.about | slice: 0:aboutCharLimit }}
+          <span class="author-details__seemore" (click)="onSeeMore()">
+            {{ limitTitlte }}
+          </span>
+        </p>
+      </article>
+    </div>
+    <h3 class="author-details__books-title">{{ theAuthor.name }}'s Books:</h3>
+    <div class="row justify-content-center  author-details__books-container ">
+      <div
+        class=" col-12 col-sm-4 col-md-3 author-book "
+        *ngFor="let book of (authorBooks | async)"
+      >
+        <img class="author-book__img" [src]="book.img" [alt]="book.bookName" />
+        <div class="author-book__bio text-center">
+          <h4 class="author-book__name">{{ book.bookName }}</h4>
+          <p class="author-book__author">by: {{ book.authorName }}</p>
+          <div class="author-book__rating" *ngIf="book.avgRating">
+            <span
+              *ngFor="let star of creatStars(book.avgRating).starArr"
+              class="author-book__star"
+            >
+              <mat-icon>star</mat-icon>
+            </span>
+            <span
+              *ngIf="creatStars(book.avgRating).i < 1"
+              [style.width]="creatStars(book.avgRating).i * 24 + 'px'"
+              class="author-book__star-container"
+            >
+              <mat-icon>star</mat-icon>
+            </span>
+          </div>
+          <p class="author-book__notreviewed" *ngIf="!book.avgRating">
+            Not Reviewed
+          </p>
+          <button
+            class="author-book__details"
+            (click)="goToBook(book.bookName)"
+          >
+            More Details
+          </button>
+        </div>
       </div>
-      <button class="author-details__remove" *ngIf="user.isAdmin" title="Remove Author" (click)="removeThisAuthor(theAuthor)" >
-          <mat-icon>clear</mat-icon>
-      </button>
+    </div>
+    <h3 class="author-details__quotes-title  ">
+      {{ theAuthor.name }}'s Quotes:
+    </h3>
+    <div
+      class="author-details__quotes-container row text-center justify-content-center"
+    >
+      <div
+        class="author-details__quote col-12"
+        *ngFor="let quote of theAuthor.quotes"
+      >
+        <p class="author-details__quote-content">
+          <q>{{ quote | titlecase }} </q>
+        </p>
+      </div>
+      <h4
+        style="color: rgba(255, 255, 255, .7); font-size: 2rem;"
+        *ngIf="!theAuthor.quotes"
+        class="text-center"
+      >
+        No Quotes
+      </h4>
+    </div>
+    <button
+      class="author-details__remove"
+      *ngIf="user.isAdmin"
+      title="Remove Author"
+      (click)="removeThisAuthor(theAuthor)"
+    >
+      <mat-icon>clear</mat-icon>
+    </button>
   </div>
-  <h2 *ngIf="isLoading$ | async" class="author-details__loading"   > Loading... </h2>
-
+  <h2 *ngIf="(isLoading$ | async)" class="author-details__loading">
+    Loading...
+  </h2>
 </section>

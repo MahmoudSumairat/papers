@@ -55,7 +55,7 @@ export class MyBooksComponent implements OnInit {
   }
 
 
-  navigateMyBooks(dest, btn) {
+  navigateMyBooks(dest) {
     // // this.booksDestination = dest;
     // const x = btn.getBoundingClientRect().x;
     // const y = btn.getBoundingClientRect().y + btn.getBoundingClientRect().height - 2;

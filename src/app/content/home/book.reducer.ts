@@ -1,18 +1,14 @@
 import { Book } from "./book.model";
-import {
-  BookActions,
-  SET_ALL_BOOKS,
-  SET_AUTHORS
-} from "./book.actions";
+import { BookActions, SET_ALL_BOOKS, SET_AUTHORS } from "./book.actions";
 
 export interface State {
   allBooks: Book[];
-  authors : any[]
+  authors: any[];
 }
 
 export const initialState: State = {
   allBooks: [],
-  authors : []
+  authors: []
 };
 
 export function bookReducer(state = initialState, action: BookActions) {

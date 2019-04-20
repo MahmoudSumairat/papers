@@ -14,7 +14,7 @@ import {
   animate
 } from "@angular/animations";
 import { Router } from "@angular/router";
-import { Title } from '@angular/platform-browser';
+import { Title } from "@angular/platform-browser";
 
 @Component({
   selector: "app-signup",
@@ -45,14 +45,14 @@ export class SignupComponent implements OnInit {
     private store: Store<fromRoot.State>,
     private afs: AngularFirestore,
     private router: Router,
-    private title : Title
+    private title: Title
   ) {}
-  someID = "";
-  chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  inputType = "password";
+  someID = ""; // AN EMPTY VARIABLE TO ASSIGNE IT TO THE RANDOM GENREATED ID
+  chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"; // ALL THE CHARACTERS TO GENREATE A RANDOM ID
+  inputType = "password"; // TO SPECIFY THE PASSWORD INPUT TYPE
 
   ngOnInit() {
-    this.title.setTitle('Creat an account');
+    this.title.setTitle("Creat an account"); // CHANGE THE PAGE TITLE
     this.afs
       .collection("users")
       .snapshotChanges()
@@ -63,33 +63,37 @@ export class SignupComponent implements OnInit {
             userID: item.payload.doc.id,
             ...itemObj
           };
-        });
-        this.store.dispatch(new auth.SetUsers(arr));
+        }); // FETCH THE USERS FROM THE DATABASE TO LOGIN FASTLY
+        this.store.dispatch(new auth.SetUsers(arr)); // DISPATCH THE USERS TO THE NGRX STORE
       });
   }
 
   onSubmit(f: NgForm, maleRadio, femaleRadio) {
-    this.someID = "";
-    console.log(f.value);
+    // A FUNCTION THAT REGISTERS THE NEW USER
+    this.someID = ""; // REASSIGNE THE EMPTY VARIABLE
     for (let i = 0; i < this.chars.length; i++) {
-      this.someID += this.chars[Math.floor(Math.random() * this.chars.length)];
+      // GENERATE A NEW RANDOM ID
+      this.someID += this.chars[Math.floor(Math.random() * this.chars.length)]; // ADD A NEW RANDOM CHARACTER IN THE VARIABLE IN EVERY ITERATRION
     }
-    this.authService.registerUser(f.value, this.someID);
-    console.log("rigesterd!");
+    this.authService.registerUser(f.value, this.someID); // INVOKE THE SIGNUP FUNCTION FROM THE AUTHSERVICE
 
-    f.reset();
+    f.reset(); // RESET THE FORM
+
+    // REMOVE THE STYLE OF THE CUSTOM RADIO INPUTS THAT SPEFICFY THE GENDER
     maleRadio.classList.remove("radio-active");
     femaleRadio.classList.remove("radio-active");
   }
 
   onSelectMale(male, maleRadio, femaleRadio) {
+    // SELECT  MALE FROM THE RADIO INPUTS
+
     male.click();
     maleRadio.classList.add("radio-active");
     femaleRadio.classList.remove("radio-active");
-    console.log("male state");
   }
 
   onSelectFemale(female, maleRadio, femaleRadio) {
+    // SELECT FEMALE FROM THE RADIO INPUTS
     female.click();
     maleRadio.classList.remove("radio-active");
     femaleRadio.classList.add("radio-active");
@@ -97,12 +101,14 @@ export class SignupComponent implements OnInit {
   }
 
   goGuest() {
+    // ENTER THE APP AS A USER
     localStorage.removeItem("user");
     localStorage.removeItem("loggedIn");
     this.router.navigate(["/content"]);
   }
 
   toggleInput() {
+    // TOGGLE THE PASSWORD INPUT TYPE
     this.inputType === "password"
       ? (this.inputType = "text")
       : (this.inputType = "password");

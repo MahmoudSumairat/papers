@@ -1,77 +1,74 @@
 @import "../../../shared/variables";
 
 .add-quote {
+  color: $color-white;
+  background-color: $color-dark;
+  min-height: 120vh;
+  perspective: 100rem;
+  -moz-perspective: 100rem;
+
+  .container {
+    padding-top: 7rem;
+  }
+
+  &__heading {
+    font-size: 4rem;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+  }
+
+  &__author-name,
+  &__quote {
+    width: 70%;
+    height: 3.5rem;
+    border: lighten($color-dark, 10%);
+    background-color: darken($color-dark, 5%);
+    border-radius: 0.5rem;
     color: $color-white;
-    background-color: $color-dark;
-    min-height: 120vh;
-    perspective: 100rem;
-    
-    .container {
-        padding-top: 7rem;
+    padding: 1rem 2rem;
+    transition: $trans-4s;
+    font-size: 1.8rem;
+    &:focus {
+      outline: none;
+      background-color: darken($color-dark, 10%);
     }
+  }
 
-    &__heading {
-        font-size: 4rem;
+  &__genre {
+    margin: 0.5rem;
+  }
+
+  &__quote {
+    height: 9rem;
+    resize: none;
+  }
+
+  &__label {
+    font-size: 2.2rem;
+    margin-top: 2rem;
+    display: block;
+  }
+
+  &__upload {
+    background-color: $color-primary;
+    padding: 0.8rem 1.4rem;
+    border: none;
+    font-size: 1.9rem;
+    color: $color-white;
+    border-radius: 1rem;
+    display: block;
+    margin: 8rem auto;
+    margin-bottom: 0;
+    transition: $trans-4s;
+    cursor: pointer;
+    &:hover {
+      background-color: darken($color-primary, 5%);
     }
-
-    &__form {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        margin: 0;
-    }
-
-    &__author-name, &__quote {
-        width: 70%;
-        height: 3.5rem;
-        border: lighten($color-dark, 10%);
-        background-color: darken($color-dark, 5%);
-        border-radius: .5rem;
-        color: $color-white;
-        padding: 1rem 2rem;
-        transition: all .4s;
-        font-size: 1.8rem;
-        &:focus {
-            outline: none;
-            background-color: darken($color-dark, 10%);
-        }
-    }
-
-    &__genre {
-        margin: .5rem;
-    }
-
-    &__quote {
-        height: 9rem;
-        resize: none;
-    }
-
-    &__label {
-        font-size: 2.2rem;
-        margin-top: 2rem;
-        display: block;
-
-    }
-
-
-
-    &__upload {
-        background-color: $color-primary;
-        padding: .8rem 1.4rem;
-        border: none;
-        font-size: 1.9rem;
-        color: $color-white;
-        border-radius: 1rem;
-        display: block;
-        margin: 8rem auto;
-        margin-bottom: 0;
-        transition: all .4s;
-        cursor: pointer;
-        &:hover {
-            background-color: darken($color-primary, 5%);
-
-        }
-
-    }
+  }
 }

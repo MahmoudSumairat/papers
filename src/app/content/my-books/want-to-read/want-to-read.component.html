@@ -1,22 +1,73 @@
 <section class="want-to-read">
-    <div class="container">
-    <div class="row" *ngIf="!(isLoading$ | async )" >
-        <app-book [dist]="'want-to-read'" *ngFor="let book of (wantBooks$ | async | slice:startingIndex:endingIndex)" [book]="book" class="col-6 want-to-read__book" style="padding:0" ></app-book>
-        <h1 style="color: rgba(255, 255, 255, .7)"  *ngIf="!(wantBooks$ | async)[0] && !(isLoading$ | async)" >No Current Books</h1>
-
+  <div class="container">
+    <div class="row" *ngIf="!(isLoading$ | async)">
+      <app-book
+        [dist]="'want-to-read'"
+        *ngFor="
+          let book of (wantBooks$ | async | slice: startingIndex:endingIndex)
+        "
+        [book]="book"
+        class="col-6 want-to-read__book"
+        style="padding:0"
+      ></app-book>
+      <h1
+        style="color: rgba(255, 255, 255, .7)"
+        *ngIf="!(wantBooks$ | async)[0] && !(isLoading$ | async)"
+      >
+        No Current Books
+      </h1>
     </div>
 
-    <div *ngIf="(wantBooks$ | async ) as books" class="want-to-read__navigate row justify-content-center " > 
-        <div class="want-to-read__navigate-box row justify-space-evenly" *ngIf="books[0]" >
-          <button (click)="firstPage(books)"  class="want-to-read__fast-rewind" title="First Page"> <mat-icon>navigate_before</mat-icon><mat-icon>navigate_before</mat-icon></button>
-          <button (click)="previuosBooks(books)"  class="want-to-read__previuos" title="Previuos"> <mat-icon>navigate_before</mat-icon> </button>
-          <span [@pageState] class="want-to-read__page" *ngFor="let page of getNumOfPages() | slice:theFirstPage:theLastPage" (click)="goToPage(page)"  [ngClass]="{'page-active':currentPage === page}"  > {{page}} </span>
-          <button (click)="nextBooks(books)" class="want-to-read__next" title="Next" > <mat-icon>navigate_next</mat-icon> </button>
-          <button (click)="lastPage(books)" class="want-to-read__fast-forward" title="Last Page" > <mat-icon>navigate_next</mat-icon><mat-icon>navigate_next</mat-icon> </button>
-        </div>
+    <div
+      *ngIf="(wantBooks$ | async) as books"
+      class="want-to-read__navigate row justify-content-center "
+    >
+      <div
+        class="want-to-read__navigate-box row justify-space-evenly"
+        *ngIf="books[0]"
+      >
+        <button
+          (click)="firstPage(books)"
+          class="want-to-read__fast-rewind"
+          title="First Page"
+        >
+          <mat-icon>navigate_before</mat-icon
+          ><mat-icon>navigate_before</mat-icon>
+        </button>
+        <button
+          (click)="previuosBooks(books)"
+          class="want-to-read__previuos"
+          title="Previuos"
+        >
+          <mat-icon>navigate_before</mat-icon>
+        </button>
+        <span
+          [@pageState]
+          class="want-to-read__page"
+          *ngFor="
+            let page of (getNumOfPages() | slice: theFirstPage:theLastPage)
+          "
+          (click)="goToPage(page)"
+          [ngClass]="{ 'page-active': currentPage === page }"
+        >
+          {{ page }}
+        </span>
+        <button
+          (click)="nextBooks(books)"
+          class="want-to-read__next"
+          title="Next"
+        >
+          <mat-icon>navigate_next</mat-icon>
+        </button>
+        <button
+          (click)="lastPage(books)"
+          class="want-to-read__fast-forward"
+          title="Last Page"
+        >
+          <mat-icon>navigate_next</mat-icon><mat-icon>navigate_next</mat-icon>
+        </button>
       </div>
     </div>
-    <h2 *ngIf="isLoading$  | async" class="want-to-read__loading"   > Loading... </h2>
-
-    
-  </section>
+  </div>
+  <h2 *ngIf="(isLoading$ | async)" class="want-to-read__loading">Loading...</h2>
+</section>

@@ -1,0 +1,28 @@
+/* HERE WE HAVE ALL THE MIXINS THAT WRITTEN IN THIS APP */
+
+/* A MIXIN THAT MAKES THE MATERIAL ICONS RESPONSIVE WITH THE WEBSITE */
+@mixin resp-mat-icons {
+  font-size: 2.4rem;
+  height: 2.4rem;
+  width: 2.4rem;
+}
+
+// A MIXIN THAT DO THE RESPONSIVE WORK FOR ALL THE PAGES
+@mixin responsive($min-max, $size) {
+  @media only screen and (#{$min-max}-width : $size) {
+    @content;
+  }
+}
+
+@mixin responsive-and($min-size, $max-size) {
+  @media only screen and (min-width: $min-size) and (max-width: $max-size) {
+    @content;
+  }
+}
+
+// DISPLAY FLEX MIXIN
+@mixin flex() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

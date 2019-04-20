@@ -1,6 +1,5 @@
 <section class="reviewes">
   <div class="reviewes__container row">
-
     <form class="reviewes__form" #f="ngForm" (ngSubmit)="onSubmit(f)">
       <textarea
         (blur)="onBlur()"
@@ -8,7 +7,6 @@
         class="reviewes__content"
         name="review"
         id="review"
-        
         rows="3"
         placeholder="What Do You Think About This Book?"
         ngModel
@@ -22,11 +20,8 @@
     </form>
   </div>
 
-
-
   <div class="people-reviewes" *ngFor="let user of (reviews | async)">
     <div class="people-reviewes__heading row">
-    
       <h4 class="people-reviewes__username">{{ user.name }}</h4>
       <span class="people-reviewes__rated"> Rated it </span>
       <div class="people-reviewes__stars">
@@ -55,7 +50,8 @@
           class="show-btn"
           id="btn-{{ user.ID }}"
           attr.isClicked="false"
-          > {{ getLikeOrUnlikeTitle(user.likes, likeBtn) || 'Like' }} </span
+        >
+          {{ getLikeOrUnlikeTitle(user.likes, likeBtn) || "Like" }} </span
         ><span class="people-reviewes__like--number">
           {{ user.likes?.length || 0 }}
         </span>
@@ -64,29 +60,42 @@
         class="people-reviewes__comment"
         (click)="toggleCommentBox(commentBox)"
       >
-      Comment <span class="people-reviewes__comment--number">{{user.comments?.length || 0 }}</span> 
+        Comment
+        <span class="people-reviewes__comment--number">{{
+          user.comments?.length || 0
+        }}</span>
       </button>
     </div>
     <div class="people-reviewes__comment-box" #commentBox style="display: none">
-      <a class="people-reviewes__comment-box--view" (click)="onToggleComments(commentsContent)">View all comments</a>
-      <div class="people-reviewes__written-comments-box" #commentsContent style='display: none' >
+      <a
+        class="people-reviewes__comment-box--view"
+        (click)="onToggleComments(commentsContent)"
+        >View all comments</a
+      >
+      <div
+        class="people-reviewes__written-comments-box"
+        #commentsContent
+        style="display: none"
+      >
         <div
-        class="people-reviewes__comments-content"
-        *ngFor="let comment of user.comments"
-      > 
-        <h4 class="people-reviewes__comments-heading">
-        {{ comment.name }} :
-        </h4>
-        <p>
-          {{ comment.comment }}
-        </p>
+          class="people-reviewes__comments-content"
+          *ngFor="let comment of user.comments"
+        >
+          <h4 class="people-reviewes__comments-heading">
+            {{ comment.name }} :
+          </h4>
+          <p>
+            {{ comment.comment }}
+          </p>
+        </div>
       </div>
-      </div>
-    
+
       <form
         class="people-reviewes__comment-form"
         #c="ngForm"
-        (ngSubmit)="onSubmitComment(c, user.ID, user.comments, commentBox, user.name)"
+        (ngSubmit)="
+          onSubmitComment(c, user.ID, user.comments, commentBox, user.name)
+        "
       >
         <textarea
           name="comment"

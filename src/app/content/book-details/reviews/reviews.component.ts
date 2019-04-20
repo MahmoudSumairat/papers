@@ -80,7 +80,6 @@ export class ReviewsComponent implements OnInit, OnDestroy {
           this.isReviewed = isReviewed;
         })
       );
-      console.log(this.isReviewed);
     }, 1000);
 
     // Fetch the reviewes from the database and get it as an Observable and use "async" pipe in the HTML template
@@ -108,23 +107,23 @@ export class ReviewsComponent implements OnInit, OnDestroy {
   onSubmit(f: NgForm) {
     if (this.isAuth) {
       // Check if the user is signed in or not
-      if (this.isReviewed ) {
-        if(f.value.review) {
+      if (this.isReviewed) {
+        if (f.value.review) {
           // Check if the user is reviewed or not
-        this.afs
-        .collection("stars") // Collection Stars in the database
-        .doc("book_review") // Document Book Review in the collection Stars
-        .collection(this.bookName.toLowerCase().replace(/ /g, "_")) // Select the collection that depends on the bookName that i got from the URL
-        .doc(this.user.userID) // Select the document that depends on the username that i got from the AuthService
-        .set(
-          // Set the content of the review in that document
-          {
-            review: f.value.review,
-            name : this.user.firstName + ' ' +  this.user.lastName
-          },
-          { merge: true } // Allow to merge the doceumtn fields with this field
-        );
-      this.onCancel(f); // To reset the form and resize it to the initial size
+          this.afs
+            .collection("stars") // Collection Stars in the database
+            .doc("book_review") // Document Book Review in the collection Stars
+            .collection(this.bookName.toLowerCase().replace(/ /g, "_")) // Select the collection that depends on the bookName that i got from the URL
+            .doc(this.user.userID) // Select the document that depends on the username that i got from the AuthService
+            .set(
+              // Set the content of the review in that document
+              {
+                review: f.value.review,
+                name: this.user.firstName + " " + this.user.lastName
+              },
+              { merge: true } // Allow to merge the doceumtn fields with this field
+            );
+          this.onCancel(f); // To reset the form and resize it to the initial size
         }
       } else {
         alert("You have to rate the book first"); // The user has not rated the book so he can't write a reviewe
@@ -173,10 +172,7 @@ export class ReviewsComponent implements OnInit, OnDestroy {
 
           if (userLikes) {
             // Check if the likes Array in the user document is defined or NOT
-            const newArr = [
-              ...userLikes,
-              this.user.userID
-            ]; // Creat a brand new array contains the new user that liked this reviewe and the rest of the liked users
+            const newArr = [...userLikes, this.user.userID]; // Creat a brand new array contains the new user that liked this reviewe and the rest of the liked users
             this.afs
               .collection("stars") // Collection Stars in the database
               .doc("book_review") // Document Book Review in the collection Stars
@@ -210,10 +206,7 @@ export class ReviewsComponent implements OnInit, OnDestroy {
         }
       } else {
         const splicedArr = userLikes.filter(username => {
-          return (
-            username !==
-            this.user.userID
-          ); // Remove the user that clicked on Unlike from the likes Array
+          return username !== this.user.userID; // Remove the user that clicked on Unlike from the likes Array
         });
         this.afs
           .collection("stars")
@@ -233,8 +226,6 @@ export class ReviewsComponent implements OnInit, OnDestroy {
 
         // Initialze the newSpanTexts Array to get the newest markup references
         const newSpanTexts = [];
-        console.log(this.spanTextsIds);
-        console.log(newSpanTexts);
         // Again check if the user clicked like or not
         if (
           !this.spanTextsIds.includes(
@@ -244,17 +235,15 @@ export class ReviewsComponent implements OnInit, OnDestroy {
           this.spanTextsIds.push(
             (<HTMLSpanElement>document.getElementById("btn-" + userID)).id
           ); // Push the span id of the clicked button in the spanTextIds
-          console.log("like state");
         } else {
           // Here the user has clikced the like button so he will click the unlike button
-         this.spanTextsIds =  this.spanTextsIds.filter(id => {
-            return id !==  (<HTMLSpanElement>document.getElementById("btn-" + userID)).id
-          })
-          console.log("unlike state");
-          console.log(this.spanTextsIds);
+          this.spanTextsIds = this.spanTextsIds.filter(id => {
+            return (
+              id !==
+              (<HTMLSpanElement>document.getElementById("btn-" + userID)).id
+            );
+          });
         }
-
-        console.log(this.spanTextsIds);
 
 
         // Loop over the spanTextIds and push the selected element by this ID into the newSpanTexts array
@@ -262,7 +251,6 @@ export class ReviewsComponent implements OnInit, OnDestroy {
           newSpanTexts.push(<HTMLSpanElement>document.getElementById(spanId));
         });
 
-     
         // Loop over the newes elements and change the innerText of them into 'Unlike'
         newSpanTexts.forEach(span => {
           span.innerText = "Unlike";
@@ -278,7 +266,6 @@ export class ReviewsComponent implements OnInit, OnDestroy {
   }
 
   toggleCommentBox(commentBox) {
-    console.log(commentBox);
     if (commentBox.style.display === "none") {
       this.renderer.setStyle(commentBox, "display", "block");
     } else {
@@ -297,14 +284,14 @@ export class ReviewsComponent implements OnInit, OnDestroy {
     if (this.isAuth) {
       // Check if the user is signed in
 
-      if(form.value.comment) {
+      if (form.value.comment) {
         if (comments) {
           const newCommentsArr = [
             ...comments,
             {
               ID: this.user.userID,
               comment: form.value.comment,
-              name : username
+              name: username
             }
           ];
           this.afs
@@ -330,7 +317,7 @@ export class ReviewsComponent implements OnInit, OnDestroy {
                   {
                     ID: this.user.userID,
                     comment: form.value.comment,
-                    name : username
+                    name: username
                   }
                 ]
               },
@@ -353,11 +340,7 @@ export class ReviewsComponent implements OnInit, OnDestroy {
       // Check if the user has signed in to show him his likes
       if (userLikes) {
         // Check if the userLikes array is defined or not
-        if (
-          userLikes.includes(
-            this.user.userID
-          )
-        ) {
+        if (userLikes.includes(this.user.userID)) {
           // If the username is included in the likes array that means he clicked the like button\
           if (!this.spanTextsIds.includes(btn.id)) {
             // Check if the spansTextIds array does not include the liked buttons
@@ -385,11 +368,9 @@ export class ReviewsComponent implements OnInit, OnDestroy {
           .subscribe((data: { value: number }) => {
             if (data) {
               if (data.value) {
-                console.log("hello");
                 this.store.dispatch(new bookDetails.SetStarReviewed());
               } else {
                 this.store.dispatch(new bookDetails.SetStarNotReviewed());
-                console.log("not hello");
               }
             }
           })
@@ -398,7 +379,6 @@ export class ReviewsComponent implements OnInit, OnDestroy {
   }
 
   onToggleComments(element) {
-    console.log(element);
     if (element.style.display === "none") {
       this.renderer.setStyle(element, "display", "block");
     } else {

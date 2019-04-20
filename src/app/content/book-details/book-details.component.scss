@@ -1,5 +1,6 @@
 @import "../../shared/variables";
 @import "../../shared/animations";
+@import "../../shared/mixins";
 
 .book-details {
   min-height: 110vh;
@@ -8,45 +9,42 @@
   justify-content: center;
   padding-top: 4rem;
   perspective: 100rem;
+  -moz-perspective: 100rem;
 
   &__article {
     position: static;
-    @media only screen and (max-width : 600px) {
+    @include responsive(max, 600px) {
       flex: 0 0 100%;
-    max-width: 100%;
-    text-align: center;
-    padding: 0 1rem;
+      max-width: 100%;
+      text-align: center;
+      padding: 0 1rem;
     }
-
   }
 
   &__img-box {
-    @media only screen and (max-width : 600px) {
+    @include responsive(max, 600px) {
       flex: 0 0 100%;
-    max-width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 0;
-    padding-top: 9rem;
-  }
-    
+      max-width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 0;
+      padding-top: 9rem;
+    }
   }
 
   .row {
     margin: 0;
   }
   .mat-icon {
-    font-size: 2.4rem;
-    height: 2.4rem;
-    width: 2.4rem;
+    @include resp-mat-icons();
   }
   .container {
     padding: 2rem;
     position: relative;
 
-    @media only screen and (max-width : 768px) {
+    @include responsive(max, 768px) {
       padding: 0;
       padding-top: 3rem;
     }
@@ -55,43 +53,42 @@
     height: 39rem !important;
     width: 26rem !important;
 
-    @media only screen and (max-width : 768px) {
+    @include responsive(max, 768px) {
       height: 33rem !important;
       width: 20rem !important;
     }
-    
-    @media only screen and (max-width : 600px) {
+
+    @include responsive(max, 600px) {
       height: 49rem !important;
       width: 36rem !important;
-      margin-right: -.5rem;
+      margin-right: -0.5rem;
     }
   }
   &__book-name {
     color: $color-white;
     font-size: 2.9rem;
 
-    @media only screen and (max-width : 600px) {
+    @include responsive(max, 600px) {
       position: absolute;
       top: 3rem;
       left: 50%;
       transform: translateX(-50%);
     }
 
-    @media only screen and (max-width : 400px) {
+    @include responsive(max, 400px) {
       font-size: 2.4rem;
     }
   }
 
   &__author-name {
-    @media only screen and (max-width : 600px) {
+    @include responsive(max, 600px) {
       position: absolute;
       top: 7rem;
       left: 50%;
       transform: translateX(-50%);
     }
 
-    
-    @media only screen and (max-width : 400px) {
+    @include responsive(max, 400px) {
       font-size: 2rem;
     }
     color: $color-white;
@@ -102,9 +99,6 @@
         text-decoration: underline;
       }
     }
-
- 
-  
   }
 
   &__par {
@@ -114,11 +108,9 @@
     text-overflow: clip;
     overflow: hidden;
 
-    @media only screen and (max-width : 600px) {
+    @include responsive(max, 600px) {
       font-size: 2.2rem;
     }
-
-  
   }
 
   &__rating {
@@ -128,31 +120,30 @@
     align-items: center;
 
     &-value {
-      margin: .5rem 1rem 0;
+      margin: 0.5rem 1rem 0;
     }
 
     &-num {
       margin-left: 1rem;
       font-size: 1.2rem;
-      margin-top: .5rem;
+      margin-top: 0.5rem;
       display: inline-block;
 
-      @media only screen and (max-width : 600px) {
+      @include responsive(max, 600px) {
         margin-bottom: 0;
         padding-top: 1rem;
       }
     }
 
-    @media only screen and (max-width : 600px) {
+    @include responsive(max, 600px) {
       justify-content: center;
       position: relative;
-      
     }
   }
 
   &__genres {
     margin: 1rem 0;
-    border-top: .1rem solid darken($color-dark, 2%);
+    border-top: 0.1rem solid darken($color-dark, 2%);
     padding: 1rem 0;
     list-style: none;
 
@@ -163,12 +154,10 @@
     }
   }
 
-
-
   &__genre {
     color: $color-white;
     font-size: 1.8rem;
-    margin-right: .9rem;
+    margin-right: 0.9rem;
     cursor: pointer;
 
     &:hover {
@@ -176,7 +165,7 @@
     }
     &:not(:last-of-type) {
       &::after {
-        content: ',  ';
+        content: ",  ";
         position: absolute;
       }
     }
@@ -192,7 +181,7 @@
   &__reading {
     display: flex;
 
-    @media only screen and (max-width : 600px) {
+    @include responsive(max, 600px) {
       justify-content: center;
       align-items: center;
     }
@@ -214,7 +203,7 @@
     color: $color-white;
     margin: 0.5rem;
     border: none;
-    transition: all 0.4s;
+    transition: $trans-4s;
     cursor: pointer;
     &:focus,
     &:active {
@@ -263,56 +252,48 @@
     align-items: center;
     flex-direction: column;
 
-    @media only screen and (max-width : 768px) {
+    @include responsive(max, 768px) {
       width: 20rem;
     }
 
-    @media only screen and (min-width : 769px ) and (max-width : 992px) {
+    @include responsive-and(769px, 992px) {
       width: 25rem;
     }
-
-
   }
 
-
   &__rating-def {
-    padding: .2rem;
+    padding: 0.2rem;
     z-index: -1;
     color: darken($color-dark, 10%);
   }
-  
+
   &__rating-def-box {
     display: flex;
     justify-content: space-between;
-
   }
-
 
   &__rating-box {
     position: absolute;
     display: flex;
-    
-    @media only screen and (max-width : 600px) {
+
+    @include responsive(max, 600px) {
       width: 85.06px;
       left: 50%;
       top: 50%;
       transform: translate(-87.7%, -50%);
     }
-    
   }
 
-    
   &__loading {
     position: absolute;
     transform: translate(-50%, -50%);
     top: 50%;
     left: 50%;
-    color: rgba($color-white, .7);
+    color: rgba($color-white, 0.7);
     font-size: 4rem;
-    animation: loading .5s ease-in-out infinite alternate;
-
+    animation: loading 0.5s ease-in-out infinite alternate;
+    -moz-animation: loading 0.5s ease-in-out infinite alternate;
   }
-
 
   &__remove {
     position: absolute;
@@ -321,25 +302,23 @@
     background: none;
     border: none;
     color: darken($color-dark, 10%);
-    transition: all .4s;
+    transition: $trans-4s;
     &:hover {
       color: $color-primary;
     }
     cursor: pointer;
-    
   }
 
   &__reviews {
-    @media only screen and (max-width : 600px) {
+    @include responsive(max, 600px) {
       flex: 0 0 100%;
       max-width: 100%;
     }
 
-    @media only screen and (max-width : 550px) {
+    @include responsive(max, 550px) {
       flex: 0 0 96%;
       max-width: 96%;
       margin: 0 1rem;
     }
   }
 }
-

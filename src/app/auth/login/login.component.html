@@ -1,19 +1,45 @@
 <section class="login">
-    <h1 class="login__papers">PAPERS</h1>
-  <div class="login__container" [@formState] >
-      <h2 class="login__heading text-center">Login to papers</h2>
-        <form class=" login__form" #f="ngForm" (ngSubmit)="onSubmit(f)" >
-              <input id="email" type="text" name="email" class="login__email " required email placeholder="Your Email" ngModel autocomplete="nickname" >
-              <div class="login__pass-box" >
-                <input id="password" [type]="inputType" name="password" class="login__password " required placeholder="Password" ngModel minlength="6" ><button type="button" (click)="toggleInput()" class="login__vis"><mat-icon>visibility</mat-icon></button>
-              </div>
-          <button type="submit" class="btn login__submit" [disabled]="f.invalid" >Login</button>
-        </form>
-        <p class="login__dont text-center">
-            Don't have an account?...You can <a class="btn login__creat" routerLink="/signup">Creat One</a>
-        </p>
+  <h1 class="login__papers">PAPERS</h1>
+  <div class="login__container" [@formState]>
+    <h2 class="login__heading text-center">Login to papers</h2>
+    <form class=" login__form" #f="ngForm" (ngSubmit)="onSubmit(f)">
+      <input
+        id="email"
+        type="text"
+        name="email"
+        class="login__email "
+        required
+        email
+        placeholder="Your Email"
+        ngModel
+        autocomplete="nickname"
+      />
+      <div class="login__pass-box">
+        <input
+          id="password"
+          [type]="inputType"
+          name="password"
+          class="login__password "
+          required
+          placeholder="Password"
+          ngModel
+          minlength="6"
+        /><button type="button" (click)="toggleInput()" class="login__vis">
+          <mat-icon>visibility</mat-icon>
+        </button>
       </div>
-      <div class="login__guest">
-        <button class="login__guest-btn" (click)="goGuest()">Enter As A Guest</button>
-      </div>
-  </section>
+      <button type="submit" class="btn login__submit" [disabled]="f.invalid">
+        Login
+      </button>
+    </form>
+    <p class="login__dont text-center">
+      Don't have an account?...You can
+      <a class="btn login__creat" routerLink="/signup">Creat One</a>
+    </p>
+  </div>
+  <div class="login__guest">
+    <button class="login__guest-btn" (click)="goGuest()">
+      Enter As A Guest
+    </button>
+  </div>
+</section>

@@ -1,42 +1,41 @@
 @import "../../shared/variables";
 @import "../../shared/animations";
+@import "../../shared/mixins";
 
 .authors {
-    padding: 7rem 0;
-    background-color: $color-dark;
-    min-height: 120vh;
-    position: relative;
-    perspective: 100rem;
+  padding: 7rem 0;
+  background-color: $color-dark;
+  min-height: 120vh;
+  position: relative;
+  perspective: 100rem;
+  -moz-perspective: 100rem;
 
+  @media only screen and (max-width: 530px) {
+    padding: 7rem 2rem;
+  }
 
-    @media only screen and (max-width : 530px) {
-      padding: 7rem 2rem;
-    }
-    
-
-
-    
   &__navigate {
     padding: 2rem 0;
     margin: 1rem auto;
-   
   }
 
   &__navigate-box {
     position: absolute;
     bottom: 3.5rem;
-    
   }
 
-  &__next, &__previuos, &__fast-rewind, &__fast-forward {
-    .mat-icon{
+  &__next,
+  &__previuos,
+  &__fast-rewind,
+  &__fast-forward {
+    .mat-icon {
       font-size: 2.9rem;
     }
     background: none;
     border: none;
     color: darken($color-dark, 10%);
     cursor: pointer;
-    transition: all .4s;
+    transition: $trans-4s;
     padding: 0;
     margin: 0 1rem;
 
@@ -49,18 +48,16 @@
     }
   }
 
-  &__fast-rewind, &__fast-forward {
+  &__fast-rewind,
+  &__fast-forward {
     .mat-icon {
       width: 1rem;
     }
   }
 
   &__fast-forward {
-    margin-left: -.3rem;
+    margin-left: -0.3rem;
   }
-
-
-
 
   &__page {
     color: $color-white;
@@ -68,16 +65,16 @@
     display: block;
     margin: 1rem;
     margin-left: 1.4rem;
-    transition: all .2s;
+    transition: $trans-2s;
     cursor: pointer;
-    text-shadow: .05rem .05rem .5rem transparent , -.05rem -.05rem .5rem transparent;
-
+    text-shadow: 0.05rem 0.05rem 0.5rem transparent,
+      -0.05rem -0.05rem 0.5rem transparent;
 
     &:hover {
-      text-shadow: .05rem .05rem .5rem $color-white, -.05rem -.05rem .5rem $color-white;
+      text-shadow: 0.05rem 0.05rem 0.5rem $color-white,
+        -0.05rem -0.05rem 0.5rem $color-white;
       transform: scale(1.2);
     }
-    
   }
 
   &__no-results {
@@ -85,7 +82,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: rgba($color-white, .7);
+    color: rgba($color-white, 0.7);
     font-size: 3rem;
   }
 
@@ -94,176 +91,153 @@
     transform: translate(-50%, -50%);
     top: 50%;
     left: 50%;
-    color: rgba($color-white, .7);
+    color: rgba($color-white, 0.7);
     font-size: 4rem;
-    animation: loading .5s ease-in-out infinite alternate;
-
-
+    animation: loading 0.5s ease-in-out infinite alternate;
+    -moz-animation: loading 0.5s ease-in-out infinite alternate;
   }
-    
 }
 
 .author {
+  margin-bottom: 1rem;
+  display: flex;
+  background-color: darken($color-dark, 5%);
+  padding: 0;
+  position: relative;
+  margin: 1.5rem;
+
+  @media only screen and (max-width: 530px) {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .mat-icon {
+    @include resp-mat-icons();
+
+    @include responsive(max, 768px) {
+      font-size: 2rem;
+      height: 2rem;
+      width: 2rem;
+    }
+  }
+
+  &__img {
+    width: 20rem !important;
+    height: 25rem !important;
+    cursor: pointer;
+  }
+
+  &__info {
+    padding: 0.5rem 2rem;
+    width: 100%;
+    color: $color-white;
+    flex: 1;
+  }
+
+  &__name {
+    font-size: 2rem;
     margin-bottom: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+    @include responsive(max, 768px) {
+      font-size: 1.6rem;
+    }
+  }
+
+  &__born {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+
+    @include responsive(max, 768px) {
+      font-size: 1.3rem;
+    }
+  }
+
+  &__genre {
+    font-size: 1.5rem;
+    display: inline-block;
+
+    &:last-of-type {
+      margin-bottom: 0.5rem;
+    }
+    &:not(:last-of-type) {
+      &::after {
+        content: ",";
+      }
+    }
+
+    @include responsive(max, 768px) {
+      font-size: 1.2rem;
+    }
+  }
+
+  &__rating {
     display: flex;
-    background-color: darken($color-dark, 5%);
-    padding: 0 ;
-    position: relative;
-    margin: 1.5rem;
-    
-    @media only screen and (max-width : 530px) {
+    align-items: center;
+    margin-bottom: 1rem;
+  }
 
-      flex: 0 0 100%;
-      max-width: 100%;
-    }
+  &__star {
+    color: $color-gold;
+    display: inline-block;
+  }
 
-    .mat-icon {
-      font-size: 2.4rem;
-      height: 2.4rem;
-      width: 2.4rem;
-      
-      @media only screen and (max-width : 768px) {
-        font-size: 2rem;
-        height: 2rem;
-        width: 2rem;
-        
-      }
-      
-    }
+  &__star-container {
+    overflow: hidden;
+    display: inline-block;
+    color: $color-gold;
+  }
 
-    &__img {
-        width: 20rem !important;
-        height: 25rem !important;
-        cursor: pointer;
-        
-    }
+  &__popular {
+    font-size: 1.6rem;
+    &-book {
+      font-size: 1.6rem;
+      font-weight: bold;
+      cursor: pointer;
 
-
-    
-    &__info {
-        padding: .5rem 2rem;
-        width: 100%;
-        color: $color-white;
-        flex: 1;
-
-    }
-
-    &__name {
-        font-size: 2rem;
-        margin-bottom: 1rem;
-        font-weight: bold;
-        cursor: pointer;
-         &:hover {
-             text-decoration: underline;
-         }
-         @media only screen and (max-width : 768px) {
-          font-size: 1.6rem
-         }
-
-    }
-
-    &__born {
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
-
-        @media only screen and (max-width : 768px) {
-          font-size: 1.3rem;
-        }
-
-    }
-
-    &__genre {
-        font-size: 1.5rem;
-        display: inline-block;
-        
-        &:last-of-type {
-
-          margin-bottom: .5rem;
-        }
-        &:not(:last-of-type) {
-            &::after {
-                content: ","
-            }
-        }
-
-        @media only screen and (max-width : 768px) {
-          font-size: 1.2rem;
-        }
-        
-    }
-
-    
-    &__rating {
-        display: flex;
-        align-items: center;
-        margin-bottom: 1rem;
-
-      
-      }
-  
-    
-      &__star {
-        color: $color-gold;
-        display: inline-block;
-  
-      }
-  
-      &__star-container {
-        overflow: hidden;
-        display: inline-block;
-        color: $color-gold;
+      @include responsive(max, 768px) {
+        font-size: 1.4rem;
       }
 
-      &__popular {
-          font-size: 1.6rem;
-          &-book {
-            font-size: 1.6rem;
-            font-weight: bold;
-            cursor: pointer;
-
-            @media only screen and (max-width : 768px) {
-              font-size: 1.4rem;
-            }
-
-            &:hover {
-                text-decoration: underline;
-            }
-          }
-
-          @media only screen and (max-width : 768px) {
-            font-size: 1.4rem;
-          }
-          
-
-          
-        }
-
-      &__your-rate, &__not-rated {
-          color: $color-white;
-          font-size: 1.6rem;
+      &:hover {
+        text-decoration: underline;
       }
-
-      &__not-rated {
-          font-size: 1.8rem;
-          margin-top: 1rem;
-      }
-
-    &__remove {
-        position: absolute; 
-        top: .5rem;
-        right: .5rem;
-        color: darken($color-dark, 10%);
-        transition: all .4s;
-        cursor: pointer;
-        &:hover {
-            color: $color-primary;
-        }
     }
+
+    @include responsive(max, 768px) {
+      font-size: 1.4rem;
+    }
+  }
+
+  &__your-rate,
+  &__not-rated {
+    color: $color-white;
+    font-size: 1.6rem;
+  }
+
+  &__not-rated {
+    font-size: 1.8rem;
+    margin-top: 1rem;
+  }
+
+  &__remove {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    color: darken($color-dark, 10%);
+    transition: $trans-4s;
+    cursor: pointer;
+    &:hover {
+      color: $color-primary;
+    }
+  }
 }
 
-
-
 .page-active {
-    text-shadow: .05rem .05rem .5rem $color-white, -.05rem -.05rem .5rem $color-white;
-    transform: scale(1.2);
-  }
+  text-shadow: 0.05rem 0.05rem 0.5rem $color-white,
+    -0.05rem -0.05rem 0.5rem $color-white;
+  transform: scale(1.2);
+}

@@ -1,5 +1,6 @@
 @import "../../../shared/variables";
 @import "../../../shared/animations";
+@import "../../../shared/mixins";
 
 
 .read-books {
@@ -14,7 +15,7 @@
 
    &__book {
 
-    @media only screen and (max-width : 530px) {
+    @include responsive(max, 530px) {
 
       flex: 0 0 100%;
       max-width: 100%;
@@ -45,7 +46,7 @@
     border: none;
     color: darken($color-dark, 10%);
     cursor: pointer;
-    transition: all .4s;
+    transition: $trans-4s;
     padding: 0;
     margin: 0 1rem;
 
@@ -77,7 +78,7 @@
     display: block;
     margin: 1rem;
     margin-left: 1.4rem;
-    transition: all .2s;
+    transition: $trans-2s;
     cursor: pointer;
     text-shadow: .05rem .05rem .5rem transparent , -.05rem -.05rem .5rem transparent;
 

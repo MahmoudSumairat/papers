@@ -1,203 +1,185 @@
 @import "../../../shared/variables";
+@import "../../../shared/mixins";
 
 .book {
+  display: flex;
+  background-color: darken($color-dark, 5%);
+  padding: 0;
+  position: relative;
+  margin: 1.5rem;
+
+  .mat-form-field {
+    width: 20rem;
+
+    @include responsive(max, 768px) {
+      width: 15rem;
+    }
+
+    @include responsive(max, 530px) {
+      width: 18rem;
+    }
+  }
+
+  .mat-icon {
+    @include resp-mat-icons();
+
+    @include responsive(max, 768px) {
+      font-size: 2rem;
+      height: 2rem;
+      width: 2rem;
+    }
+
+    @include responsive(max, 550px) {
+      font-size: 1.8rem;
+      height: 1.8rem;
+      width: 1.8rem;
+    }
+
+    @include responsive(max, 530px) {
+      font-size: 2rem;
+      height: 2rem;
+      width: 2rem;
+    }
+  }
+
+  &__img {
+    width: 18rem;
+    height: 25rem;
+    flex: 1;
+    cursor: pointer;
+  }
+
+  &__info {
+    padding: 0.5rem 1rem;
+    width: 100%;
+  }
+
+  &__book-name {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+
+    @include responsive(max, 768px) {
+      font-size: 1.5rem;
+    }
+
+    @include responsive(max, 550px) {
+      font-size: 1.3rem;
+    }
+
+    @include responsive(max, 530px) {
+      font-size: 1.6rem;
+    }
+  }
+
+  &__author-name {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+
+    @include responsive(max, 768px) {
+      font-size: 1.4rem;
+    }
+
+    @include responsive(max, 550px) {
+      font-size: 1.2rem;
+    }
+
+    @include responsive(max, 530px) {
+      font-size: 1.5rem;
+    }
+  }
+
+  &__date-added,
+  &__date-read {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+
+    @include responsive(max, 768px) {
+      font-size: 1.2rem;
+    }
+
+    @include responsive(max, 550px) {
+      font-size: 1rem;
+    }
+
+    @include responsive(max, 530px) {
+      font-size: 1.5rem;
+    }
+  }
+
+  &__date-read {
+    display: inline-block;
+  }
+
+  &__avgRating {
     display: flex;
-    background-color: darken($color-dark, 5%);
-    padding: 0;
-    position: relative;
-    margin: 1.5rem;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
 
-    .mat-form-field {
-        width: 20rem;
+  &__star {
+    color: $color-gold;
+    display: inline-block;
+  }
 
-        @media only screen and (max-width : 768px) {
-            width: 15rem;
-        }
+  &__star-container {
+    overflow: hidden;
+    display: inline-block;
+    color: $color-gold;
+  }
 
-        @media only screen and (max-width : 530px) {
-            width: 18rem;
-        }
+  &__your-rate,
+  &__not-rated {
+    color: $color-white;
+    font-size: 1.6rem;
+
+    @include responsive(max, 768px) {
+      font-size: 1.4rem;
     }
 
-
-    .mat-icon {
-        font-size: 2.4rem;
-        height: 2.4rem;
-        width: 2.4rem;
-
-        @media only screen and (max-width : 768px) {
-            font-size: 2rem;
-            height: 2rem;
-            width: 2rem;
-        }
-
-        @media only screen and (max-width : 550px) {
-            font-size: 1.8rem;
-            height: 1.8rem;
-            width: 1.8rem;
-        }
-
-        @media only screen and (max-width : 530px) {
-            font-size: 2rem;
-            height: 2rem;
-            width: 2rem;
-        }
-      }
-
-    &__img {
-        width: 18rem;
-        height: 25rem;
-        flex: 1;
-        cursor: pointer;
+    @include responsive(max, 550px) {
+      font-size: 1.2rem;
     }
 
-
-    
-    &__info {
-        padding: .5rem 1rem;
-        width: 100%;
+    @include responsive(max, 530px) {
+      font-size: 1.2rem;
     }
+  }
 
-    &__book-name {
-        font-size: 1.8rem;
-        margin-bottom: 1rem;
+  &__not-rated {
+    font-size: 1.8rem;
+  }
 
-        @media only screen and (max-width : 768px) {
-            font-size: 1.5rem;
-        }
+  &__finished-reading {
+    background-color: $color-primary;
+    color: $color-white;
+    font-size: 1.7rem;
+    border-radius: 0.3rem;
+    padding: 0.4rem 0.7rem;
+    cursor: pointer;
+    border: none;
+  }
 
-        @media only screen and (max-width : 550px) {
-            font-size: 1.3rem;
-        }
-
-        @media only screen and (max-width : 530px) {
-            font-size: 1.6rem;
-        }
-
+  &__remove {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    color: darken($color-dark, 10%);
+    transition: $trans-4s;
+    cursor: pointer;
+    &:hover {
+      color: $color-primary;
     }
+  }
 
-    &__author-name {
-        font-size: 1.6rem;
-        margin-bottom: 1rem;
+  &__edit-date-read {
+    color: $color-white;
+    display: inline-block;
+    font-size: 1.4rem;
+    margin-left: 0.5rem;
+    cursor: pointer;
 
-        @media only screen and (max-width : 768px) {
-            font-size: 1.4rem;
-        }
-
-        @media only screen and (max-width : 550px) {
-            font-size: 1.2rem;
-        }
-
-        @media only screen and (max-width : 530px) {
-            font-size: 1.5rem;
-        }
-
-        
-
+    &:hover {
+      text-decoration: underline;
     }
-
-    &__date-added, &__date-read {
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
-
-        @media only screen and (max-width : 768px) {
-            font-size: 1.2rem;
-        }
-
-        @media only screen and (max-width : 550px) {
-            font-size: 1rem;
-        }
-
-        @media only screen and (max-width : 530px) {
-            font-size: 1.5rem;
-        }
-
-    }
-
-    &__date-read {
-        display: inline-block;
-    }
-
-    
-    &__avgRating {
-        display: flex;
-        align-items: center;
-        margin-bottom: 1rem;
-
-      
-      }
-  
-    
-      &__star {
-        color: $color-gold;
-        display: inline-block;
-  
-      }
-  
-      &__star-container {
-        overflow: hidden;
-        display: inline-block;
-        color: $color-gold;
-      }
-
-      &__your-rate, &__not-rated {
-          color: $color-white;
-          font-size: 1.6rem;
-
-          @media only screen and (max-width : 768px) {
-              font-size: 1.4rem;
-          }
-
-          @media only screen and (max-width : 550px) {
-              font-size: 1.2rem;
-          }
-
-          @media only screen and (max-width : 530px) {
-            font-size: 1.2rem;
-        }
-      }
-
-      &__not-rated {
-          font-size: 1.8rem
-      }
-
-      &__finished-reading {
-          background-color: $color-primary;
-          color: $color-white;
-          font-size: 1.7rem;
-          border-radius: .3rem;
-          padding: .4rem .7rem;
-          cursor: pointer;
-          border: none;
-      }
-
-    &__remove {
-        position: absolute; 
-        top: .5rem;
-        right: .5rem;
-        color: darken($color-dark, 10%);
-        transition: all .4s;
-        cursor: pointer;
-        &:hover {
-            color: $color-primary;
-        }
-
-        
-    }
-
-    &__edit-date-read {
-        color: $color-white;
-        display: inline-block;
-        font-size: 1.4rem;
-        margin-left: .5rem;
-        cursor: pointer;
-
-        &:hover {
-            text-decoration: underline;
-        }
-    }
+  }
 }
-
-
-
-  

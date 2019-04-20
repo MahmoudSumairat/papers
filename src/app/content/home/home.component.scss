@@ -1,5 +1,6 @@
 @import "../../shared/variables";
 @import "../../shared/animations";
+@import "../../shared/mixins";
 
 .home {
   min-height: 100vh;
@@ -7,12 +8,13 @@
   padding-top: 3rem;
   position: relative;
   perspective: 100rem;
+  -moz-perspective: 100rem;
   .container {
     padding: 3rem;
   }
 
   &__book-list {
-    @media only screen and (max-width : 768px) {
+    @include responsive(max, 768px) {
       padding-left: 2rem;
     }
   }
@@ -20,24 +22,25 @@
   &__navigate {
     padding: 2rem 0;
     margin: 1rem auto;
-   
   }
 
   &__navigate-box {
     position: absolute;
     bottom: 3.5rem;
-    
   }
 
-  &__next, &__previuos, &__fast-rewind, &__fast-forward {
-    .mat-icon{
+  &__next,
+  &__previuos,
+  &__fast-rewind,
+  &__fast-forward {
+    .mat-icon {
       font-size: 2.9rem;
     }
     background: none;
     border: none;
     color: darken($color-dark, 10%);
     cursor: pointer;
-    transition: all .4s;
+    transition: $trans-4s;
     padding: 0;
     margin: 0 1rem;
 
@@ -50,18 +53,16 @@
     }
   }
 
-  &__fast-rewind, &__fast-forward {
+  &__fast-rewind,
+  &__fast-forward {
     .mat-icon {
       width: 1rem;
     }
   }
 
   &__fast-forward {
-    margin-left: -.3rem;
+    margin-left: -0.3rem;
   }
-
-
-
 
   &__page {
     color: $color-white;
@@ -69,44 +70,37 @@
     display: block;
     margin: 1rem;
     margin-left: 1.4rem;
-    transition: all .2s;
+    transition: $trans-2s;
     cursor: pointer;
-    text-shadow: .05rem .05rem .5rem transparent , -.05rem -.05rem .5rem transparent;
-
+    text-shadow: 0.05rem 0.05rem 0.5rem transparent,
+      -0.05rem -0.05rem 0.5rem transparent;
 
     &:hover {
-      text-shadow: .05rem .05rem .5rem $color-white, -.05rem -.05rem .5rem $color-white;
+      text-shadow: 0.05rem 0.05rem 0.5rem $color-white,
+        -0.05rem -0.05rem 0.5rem $color-white;
       transform: scale(1.2);
     }
-    
   }
 
-  
   &__no-results {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: rgba($color-white, .7);
+    color: rgba($color-white, 0.7);
     font-size: 3rem;
   }
 
-
-  
   &__loading {
     position: absolute;
     transform: translate(-50%, -50%);
     top: 50%;
     left: 50%;
-    color: rgba($color-white, .7);
+    color: rgba($color-white, 0.7);
     font-size: 4rem;
-    animation: loading .5s ease-in-out infinite alternate;
-
+    animation: loading 0.5s ease-in-out infinite alternate;
+    -moz-animation: loading 0.5s ease-in-out infinite alternate;
   }
-
-
-
-
 }
 
 .book {
@@ -114,17 +108,14 @@
   padding-right: 0 !important;
   margin: 1rem 0;
 
-  @media only screen and (max-width : 400px) {
+  @include responsive(max, 400px) {
     flex: 0 0 50%;
     max-width: 50%;
   }
 
-  
-.mat-icon {
-  font-size: 2.4rem;
-  width: 2.4rem;
-  height: 2.4rem;
-}
+  .mat-icon {
+    @include resp-mat-icons();
+  }
 
   .card {
     width: 90%;
@@ -149,7 +140,7 @@
       background-color: rgba($color-dark, 0.8);
       padding: 0.2rem;
       opacity: 0;
-      transition: all 0.4s;
+      transition: $trans-4s;
       transform: translateY(1rem);
       z-index: -1;
     }
@@ -165,7 +156,6 @@
       color: $color-white;
       font-size: 1.8rem;
       &--content {
-
         cursor: pointer;
         &:hover {
           text-decoration: underline;
@@ -177,14 +167,11 @@
       display: flex;
       align-items: center;
       justify-content: center;
-    
     }
 
-  
     &__star {
       color: $color-gold;
       display: inline-block;
-
     }
 
     &__star-container {
@@ -198,7 +185,7 @@
       background-color: $color-secondary;
       border-radius: 0.5rem;
       font-size: 1.8rem;
-      margin-top: .5rem;
+      margin-top: 0.5rem;
       &:hover {
         background-color: darken($color-secondary, 5%);
       }
@@ -213,18 +200,11 @@
       transform: translateY(0);
       z-index: 5;
     }
-
-
   }
-
-
-
-
 }
-
 
 .page-active {
-  text-shadow: .05rem .05rem .5rem $color-white, -.05rem -.05rem .5rem $color-white;
+  text-shadow: 0.05rem 0.05rem 0.5rem $color-white,
+    -0.05rem -0.05rem 0.5rem $color-white;
   transform: scale(1.2);
 }
-

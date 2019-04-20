@@ -1,118 +1,117 @@
 @import "../../shared/variables";
 @import "../../shared/animations";
+@import "../../shared/mixins";
 
 .quotes {
-    background-color: $color-dark;
-    min-height: 120vh;
-    padding-top : 5.5rem;
+  background-color: $color-dark;
+  min-height: 120vh;
+  padding-top: 5.5rem;
+  position: relative;
+  perspective: 100rem;
+  -moz-perspective: 100rem;
+
+  .mat-icon {
+    @include resp-mat-icons();
+  }
+
+  &__heading {
+    color: $color-white;
+    font-size: 4rem;
+    margin-bottom: 2rem;
+
+    @include responsive(max, 768px) {
+      margin-top: 2rem;
+    }
+
+    @include responsive(max, 500px) {
+      font-size: 3rem;
+    }
+  }
+
+  &__box {
+    color: $color-white;
+    background-color: darken($color-dark, 5%);
+    padding: 1rem 2rem;
+    margin-top: 1rem;
     position: relative;
-    perspective: 100rem;
+  }
+  &__content {
+    font-size: 2rem;
+    line-height: 1.5;
 
-    .mat-icon {
-      font-size: 2.4rem;
-      width: 2.4rem;
-      height: 2.4rem;
+    @include responsive(max, 500px) {
+      font-size: 1.6rem;
+      padding-right: 4rem;
     }
+  }
 
-    &__heading {
-        color: $color-white;
-        font-size: 4rem;
-        margin-bottom: 2rem;
-        
-        @media only screen and (max-width : 768px) {
-          margin-top: 2rem;
-        }
+  &__name {
+    cursor: pointer;
+    font-size: 1.7rem;
 
-        @media only screen and (max-width : 500px) {
-          font-size: 3rem;
-        }
+    &:hover {
+      text-decoration: underline;
     }
-    
-    &__box {
-        color: $color-white;
-        background-color: darken($color-dark, 5%);
-        padding: 1rem 2rem;
-        margin-top: 1rem;
-        position: relative;
+  }
+
+  &__like-fave {
+    position: absolute;
+    right: 2rem;
+    bottom: 1rem;
+    color: darken($color-dark, 10%);
+
+    @include responsive(max, 500px) {
+      right: 1rem;
     }
-    &__content {
-        font-size: 2rem;
-        line-height: 1.5;
+  }
 
-        @media only screen and (max-width : 500px) {
-          font-size: 1.6rem;
-          padding-right: 4rem;
-        }
-    }
+  &__like,
+  &__fav {
+    cursor: pointer;
+    transition: $trans-2s;
+  }
 
-    &__name {
-        cursor: pointer;
-        font-size: 1.7rem;
+  &__fav {
+    color: darken($color-dark, 10%);
+  }
 
-        &:hover {
-            text-decoration: underline;
-        }
-    }
+  &__like {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-    &__like-fave {
-        position: absolute;
-        right: 2rem;
-        bottom: 1rem;
-        color: darken($color-dark, 10%);
+  &__like-num {
+    font-size: 1.7rem;
+    display: inline-block;
+    padding-left: 0.5rem;
+    color: $color-white;
+    width: 2rem;
+  }
 
-        @media only screen and (max-width : 500px) {
-          right: 1rem;
-        }
-
-    }
-
-    &__like, &__fav {
-        cursor: pointer;
-        transition: all .2s;
-    }
-
-    &__fav {
-        color: darken($color-dark, 10%);
-    }
-
-    &__like {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    &__like-num {
-        font-size: 1.7rem;
-        display: inline-block;
-        padding-left: .5rem;
-        color: $color-white;
-        width: 2rem;
-    }
-
-
-    
   &__navigate {
     padding: 4rem 0;
     margin: 0rem auto;
-   
   }
 
   &__navigate-box {
     position: absolute;
     bottom: 1rem;
     margin: 0;
-    
   }
 
-  &__next, &__previuos, &__fast-rewind, &__fast-forward {
-    .mat-icon{
+  &__next,
+  &__previuos,
+  &__fast-rewind,
+  &__fast-forward {
+    .mat-icon {
       font-size: 2.9rem;
     }
     background: none;
     border: none;
     color: darken($color-dark, 10%);
     cursor: pointer;
-    transition: all .4s;
+    transition: $trans-4s;
     padding: 0;
     margin: 0 1rem;
 
@@ -125,18 +124,16 @@
     }
   }
 
-  &__fast-rewind, &__fast-forward {
+  &__fast-rewind,
+  &__fast-forward {
     .mat-icon {
       width: 1rem;
     }
   }
 
   &__fast-forward {
-    margin-left: -.3rem;
+    margin-left: -0.3rem;
   }
-
-
-
 
   &__page {
     color: $color-white;
@@ -144,16 +141,16 @@
     display: block;
     margin: 1rem;
     margin-left: 1.4rem;
-    transition: all .2s;
+    transition: $trans-2s;
     cursor: pointer;
-    text-shadow: .05rem .05rem .5rem transparent , -.05rem -.05rem .5rem transparent;
-
+    text-shadow: 0.05rem 0.05rem 0.5rem transparent,
+      -0.05rem -0.05rem 0.5rem transparent;
 
     &:hover {
-      text-shadow: .05rem .05rem .5rem $color-white, -.05rem -.05rem .5rem $color-white;
+      text-shadow: 0.05rem 0.05rem 0.5rem $color-white,
+        -0.05rem -0.05rem 0.5rem $color-white;
       transform: scale(1.2);
     }
-    
   }
 
   &__no-results {
@@ -161,7 +158,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: rgba($color-white, .7);
+    color: rgba($color-white, 0.7);
     font-size: 3rem;
   }
 
@@ -170,17 +167,15 @@
     transform: translate(-50%, -50%);
     top: 50%;
     left: 50%;
-    color: rgba($color-white, .7);
+    color: rgba($color-white, 0.7);
     font-size: 4rem;
-    animation: loading .5s ease-in-out infinite alternate;
-
-
+    animation: loading 0.5s ease-in-out infinite alternate;
+    -moz-animation: loading 0.5s ease-in-out infinite alternate;
   }
-
 }
 
-
 .page-active {
-    text-shadow: .05rem .05rem .5rem $color-white, -.05rem -.05rem .5rem $color-white;
-    transform: scale(1.2);
-  }
+  text-shadow: 0.05rem 0.05rem 0.5rem $color-white,
+    -0.05rem -0.05rem 0.5rem $color-white;
+  transform: scale(1.2);
+}

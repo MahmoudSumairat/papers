@@ -30,7 +30,12 @@
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
-    <span class="book__edit-date-read" (click)="editDateRead()" *ngIf="dist === 'read-books'" >[edit]</span>
+    <span
+      class="book__edit-date-read"
+      (click)="editDateRead()"
+      *ngIf="dist === 'read-books'"
+      >[edit]</span
+    >
     <div class="book__avgRating" *ngIf="resArr.starArr[0]">
       <span class="book__your-rate">Your Rate: </span>
       <span *ngFor="let star of resArr.starArr" class="book__star">
@@ -46,7 +51,13 @@
     </div>
 
     <p class="book__not-rated" *ngIf="!resArr.starArr[0]">Not Rated</p>
-    <button class="book__finished-reading" *ngIf="dist === 'currently-reading'" (click)="finishedReading()" >Finished Reading</button>
+    <button
+      class="book__finished-reading"
+      *ngIf="dist === 'currently-reading'"
+      (click)="finishedReading()"
+    >
+      Finished Reading
+    </button>
   </div>
   <span class="book__remove" (click)="removeBook()">
     <mat-icon>clear</mat-icon>

@@ -1,38 +1,126 @@
 <section class="add-author">
-    <div class="container" [@navigateState] >
-      <h1 class="add-author__heading text-center" >Add an author to the Database</h1>
-      <form #form="ngForm" class="form-group add-author__form" (ngSubmit)="submitAuthor(form)" >
-        <label for="authorName" class="add-author__label" >Author Name</label>
-        <input type="text" name="authorName" ngModel required id="authorName" class="add-author__author-name" autocomplete="off" >
-  
-        <label for="about" class="add-author__label" >About</label>
-        <textarea type="text" name="about" ngModel required id="about" class="add-author__about"  autocomplete="off" >
-        </textarea>
-        
-        <label for="place" class="add-author__label" >Place Of Birth </label>
-        <input type="text" name="place" ngModel required id="place"    class="add-author__place"  autocomplete="off" >
-  
-        <label for="birth" class="add-author__label" >Date Of Birth</label>
-        <input type="text" name="birth" ngModel required id="birth" class="add-author__birth"  autocomplete="off" >
-        
-        <label for="death" class="add-author__label" >Date Of Death</label>
-        <input type="text" name="death" ngModel  id="death" class="add-author__death"  autocomplete="off" >
-  
-        <label for="best" class="add-author__label" >Best Book</label>
-        <input type="text" name="best" ngModel required id="best"    class="add-author__best"  autocomplete="off" >
-       
-        <label for="img" class="add-author__label" >Image</label>
-        <input type="text" name="img" ngModel required id="img"    class="add-author__img"  autocomplete="off" >
-       
-        <label for="genre" class="add-author__label" >Genre</label>
-        <input type="text" name="genre" ngModel required id="genre"    class="add-author__genre"  autocomplete="off" >
+  <div class="container" [@navigateState]>
+    <h1 class="add-author__heading text-center">
+      Add an author to the Database
+    </h1>
+    <form
+      #form="ngForm"
+      class="form-group add-author__form"
+      (ngSubmit)="submitAuthor(form)"
+    >
+      <label for="authorName" class="add-author__label">Author Name</label>
+      <input
+        type="text"
+        name="authorName"
+        ngModel
+        required
+        id="authorName"
+        class="add-author__author-name"
+        autocomplete="off"
+      />
 
-        <label for="quote" class="add-author__label" >Quotes</label>
-        <input class="add-author__quote" type="text" name="quote" *ngFor="let input of inputArr; let i = index" #input (change)="insertQuote(input,i )" id="quotes" >
-        <button type="button" (click)="addQuote()" class="add-author__add-quotes "  > Add Quote </button>
-  
-        <button type="submit" class="add-author__upload" [disabled]="form.invalid" > Upload </button>
-      </form>
-  
-    </div>
-  </section>
+      <label for="about" class="add-author__label">About</label>
+      <textarea
+        type="text"
+        name="about"
+        ngModel
+        required
+        id="about"
+        class="add-author__about"
+        autocomplete="off"
+      >
+      </textarea>
+
+      <label for="place" class="add-author__label">Place Of Birth </label>
+      <input
+        type="text"
+        name="place"
+        ngModel
+        required
+        id="place"
+        class="add-author__place"
+        autocomplete="off"
+      />
+
+      <label for="birth" class="add-author__label">Date Of Birth</label>
+      <input
+        type="text"
+        name="birth"
+        ngModel
+        required
+        id="birth"
+        class="add-author__birth"
+        autocomplete="off"
+      />
+
+      <label for="death" class="add-author__label">Date Of Death</label>
+      <input
+        type="text"
+        name="death"
+        ngModel
+        id="death"
+        class="add-author__death"
+        autocomplete="off"
+      />
+
+      <label for="best" class="add-author__label">Best Book</label>
+      <input
+        type="text"
+        name="best"
+        ngModel
+        required
+        id="best"
+        class="add-author__best"
+        autocomplete="off"
+      />
+
+      <label for="img" class="add-author__label">Image</label>
+      <input
+        type="text"
+        name="img"
+        ngModel
+        required
+        id="img"
+        class="add-author__img"
+        autocomplete="off"
+      />
+
+      <label for="genre" class="add-author__label">Genre</label>
+      <input
+        type="text"
+        name="genre"
+        ngModel
+        required
+        id="genre"
+        class="add-author__genre"
+        autocomplete="off"
+      />
+
+      <label for="quote" class="add-author__label">Quotes</label>
+      <input
+        class="add-author__quote"
+        type="text"
+        name="quote"
+        *ngFor="let input of inputArr; let i = index"
+        #input
+        (change)="insertQuote(input, i)"
+        id="quotes"
+      />
+      <button
+        type="button"
+        (click)="addQuote()"
+        class="add-author__add-quotes "
+      >
+        Add Quote
+      </button>
+
+      <button
+        type="submit"
+        class="add-author__upload"
+        [disabled]="form.invalid"
+      >
+        Upload
+      </button>
+    </form>
+  </div>
+</section>

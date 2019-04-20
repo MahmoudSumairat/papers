@@ -1,29 +1,38 @@
 <section class="author" *ngIf="(author$ | async) as author">
-    <h3 class="author__heading text-center"> About {{ author.name }} </h3>
-    <div class="row">
-        <img [src]="author.img" [alt]="author.name" class="author__img" >
-        <div class="author__bio">
-            <h3 class="author__name"> {{ author.name }} </h3>
-            <div class="author__rating" *ngIf="author.avgRating" >
-                <span *ngFor="let star of creatStars(author.avgRating).starArr" class="author__star">
-                  <mat-icon  >star</mat-icon>
-                </span>
-                <span *ngIf="creatStars(author.avgRating).i < 1" [style.width]="creatStars(author.avgRating).i * 24 + 'px'" class="author__star-container" >
-                    <mat-icon  >star</mat-icon>
-                </span>
-                
-              </div>
-              <p class="author__notreviewed" *ngIf="!author.avgRating" >Not Reviewed</p>
-            <button class="author__details" (click)="goToAuthor(author.name)"  > More Details </button>
-        </div>
+  <h3 class="author__heading text-center">About {{ author.name }}</h3>
+  <div class="row">
+    <img [src]="author.img" [alt]="author.name" class="author__img" />
+    <div class="author__bio">
+      <h3 class="author__name">{{ author.name }}</h3>
+      <div class="author__rating" *ngIf="author.avgRating">
+        <span
+          *ngFor="let star of creatStars(author.avgRating).starArr"
+          class="author__star"
+        >
+          <mat-icon>star</mat-icon>
+        </span>
+        <span
+          *ngIf="creatStars(author.avgRating).i < 1"
+          [style.width]="creatStars(author.avgRating).i * 24 + 'px'"
+          class="author__star-container"
+        >
+          <mat-icon>star</mat-icon>
+        </span>
+      </div>
+      <p class="author__notreviewed" *ngIf="!author.avgRating">Not Reviewed</p>
+      <button class="author__details" (click)="goToAuthor(author.name)">
+        More Details
+      </button>
     </div>
-    <div class="row">
-        <article class="author__brief-box">
-            <p class="author__brief">
-                {{ (author.about) | slice:0:aboutCharLimit }}
-                <span (click)="clickSeeMore()" class="author__seemore" > {{seeMoreTitle}} </span>
-            </p>
-        </article>
-    </div>
-
+  </div>
+  <div class="row">
+    <article class="author__brief-box">
+      <p class="author__brief">
+        {{ author.about | slice: 0:aboutCharLimit }}
+        <span (click)="clickSeeMore()" class="author__seemore">
+          {{ seeMoreTitle }}
+        </span>
+      </p>
+    </article>
+  </div>
 </section>

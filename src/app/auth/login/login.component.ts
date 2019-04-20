@@ -14,8 +14,8 @@ import {
   transition,
   animate
 } from "@angular/animations";
-import { Router } from '@angular/router';
-import { Title } from '@angular/platform-browser';
+import { Router } from "@angular/router";
+import { Title } from "@angular/platform-browser";
 
 @Component({
   selector: "app-login",
@@ -42,19 +42,19 @@ import { Title } from '@angular/platform-browser';
 })
 export class LoginComponent implements OnInit, OnDestroy {
   sub: Subscription;
-  inputType = 'password';
+  inputType = "password"; // TO SPECIFY THE PASSWORD INPUT TYPE
 
   constructor(
     private authService: AuthService,
     private store: Store<fromRoot.State>,
     private afs: AngularFirestore,
-    private router : Router,
-    private title : Title
+    private router: Router,
+    private title: Title
   ) {}
 
   ngOnInit() {
-    this.title.setTitle('Login to papers');
-    this.sub = this.afs
+    this.title.setTitle("Login to papers"); // CHANGE THE TITLE OF THE PAGE
+    this.sub = this.afs // FETCH THE USERS FROM THE DATABASTE TO REGISTER FASTLY
       .collection("users")
       .snapshotChanges()
       .subscribe(data => {
@@ -65,29 +65,33 @@ export class LoginComponent implements OnInit, OnDestroy {
             ...itemObj
           };
         });
-        this.store.dispatch(new auth.SetUsers(arr));
+        this.store.dispatch(new auth.SetUsers(arr)); // DISPATCH THE USERS THAT I FETCHED FROM THE DATABASE TO THE NGRX STORE
       });
   }
 
   onSubmit(f: NgForm) {
-    this.authService.loginUser(f.value.email, f.value.password);
-    f.reset();
+    // A FUNCTION TO SUBMIT THE FORM TO SIGN IN THE USER
+    this.authService.loginUser(f.value.email, f.value.password); // INVOKE THE LOGIN METHOD FROM THE AUTHSERVICE
+    f.reset(); // RESET THE FORM
   }
 
   goGuest() {
-    localStorage.removeItem('user');
-    localStorage.removeItem('loggedIn');
-    this.router.navigate(['/content']);
+    // A FUNCTION THAT ALLOW THE USER TO ENTER THE APP LIKE A GUEST
+    localStorage.removeItem("user");
+    localStorage.removeItem("loggedIn");
+    // REMOVE THE USER DATA THAT IS SAVED IN THE LOCAL STORAGE
+    this.router.navigate(["/content"]);
+    // GO TO THE CONTENT COMPONENT
   }
 
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
 
-
   toggleInput() {
-      this.inputType === 'password' ? this.inputType = 'text' : this.inputType = 'password';
+    // TOGGLE THE TYPE OF THE PASSWORD INPUT TO MAKE IT VISIBLE
+    this.inputType === "password"
+      ? (this.inputType = "text")
+      : (this.inputType = "password");
   }
-
-
 }

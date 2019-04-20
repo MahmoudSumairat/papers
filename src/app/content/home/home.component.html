@@ -1,9 +1,14 @@
 <section class="home">
   <div class="container">
-    <div class="home__book-list row" *ngIf=" showBooks" > 
+    <div class="home__book-list row" *ngIf="showBooks">
       <div
         class="book col-4 col-sm-4 col-md-3"
-        *ngFor="let book of (allBooks$ | async | filter:searchValue | slice:startingIndex:endingIndex)"
+        *ngFor="
+          let book of (allBooks$
+            | async
+            | filter: searchValue
+            | slice: startingIndex:endingIndex)
+        "
         [@booksState]
       >
         <div class="card">
@@ -14,15 +19,29 @@
           />
           <div class="card-body text-center">
             <h4 class="card-title">{{ book.bookName }}</h4>
-            <p class="card-text"  >by: <span (click)="goToAuthor(book.authorName)" class="card-text--content" > {{ book.authorName }} </span></p>
+            <p class="card-text">
+              by:
+              <span
+                (click)="goToAuthor(book.authorName)"
+                class="card-text--content"
+              >
+                {{ book.authorName }}
+              </span>
+            </p>
             <div class="card__rating">
-              <span *ngFor="let star of creatStars(book.avgRating).arr" class="card__star">
-                <mat-icon  >star</mat-icon>
+              <span
+                *ngFor="let star of creatStars(book.avgRating).arr"
+                class="card__star"
+              >
+                <mat-icon>star</mat-icon>
               </span>
-              <span *ngIf="creatStars(book.avgRating).i < 1" [style.width]="creatStars(book.avgRating).i * 24 + 'px'" class="card__star-container" >
-                  <mat-icon  >star</mat-icon>
+              <span
+                *ngIf="creatStars(book.avgRating).i < 1"
+                [style.width]="creatStars(book.avgRating).i * 24 + 'px'"
+                class="card__star-container"
+              >
+                <mat-icon>star</mat-icon>
               </span>
-              
             </div>
             <button
               class="btn card__btn"
@@ -35,17 +54,59 @@
       </div>
     </div>
 
-    <div *ngIf="(allBooks$ | async | filter:searchValue ) as books" class="home__navigate row justify-content-center " > 
-      <div class="home__navigate-box row justify-space-evenly" *ngIf="books[0] && showPagination" >
-        <button (click)="firstPage(books)"  class="home__fast-rewind" title="First Page"> <mat-icon>navigate_before</mat-icon><mat-icon>navigate_before</mat-icon></button>
-        <button (click)="previuosBooks(books)"  class="home__previuos" title="Previuos"> <mat-icon>navigate_before</mat-icon> </button>
-        <span [@pageState] class="home__page" *ngFor="let page of getNumOfPages() | slice:theFirstPage:theLastPage" (click)="goToPage(page)"  [ngClass]="{'page-active':currentPage === page}"  > {{page}} </span>
-        <button (click)="nextBooks(books)" class="home__next" title="Next" > <mat-icon>navigate_next</mat-icon> </button>
-        <button (click)="lastPage(books)" class="home__fast-forward" title="Last Page" > <mat-icon>navigate_next</mat-icon><mat-icon>navigate_next</mat-icon> </button>
+    <div
+      *ngIf="(allBooks$ | async | filter: searchValue) as books"
+      class="home__navigate row justify-content-center "
+    >
+      <div
+        class="home__navigate-box row justify-space-evenly"
+        *ngIf="books[0] && showPagination"
+      >
+        <button
+          (click)="firstPage(books)"
+          class="home__fast-rewind"
+          title="First Page"
+        >
+          <mat-icon>navigate_before</mat-icon
+          ><mat-icon>navigate_before</mat-icon>
+        </button>
+        <button
+          (click)="previuosBooks(books)"
+          class="home__previuos"
+          title="Previuos"
+        >
+          <mat-icon>navigate_before</mat-icon>
+        </button>
+        <span
+          [@pageState]
+          class="home__page"
+          *ngFor="
+            let page of (getNumOfPages() | slice: theFirstPage:theLastPage)
+          "
+          (click)="goToPage(page)"
+          [ngClass]="{ 'page-active': currentPage === page }"
+        >
+          {{ page }}
+        </span>
+        <button (click)="nextBooks(books)" class="home__next" title="Next">
+          <mat-icon>navigate_next</mat-icon>
+        </button>
+        <button
+          (click)="lastPage(books)"
+          class="home__fast-forward"
+          title="Last Page"
+        >
+          <mat-icon>navigate_next</mat-icon><mat-icon>navigate_next</mat-icon>
+        </button>
       </div>
     </div>
   </div>
 
-  <h2 *ngIf="searchValue && !((allBooks$ | async) | filter:searchValue).length"  class="home__no-results" >No Results</h2>
-  <h2 *ngIf="isLoading$  | async" class="home__loading"   > Loading... </h2>
+  <h2
+    *ngIf="searchValue && !(allBooks$ | async | filter: searchValue).length"
+    class="home__no-results"
+  >
+    No Results
+  </h2>
+  <h2 *ngIf="(isLoading$ | async)" class="home__loading">Loading...</h2>
 </section>

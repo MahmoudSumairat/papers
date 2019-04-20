@@ -1,290 +1,223 @@
 @import "../../shared/variables";
 @import "../../shared/animations";
+@import "../../shared/mixins";
 
 .author-details {
-    padding: 6rem 0;
-    background-color: $color-dark;
-    min-height: 100vh;
-    color: $color-white;
-    perspective: 100rem;
-    .mat-icon {
-        width: 2.4rem;
-        height: 2.4rem;
-        font-size: 2.4rem;
+  padding: 6rem 0;
+  background-color: $color-dark;
+  min-height: 100vh;
+  color: $color-white;
+  perspective: 100rem;
+  -moz-perspective: 100rem;
+  .mat-icon {
+    @include resp-mat-icons();
+  }
+
+  .container {
+    padding: 2rem;
+    position: relative;
+
+    @include responsive(max, 768px) {
+      padding: 0;
+      padding-top: 3rem;
     }
 
-    
-    
-    .container {
-        padding: 2rem;
-        position: relative;
+    @include responsive(max, 600px) {
+      padding: 0 4rem;
+    }
+  }
 
-        @media only screen and (max-width : 768px) {
-            padding: 0;
-            padding-top: 3rem;
-          }
+  &__img-box {
+    @include responsive(max, 600px) {
+      flex: 0 0 100%;
+      max-width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 0;
+      padding-top: 9rem;
+    }
+  }
 
-        @media only screen and (max-width : 600px) {
-            padding: 0 4rem;
-        }
+  &__article {
+    position: static;
+    margin-left: 0 !important;
+    @include responsive(max, 600px) {
+      flex: 0 0 100%;
+      max-width: 100%;
+      text-align: center;
+      padding: 0 1rem;
+    }
+  }
+
+  &__img {
+    width: 26rem;
+    height: 39rem;
+
+    @include responsive(max, 768px) {
+      height: 33rem !important;
+      width: 20rem !important;
     }
 
-    &__img-box {
-        @media only screen and (max-width : 600px) {
-            flex: 0 0 100%;
-          max-width: 100%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          flex-direction: column;
-          padding: 0;
-          padding-top: 9rem;
-        }
+    @include responsive(max, 600px) {
+      height: 49rem !important;
+      width: 36rem !important;
+      margin-right: -0.5rem;
+    }
+  }
+
+  &__rate {
+    font-size: 1.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    &--title {
+      color: $color-white;
+    }
+  }
+
+  &__name {
+    font-size: 2.7rem;
+    font-weight: bold;
+    margin-bottom: 3rem;
+
+    @include responsive(max, 600px) {
+      position: absolute;
+      top: 3rem;
+      left: 50%;
+      transform: translateX(-50%);
     }
 
-    &__article {
-        position: static;
-        margin-left: 0!important;
-        @media only screen and (max-width : 600px) {
-            flex: 0 0 100%;
-          max-width: 100%;
-          text-align: center;
-          padding: 0 1rem;
-          }
+    @include responsive(max, 400px) {
+      font-size: 2.4rem;
+    }
+  }
+
+  &__born,
+  &__birth,
+  &__death {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+
+    &--title {
+      font-weight: bold;
+    }
+  }
+
+  &__genres {
+    display: flex;
+    justify-content: flex-start;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+
+    &--title {
+      font-weight: bold;
     }
 
-    &__img {
-        width: 26rem;
-        height: 39rem;
-
-        @media only screen and (max-width : 768px) {
-            height: 33rem !important;
-            width: 20rem !important;
-          }
-          
-          @media only screen and (max-width : 600px) {
-            height: 49rem !important;
-            width: 36rem !important;
-            margin-right: -.5rem;
-          }
+    @include responsive(max, 600px) {
+      justify-content: center;
     }
+  }
 
-    &__rate {
-        font-size: 1.7rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        @media only screen and (max-width : 768px) and (min-width : 600px) {
-        }
-        &--title {
-            color: $color-white;
+  &__genre {
+    display: inline-block;
+    margin-left: 1rem;
+    position: relative;
 
-        }
-    }
-
-    &__name {
-        font-size: 2.7rem;
-        font-weight: bold;
-        margin-bottom: 3rem;
-
-        
-    @media only screen and (max-width : 600px) {
+    &:not(:last-of-type) {
+      &:after {
+        content: ", ";
         position: absolute;
-        top: 3rem;
-        left: 50%;
-        transform: translateX(-50%);
+        bottom: 0;
+        right: -0.5rem;
       }
-  
-      @media only screen and (max-width : 400px) {
-        font-size: 2.4rem;
-      }
-
     }
+  }
 
-    &__born,&__birth,&__death {
-        font-size: 2rem;
-        margin-bottom: .5rem;
-         
-        &--title {
-            font-weight: bold;
-        }
+  &__about {
+    line-height: 1.5;
+    font-size: 1.7rem;
+
+    @include responsive(max, 600px) {
+      font-size: 2.2rem;
     }
+  }
 
-    &__genres {
-        display: flex;
-        justify-content: flex-start;
-        font-size: 2rem;
-        margin-bottom: 1.5rem;
+  &__rating {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 0.5rem;
 
-        &--title {
-            font-weight: bold;
-        }
-
-        @media only screen and (max-width : 600px) {
-            justify-content: center;
-        }
+    @include responsive(max, 600px) {
+      margin-bottom: 0;
+      padding-top: 1rem;
+      justify-content: center;
+      position: relative;
     }
+  }
 
-    &__genre {
-        display: inline-block;
-        margin-left: 1rem;
-        position: relative;
+  &__avgRating {
+    font-size: 1.9rem;
+    margin-left: 1rem;
+  }
 
+  &__ratings-length {
+    font-size: 1.5rem;
+    margin-left: 2rem;
+  }
 
-        &:not(:last-of-type) {
-            &:after {
-                content: ", ";
-                position: absolute;
-                bottom: 0;
-                right: -.5rem;
-            }
-        }
-    }
+  &__star {
+    color: $color-gold;
+    display: inline-block;
+  }
 
-    &__about {
-        line-height: 1.5;
-        font-size: 1.7rem;
+  &__star-container {
+    overflow: hidden;
+    display: inline-block;
+    color: $color-gold;
+  }
 
-        @media only screen and (max-width : 600px) {
-            font-size: 2.2rem;
-          }
-    }
+  &__notreviewed {
+    font-size: 1.8rem;
+  }
 
-    &__rating {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        margin-bottom: .5rem;
-
-        @media only screen and (max-width : 600px) {
-            margin-bottom: 0;
-            padding-top: 1rem;
-            justify-content: center;
-            position: relative;
-        }
-
-      }
-
-      &__avgRating {
-          font-size: 1.9rem;
-          margin-left: 1rem;
-
-      }
-
-      &__ratings-length {
-          font-size: 1.5rem;
-          margin-left: 2rem;
-      }
-  
-    
-      &__star {
-        color: $color-gold;
-        display: inline-block;
-  
-      }
-  
-      &__star-container {
-        overflow: hidden;
-        display: inline-block;
-        color: $color-gold;
-      }
-
-      &__notreviewed {
-          font-size: 1.8rem;
-      }
-
-    &__seemore {
-        color: darken($color-white, 7%);
-        cursor: pointer;
-        &:hover {
-            text-decoration: underline;
-        }
-    }
-
-    &__books-title, &__quotes-title {
-        color: $color-white;
-        font-size: 1.8rem;
-        padding-bottom: 1rem;
-        border-bottom: .1rem solid darken($color-dark, 5%);
-        padding-left: 1rem;
-        margin: 1rem 0;
-    }
-
-    &__books-container, &__quotes-container {
-        padding: 0 1rem;
-    }
-
-    
-    &__quote {
-        background-color: darken($color-dark, 5%);
-        padding: .5rem 1rem;
-        margin-bottom: .5rem;
-
-        &-content {
-            font-size: 1.8rem;
-            color: $color-white;
-            line-height: 1.5;
-        }
-    }
-
-    
-    &__loading {
-        position: absolute;
-        transform: translate(-50%, -50%);
-        top: 50%;
-        left: 50%;
-        color: rgba($color-white, .7);
-        font-size: 4rem;
-        animation: loading .5s ease-in-out infinite alternate;
-      }
-
-      &__rating-def {
-        z-index: -1;
-        color: darken($color-dark, 10%);
-    }
-    
-    &__rating-def-box {
-        display: flex;
-        justify-content: space-between;
-    
-      }
-    
-    
-      &__rating-box {
-        position: absolute;
-        display: flex;
-
-        @media only screen and (max-width : 600px) {
-            width: 85.06px;
-            left: 50%;
-            top: 50%;
-            transform: translate(-85%, -40%);
-          }
-        
-      }
-
-      &__rating-value, &__rating-num {
-        font-size: 1.8rem;
-        padding: 1rem;
-        padding-bottom: 0;
-      }
-
-
-      
-  &__remove {
-    position: absolute;
-    top: 2rem;
-    right: 1rem;
-    background: none;
-    border: none;
-    color: darken($color-dark, 10%);
-    transition: all .4s;
-    &:hover {
-      color: $color-primary;
-    }
+  &__seemore {
+    color: darken($color-white, 7%);
     cursor: pointer;
-    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__books-title,
+  &__quotes-title {
+    color: $color-white;
+    font-size: 1.8rem;
+    padding-bottom: 1rem;
+    border-bottom: 0.1rem solid darken($color-dark, 5%);
+    padding-left: 1rem;
+    margin: 1rem 0;
+  }
+
+  &__books-container,
+  &__quotes-container {
+    padding: 0 1rem;
+  }
+
+  &__quote {
+    background-color: darken($color-dark, 5%);
+    padding: 0.5rem 1rem;
+    margin-bottom: 0.5rem;
+
+    &-content {
+      font-size: 1.8rem;
+      color: $color-white;
+      line-height: 1.5;
+    }
   }
 
   &__loading {
@@ -292,79 +225,124 @@
     transform: translate(-50%, -50%);
     top: 50%;
     left: 50%;
-    color: rgba($color-white, .7);
+    color: rgba($color-white, 0.7);
     font-size: 4rem;
-    animation: loading .5s ease-in-out infinite alternate;
-
+    animation: loading 0.5s ease-in-out infinite alternate;
+    -moz-animation: loading 0.5s ease-in-out infinite alternate;
   }
-      
 
+  &__rating-def {
+    z-index: -1;
+    color: darken($color-dark, 10%);
+  }
+
+  &__rating-def-box {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__rating-box {
+    position: absolute;
+    display: flex;
+
+    @include responsive(max, 600px) {
+      width: 85.06px;
+      left: 50%;
+      top: 50%;
+      transform: translate(-85%, -40%);
+    }
+  }
+
+  &__rating-value,
+  &__rating-num {
+    font-size: 1.8rem;
+    padding: 1rem;
+    padding-bottom: 0;
+  }
+
+  &__remove {
+    position: absolute;
+    top: 2rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: darken($color-dark, 10%);
+    transition: $trans-4s;
+    &:hover {
+      color: $color-primary;
+    }
+    cursor: pointer;
+  }
+
+  &__loading {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    color: rgba($color-white, 0.7);
+    font-size: 4rem;
+    animation: loading 0.5s ease-in-out infinite alternate;
+  }
 }
 
 .author-book {
+  display: flex;
+  margin-top: 3rem;
+  background-color: darken($color-dark, 5%);
+  padding: 0;
+  margin: 0.5rem;
+
+  .mat-icon {
+    font-size: 2.4rem;
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+
+  &__bio {
+    margin-left: 0.5rem;
+    flex: 1;
+    padding: 0.5rem 0.5rem;
+  }
+
+  &__img {
+    width: 12rem;
+    height: 19rem;
+  }
+  &__name {
+    font-size: 1.7rem;
+    padding-bottom: 0.5rem;
+  }
+  &__author {
+    color: $color-white;
+    font-size: 1.5rem;
+  }
+  &__rating {
     display: flex;
-    margin-top: 3rem;
-    background-color: darken($color-dark, 5%);
-    padding: 0;
-    margin: .5rem;
+    align-items: center;
+    justify-content: center;
+  }
 
-    .mat-icon {
-        font-size: 2.4rem;
-        width: 2.4rem;
-        height: 2.4rem;
-    }
-    
-    &__bio {
-        margin-left: .5rem;
-        flex: 1;
-        padding: .5rem .5rem;
-    }
+  &__star {
+    color: $color-gold;
+    display: inline-block;
+  }
 
-    &__img {
-        width: 12rem;
-        height: 19rem;
-    }
-    &__name {
-        font-size: 1.7rem;
-        padding-bottom: .5rem;
-    }
-    &__author {
-        color: $color-white;
-        font-size: 1.5rem;
-    }
-    &__rating {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      
-      }
-  
-    
-      &__star {
-        color: $color-gold;
-        display: inline-block;
-  
-      }
-  
-      &__star-container {
-        overflow: hidden;
-        display: inline-block;
-        color: $color-gold;
-      }
-      &__notreviewed {
-        font-size: 1.8rem;
-    }
+  &__star-container {
+    overflow: hidden;
+    display: inline-block;
+    color: $color-gold;
+  }
+  &__notreviewed {
+    font-size: 1.8rem;
+  }
 
-    &__details {
-        color: $color-white;
-        background-color: $color-primary;
-        border: none;
-        font-size: 1.7rem;
-        border-radius: .5rem;
-        margin-top: 1rem;
-        cursor: pointer;
-    }
-
-
-
+  &__details {
+    color: $color-white;
+    background-color: $color-primary;
+    border: none;
+    font-size: 1.7rem;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+    cursor: pointer;
+  }
 }

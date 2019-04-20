@@ -1,34 +1,31 @@
 @import "../../shared/variables";
 @import "../../shared/utilities";
+@import "../../shared/mixins";
+
 .header {
   .container {
     justify-content: flex-start;
     position: relative;
     flex-wrap: nowrap;
     perspective: 100rem;
+    -moz-perspective: 100rem;
 
-    @media only screen and (max-width : 768px) {
+    @include responsive(max, 768px) {
       height: 100%;
       width: 100%;
       top: 0;
       left: 0;
       justify-content: center;
-
     }
-   
   }
-
 
   .mat-icon {
-    font-size: 2.4rem;
-    height: 2.4rem;
-    width: 2.4rem;
+    @include resp-mat-icons();
   }
-
 
   .navbar-nav {
     flex-direction: row;
-    @media only screen and (max-width : 768px) {
+    @include responsive(max, 768px) {
       flex-direction: column !important;
       position: absolute;
       top: 50%;
@@ -37,35 +34,28 @@
       text-align: center;
       padding-top: 1rem;
       width: 100%;
-
     }
   }
-  
+
   &__logo {
     color: $color-white;
     font-weight: bold;
     font-size: 2.5rem;
     border-right: 0.1rem solid $color-white;
     padding: 0 2rem;
-    font-family: 'Kalam', cursive;
-    padding-top: .4rem;
+    font-family: "Kalam", cursive;
+    padding-top: 0.4rem;
 
-    @media only screen and (max-width : 768px) {
+    @include responsive(max, 768px) {
       position: absolute;
       top: 2rem;
-      left : 50%;
+      left: 50%;
       transform: translateX(-50%);
       font-size: 5.5rem;
       border-right: none;
-    
-
     }
-
   }
 
- 
-
-  
   &__nav {
     background-color: $color-primary;
     color: $color-white;
@@ -73,17 +63,16 @@
     position: fixed;
     width: 100%;
     z-index: 999;
-    transition: all .4s;
+    transition: $trans-4s;
 
-    @media only screen and (max-width : 768px) {
+    @include responsive(max, 768px) {
       height: 100vh;
       width: 100%;
       top: 0;
       left: 0;
-      transform: scale(.5);
+      transform: scale(0.5);
       opacity: 0;
       z-index: -1;
-
     }
   }
 
@@ -95,8 +84,6 @@
     z-index: 2;
     color: $color-white !important;
     cursor: pointer;
- 
-   
 
     &::after {
       content: "";
@@ -112,7 +99,7 @@
       display: block;
       z-index: -1;
 
-      @media only screen and (max-width : 768px) {
+      @include responsive(max, 768px) {
         display: none;
       }
     }
@@ -122,28 +109,18 @@
         transform: scaleX(1);
         height: 100%;
       }
-
-    
     }
 
-   
-    
-  
-
-    @media only screen and (max-width : 768px) {
+    @include responsive(max, 768px) {
       font-size: 3.5rem;
     }
   }
 
- 
-
   &__item--res {
     display: none;
-    @media only screen and (max-width : 768px) {
+    @include responsive(max, 768px) {
       display: inline;
     }
-
-
 
     &::after {
       content: "";
@@ -158,22 +135,18 @@
       transform-origin: center;
       display: block;
       z-index: -1;
-      @media only screen and (max-width : 768px) {
+      @include responsive(max, 768px) {
         display: none;
       }
     }
 
-    
     &:hover {
       &::after {
         transform: scaleX(1);
         height: 100%;
       }
-
-    
     }
   }
-
 
   &__search {
     width: 35rem;
@@ -183,7 +156,7 @@
     padding: 0.4rem 1rem;
     font-size: 1.5rem;
     display: flex;
-    transition: all 0.4s;
+    transition: $trans-4s;
     color: $color-white;
 
     &:focus {
@@ -202,7 +175,7 @@
     align-items: center;
     position: relative;
 
-    @media only screen and (max-width : 768px) {
+    @include responsive(max, 768px) {
       display: none;
     }
   }
@@ -221,10 +194,9 @@
     font-size: 1.6rem;
     width: auto;
 
-    @media only screen and (max-width : 768px) {
+    @include responsive(max, 768px) {
       display: none;
     }
-    
   }
 
   &__signin-btn,
@@ -253,10 +225,9 @@
     align-items: center;
     margin: 0 1rem;
 
-    @media only screen and (max-width : 768px) {
+    @include responsive(max, 768px) {
       display: none;
     }
-  
   }
 
   &__icon {
@@ -268,13 +239,11 @@
     color: $color-white;
     background-color: darken($color-primary, 20%);
     cursor: pointer;
-    transition: all 0.4s;
+    transition: $trans-4s;
     &:hover {
       background-color: $color-dark;
     }
   }
-
-
 
   &__mail-box,
   &__notification-box {
@@ -303,7 +272,6 @@
       text-align: center;
       background-color: lighten($color-dark, 10%);
       margin: 0;
-
     }
 
     &__list {
@@ -319,7 +287,7 @@
         margin: 0.1rem 0;
         color: $color-white;
         text-decoration: none;
-        transition: all 0.4s;
+        transition: $trans-4s;
         cursor: pointer;
         display: block;
         padding: 0.4rem;
@@ -330,22 +298,22 @@
     }
   }
 
-
-  &__toggle, &__search-res {
+  &__toggle,
+  &__search-res {
     cursor: pointer;
     display: none;
     background: none;
     background-color: $color-white;
     border: none;
     color: $color-dark;
-    padding: .5rem .7rem;
+    padding: 0.5rem 0.7rem;
     position: fixed;
     top: 2rem;
     right: 4rem;
     z-index: 999999;
     border-radius: 2rem;
 
-    @media only screen and (max-width : 768px) {
+    @include responsive(max, 768px) {
       display: block;
     }
 
@@ -354,37 +322,32 @@
     }
     mat-icon {
       color: $color-dark;
-      
     }
   }
 
-  
-
   &__res-logo {
     position: absolute;
-    top : 0;
-    padding: .5rem 0;
+    top: 0;
+    padding: 0.5rem 0;
     width: 100%;
     color: $color-white;
     z-index: 99;
-    font-family: 'Kalam', cursive;
-    border-bottom: .1rem solid $color-primary;
+    font-family: "Kalam", cursive;
+    border-bottom: 0.1rem solid $color-primary;
     display: none;
 
     h1 {
       font-size: 3.5rem;
       margin: 0;
       padding: 0;
-      padding-top: .8rem;
+      padding-top: 0.8rem;
     }
 
-
-    @media only screen and (max-width : 768px) {
+    @include responsive(max, 768px) {
       display: block;
-    } 
+    }
   }
 
-  
   &__search-res {
     top: 9rem;
   }
@@ -395,23 +358,21 @@
     top: -10rem;
     left: 50%;
     transform: translate(-50%);
-    transition: all .4s;
- 
+    transition: $trans-4s;
   }
 
   &__search-input {
     width: 35rem;
-    padding: .5rem 1rem;
+    padding: 0.5rem 1rem;
     background-color: $color-white;
     color: $color-dark;
-    border: .1rem solid darken($color-dark, 10%);
+    border: 0.1rem solid darken($color-dark, 10%);
     border-radius: 2rem;
     font-size: 1.8rem;
-    transition: all .4s;
+    transition: $trans-4s;
 
-    @media only screen and (max-width : 400px) {
+    @include responsive(max, 400px) {
       width: 30rem;
-
     }
 
     &::placeholder {
@@ -422,14 +383,11 @@
       outline: none;
       width: 40rem;
 
-      @media only screen and (max-width : 400px) {
+      @include responsive(max, 400px) {
         width: 34rem;
       }
     }
   }
-
-
-
 }
 
 mat-icon {
@@ -445,4 +403,3 @@ mat-icon {
 .active-res-search {
   top: 7.5rem;
 }
-

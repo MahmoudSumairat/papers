@@ -1,17 +1,33 @@
 <section class="add-quote">
-    <div class="container" [@navigateState] >
-      <h1 class="add-quote__heading text-center" >Add a quote to the Database</h1>
-      <form #form="ngForm" class="form-group add-quote__form" (ngSubmit)="submitQuote(form)" >
-        <label for="authorName" class="add-quote__label" >Author Name</label>
-        <input type="text" name="authorName" ngModel required id="authorName" class="add-quote__author-name" autocomplete="off" >
-  
-     
-        <label for="quote" class="add-quote__label" >Quote</label>
-        <textarea name="quote" id="quote"  ngModel class="add-quote__quote" ></textarea>
-  
-  
-        <button type="submit" class="add-quote__upload" [disabled]="form.invalid" > Upload </button>
-      </form>
-  
-    </div>
-  </section>
+  <div class="container" [@navigateState]>
+    <h1 class="add-quote__heading text-center">Add a quote to the Database</h1>
+    <form
+      #form="ngForm"
+      class="form-group add-quote__form"
+      (ngSubmit)="submitQuote(form)"
+    >
+      <label for="authorName" class="add-quote__label">Author Name</label>
+      <input
+        type="text"
+        name="authorName"
+        ngModel
+        required
+        id="authorName"
+        class="add-quote__author-name"
+        autocomplete="off"
+      />
+
+      <label for="quote" class="add-quote__label">Quote</label>
+      <textarea
+        name="quote"
+        id="quote"
+        ngModel
+        class="add-quote__quote"
+      ></textarea>
+
+      <button type="submit" class="add-quote__upload" [disabled]="form.invalid">
+        Upload
+      </button>
+    </form>
+  </div>
+</section>

@@ -1,170 +1,162 @@
 @import "../../shared/variables";
+@import "../../shared/mixins";
 
 .login {
-    height: 100vh;
-    background-image: linear-gradient(90deg, $color-primary 0%, $color-primary 50%, $color-dark 50%, $color-dark 100% );
-    padding-top: 20rem;
-    perspective: 100rem;
+  height: 100vh;
+  background-image: linear-gradient(
+    90deg,
+    $color-primary 0%,
+    $color-primary 50%,
+    $color-dark 50%,
+    $color-dark 100%
+  );
+  padding-top: 20rem;
+  perspective: 100rem;
 
-    .mat-icon {
-        font-size: 2.4rem;
-        width: 2.4rem;
-        height: 2.4rem;
+  .mat-icon {
+    //Include the responsive material icons mixin
+    @include resp-mat-icons();
+  }
+
+  @include responsive(max, 517px) {
+    background-image: none;
+    background-color: $color-primary;
+  }
+
+  &__papers {
+    position: absolute;
+    top: 10rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 6.5rem;
+    font-family: "Kalam", cursive;
+    color: $color-white;
+  }
+
+  &__container {
+    padding: 7rem;
+    border-radius: 1rem;
+    width: 50%;
+    @include responsive(max, 517px) {
+      padding: 1rem 0.5rem;
+      position: relative;
+      left: 25%;
     }
+  }
 
-    @media only screen and (max-width : 517px) {
-        background-image: none;
-        background-color: $color-primary;
+  &__heading {
+    color: $color-white;
+    font-size: 3.8rem;
+    margin-bottom: 4rem;
+  }
+
+  &__form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  &__email,
+  &__password,
+  &__username {
+    width: 35rem;
+    background-color: $color-white;
+    border-radius: 1.5rem;
+    border: none;
+    padding: 0.5rem;
+    padding-left: 2rem;
+    margin: 0.5rem 0;
+    font-size: 1.5rem;
+    color: $color-dark;
+    transition: $trans-4s;
+    border: 0.1rem solid transparent;
+
+    &::placeholder {
+      color: $color-dark;
     }
-
-    &__papers {
-        position: absolute;
-        top: 10rem;
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 6.5rem;
-        font-family: 'Kalam', cursive;
-        color: $color-white;
-
+    &:focus {
+      border: 0.1rem solid $color-dark;
+      outline: none;
     }
+  }
 
-    &__container {
-        padding: 7rem;
-        border-radius: 1rem;
-        width: 50%;
-        @media only screen and (max-width : 517px) {
-            padding: 1rem .5rem;
-            position: relative;
-            left: 25%;
-        }
+  &__submit {
+    background-color: $color-dark;
+    border-radius: 1rem;
+    padding: 0.5rem 1.2rem;
+    color: $color-white;
+    font-size: 1.8rem;
+    display: block;
+    margin: 2rem auto;
+    transition: $trans-4s;
+  }
+
+  &__dont {
+    color: $color-white;
+    font-size: 1.8rem;
+  }
+
+  &__creat {
+    background-color: $color-dark;
+    color: $color-white;
+    padding: 0.5rem;
+    font-size: 1.5rem;
+    border-radius: 1rem;
+    margin: 0.2rem;
+    transition: $trans-4s;
+    &:hover {
+      background-color: darken($color-dark, 10%);
     }
+  }
 
-    &__heading {
-        color: $color-white;
-        font-size: 3.8rem;
-        margin-bottom: 4rem;
+  &__guest {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4rem;
 
-      
-    }
+    &-btn {
+      background: none;
+      border: 0.2rem solid $color-white;
+      font-size: 2.2rem;
+      padding: 1rem 2rem;
+      color: $color-white;
+      border-radius: 1rem;
+      transition: $trans-4s;
+      cursor: pointer;
 
-    &__form {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
- 
-    }
+      &:focus {
+        outline: none;
+      }
 
-   
-
-    &__email, &__password, &__username {
-            width: 35rem;
-            background-color: $color-white;
-            border-radius: 1.5rem;
-            border: none;
-            padding: .5rem;
-            padding-left: 2rem;
-            margin: .5rem 0;
-            font-size: 1.5rem;
-            color: $color-dark;
-            transition: all .4s;
-            border: .1rem solid transparent;
-
-            &::placeholder {
-                color: $color-dark;
-            }
-            &:focus {
-                border: .1rem solid $color-dark;
-                outline: none;
-
-            }
-            
-        
-    }
-
-    &__submit {
-        background-color: $color-dark;
-        border-radius: 1rem;
-        padding: .5rem 1.2rem;
-        color: $color-white;
-        font-size: 1.8rem;
-        display: block;
-        margin: 2rem auto;
-        transition: all .4s;
-        
-    }
-
-    &__dont {
-        color: $color-white;
-        font-size: 1.8rem;
-
-    }
-
-    &__creat {
-        background-color: $color-dark;
-        color: $color-white;
-        padding: .5rem;
-        font-size: 1.5rem;
-        border-radius: 1rem;
-        margin: .2rem;
-        transition: all .4s;
-        &:hover {
-            background-color: darken($color-dark, 10%);
-        }
-    }
-
-    &__guest {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 4rem;
-
-        &-btn {
-            background: none;
-            border: .2rem solid $color-white;
-            font-size: 2.2rem;
-            padding: 1rem 2rem;
-            color: $color-white;
-            border-radius: 1rem;
-            transition: all .4s;
-            cursor: pointer;
-
-            &:focus {
-                outline: none;
-            }
-
-            &:hover {
-                background-color: $color-white;
-                color: $color-dark;
-            }
-
-        }
-    }
-
-    &__pass-box {
-        position: relative;
-    }
-
-    &__vis {
-        position: absolute;
-        top: 50%;
-        right: 1rem;
-        transform: translateY(-50%);
-        background: none;
-        border: none;
+      &:hover {
+        background-color: $color-white;
         color: $color-dark;
-        cursor: pointer;
-
-        &:focus {
-            outline: none;
-        }
+      }
     }
+  }
 
+  &__pass-box {
+    position: relative;
+  }
 
+  &__vis {
+    position: absolute;
+    top: 50%;
+    right: 1rem;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: $color-dark;
+    cursor: pointer;
 
- 
+    &:focus {
+      outline: none;
+    }
+  }
 }
 
 input.ng-invalid.ng-touched {
-    background-color: lighten(red, 35%);
+  background-color: lighten(red, 35%);
 }

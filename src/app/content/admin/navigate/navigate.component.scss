@@ -1,44 +1,43 @@
 @import "../../../shared/variables";
 .navigate {
-    background-color: $color-dark;
-    min-height: 120vh;
-    color: $color-white;
-    padding-top: 7rem;
-    perspective: 100rem;
+  background-color: $color-dark;
+  min-height: 120vh;
+  color: $color-white;
+  padding-top: 7rem;
+  perspective: 100rem;
+  -moz-perspective: 100rem;
 
-    &__heading {
-        font-size: 4rem;
+  &__heading {
+    font-size: 4rem;
+  }
 
+  &__list {
+    list-style: none;
+    margin: 0;
+  }
+
+  &__add-books,
+  &__add-quotes,
+  &__add-author,
+  &__users {
+    border: solid 0.6rem lighten($color-dark, 5%);
+    border-radius: 1rem;
+    padding: 4rem;
+    margin: 0 1rem;
+    color: lighten($color-dark, 25%);
+    margin-top: 2rem;
+    cursor: pointer;
+    transition: $trans-4s;
+    .mat-icon {
+      font-size: 4rem;
     }
-
-    &__list {
-        list-style: none;
-        margin: 0;
+    &:hover {
+      border: solid 0.6rem lighten($color-dark, 20%);
     }
+  }
 
-    &__add-books, &__add-quotes, &__add-author, &__users {
-        border: solid .6rem lighten($color-dark, 5%);
-        border-radius: 1rem;
-        padding: 4rem;
-        margin: 0 1rem;
-        color: lighten($color-dark, 25%);
-        margin-top: 2rem;
-        cursor: pointer;
-        transition: all .4s;
-        .mat-icon {
-            font-size: 4rem;
-        }
-        &:hover {
-            border: solid .6rem lighten($color-dark, 20%);
-            
-
-        }
-
-    }
-
-    &__add-heading {
-        font-size: 2.5rem;
-        color: lighten($color-dark, 25%);
-    }
+  &__add-heading {
+    font-size: 2.5rem;
+    color: lighten($color-dark, 25%);
+  }
 }
-

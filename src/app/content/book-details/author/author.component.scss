@@ -1,97 +1,93 @@
 @import "../../../shared/variables";
+@import "../../../shared/mixins";
 
 .author {
-    padding: 0 2rem;
-    @media only screen and (max-width : 600px) {
-        display: none;
-    }
+  padding: 0 2rem;
+  @include responsive(max, 600px) {
+    display: none;
+  }
 
-    .mat-icon {
-        font-size: 2.4rem;
-        height: 2.4rem;
-        width: 2.4rem;
-    }
-    &__heading {
-        font-size: 2rem;
-        color: $color-white;
-        padding: 1rem 2rem;
-        border-bottom: .1rem solid lighten($color-dark, 10%);
-        margin-bottom: 2rem;
-    }
-    &__img {
-       width: 15rem;
-       height: 18rem; 
-       padding: 0 1rem;
-    }
+  .mat-icon {
+    @include resp-mat-icons();
+  }
+  &__heading {
+    font-size: 2rem;
+    color: $color-white;
+    padding: 1rem 2rem;
+    border-bottom: 0.1rem solid lighten($color-dark, 10%);
+    margin-bottom: 2rem;
+  }
+  &__img {
+    width: 15rem;
+    height: 18rem;
+    padding: 0 1rem;
+  }
 
-    &__bio {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-left: 1rem;
-        flex-wrap: wrap;
-    }
+  &__bio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 1rem;
+    flex-wrap: wrap;
+  }
 
-    &__rating {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      
-      }
-  
-    
-      &__star {
-        color: $color-gold;
-        display: inline-block;
-  
-      }
-  
-      &__star-container {
-        overflow: hidden;
-        display: inline-block;
-        color: $color-gold;
-      }
+  &__rating {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-    &__name {
-        font-size: 1.9rem;
-        color: $color-white;
-        word-wrap: break-word;
-        margin-bottom: 1rem;
-    }   
+  &__star {
+    color: $color-gold;
+    display: inline-block;
+  }
 
-    &__details {
-        background-color: $color-primary;
-        border-radius: .5rem;
-        color: $color-white;
-        font-size: 1.5rem;
-        padding: .5rem 1rem;
-        border : none;
-        display: inline-block;
-        cursor: pointer;
-        margin-top: 1rem;
-    }
+  &__star-container {
+    overflow: hidden;
+    display: inline-block;
+    color: $color-gold;
+  }
 
-    &__brief-box {
-        padding: 1rem;
-        margin: .5rem 0;
-    }
-    
-    &__brief {
-        color: $color-white;
-        font-size: 1.6rem;
-        line-height: 1.5;
-    }
+  &__name {
+    font-size: 1.9rem;
+    color: $color-white;
+    word-wrap: break-word;
+    margin-bottom: 1rem;
+  }
 
-    &__seemore {
-        cursor: pointer;;
-        color: darken($color-white, 10%);
-        &:hover {
-            text-decoration: underline;
-        }
-    }
+  &__details {
+    background-color: $color-primary;
+    border-radius: 0.5rem;
+    color: $color-white;
+    font-size: 1.5rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    display: inline-block;
+    cursor: pointer;
+    margin-top: 1rem;
+  }
 
-    &__notreviewed {
-        color: $color-white;
-        font-size: 1.8rem;
+  &__brief-box {
+    padding: 1rem;
+    margin: 0.5rem 0;
+  }
+
+  &__brief {
+    color: $color-white;
+    font-size: 1.6rem;
+    line-height: 1.5;
+  }
+
+  &__seemore {
+    cursor: pointer;
+    color: darken($color-white, 10%);
+    &:hover {
+      text-decoration: underline;
     }
+  }
+
+  &__notreviewed {
+    color: $color-white;
+    font-size: 1.8rem;
+  }
 }

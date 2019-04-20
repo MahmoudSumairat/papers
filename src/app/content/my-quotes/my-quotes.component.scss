@@ -1,102 +1,95 @@
 @import "../../shared/variables";
+@import "../../shared/mixins";
 
 .my-quotes {
-    background-color: $color-dark;
-    color: $color-white;
-    min-height: 120vh;
-    padding-top: 5rem;
+  background-color: $color-dark;
+  color: $color-white;
+  min-height: 120vh;
+  padding-top: 5rem;
+  position: relative;
+
+  .mat-icon {
+    @include resp-mat-icons();
+  }
+
+  .container {
+    padding-top: 2rem;
+  }
+
+  &__heading {
+    margin-bottom: 2rem;
+  }
+
+  &__quote-box {
+    background-color: darken($color-dark, 5%);
+    padding: 1rem 2rem;
+    margin-top: 0.5rem;
     position: relative;
+  }
 
+  &__quote-content {
+    font-size: 1.8rem;
+    line-height: 1.5;
 
-    .mat-icon {
-      font-size: 2.4rem;
-      width: 2.4rem;
-      height : 2.4rem;
+    @include responsive(max, 500px) {
+      padding-right: 3.5rem;
+    }
+  }
+
+  &__quote-name {
+    font-size: 1.7rem;
+  }
+
+  &__remove {
+    background: none;
+    border: none;
+    color: darken($color-dark, 10%);
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    cursor: pointer;
+    transition: $trans-4s;
+
+    &:hover {
+      color: $color-primary;
     }
 
-    .container {
-        padding-top: 2rem;
+    &:focus {
+      outline: none;
     }
+  }
 
-    &__heading {
-        margin-bottom: 2rem;
+  &__no-quotes {
+    color: rgba($color-white, 0.7);
+    position: absolute;
+    top: 15rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 
-    }
-
-    &__quote-box {
-        background-color: darken($color-dark, 5%);
-        padding: 1rem 2rem;
-        margin-top: .5rem;
-        position: relative;
-    
-    }
-
-    &__quote-content {
-        font-size: 1.8rem;
-        line-height: 1.5;
-
-        @media only screen and (max-width : 500px) {
-          padding-right: 3.5rem;
-        }
-    }
-
-    &__quote-name {
-        font-size: 1.7rem;
-    }
-
-    &__remove {
-        background: none;
-        border: none;
-        color: darken($color-dark, 10%);
-        position: absolute;
-        right: 1rem;
-        top: 1rem;
-        cursor: pointer;
-        transition: all .4s;
-
-        &:hover {
-            color: $color-primary;
-
-        }
-
-        &:focus {
-            outline: none;
-        }
-    }
-
-    &__no-quotes {
-        color: rgba($color-white,.7);
-        position: absolute; 
-        top: 15rem;
-        left: 50%;
-        transform: translateX(-50%);
-        
-    }
-
-    
-    
   &__navigate {
     padding: 4rem 0;
     margin: 0rem auto;
-   
   }
 
   &__navigate-box {
     position: absolute;
     bottom: 1rem;
     margin: 0;
-    
   }
 
-  &__next, &__previuos, &__fast-rewind, &__fast-forward {
-    .mat-icon{
+  &__next,
+  &__previuos,
+  &__fast-rewind,
+  &__fast-forward {
+    .mat-icon {
       font-size: 2.9rem;
     }
     background: none;
     border: none;
     color: darken($color-dark, 10%);
     cursor: pointer;
-    transition: all .4s;
+    transition: $trans-4s;
     padding: 0;
     margin: 0 1rem;
 
@@ -109,18 +102,16 @@
     }
   }
 
-  &__fast-rewind, &__fast-forward {
+  &__fast-rewind,
+  &__fast-forward {
     .mat-icon {
       width: 1rem;
     }
   }
 
   &__fast-forward {
-    margin-left: -.3rem;
+    margin-left: -0.3rem;
   }
-
-
-
 
   &__page {
     color: $color-white;
@@ -128,20 +119,21 @@
     display: block;
     margin: 1rem;
     margin-left: 1.4rem;
-    transition: all .2s;
+    transition: $trans-2s;
     cursor: pointer;
-    text-shadow: .05rem .05rem .5rem transparent , -.05rem -.05rem .5rem transparent;
-
+    text-shadow: 0.05rem 0.05rem 0.5rem transparent,
+      -0.05rem -0.05rem 0.5rem transparent;
 
     &:hover {
-      text-shadow: .05rem .05rem .5rem $color-white, -.05rem -.05rem .5rem $color-white;
+      text-shadow: 0.05rem 0.05rem 0.5rem $color-white,
+        -0.05rem -0.05rem 0.5rem $color-white;
       transform: scale(1.2);
     }
-    
   }
 }
 
 .page-active {
-    text-shadow: .05rem .05rem .5rem $color-white, -.05rem -.05rem .5rem $color-white;
-    transform: scale(1.2);
-  }
+  text-shadow: 0.05rem 0.05rem 0.5rem $color-white,
+    -0.05rem -0.05rem 0.5rem $color-white;
+  transform: scale(1.2);
+}

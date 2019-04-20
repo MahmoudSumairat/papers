@@ -1,48 +1,46 @@
 @import "../../../shared/variables";
 @import "../../../shared/animations";
+@import "../../../shared/mixins";
 
 .want-to-read {
-   padding: 2rem 0;
-   color: $color-white;
-   min-height: 100vh;
-   position: relative;
-   .row {
-       margin: 0;
-       justify-content: space-evenly;
-   }
+  padding: 2rem 0;
+  color: $color-white;
+  min-height: 100vh;
+  position: relative;
+  .row {
+    margin: 0;
+    justify-content: space-evenly;
+  }
 
-   &__book {
-
-    @media only screen and (max-width : 530px) {
-
+  &__book {
+    @include responsive(max, 530px) {
       flex: 0 0 100%;
       max-width: 100%;
     }
+  }
 
-   }
-
-    
-   &__navigate {
+  &__navigate {
     padding: 2rem 0;
     margin: 1rem auto;
-   
   }
 
   &__navigate-box {
     position: absolute;
     top: 100%;
-    
   }
 
-  &__next, &__previuos, &__fast-rewind, &__fast-forward {
-    .mat-icon{
+  &__next,
+  &__previuos,
+  &__fast-rewind,
+  &__fast-forward {
+    .mat-icon {
       font-size: 2.9rem;
     }
     background: none;
     border: none;
     color: darken($color-dark, 10%);
     cursor: pointer;
-    transition: all .4s;
+    transition: $trans-4s;
     padding: 0;
     margin: 0 1rem;
 
@@ -55,18 +53,16 @@
     }
   }
 
-  &__fast-rewind, &__fast-forward {
+  &__fast-rewind,
+  &__fast-forward {
     .mat-icon {
       width: 1rem;
     }
   }
 
   &__fast-forward {
-    margin-left: -.3rem;
+    margin-left: -0.3rem;
   }
-
-
-
 
   &__page {
     color: $color-white;
@@ -74,35 +70,31 @@
     display: block;
     margin: 1rem;
     margin-left: 1.4rem;
-    transition: all .2s;
+    transition: $trans-2s;
     cursor: pointer;
-    text-shadow: .05rem .05rem .5rem transparent , -.05rem -.05rem .5rem transparent;
-
+    text-shadow: 0.05rem 0.05rem 0.5rem transparent,
+      -0.05rem -0.05rem 0.5rem transparent;
 
     &:hover {
-      text-shadow: .05rem .05rem .5rem $color-white, -.05rem -.05rem .5rem $color-white;
+      text-shadow: 0.05rem 0.05rem 0.5rem $color-white,
+        -0.05rem -0.05rem 0.5rem $color-white;
       transform: scale(1.2);
     }
-    
   }
-
 
   &__loading {
     position: absolute;
     transform: translate(-50%, -50%);
     top: 50%;
     left: 50%;
-    color: rgba($color-white, .7);
+    color: rgba($color-white, 0.7);
     font-size: 4rem;
-    animation: loading .5s ease-in-out infinite alternate;
-
+    animation: loading 0.5s ease-in-out infinite alternate;
   }
-
-
-    
 }
 
 .page-active {
-    text-shadow: .05rem .05rem .5rem $color-white, -.05rem -.05rem .5rem $color-white;
-    transform: scale(1.2);
-  }
+  text-shadow: 0.05rem 0.05rem 0.5rem $color-white,
+    -0.05rem -0.05rem 0.5rem $color-white;
+  transform: scale(1.2);
+}

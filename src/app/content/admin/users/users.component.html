@@ -1,31 +1,39 @@
 <section class="users">
-  <div class="container"  >
+  <div class="container">
+    <div class="users__box" *ngFor="let user of users" [@userState]>
+      <div class="users__chunk">
+        <span class="users__label">Name : </span>
+        <h2>{{ user.firstName + " " + user.lastName }}</h2>
+      </div>
+      <div class="users__chunk">
+        <span class="users__label">Gender : </span>
+        <h2>{{ user.gender }}</h2>
+      </div>
+      <div class="users__chunk">
+        <span class="users__label">Email : </span>
+        <h2>{{ user.email }}</h2>
+      </div>
+      <div class="users__chunk">
+        <span class="users__label"> Password : </span>
+        <h2>{{ user.password }}</h2>
+      </div>
 
-    <div class="users__box" *ngFor="let user of users" [@userState] >
-      <div class="users__chunk" >
-        <span class="users__label" >Name : </span> <h2> {{user.firstName + ' ' + user.lastName}} </h2>
-      </div>
-      <div class="users__chunk" >
-        <span class="users__label" >Gender : </span> <h2> {{user.gender}} </h2>
-      </div>
-      <div class="users__chunk" >
-        <span class="users__label" >Email :  </span> <h2> {{user.email}} </h2>
-      </div>
-      <div class="users__chunk" >
-        <span class="users__label" > Password :  </span> <h2> {{user.password}} </h2>
-      </div>
-
-      <button type="button" class="users__remove" title="Remove User" (click)="toggleDialog(true, user)" ><mat-icon>clear</mat-icon></button>
+      <button
+        type="button"
+        class="users__remove"
+        title="Remove User"
+        (click)="toggleDialog(true, user)"
+      >
+        <mat-icon>clear</mat-icon>
+      </button>
     </div>
 
+    <div class="users__sure" *ngIf="(showSureBox$ | async)" [@dialogBox]>
+      <h3>Are you sure you want to remove the user?</h3>
+      <button class="users__yes" (click)="removeUser()">Yes</button>
+      <button class="users__no" (click)="toggleDialog(false)">No</button>
+    </div>
 
-      <div class="users__sure" *ngIf="showSureBox$ | async" [@dialogBox] >
-        <h3>Are you sure you want to remove the user?</h3>
-        <button class="users__yes" (click)="removeUser()">Yes</button>
-        <button class="users__no" (click)="toggleDialog(false)" >No</button>
-      </div>
-
-      <h2 *ngIf="isLoading$  | async" class="users__loading"   > Loading... </h2>
-
+    <h2 *ngIf="(isLoading$ | async)" class="users__loading">Loading...</h2>
   </div>
 </section>

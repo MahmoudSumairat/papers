@@ -2,39 +2,41 @@ import {
   Component,
   OnInit,
   AfterViewInit,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  OnDestroy
 } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { AngularFirestore } from "@angular/fire/firestore";
-import { Observable } from "rxjs";
+import { Observable, Subscription } from "rxjs";
 import { Store } from "@ngrx/store";
 import * as fromRoot from "../../../app.reducer";
 import { map } from "rxjs/operators";
-import { StarService } from '../star.service';
-import { Author } from '../../authors/author.model';
+import { StarService } from "../star.service";
+import { Author } from "../../authors/author.model";
 
 @Component({
   selector: "app-author",
   templateUrl: "./author.component.html",
   styleUrls: ["./author.component.scss"]
 })
-export class AuthorComponent implements OnInit {
+export class AuthorComponent implements OnInit, OnDestroy {
   bookName = this.route.snapshot.params["bookName"];
   authorName;
   author$: Observable<Author>;
   aboutCharLimit = 420;
   seeMoreTitle = "...See More";
+  sub : Subscription;
 
   constructor(
     private route: ActivatedRoute,
     private afs: AngularFirestore,
     private store: Store<fromRoot.State>,
-    private starService : StarService,
-    private router : Router
+    private starService: StarService,
+    private router: Router
   ) {}
 
   ngOnInit() {
-    this.store
+    this.sub = this.store
       .select(fromRoot.getAllBooks)
       .pipe(
         map(bookArr => {
@@ -51,7 +53,7 @@ export class AuthorComponent implements OnInit {
     );
   }
 
-  clickSeeMore() {
+  clickSeeMore() { // SEE MORE CHARACTERS
     if (this.aboutCharLimit === 420) {
       this.aboutCharLimit = -1;
       this.seeMoreTitle = "(less)";
@@ -61,10 +63,14 @@ export class AuthorComponent implements OnInit {
     }
   }
 
-  creatStars(authorRating : number) {
-   return this.starService.creatStars(authorRating);
+  creatStars(authorRating: number) { // CREATE DUMMY ARRAY TO RENDER STARS
+    return this.starService.creatStars(authorRating);
   }
-  goToAuthor(authorName) {
-    this.router.navigate(['content/authors', authorName])
+  goToAuthor(authorName) { // NAVIGATE TO THE AUTHOR DETAILS
+    this.router.navigate(["content/authors", authorName]);
+  }
+
+  ngOnDestroy() {
+    this.sub.unsubscribe();
   }
 }

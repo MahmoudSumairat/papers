@@ -1,8 +1,4 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-} from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Observable, Subscription } from "rxjs";
 import { StarService } from "../star.service";
 import { AngularFirestore } from "@angular/fire/firestore";
@@ -25,7 +21,7 @@ export class StarsReviewComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private starService: StarService,
     private store: Store<fromRoot.State>,
-    private router : Router
+    private router: Router
   ) {}
 
   user: UserData = this.authService.getUser();
@@ -34,83 +30,84 @@ export class StarsReviewComponent implements OnInit, OnDestroy {
 
   sub: Subscription;
   myValue = 0;
-  isAuth : boolean;
-  subscription : Subscription[] = [];
-  isReviewed : boolean;
+  isAuth: boolean;
+  subscription: Subscription[] = [];
+  isReviewed: boolean;
 
   onClick(value) {
-    if(this.user.userID){
+    if (this.user.userID) {
       if (this.bookName) {
         this.starService.setStar(value, this.bookName, this.user);
         this.starService.calculateAverage(this.bookName);
         this.store.dispatch(new bookDetails.SetStarReviewed());
-        console.log('book state')
+        console.log("book state");
       } else if (this.authorName) {
         this.starService.setStarForAuthor(value, this.authorName, this.user);
         this.starService.calculateAverageForAuthor(this.authorName);
-        console.log('author state')
+        console.log("author state");
       }
     } else {
-      this.router.navigate(['/login']);
+      this.router.navigate(["/login"]);
     }
- 
   }
 
   ngOnInit() {
-    this.subscription.push(this.store.select(fromRoot.getIsAuth).subscribe(data => {
-      this.isAuth = data;
-    }))
+    this.subscription.push(
+      this.store.select(fromRoot.getIsAuth).subscribe(data => {
+        this.isAuth = data;
+      })
+    );
 
-    this.subscription.push(this.store.select(fromRoot.getIsReviewed).subscribe(result => {
-      this.isReviewed = result;
-    }))
+    this.subscription.push(
+      this.store.select(fromRoot.getIsReviewed).subscribe(result => {
+        this.isReviewed = result;
+      })
+    );
 
     this.getStarsValue();
-    
   }
 
   getStarsValue() {
     if (this.isAuth) {
-      if(this.bookName) {
+      if (this.bookName) {
         this.sub = this.afs
-        .collection("stars")
-        .doc("book_review")
-        .collection(this.bookName.toLowerCase().replace(/ /g, "_"))
-        .doc(this.user.userID)
-        .valueChanges()
-        .subscribe((data: { value: number }) => {
-          if(data) {
-            if(data.value) {
-              this.myValue = data.value
-              this.store.dispatch(new bookDetails.SetStarReviewed());
-            } else {
+          .collection("stars")
+          .doc("book_review")
+          .collection(this.bookName.toLowerCase().replace(/ /g, "_"))
+          .doc(this.user.userID)
+          .valueChanges()
+          .subscribe((data: { value: number }) => {
+            if (data) {
+              if (data.value) {
+                this.myValue = data.value;
+                this.store.dispatch(new bookDetails.SetStarReviewed());
+              } else {
+              }
             }
-          }
-        });
+          });
       } else if (this.authorName) {
         this.sub = this.afs
-        .collection("stars")
-        .doc("author_review")
-        .collection(this.authorName.toLowerCase().replace(/ /g, "_"))
-        .doc(this.user.userID)
-        .valueChanges()
-        .subscribe((data: { value: number }) => {
-          if(data) {
-            if(data.value) {
-              this.myValue = data.value
-              this.store.dispatch(new bookDetails.SetStarReviewed());
-            } else {
+          .collection("stars")
+          .doc("author_review")
+          .collection(this.authorName.toLowerCase().replace(/ /g, "_"))
+          .doc(this.user.userID)
+          .valueChanges()
+          .subscribe((data: { value: number }) => {
+            if (data) {
+              if (data.value) {
+                this.myValue = data.value;
+                this.store.dispatch(new bookDetails.SetStarReviewed());
+              } else {
+              }
             }
-          }
-        });
+          });
       }
-        
     }
   }
 
   ngOnDestroy() {
     this.subscription.forEach(sub => {
       sub.unsubscribe();
-    })
+    });
   }
 }

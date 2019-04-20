@@ -5,7 +5,7 @@ import { Store } from "@ngrx/store";
 import * as fromRoot from "../../app.reducer";
 import * as BookActions from "./book.actions";
 import { map } from "rxjs/operators";
-import { Subject } from 'rxjs';
+import { Subject } from "rxjs";
 import * as ui from "../../shared/ui.actions";
 
 @Injectable()
@@ -17,8 +17,8 @@ export class BookService {
     private store: Store<fromRoot.State>
   ) {}
 
-  fetchAllBooks() {
-    this.store.dispatch(new ui.StartLoading());
+  fetchAllBooks() { // FETCH THE BOOKS FROM THE DATABASE
+    this.store.dispatch(new ui.StartLoading()); // SHOW THE LOADING WORD
     this.db
       .collection("myBooks")
       .valueChanges()
@@ -28,16 +28,14 @@ export class BookService {
           return dataArray.sort((a: any, b: any) => b.avgRating - a.avgRating);
         })
       )
-      .subscribe((books: Book[]) => {
-        this.store.dispatch(new BookActions.SetAllBooks(books));
-        this.store.dispatch(new ui.StopLoading());
-      }, (error => {
-        this.store.dispatch(new ui.ShowTryAgain());
-      }));
+      .subscribe(
+        (books: Book[]) => {
+          this.store.dispatch(new BookActions.SetAllBooks(books));
+          this.store.dispatch(new ui.StopLoading());
+        },
+        error => {
+          this.store.dispatch(new ui.ShowTryAgain());
+        }
+      );
   }
-
-
-
-  
-  
 }

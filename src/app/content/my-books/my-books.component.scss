@@ -1,4 +1,5 @@
 @import "../../shared/variables";
+@import "../../shared/mixins";
 .my-books {
     min-height: 120vh;
     padding: 5rem 0 ;
@@ -40,7 +41,7 @@
         width: 50%;
         margin: 2rem auto;
 
-        @media only screen and (max-width : 530px) {
+        @include responsive(max, 530px) {
             width: 70%;
         }
 
@@ -56,14 +57,14 @@
         padding: 0 1rem;
         padding-bottom: .5rem;
         margin: 0 1rem;
-        transition: all .2s;
+        transition: $trans-2s;
         cursor: pointer;
         position: relative;
         &:active, &:focus {
             outline: none;
         }
 
-        @media only screen and (max-width : 600px) {
+        @include responsive(max, 600px) {
             font-size: 1.8rem;
         }
 

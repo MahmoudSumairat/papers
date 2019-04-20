@@ -21,34 +21,34 @@ import { BookService } from "./content/home/book.service";
 import { BookDetailsComponent } from "./content/book-details/book-details.component";
 import { StarsReviewComponent } from "./content/book-details/stars-review/stars-review.component";
 import { StarService } from "./content/book-details/star.service";
-import { MyBooksComponent } from './content/my-books/my-books.component';
-import { ReviewsComponent } from './content/book-details/reviews/reviews.component';
-import { AuthorComponent } from './content/book-details/author/author.component';
-import { BookDetailsService } from './content/book-details/book-details.service';
+import { MyBooksComponent } from "./content/my-books/my-books.component";
+import { ReviewsComponent } from "./content/book-details/reviews/reviews.component";
+import { AuthorComponent } from "./content/book-details/author/author.component";
+import { BookDetailsService } from "./content/book-details/book-details.service";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { ReadBooksComponent } from './content/my-books/read-books/read-books.component';
-import { CurrentlyReadingComponent } from './content/my-books/currently-reading/currently-reading.component';
-import { WantToReadComponent } from './content/my-books/want-to-read/want-to-read.component';
-import { BookComponent } from './content/my-books/book/book.component';
+import { ReadBooksComponent } from "./content/my-books/read-books/read-books.component";
+import { CurrentlyReadingComponent } from "./content/my-books/currently-reading/currently-reading.component";
+import { WantToReadComponent } from "./content/my-books/want-to-read/want-to-read.component";
+import { BookComponent } from "./content/my-books/book/book.component";
 import { AuthGurad } from "./auth/auth.guard";
-import { AuthorsComponent } from './content/authors/authors.component';
-import { AuthorsService } from './content/authors/authors.service';
-import { MyBooksService } from './content/my-books/my-books.service';
-import { AuthorDetailsComponent } from './content/author-details/author-details.component';
-import { ContentModule } from './content/content.module';
-import { QuotesComponent } from './content/quotes/quotes.component';
-import { QuotesService } from './content/quotes/quotes.service';
-import { MyQuotesComponent } from './content/my-quotes/my-quotes.component';
-import { ProfileComponent } from './content/profile/profile.component';
-import { FilterPipe } from './content/filter.pipe';
-import { AdminComponent } from './content/admin/admin.component';
-import { AddBookComponent } from './content/admin/add-book/add-book.component';
-import { AddAuthorComponent } from './content/admin/add-author/add-author.component';
-import { AddQuoteComponent } from './content/admin/add-quote/add-quote.component';
-import { UsersComponent } from './content/admin/users/users.component';
-import { NavigateComponent } from './content/admin/navigate/navigate.component';
-import { AdminGuard } from './content/admin/admin.guard';
-import { FooterComponent } from './navigation/footer/footer.component';
+import { AuthorsComponent } from "./content/authors/authors.component";
+import { AuthorsService } from "./content/authors/authors.service";
+import { MyBooksService } from "./content/my-books/my-books.service";
+import { AuthorDetailsComponent } from "./content/author-details/author-details.component";
+import { ContentModule } from "./content/content.module";
+import { QuotesComponent } from "./content/quotes/quotes.component";
+import { QuotesService } from "./content/quotes/quotes.service";
+import { MyQuotesComponent } from "./content/my-quotes/my-quotes.component";
+import { ProfileComponent } from "./content/profile/profile.component";
+import { FilterPipe } from "./content/filter.pipe";
+import { AdminComponent } from "./content/admin/admin.component";
+import { AddBookComponent } from "./content/admin/add-book/add-book.component";
+import { AddAuthorComponent } from "./content/admin/add-author/add-author.component";
+import { AddQuoteComponent } from "./content/admin/add-quote/add-quote.component";
+import { UsersComponent } from "./content/admin/users/users.component";
+import { NavigateComponent } from "./content/admin/navigate/navigate.component";
+import { AdminGuard } from "./content/admin/admin.guard";
+import { FooterComponent } from "./navigation/footer/footer.component";
 
 @NgModule({
   declarations: [
@@ -92,9 +92,18 @@ import { FooterComponent } from './navigation/footer/footer.component';
     AuthModule,
     BrowserAnimationsModule,
     ContentModule
-    
   ],
-  providers: [AuthService, BookService, StarService, BookDetailsService, AuthGurad, AuthorsService, MyBooksService, QuotesService, AdminGuard],
+  providers: [
+    AuthService,
+    BookService,
+    StarService,
+    BookDetailsService,
+    AuthGurad,
+    AuthorsService,
+    MyBooksService,
+    QuotesService,
+    AdminGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

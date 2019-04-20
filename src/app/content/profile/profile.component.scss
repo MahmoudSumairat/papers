@@ -1,190 +1,189 @@
 @import "../../shared/variables";
+@import "../../shared/mixins";
 
 .profile {
-    background-color: $color-dark;
-    min-height: 120vh;
-    padding: 5rem 0;
+  background-color: $color-dark;
+  min-height: 120vh;
+  padding: 5rem 0;
+  color: $color-white;
+  perspective: 100rem;
+  -moz-perspective: 100rem;
+  .container {
+    padding: 0 4rem;
+    padding-top: 3rem;
+  }
+
+  &__name {
+    font-size: 3.5rem;
+  }
+
+  &__quote-container {
+    margin-top: 2rem;
+  }
+
+  &__second-heading {
+    padding-bottom: 1rem;
+    font-size: 2.5rem;
+  }
+
+  &__add-quote {
+    background: none;
+    cursor: pointer;
+    color: $color-primary;
+    border: none;
+    display: block;
+    margin: 1rem auto;
+    font-size: 1.9rem;
+
+    &:focus {
+      outline: none;
+    }
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__quote-input {
+    width: 50rem;
+    display: block;
+    margin: 0.5rem auto;
+    padding: 0.5rem 1rem;
+    background-color: darken($color-dark, 5%);
+    border-radius: 0.5rem;
+    border: solid 0.1rem lighten($color-dark, 10%);
+    font-size: 1.5rem;
     color: $color-white;
-    perspective: 100rem;
-    .container {
-        padding: 0 4rem;
-        padding-top: 3rem;
-    }
-    
-    &__name {
-        font-size: 3.5rem;
+    resize: none;
+
+    @include responsive(max, 500px) {
+      width: 40rem;
     }
 
-    &__quote-container {
-        margin-top: 2rem;
-
+    &:focus {
+      outline: none;
     }
+  }
 
-    &__second-heading {
-        padding-bottom: 1rem;
-        font-size: 2.5rem;
+  &__buttons-container {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+  }
+
+  &__submit-quote,
+  &__cancel-quote {
+    color: $color-white;
+    background-color: $color-primary;
+    border: none;
+    font-size: 1.7rem;
+    border-radius: 0.5rem;
+    margin: 0 0.5rem;
+    cursor: pointer;
+  }
+
+  &__cancel-quote {
+    background-color: lighten($color-dark, 5%);
+    border: solid 0.1rem $color-primary;
+  }
+
+  &__my-quote {
+    font-size: 1.9rem;
+    line-height: 1.5;
+  }
+
+  &__quote-edit {
+    color: lighten($color-dark, 10%);
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+      color: lighten($color-dark, 15%);
     }
-
-    &__add-quote {
-        background: none;
-        cursor: pointer;
-        color: $color-primary;
-        border: none;
-        display: block;
-        margin: 1rem auto;
-        font-size: 1.9rem;
-
-        &:focus {
-            outline: none;
-        }
-        &:hover {
-            text-decoration: underline;
-        }
-    }
-
-    &__quote-input {
-        width: 50rem;
-        display: block;
-        margin: .5rem auto;
-        padding: .5rem 1rem;
-        background-color: darken($color-dark, 5%);
-        border-radius: .5rem;
-        border: solid .1rem lighten($color-dark, 10%) ;
-        font-size: 1.5rem;
-        color: $color-white;
-        resize: none;
-
-        @media only screen and (max-width : 500px) {
-            width: 40rem;
-        }
-        
-
-        &:focus {
-            outline: none;
-        }
-    }
-
-    &__buttons-container {
-        display: flex;
-        justify-content: center;
-        align-content: center;
-
-    }
-
-    &__submit-quote, &__cancel-quote {
-        color: $color-white;
-        background-color: $color-primary;
-        border: none;
-        font-size: 1.7rem;
-        border-radius: .5rem;
-        margin: 0 .5rem;
-        cursor: pointer;
-    }
-
-    &__cancel-quote {
-        background-color: lighten($color-dark, 5%);
-        border: solid .1rem $color-primary;
-    }
-
-    &__my-quote {
-        font-size: 1.9rem;
-        line-height: 1.5;
-
-    }
-
-    &__quote-edit {
-        color: lighten($color-dark, 10%);
-        cursor: pointer;
-        &:hover {
-            text-decoration: underline;
-            color: lighten($color-dark, 15%);
-        }
-    }
+  }
 }
 
 .books {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    margin-top: 2rem;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 2rem;
 
-    &__heading {
-        font-size: 2.2rem;
-        margin-bottom: 1rem;
-        margin-top: 4rem;
-        padding-bottom: 1rem;
+  &__heading {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    margin-top: 4rem;
+    padding-bottom: 1rem;
+  }
 
+  &__sum {
+    color: lighten($color-dark, 20%);
+  }
 
+  &__read,
+  &__current,
+  &__want {
+    background-color: darken($color-dark, 10%);
+    color: $color-white;
+    padding: 1rem;
+    width: 30%;
+
+    @include responsive(max, 450px) {
+      height: 14.2rem;
     }
+  }
 
-    &__sum {
-        color: lighten($color-dark, 20%);
+  &__read-heading,
+  &__current-heading,
+  &__want-heading {
+    color: $color-white;
+    font-size: 1.8rem;
+    padding-bottom: 1rem;
+    border-bottom: 0.1rem solid lighten($color-dark, 10%);
+
+    @include responsive(max, 450px) {
+      font-size: 1.6rem;
     }
+  }
 
-    &__read, &__current, &__want {
-        background-color: darken($color-dark, 10%);
-        color: $color-white;
-        padding: 1rem;
-        width: 30%;
-
-        @media only screen and (max-width : 450px) {
-            height: 14.2rem;
-        }
-        
+  &__read-heading {
+    @include responsive(max, 420px) {
+      padding-bottom: 2rem;
+      padding-top: 1rem;
     }
+  }
 
-    &__read-heading, &__current-heading, &__want-heading {
-        color: $color-white;
-        font-size: 1.8rem;
-        padding-bottom: 1rem;
-        border-bottom: .1rem solid lighten($color-dark, 10%);
-
-        @media only screen and (max-width : 450px) {
-            font-size: 1.6rem;
-        }
-    }
-
-    &__read-heading {
-        @media only screen and (max-width : 420px)  {
-            padding-bottom: 2rem;
-            padding-top: 1rem;
-        }
-    }
-
-    &__read-number, &__current-number, &__want-number {
-        font-size: 5rem;
-        display: block;
-
-    }
- 
+  &__read-number,
+  &__current-number,
+  &__want-number {
+    font-size: 5rem;
+    display: block;
+  }
 }
 
 .quotes {
-    &__heading {
-        font-size: 2.2rem;
-        margin-top: 4rem;
-        margin-bottom: 1rem;
-        padding-bottom: 1rem;
+  &__heading {
+    font-size: 2.2rem;
+    margin-top: 4rem;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  &__quote {
+    padding: 1rem 2rem;
+    background-color: darken($color-dark, 5%);
+    font-size: 1.8rem;
+    line-height: 1.5;
+    margin: 0.5rem 0;
+  }
+
+  &__link {
+    color: $color-primary !important;
+    cursor: pointer;
+    font-size: 2rem;
+    display: block;
+
+    &:hover {
+      text-decoration: underline !important;
+      color: $color-secondary !important;
     }
-
-    &__quote {
-        padding: 1rem 2rem;
-        background-color: darken($color-dark, 5%);
-        font-size: 1.8rem;
-        line-height: 1.5;
-        margin: .5rem 0;
-    }
-
-    &__link {
-        color: $color-primary !important;
-        cursor: pointer;
-        font-size: 2rem;
-        display: block;
-
-        &:hover {
-            text-decoration: underline !important;
-            color: $color-secondary !important;
-        }
-
-    }
+  }
 }

@@ -1,77 +1,100 @@
 <section class="book-details">
-  <div class="container"  *ngIf="(selectedBook$ | async) as book" [@bookDetailsState] >
+  <div
+    class="container"
+    *ngIf="(selectedBook$ | async) as book"
+    [@bookDetailsState]
+  >
     <div class="row">
       <div class="col-3 book-details__img-box">
-          <img
+        <img
           [src]="book.img"
           [alt]="book.bookName"
           class=" book-details__img"
-          
         />
         <div class="book-details__rate  text-center">
-            <span   *ngIf="titleCondition | async" > You rated this Book </span>
-            <span *ngIf="!(titleCondition | async)" > Rate this Book </span>
-            <app-stars-review></app-stars-review>
-          </div>
+          <span *ngIf="(titleCondition | async)"> You rated this Book </span>
+          <span *ngIf="!(titleCondition | async)"> Rate this Book </span>
+          <app-stars-review></app-stars-review>
+        </div>
       </div>
-      
+
       <article class="col-8 col-sm-9 book-details__article">
         <h2 class="book-details__book-name">
           {{ book.bookName }}
         </h2>
-        <p class="book-details__author-name"   >
-          by: <strong (click)="goToAuthor(book.authorName)" class="book-details__author-name--content">{{ book.authorName }}</strong>
+        <p class="book-details__author-name">
+          by:
+          <strong
+            (click)="goToAuthor(book.authorName)"
+            class="book-details__author-name--content"
+            >{{ book.authorName }}</strong
+          >
         </p>
         <p class="book-details__par">{{ book.brief }}</p>
 
         <div class="book-details__rating">
-            <div  class="book-details__rating-def-box" >
-                <div class="book-details__rating-def" *ngFor="let star of [1,2,3,4,5]" >
-                  <mat-icon>star</mat-icon>
-                </div>
-    
-              </div>
-              <div class="book-details__rating-box" >
-                  <div class="book-details__star" *ngFor="let star of creatDummyArray(book.avgRating).starArr">
-                      <mat-icon>star</mat-icon>
-                    </div>
-                    <div
-                      [style.width]="creatDummyArray(book.avgRating).i * 24 + 'px'"
-                      class="book-details__star"
-                      *ngIf="creatDummyArray(book.avgRating).i < 1"
-                    >
-                      <mat-icon>star</mat-icon>
-                    </div>
-              </div>
-       
+          <div class="book-details__rating-def-box">
+            <div
+              class="book-details__rating-def"
+              *ngFor="let star of [1, 2, 3, 4, 5]"
+            >
+              <mat-icon>star</mat-icon>
+            </div>
+          </div>
+          <div class="book-details__rating-box">
+            <div
+              class="book-details__star"
+              *ngFor="let star of creatDummyArray(book.avgRating).starArr"
+            >
+              <mat-icon>star</mat-icon>
+            </div>
+            <div
+              [style.width]="creatDummyArray(book.avgRating).i * 24 + 'px'"
+              class="book-details__star"
+              *ngIf="creatDummyArray(book.avgRating).i < 1"
+            >
+              <mat-icon>star</mat-icon>
+            </div>
+          </div>
+
           <div class="book-details__rating-value">
-            <p> {{ book.avgRating }} </p>
+            <p>{{ book.avgRating }}</p>
           </div>
           <div class="book-details__rating-num">
             <p>{{ ratingLength | async }} ratings</p>
           </div>
-
-       
         </div>
-        
+
         <div class="book-details__reading" *ngIf="!readingTitle">
           <button class=" book-details__read" (click)="readBook(book)">
             Read <mat-icon>done</mat-icon>
           </button>
-          <button class=" book-details__current" (click)="currentlyReadingBook(book)" >
+          <button
+            class=" book-details__current"
+            (click)="currentlyReadingBook(book)"
+          >
             Currently Reading <mat-icon>local_cafe</mat-icon>
           </button>
-          <button class=" book-details__want" (click)="wantToReadBook(book)" >
+          <button class=" book-details__want" (click)="wantToReadBook(book)">
             Want To Read <mat-icon>add</mat-icon>
           </button>
         </div>
-        <p class="book-details__reading-title" *ngIf="readingTitle" >
-          {{ readingTitle }} <span  (click)=(undo()) >(Undo)</span>
+        <p class="book-details__reading-title" *ngIf="readingTitle">
+          {{ readingTitle }} <span (click)="undo()">(Undo)</span>
         </p>
-        <div class="book-details__genres"> <span class="book-details__genres-caption"> Genres : </span> <span class="book-details__genre" *ngFor="let genre of book.genres" (click)="findTheSameGenre(genre)" >    {{genre}} </span> </div>
+        <div class="book-details__genres">
+          <span class="book-details__genres-caption"> Genres : </span>
+          <span
+            class="book-details__genre"
+            *ngFor="let genre of book.genres"
+            (click)="findTheSameGenre(genre)"
+          >
+            {{ genre }}
+          </span>
+        </div>
       </article>
     </div>
-    
+
     <div class="row">
       <div class="col-8 book-details__reviews">
         <app-reviews></app-reviews>
@@ -80,10 +103,15 @@
         <app-author></app-author>
       </div>
     </div>
-    
-    <button class="book-details__remove" *ngIf="user.isAdmin" title="Remove Book" (click)="removeBook(book)" >
+
+    <button
+      class="book-details__remove"
+      *ngIf="user.isAdmin"
+      title="Remove Book"
+      (click)="removeBook(book)"
+    >
       <mat-icon>clear</mat-icon>
     </button>
   </div>
-  <h2 *ngIf="isLoading$ | async" class="book-details__loading"   > Loading... </h2>
+  <h2 *ngIf="(isLoading$ | async)" class="book-details__loading">Loading...</h2>
 </section>

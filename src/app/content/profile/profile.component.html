@@ -1,55 +1,93 @@
 <section class="profile">
-  <div class="container" *ngIf=" user" [@profileState] >
+  <div class="container" *ngIf="user" [@profileState]>
     <div class="row justify-content-center">
-      <h1 class="profile__name"> {{user.firstName + ' ' + user.lastName}} </h1>      
+      <h1 class="profile__name">{{ user.firstName + " " + user.lastName }}</h1>
     </div>
-    <div class="profile__quote-container" >
-      <h2 class="profile__second-heading text-center" *ngIf="!user.myQuote && toggleQuoteInput" > Best Quote </h2>
-      <p class="profile__my-quote text-center" *ngIf="user.myQuote" ><q>{{user.myQuote.replace('"', "")}}</q>  <span class="profile__quote-edit" (click)="toggleQuote()" > [Edit] </span> </p>
-      <button class="profile__add-quote" *ngIf="!user.myQuote && toggleQuoteInput" (click)="toggleQuote()" >Add One</button>
+    <div class="profile__quote-container">
+      <h2
+        class="profile__second-heading text-center"
+        *ngIf="!user.myQuote && toggleQuoteInput"
+      >
+        Best Quote
+      </h2>
+      <p class="profile__my-quote text-center" *ngIf="user.myQuote">
+        <q>{{ user.myQuote.replace('"', "") }}</q>
+        <span class="profile__quote-edit" (click)="toggleQuote()">
+          [Edit]
+        </span>
+      </p>
+      <button
+        class="profile__add-quote"
+        *ngIf="!user.myQuote && toggleQuoteInput"
+        (click)="toggleQuote()"
+      >
+        Add One
+      </button>
 
-      <div *ngIf="!toggleQuoteInput"  >
-        <textarea placeholder="Your Quote" type="text" class="profile__quote-input" #quote ></textarea>  
-        <div class="profile__buttons-container" >
-          <button class="profile__submit-quote" (click)="submitQuote(quote)" >Submit</button>
-          <button class="profile__cancel-quote" (click)="toggleQuote()" >Cancel</button>
+      <div *ngIf="!toggleQuoteInput">
+        <textarea
+          placeholder="Your Quote"
+          type="text"
+          class="profile__quote-input"
+          #quote
+        ></textarea>
+        <div class="profile__buttons-container">
+          <button class="profile__submit-quote" (click)="submitQuote(quote)">
+            Submit
+          </button>
+          <button class="profile__cancel-quote" (click)="toggleQuote()">
+            Cancel
+          </button>
         </div>
       </div>
-
     </div>
 
-    <h2 class="books__heading text-center" > Number of books added to your library <span class="books__sum">({{(readBooks$ | async)?.length + (currentBooks$ | async)?.length + (wantBooks$ | async)?.length}})</span> </h2>
+    <h2 class="books__heading text-center">
+      Number of books added to your library
+      <span class="books__sum"
+        >({{
+          (readBooks$ | async)?.length +
+            (currentBooks$ | async)?.length +
+            (wantBooks$ | async)?.length
+        }})</span
+      >
+    </h2>
     <div class="books">
-        <div class="books__read text-center">
-          <h3 class="books__read-heading"> Read Books </h3>
-          <span class="books__read-number">
-            {{ (readBooks$ | async)?.length }}
-          </span>
-        </div>
-        <div class="books__current text-center">
-          <h3 class="books__current-heading"> Currently Reading Books </h3>
-          <span class="books__current-number">
-            {{ (currentBooks$ | async)?.length }}
-          </span>
-          
-        </div>
-        <div class="books__want text-center">
-            <h3 class="books__want-heading"> Want To Read Books </h3>
-            <span class="books__want-number">
-              {{ (wantBooks$ | async)?.length }}
-            </span>
-
-        </div>
+      <div class="books__read text-center">
+        <h3 class="books__read-heading">Read Books</h3>
+        <span class="books__read-number">
+          {{ (readBooks$ | async)?.length }}
+        </span>
+      </div>
+      <div class="books__current text-center">
+        <h3 class="books__current-heading">Currently Reading Books</h3>
+        <span class="books__current-number">
+          {{ (currentBooks$ | async)?.length }}
+        </span>
+      </div>
+      <div class="books__want text-center">
+        <h3 class="books__want-heading">Want To Read Books</h3>
+        <span class="books__want-number">
+          {{ (wantBooks$ | async)?.length }}
+        </span>
+      </div>
     </div>
-    <h2 class="quotes__heading text-center " >
+    <h2 class="quotes__heading text-center ">
       Quotes
     </h2>
-    <div class="quotes  " >
-      <div class="quotes__quote" *ngFor="let quote of user.favQuotes | slice:0:5, let i = index"  >
-        <p><q>{{quote.quote.replace('"', "")}}</q></p>
+    <div class="quotes  ">
+      <div
+        class="quotes__quote"
+        *ngFor="let quote of (user.favQuotes | slice: 0:5); let i = index"
+      >
+        <p>
+          <q>{{ quote.quote.replace('"', "") }}</q>
+        </p>
         <h4>{{ quote.name }}</h4>
       </div>
-      <a class="quotes__link text-center" routerLink="/content/my-quotes" > Go to My Quotes </a>
+      <a class="quotes__link text-center" routerLink="/content/my-quotes">
+        Go to My Quotes
+      </a>
     </div>
   </div>
 </section>

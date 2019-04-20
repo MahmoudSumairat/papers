@@ -1,10 +1,10 @@
 import { Component, OnInit } from "@angular/core";
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from "../auth/auth.service";
 import * as fromRoot from "../app.reducer";
-import { Store } from '@ngrx/store';
+import { Store } from "@ngrx/store";
 import * as auth from "../auth/auth.actions";
-import { UserData } from '../auth/user.model';
-import { Title } from '@angular/platform-browser';
+import { UserData } from "../auth/user.model";
+import { Title } from "@angular/platform-browser";
 
 @Component({
   selector: "app-content",
@@ -13,21 +13,20 @@ import { Title } from '@angular/platform-browser';
 })
 export class ContentComponent implements OnInit {
   constructor(
-    private authService : AuthService,
-    private store : Store<fromRoot.State>,
-    private title : Title
-
+    private authService: AuthService,
+    private store: Store<fromRoot.State>,
+    private title: Title
   ) {}
 
-
   loggedInStatus = this.authService.getIsLoggedIn();
-  currentUser  : UserData = this.authService.getCurrenUser();
-  
+  currentUser: UserData = this.authService.getCurrenUser();
+
   ngOnInit() {
-    this.title.setTitle('Home')
-    if(this.loggedInStatus) {
+    // WHEN RELOADING THE PAGE WE CHECK IF THERE IS A USER SIGNED IN OR NOT
+    this.title.setTitle("Home");
+    if (this.loggedInStatus) {
       this.store.dispatch(new auth.SetAuthenticated());
       this.authService.setUser(this.currentUser);
-    } 
+    }
   }
 }
